@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
+      <h1>Hello</h1>
       <Routes>
         <Route path='/' element={<ShowerCabin/>}/>
         <Route path='/mirrors' element={<Mirrors/>}/>
