@@ -6,6 +6,7 @@ const Header = () => {
             <div className='navigation-block'>
                 <a className='navigatin-item' href='/'>Душові кабіни</a>
                 <a className='navigatin-item' href='/mirrors'>Дзеркала</a>
+                <a className='navigatin-item' href='/admin'>Адмінкка</a>
             </div>
         </div>
     );
