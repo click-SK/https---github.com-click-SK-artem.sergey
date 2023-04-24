@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
 
 const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
   const [currentObject, setCurrentObject] = useState({});
   const [totalSum, setTotalSum] = useState(null);
-  const [currentCategory, setCurrentCategory] = useState("");
   const [currentType, setCurrentType] = useState(null);
   const [currentGlass, setCurrentGlass] = useState("");
-  const [currentGlassColor, setCurrentGlassColor] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -30,22 +26,11 @@ const ShowerCabin = () => {
   const selectGlassFunc = (e) => {
     setCurrentGlass(e.target.value);
   };
-  const selectGlassColorFunc = (e) => {
-    setCurrentGlassColor(e.target.value);
-  };
 
   const calcTotalSumFunc = () => {
     const total = currentType.price;
     setTotalSum(total)
   }
-
-  const handleOpenModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
 
   return (
     <div>
@@ -82,42 +67,6 @@ const ShowerCabin = () => {
           ))}
       </select>
       <p>Вибране скло: {currentGlass}</p>
-
-      <h3>Виберіть колір скла</h3>
-      <select value={currentGlassColor} onChange={selectGlassColorFunc}>
-        <option value="" disabled>
-          Оберіть колір скла
-        </option>
-        {currentObject &&
-          currentObject.color &&
-          currentObject.color.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-      </select>
-      <p>Вибраний колір скла: {currentGlassColor}</p>
-
-      <h3>Вкажіть розміри:</h3>
-      <div>
-        <div>
-          <h4>Ширина:</h4>
-          <input />
-        </div>
-        <div>
-          <h4>Висота:</h4>
-          <input />
-        </div>
-        <div>
-          <h4>Обєм:</h4>
-          <input />
-        </div>
-      </div>
-
-      <div>
-        <button onClick={handleOpenModal}>Обрати фурнітуру</button>
-        <Modal isOpen={modalIsOpen} onClose={handleCloseModal}/>
-      </div>
       <div>
         <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
       </div>
