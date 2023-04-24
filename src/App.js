@@ -14,6 +14,8 @@ function App() {
         <Route path='/mirrors' element={<Mirrors />}/>
         <Route path='/admin' element={<AdminPanel />}/>
       </Routes>
+        
+
     </div>
   );
 }
