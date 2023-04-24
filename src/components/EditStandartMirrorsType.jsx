@@ -14,7 +14,7 @@ const EditStandartMirrorsType = ({item, idxType}) => {
       };
 
       const sendData = () => {
-        fetch('http://localhost:4444/update-type', {
+        fetch('https://calc-shower.herokuapp.com/update-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -30,8 +30,6 @@ const EditStandartMirrorsType = ({item, idxType}) => {
             window.location.reload();
           },1000)
       }
-
-    //   console.log('typeGoodsValue',typeGoodsValue);
       
     return (
         <div>
@@ -54,7 +52,7 @@ const EditStandartMirrorsType = ({item, idxType}) => {
           {isShowInput &&
            <div>
             <input value={typeNameValue} onChange={(e) => setTypeNameValue(e.target.value)}/>
-            <button onClick={sendData}>Підтвердити зміни</button>
+            <button onClick={sendData} style={{ cursor:'pointer' }}>Підтвердити зміни</button>
            </div>
            }
           </div>
