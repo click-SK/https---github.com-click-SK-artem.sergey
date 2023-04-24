@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const StandartMirrors = ({ data }) => {
+
   const [currentType, setCurrentType] = useState(null);
   const [currentTypeArray, setCurrentTypeArray] = useState(null);
   const [currentGoods, setCurrentGoods] = useState(null);

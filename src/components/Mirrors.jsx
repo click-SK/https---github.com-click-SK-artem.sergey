@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
 import StandartMirrors from './StandartMirrors';
 
-const Mirrors = ({data}) => {
+const Mirrors = () => {
+    const [mirrorsData, setMirrorsData] = useState(null);
 
-    //   console.log('currentObject',currentObject);
+    useEffect(() => {
+        fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
+          .then((res) => res.json())
+          .then((data) => {
+            setMirrorsData(data[0])
+          })
+          .catch((error) => console.error(error));
+      }, []);
+
+      console.log('mirrorsData',mirrorsData);
     return (
         <div>
             <h1>Mirrors</h1>
-            <StandartMirrors data={data}/>
+            {mirrorsData &&
+              <StandartMirrors data={mirrorsData}/>
+            }
         </div>
     );
 };
