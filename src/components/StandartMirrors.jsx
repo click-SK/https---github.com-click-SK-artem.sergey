@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { CSVLink } from "react-csv";
+import Api from "./Api";
 
 const StandartMirrors = ({ data }) => {
   const [currentType, setCurrentType] = useState(null);
@@ -13,6 +15,26 @@ const StandartMirrors = ({ data }) => {
   const [isPainting, setIsPainting] = useState(false);
 
   console.log("data", data);
+
+  // const keyCsv = [
+  //   {"Форма скла": currentType?.name },
+  //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
+  // ];
+
+  const keyCsv = [
+    [ "Магазин", "Дзеркала" ],
+    [ "Назва", "Модифікація", "Ціна" ],
+    [ 'Форма скла', currentType?.name, "" ],
+    [ 'Тип дзеркала', 'Дзеркало з фоновою підсвідкою', "4700 грн\м2" ],
+    [ 'Розмір', 'В: 1м, Ш:1 ', "4700 грн" ],
+    [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
+  ];
+
+
+  const calcTotalSum = () => {
+    console.log('finalObject',currentType);
+  }
+
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
@@ -70,15 +92,7 @@ const StandartMirrors = ({ data }) => {
     setCurrentColor(selectedColor);
   }
 
-  const calcTotalSum = () => {
-    const finalObject = {
-      name: 'My Name',
-      age: 30,
-      work: 'frontEnd',
-      coutry: 'USA'
-    }
-    console.log('finalObject',finalObject);
-  }
+
 
   return (
     <div>
@@ -210,7 +224,11 @@ const StandartMirrors = ({ data }) => {
         </select>
       </div>
 
-      <button style={{margin: '200px 0px'}} onClick={calcTotalSum}>Підрухувати кінцеву вартість</button>
+      <button style={{margin: '200px 0px 0px 0px'}} onClick={calcTotalSum}>Підрухувати кінцеву вартість</button>
+      
+      {/* <CSVLink data={dataCsv} headers={csvHeaders} separator={";"} >Download me</CSVLink>; */}
+      <CSVLink data={keyCsv} filename = { "date.csv" } separator={";"} >Download me</CSVLink>;
+      <Api/>       
     </div>
   );
 };
