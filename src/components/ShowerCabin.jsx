@@ -12,7 +12,7 @@ const ShowerCabin = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:4444/get-all-shower")
+    fetch("https://calc-shower.herokuapp.com/get-all-shower")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);

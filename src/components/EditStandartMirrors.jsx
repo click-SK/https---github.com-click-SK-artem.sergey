@@ -4,7 +4,7 @@ const EditStandartMirrors = () => {
   const [currentObject, setCurrentObject] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:4444/get-all-standart-mirrors")
+    fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);

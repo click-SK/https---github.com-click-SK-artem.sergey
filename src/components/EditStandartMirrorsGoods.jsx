@@ -15,7 +15,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
   };
 
   const sendData = () => {
-    fetch('http://localhost:4444/update-goods', {
+    fetch('https://calc-shower.herokuapp.com/update-goods', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
