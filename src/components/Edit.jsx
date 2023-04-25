@@ -1,72 +1,59 @@
 import React, { useState, useEffect } from "react";
 
 const ShowerCabin = () => {
-  const [allData, setAllData] = useState([]);
-  const [currentObject, setCurrentObject] = useState({});
   const [totalSum, setTotalSum] = useState(null);
-  const [currentType, setCurrentType] = useState(null);
-  const [currentGlass, setCurrentGlass] = useState("");
-
-  useEffect(() => {
-    fetch("https://calc-shower.herokuapp.com/get-all-shower")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllData(data);
-        setCurrentObject(data[0]);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-  console.log("allData", allData);
-
-  const selectTypeFunc = (e) => {
-    const selectedType = JSON.parse(e.target.value);
-    setCurrentType(selectedType);
-  };
-  const selectGlassFunc = (e) => {
-    setCurrentGlass(e.target.value);
-  };
+  const [widthValue, setWidthValue] = useState(0);
+  const [heightValue, setHeightValue] = useState(0);
+  const [volumValue, setVolumValue] = useState(0);
+  const [widthSum, setWidthSum] = useState(0);
+  const [heightSum, setHeightSum] = useState(0);
+  const [volumSum, setVolumSum] = useState(0);
 
   const calcTotalSumFunc = () => {
-    const total = currentType.price;
-    setTotalSum(total)
+    const priceForSize = widthSum + heightSum + volumSum;
+    console.log('priceForSize',priceForSize);
+    let total = 0;
+    if(currentType?.price) {
+      total = currentType.price;
+    }
+
+    const res = total + priceForSize;
+    setTotalSum(res)
+  }
+
+  const changeWidth = (e) => {
+    setWidthValue(e);
+    setWidthSum(Number(e) * 5)
+  }
+
+  const changeHeight = (e) => {
+    setHeightValue(e)
+    setHeightSum(Number(e) * 5)
+  }
+
+  const changeVolume = (e) => {
+    setVolumValue(e)
+    setVolumSum(Number(e) * 5)
   }
 
   return (
     <div>
-      <h1>Душові кабіни</h1>
+      <h3>Вкажіть розміри:</h3>
+      <div>
+        <div>
+          <h4>Ширина:</h4>
+          <input value={widthValue} onChange={(e) => changeWidth(e.target.value)}/>
+        </div>
+        <div>
+          <h4>Висота:</h4>
+          <input value={heightValue} onChange={(e) => changeHeight(e.target.value)}/>
+        </div>
+        <div>
+          <h4>Обєм:</h4>
+          <input value={volumValue} onChange={(e) => changeVolume(e.target.value)}/>
+        </div>
+      </div>
 
-      <h3>Виберіть тип</h3>
-      <select
-        value={currentType ? JSON.stringify(currentType) : ""}
-        onChange={selectTypeFunc}
-      >
-        <option value="" disabled>
-          Оберіть тип
-        </option>
-        {currentObject?.type &&
-          currentObject.type.map((item) => (
-            <option key={item.name} value={JSON.stringify(item)}>
-              {item.name}
-            </option>
-          ))}
-      </select>
-      <p>Вибраний тип: {currentType?.name && currentType.name}</p>
-
-      <h3>Виберіть скло</h3>
-      <select value={currentGlass} onChange={selectGlassFunc}>
-        <option value="" disabled>
-          Оберіть скло
-        </option>
-        {currentObject &&
-          currentObject.glassThickness &&
-          currentObject.glassThickness.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-      </select>
-      <p>Вибране скло: {currentGlass}</p>
       <div>
         <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
       </div>
