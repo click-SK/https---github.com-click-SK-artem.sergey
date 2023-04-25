@@ -5,11 +5,16 @@ const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
   const [currentObject, setCurrentObject] = useState({});
   const [totalSum, setTotalSum] = useState(null);
-  const [currentCategory, setCurrentCategory] = useState("");
   const [currentType, setCurrentType] = useState(null);
   const [currentGlass, setCurrentGlass] = useState("");
   const [currentGlassColor, setCurrentGlassColor] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [widthValue, setWidthValue] = useState(0);
+  const [heightValue, setHeightValue] = useState(0);
+  const [volumValue, setVolumValue] = useState(0);
+  const [widthSum, setWidthSum] = useState(0);
+  const [heightSum, setHeightSum] = useState(0);
+  const [volumSum, setVolumSum] = useState(0);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -35,8 +40,15 @@ const ShowerCabin = () => {
   };
 
   const calcTotalSumFunc = () => {
-    const total = currentType.price;
-    setTotalSum(total)
+    const priceForSize = widthSum + heightSum + volumSum;
+    console.log('priceForSize',priceForSize);
+    let total = 0;
+    if(currentType?.price) {
+      total = currentType.price;
+    }
+
+    const res = total + priceForSize;
+    setTotalSum(res)
   }
 
   const handleOpenModal = () => {
@@ -46,6 +58,26 @@ const ShowerCabin = () => {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
+  const changeWidth = (e) => {
+    setWidthValue(e);
+    setWidthSum(Number(e) * 5)
+  }
+
+  const changeHeight = (e) => {
+    setHeightValue(e)
+    setHeightSum(Number(e) * 5)
+  }
+
+  const changeVolume = (e) => {
+    setVolumValue(e)
+    setVolumSum(Number(e) * 5)
+  }
+
+  console.log('widthSum',widthSum);
+  console.log('heightSum',heightSum);
+  console.log('volumSum',volumSum);
+  console.log('totalSum',totalSum);
 
   return (
     <div>
@@ -102,15 +134,15 @@ const ShowerCabin = () => {
       <div>
         <div>
           <h4>Ширина:</h4>
-          <input />
+          <input value={widthValue} onChange={(e) => changeWidth(e.target.value)}/>
         </div>
         <div>
           <h4>Висота:</h4>
-          <input />
+          <input value={heightValue} onChange={(e) => changeHeight(e.target.value)}/>
         </div>
         <div>
           <h4>Обєм:</h4>
-          <input />
+          <input value={volumValue} onChange={(e) => changeVolume(e.target.value)}/>
         </div>
       </div>
 
