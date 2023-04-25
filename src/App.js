@@ -17,11 +17,13 @@ function App() {
         <p className='tittle'></p>
       </div>
       <div className='logo'>
+        <div className='logo_wrap'>
         <img className='logo_img' src='/logo.png' alt="My Image" />
         <div className='info'>
           <p> +38 (067) 320 60 23 </p>
           <p> skloexpert.ua@gmail.com </p>
           <p> Адреса нашого офісу: 46000, м. Тернопіль, вул. Текстильна, 42 ПН-ПТ: 09:00-18:00 </p>
+        </div>
         </div>
       </div>
       <Header/>

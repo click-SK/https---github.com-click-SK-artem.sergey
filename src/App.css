@@ -110,10 +110,17 @@ input, textarea {
 .logo{
   position: absolute;
   display: flex;
-  justify-content: space-evenly;
   top: 15px;
   left: 0;
   width: 100%;
+  justify-content: center;
+}
+
+.logo_wrap{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 800px;
 }
 
 .info{
