@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import Api from "./Api";
+import '../style/shower.scss'
+import '../style/mirrors.scss'
 
 const StandartMirrors = ({ data }) => {
 
@@ -96,9 +98,9 @@ const StandartMirrors = ({ data }) => {
 
 
   return (
-    <div>
+    <div className="wrap_item mirrors_item">
+      <div className="choose_item item_mirrors">
       <h3>Оберіть тип скла</h3>
-      <div>
         <select
           onChange={selectTypeFunc}
           value={currentType ? JSON.stringify(currentType) : ""}
@@ -115,28 +117,29 @@ const StandartMirrors = ({ data }) => {
         </select>
       </div>
 
-      <div>
-        <h3>Виберіть товар:</h3>
-
-        <select
-          onChange={selectGoodsFunc}
-          value={currentGoods ? JSON.stringify(currentGoods) : ""}
-        >
-          <option value="" disabled>
-            Оберіть товар
-          </option>
-          {currentTypeArray &&
-            currentTypeArray.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
+      
+          <div className="choose_item item_mirrors">
+          <h3>Виберіть товар:</h3>
+            <select
+              onChange={selectGoodsFunc}
+              value={currentGoods ? JSON.stringify(currentGoods) : ""}
+            >
+              <option value="" disabled>
+                Оберіть товар
               </option>
-            ))}
-        </select>
-      </div>
+              {currentTypeArray &&
+                currentTypeArray.map((item) => (
+                  <option key={item.name} value={JSON.stringify(item)}>
+                    {item.name}
+                  </option>
+                ))}
+            </select>
+            </div>
+      
 
-      <div>
+      
+        <div className="choose_item item_mirrors">         
         <h3>Виберіть рамку:</h3>
-
         <select
           onChange={selectFrameFunc}
           value={currentFrame ? JSON.stringify(currentFrame) : ""}
@@ -151,11 +154,12 @@ const StandartMirrors = ({ data }) => {
               </option>
             ))}
         </select>
-      </div>
+        </div>
+      
 
-      <div>
+      
+        <div className="choose_item item_mirrors">
         <h3>Виберіть підсвітку:</h3>
-
         <select
           onChange={selectBackLightFunc}
           value={currentBackLight ? JSON.stringify(currentBackLight) : ""}
@@ -170,11 +174,12 @@ const StandartMirrors = ({ data }) => {
               </option>
             ))}
         </select>
-      </div>
+        </div>
+      
 
-      <div>
+      
+        <div className="choose_item item_mirrors">
         <h3>Виберіть вимикач:</h3>
-
         <select
           onChange={selectSwitchFunc}
           value={currentSwitch ? JSON.stringify(currentSwitch) : ""}
@@ -189,26 +194,33 @@ const StandartMirrors = ({ data }) => {
               </option>
             ))}
         </select>
+        </div>
+      
+
+      <div className="choose_item item_mirrors">
+      <h3>Довжину кабелю (м):</h3>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
       </div>
 
-      <div>
-      <h3>Виберіть довжину кабеля:</h3>
-        <input placeholder="Довжина кабеля" value={currentCord} onChange={(e) => changeCord(e)}/>
-      </div>
-
-      <div>
+      <div className="choose_item item_mirrors check-item">
         <h3>Підігрів:</h3>
-        <input type='checkbox' checked={isWarmedUp} onChange={changeWarmUpFunc}/>
+        <div className="checkbox_wrap">
+        <input id="checkbox1" className="checkbox" type='checkbox' checked={isWarmedUp} onChange={changeWarmUpFunc}/>
+        <label className="checkbox-label" for="checkbox1"></label>
+        </div>
       </div>
 
-      <div>
+      <div className="choose_item item_mirrors check-item">
         <h3>Покраска:</h3>
-        <input type='checkbox' checked={isPainting} onChange={changePaintingFunc}/>
+        <div className="checkbox_wrap">
+        <input id="checkbox2"  className="checkbox" type='checkbox' checked={isPainting} onChange={changePaintingFunc}/>
+        <label className="checkbox-label" for="checkbox2"></label>
+        </div>
       </div>
 
-      <div>
+      
+        <div className="choose_item item_mirrors">
         <h3>Виберіть колір:</h3>
-
         <select
           onChange={selectedColorFunc}
           value={currentColor ? JSON.stringify(currentColor) : ""}
@@ -223,13 +235,20 @@ const StandartMirrors = ({ data }) => {
               </option>
             ))}
         </select>
-      </div>
+        </div>
 
-      <button style={{margin: '200px 0px 0px 0px'}} onClick={calcTotalSum}>Підрухувати кінцеву вартість</button>
-      
-      {/* <CSVLink data={dataCsv} headers={csvHeaders} separator={";"} >Download me</CSVLink>; */}
-      <CSVLink data={keyCsv} filename = { "date.csv" } separator={";"} >Download me</CSVLink>;
-      <Api/>       
+        <div className="footer_calc">
+            <div className="mirror_sum">
+              <div>
+                <button className="mirror_buttom" onClick={calcTotalSum}>Підрахувати вартість</button>
+              </div>
+              <h3 className="order_sum mirror_sum">Кінцева вартість: <span> 0 грн</span> </h3>
+            </div>
+            <div className="send_order mirror_button">
+            <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink>
+            <button className="mirror_button_order" >Оформити</button>
+            </div>
+        </div> 
     </div>
   );
 };
