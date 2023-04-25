@@ -94,69 +94,6 @@ const ShowerCabin = () => {
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
-
-
-      <h3>Виберіть тип</h3>
-      <select
-        value={currentType ? JSON.stringify(currentType) : ""}
-        onChange={selectTypeFunc}
-      >
-        <option value="" disabled>
-          Оберіть тип
-        </option>
-        {currentObject?.type &&
-          currentObject.type.map((item) => (
-            <option key={item.name} value={JSON.stringify(item)}>
-              {item.name}
-            </option>
-          ))}
-      </select>
-      <p>Вибраний тип: {currentType?.name && currentType.name}</p>
-
-      <h3>Виберіть скло</h3>
-      <select value={currentGlass} onChange={selectGlassFunc}>
-        <option value="" disabled>
-          Оберіть скло
-        </option>
-        {currentObject &&
-          currentObject.glassThickness &&
-          currentObject.glassThickness.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-      </select>
-      <p>Вибране скло: {currentGlass}</p>
-
-      <h3>Виберіть колір скла</h3>
-      <select value={currentGlassColor} onChange={selectGlassColorFunc}>
-        <option value="" disabled>
-          Оберіть колір скла
-        </option>
-        {currentObject &&
-          currentObject.color &&
-          currentObject.color.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-      </select>
-      <p>Вибраний колір скла: {currentGlassColor}</p>
-
-      <h3>Вкажіть розміри:</h3>
-      <div>
-        <div>
-          <h4>Ширина:</h4>
-          <input value={widthValue} onChange={(e) => changeWidth(e.target.value)}/>
-        </div>
-        <div>
-          <h4>Висота:</h4>
-          <input value={heightValue} onChange={(e) => changeHeight(e.target.value)}/>
-        </div>
-        <div>
-          <h4>Обєм:</h4>
-          <input value={volumValue} onChange={(e) => changeVolume(e.target.value)}/>
-
         <div className="wrap_item type_shower">
             <h3>Виберіть тип</h3>
             <div className="choose_item selected_shower">
@@ -262,6 +199,7 @@ const ShowerCabin = () => {
             </div>
         </div> 
     </div>
+    
   );
 };
 
