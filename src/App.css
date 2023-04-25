@@ -1,5 +1,134 @@
+* {
+  padding: 0%;
+  margin: 0;
+  border: 0;
+}
+*,
+*::before,
+*::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus-active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: non;
+}
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+a {
+  text-decoration:none;
+}
+
+input, textarea {
+  outline: none;
+  border: none;
+  border: solid 1px #f2f2f2;
+  }
+
+
+
+
+
+
 .App {
   text-align: center;
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin: 50px auto;
+
+}
+
+.color_ref{
+  position: absolute;
+  left: 50px;
+  top: 20px;
+}
+
+.color_ref p{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.prime{
+  background-color: #0c71a5 ;
+}
+.second{
+  background-color: #57b4f7 ;
+}
+.disab{
+  background-color: #7a7a7a ;
+}
+.back{
+  background-color: #f2f2f2 ;
+}
+.tittle{
+  background-color: #2f7ca4 ;
 }
 
 .App-logo {
@@ -35,4 +164,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.form_api{
+        margin: 50px;
 }
