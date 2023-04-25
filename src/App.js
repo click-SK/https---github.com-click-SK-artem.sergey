@@ -8,6 +8,14 @@ import {Routes, Route} from 'react-router-dom';
 function App() {
   return (
     <div className="App">
+      <div className='color_ref'> 
+        <p className='prime'></p>
+        <p className='second'></p>
+        <p className='disab'></p>
+        <p className='back'></p>
+        <p className='tittle'></p>
+
+      </div>
       <Header/>
       <Routes>
         <Route path='/' element={<ShowerCabin/>}/>
