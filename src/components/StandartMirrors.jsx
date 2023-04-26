@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
+import ExelPrint from "./ExelPrint";
 import Api from "./Api";
 import '../style/shower.scss'
 import '../style/mirrors.scss'
@@ -245,7 +246,8 @@ const StandartMirrors = ({ data }) => {
               <h3 className="order_sum mirror_sum">Кінцева вартість: <span> 0 грн</span> </h3>
             </div>
             <div className="send_order mirror_button">
-            <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink>
+            {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
+            <ExelPrint/>
             <button className="mirror_button_order" >Оформити</button>
             </div>
         </div> 
