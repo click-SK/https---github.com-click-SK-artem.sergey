@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 });
 
 const PdfFile = () => {
+    const arr = [1,2,3,4,5]
     return (
         <Document>
             <Page style={styles.body}>
@@ -80,18 +81,11 @@ const PdfFile = () => {
                     </Text>
                 </View>
                 <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Кругле дзеркало з підсвіткою 1м Х 1м
-                    </Text>
-                    <Text style={styles.text}>
-                        без вимикача
-                    </Text>
-                    <Text style={styles.text}>
-                        1
-                    </Text>
-                    <Text style={styles.text}>
-                        2400 грн
-                    </Text>
+                    {arr.map((item)=>(
+                        <Text style={styles.text}>
+                        {item}
+                        </Text>
+                    ))}
                 </View>
                 <Text style={styles.text}>
 
