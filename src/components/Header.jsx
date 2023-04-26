@@ -1,8 +1,6 @@
 import React from 'react';
 import '../style/header.scss'
 import {BsFillGearFill} from 'react-icons/bs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     return (

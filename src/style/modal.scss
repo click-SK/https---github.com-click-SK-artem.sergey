@@ -33,3 +33,15 @@
     cursor: pointer;
     padding: 10px;
   }
+
+  .furniture_wrap {
+
+  }
+
+  .furniture_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+    border-bottom: 1px solid black;
+  }
