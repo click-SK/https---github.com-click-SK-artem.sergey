@@ -11,7 +11,6 @@ const ShowerCabin = () => {
 
   const calcTotalSumFunc = () => {
     const priceForSize = widthSum + heightSum + volumSum;
-    console.log('priceForSize',priceForSize);
     let total = 0;
     if(currentType?.price) {
       total = currentType.price;

@@ -1,11 +1,11 @@
 import React from 'react';
-import EditStandartMirrors from './EditStandartMirrors';
 
 const AdminPanel = () => {
     return (
         <div>
             <h1>Admin Panel</h1>
-            <EditStandartMirrors/>
+            <a href='/admin-mirrors'>Mirrors</a>
+            <a href='/admin-showers'>Shower</a>
         </div>
     );
 };

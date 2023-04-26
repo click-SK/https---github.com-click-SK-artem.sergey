@@ -20,8 +20,6 @@ const StandartMirrors = ({ data }) => {
   const [isWarmedUp, setIsWarmedUp] = useState(false);
   const [isPainting, setIsPainting] = useState(false);
 
-  console.log("data", data);
-
   // const keyCsv = [
   //   {"Форма скла": currentType?.name },
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
@@ -38,7 +36,6 @@ const StandartMirrors = ({ data }) => {
 
 
   const calcTotalSum = () => {
-    console.log('finalObject',currentType);
   }
 
 
@@ -50,51 +47,41 @@ const StandartMirrors = ({ data }) => {
 
   const selectGoodsFunc = (e) => {
     const selectedGoods = JSON.parse(e.target.value);
-    console.log("selectedGoods", selectedGoods);
     setCurrentGoods(selectedGoods);
   };
 
   const selectFrameFunc = (e) => {
     const selectedFrame = JSON.parse(e.target.value);
-    console.log("selectedFrame", selectedFrame);
     setCurrentFrame(selectedFrame);
   };
 
   const selectBackLightFunc = (e) => {
     const selectedBackLight = JSON.parse(e.target.value);
-    console.log("selectedBackLight", selectedBackLight);
     setCurrentBackLight(selectedBackLight);
   };
 
   const selectSwitchFunc = (e) => {
     const selectedSwitch = JSON.parse(e.target.value);
-    console.log("selectedSwitch", selectedSwitch);
     setCurrentSwitch(selectedSwitch);
   };
 
   const changeCord = (e) => {
     const cordObj = data?.option?.cord;
-    console.log('cordObj',cordObj);
     setCurrentCord(e.target.value);
   }
 
   const changeWarmUpFunc = () => {
     const warmeUpObj = data?.option?.warmedUp;
     setIsWarmedUp(isWarmedUp => !isWarmedUp)
-    console.log('warmeUpObj',warmeUpObj);
   }
-
-  console.log('isWarmedUp',isWarmedUp);
 
   const changePaintingFunc = () => {
     const paintingObj = data?.option?.painting;
     setIsPainting(isPainting => !isPainting)
-    console.log('paintingObj',paintingObj);
   }
 
   const selectedColorFunc = (e) => {
     const selectedColor = JSON.parse(e.target.value);
-    console.log("selectedColor", selectedColor);
     setCurrentColor(selectedColor);
   }
 

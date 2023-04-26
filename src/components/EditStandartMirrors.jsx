@@ -12,8 +12,6 @@ const EditStandartMirrors = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log("currentObject", currentObject);
-
   return (
     <div>
       <h1>Редагування типів та товарів</h1>

@@ -12,7 +12,6 @@ const DispalayModalItems = ({item}) => {
       let isCart = false
       cart.forEach((el) => {
         if(el.title == i.title) {
-          console.log('el',el);
           dispatch(changeFurniture(colorAndPrice))
           // el?.colorsFurniture = [colorAndPrice];
           isCart = true;
@@ -22,7 +21,6 @@ const DispalayModalItems = ({item}) => {
   
       if(!isCart) {
         if(colorAndPrice) {
-          console.log('current_item,',i);
           copyFurniture.colorsFurniture = [colorAndPrice];
         }
         dispatch(addCart(copyFurniture))
@@ -34,7 +32,6 @@ const DispalayModalItems = ({item}) => {
         setColorAndPrice(selectedColor)
     }
 
-    console.log('item',item);
 
     return (
         <div className="furniture_block">

@@ -38,8 +38,6 @@ const ShowerCabin = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log("allData", allData);
-
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
     setCurrentType(selectedType);
@@ -53,7 +51,6 @@ const ShowerCabin = () => {
 
   const calcTotalSumFunc = () => {
     const priceForSize = widthSum + heightSum + volumSum;
-    console.log('priceForSize',priceForSize);
     let total = 0;
     if(currentType?.price) {
       total = currentType.price;

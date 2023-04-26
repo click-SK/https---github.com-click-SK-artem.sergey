@@ -6,12 +6,9 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
   const [goodsPriceValue, setGoodPriceValue] = useState("");
 
   const changeBlock = (item) => {
-    console.log("item", item);
     setIsEditGood((isEditGood) => !isEditGood);
     setGoodNameValue(item.name);
     setGoodPriceValue(item.price);
-    console.log('idxType',idxType);
-    console.log('idxGoods',idxGoods);
   };
 
   const sendData = () => {
