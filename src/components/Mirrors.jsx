@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import StandartMirrors from './StandartMirrors';
 import { CSVLink } from "react-csv";
+import '../style/shower.scss'
+import '../style/mirrors.scss'
 
 const Mirrors = () => {
     const [mirrorsData, setMirrorsData] = useState(null);
@@ -16,7 +18,7 @@ const Mirrors = () => {
 
       console.log('mirrorsData',mirrorsData);
     return (
-        <div>
+        <div className="mirrors_wrapper">
             <h1>Mirrors</h1>
             {mirrorsData &&
               <StandartMirrors data={mirrorsData}/>
