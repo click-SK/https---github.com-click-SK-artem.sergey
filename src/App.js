@@ -4,6 +4,8 @@ import Header from './components/Header';
 import ShowerCabin from './components/ShowerCabin.jsx';
 import Mirrors from './components/Mirrors';
 import AdminPanel from './components/AdminPanel';
+import EditStandartMirrors from './components/EditStandartMirrors';
+import EditShower from './components/EditShower';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -29,8 +31,10 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<ShowerCabin/>}/>
-        <Route path='/mirrors' element={<Mirrors />}/>
-        <Route path='/admin' element={<AdminPanel />}/>
+        <Route path='/mirrors' element={<Mirrors/>}/>
+        <Route path='/admin' element={<AdminPanel/>}/>
+        <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
+        <Route path='/admin-showers' element={<EditShower/>}/>
       </Routes>
         
 

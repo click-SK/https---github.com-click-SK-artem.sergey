@@ -8,7 +8,6 @@ const EditStandartMirrorsType = ({item, idxType}) => {
     const [typeNameValue, setTypeNameValue] = useState("");
     const [typeGoodsValue, setTypeGoodsValue] = useState([]);
     const changeNameSection = (item) => {
-        console.log("item", item);
         setTypeNameValue(item.name);
         setTypeGoodsValue(item.goods)
       };

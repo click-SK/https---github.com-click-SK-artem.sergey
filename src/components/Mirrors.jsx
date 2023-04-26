@@ -15,8 +15,7 @@ const Mirrors = () => {
           })
           .catch((error) => console.error(error));
       }, []);
-
-      console.log('mirrorsData',mirrorsData);
+      
     return (
         <div className="mirrors_wrapper">
             <h1>Mirrors</h1>
