@@ -3,9 +3,9 @@ import './App.css';
 import Header from './components/Header';
 import ShowerCabin from './components/ShowerCabin.jsx';
 import Mirrors from './components/Mirrors';
-import AdminPanel from './components/AdminPanel';
-import EditStandartMirrors from './components/EditStandartMirrors';
-import EditShower from './components/EditShower';
+import AdminPanel from './components/Admin/AdminPanel';
+import EditStandartMirrors from './components/Admin/Mirrors/EditStandartMirrors';
+import EditShower from './components/Admin/Shower/EditShower';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {

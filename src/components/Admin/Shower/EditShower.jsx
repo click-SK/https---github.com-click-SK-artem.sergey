@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import '../style/edir-shower.scss';
+import '../../../style/edir-shower.scss';
 import EditShowerFurnitureTemplate from "./EditShowerFurnitureTemplate";
 import EditShowerColorsTemplate from "./EditShowerColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import EditShowerTypeTemplate from './EditShowerTypeTemplate';
 import EditShowerSizeTemplate from "./EditShowerSizeTemplate";
+
 const EditShower = () => {
     const [currentObject, setCurrentObject] = useState({});
     const [showFurnitureBlock, setShowFurnitureBlock] = useState(true);
