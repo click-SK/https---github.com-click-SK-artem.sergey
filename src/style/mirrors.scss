@@ -1,52 +1,32 @@
-.shower_wrapper{
+.mirrors_wrapper{
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
-
-
-}
-
-h1{
-    display: flex;
-    height: 70px;
-    font-size: 25px;
-    font-weight: 700;
-    text-transform: uppercase;
-    justify-content: center;
     align-items: center;
+
+
 }
 
+.mirrors_item{
+    flex-direction: column;
+    width: 90%;
+    
+}
 
-.wrap_item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.item_mirrors{
+    position: relative;
+    align-items: center;
     h3{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 200px;
-        font-size: 20px;
-        margin-left: 25px;
+        width:30%;
+        font-size: 19px;
     }
-}
-
-.choose_item{
-    display: flex;
-    justify-content: space-evenly;
-    height: 80px;
-
     select{
-        width: 500px;
-        margin: 10px 20px;
-        border-radius: 10px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-        padding: 10px;
-        font-size: 15px;
+        width: 70%;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        outline: none;
+         outline: none;
+
         &::focus-visible{
             outline: none;
         }
@@ -56,7 +36,6 @@ h1{
         &:active{
             outline: none;
         }
-
         option{
             background-color: #ffffff;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
@@ -66,129 +45,96 @@ h1{
             }
         }
     }
-    p{
-        flex: 50%;
-        display: flex;
-        flex-direction: column;
-        span{
-
-        }
-    }
-
-}
-
-.type_shower{
-
-}
-
-.size_shower{
-    display: flex;
-}
-
-.size_input {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-
-}
-
-.size_item{
-    height: 80px;
-
-    h4{
-        height: 0px;
-    }
-
-    input{
-        height: 60px;
+    .cabel{
+        width: 70%;
         margin: 10px 20px;
         border-radius: 10px;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
         padding: 10px;
-        width: 140px;
+        font-size: 15px;
         &::placeholder{
-            color: black;
-            font-size: 15px;
+            color: #111;
         }
     }
-}
 
-.firnitur {
-    height: 60px;
-    display: flex;
-    margin: 20px;
-    align-items: center;
-    justify-content: center;
-
-    .button_open {
-        min-width: 200px;
-        width: 60%;
-        height: 60px;
-        border-radius: 10px;
+    .checkbox_wrap {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        background-color: #333;
+        border-radius: 50px;
+        box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-        font-size: 20px;
-        background: #0c71a5;
-        color: #ffffff;
-        font-weight: 700;
+
+        &::after{
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            height: 2px;
+            width: 52px;
+            background-color: #111;
+            border-radius: 50px;
+            box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+          }
+      }
+
+    .checkbox {
+        visibility: hidden;
+      }
+
+    label{
+            display: block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 4px;
+            z-index: 1;
+            left: 4px;
+            box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            &:after {
+                content: '';
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #333;
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 0px rgba(255, 255, 255, 0.8);
+              }
     }
+    
 }
 
-.list_firnitur {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.checkbox:checked + .checkbox-label {
+    left: 54px;
+  }
+  .checkbox:checked + .checkbox-label:after {
+    background-color: #57b4f7;
+  }
+
+
+  .check-item{
     align-items: center;
-    margin-bottom: 20px;
-}
+    justify-content: flex-start;
+    height: 40px;
+    h3{
+        width: 60%;
+    }
+  }
 
-.list_firnitur_wrap {
-    width: 80%;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.list_header {
-    display: flex;
-    height: 30px;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    text-transform: uppercase;
-    border-bottom: 1px solid #7a7a7a;
-}
-
-.image_furniture {
-    height: 100%;
-    width: auto;
-}
-
-.list_firnitur_item {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 60px;
-    font-size: 15px;
-}
-
-.list_furniture_buttons_wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.list_furniture_button {
-    border: 1px solid black;
-    padding: 10px;
-}
-
-.footer_calc{
+  .footer_calc{
     display: flex;
     height: 200px;
     justify-content: center;
     flex-direction: column;
-    .summ{
+    .mirror_sum{
         display: flex;
         justify-content: center;
         height: 60px;
@@ -217,9 +163,8 @@ h1{
             border-radius: 10px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
             font-size: 24px;
-            
-            p{
-                
+            span{
+                margin-left: 10px;
             }
         }
     }
@@ -231,8 +176,8 @@ h1{
         justify-content: space-around;
 
 
-        .exel{
-            width: 300px;
+        .mirror_button_exel{
+            width: 200px;
             height: 60px;
             border-radius: 10px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
