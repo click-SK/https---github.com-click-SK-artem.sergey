@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
+import ListTheChosenFurniture from "./ListTheChosenFurniture";
 import { CSVLink } from "react-csv";
 import '../style/shower.scss'
 
@@ -17,7 +18,6 @@ const ShowerCabin = () => {
   const [widthSum, setWidthSum] = useState(0);
   const [heightSum, setHeightSum] = useState(0);
   const [volumSum, setVolumSum] = useState(0);
-
 
   const keyCsv = [
     [ "Магазин", "Дзеркала" ],
@@ -85,11 +85,6 @@ const ShowerCabin = () => {
     setVolumValue(e)
     setVolumSum(Number(e) * 5)
   }
-
-  console.log('widthSum',widthSum);
-  console.log('heightSum',heightSum);
-  console.log('volumSum',volumSum);
-  console.log('totalSum',totalSum);
 
   return (
     <div className="shower_wrapper">
@@ -170,20 +165,9 @@ const ShowerCabin = () => {
         </div>
         <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
-            <Modal isOpen={modalIsOpen} onClose={handleCloseModal}/>
+            <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
         </div>
-            <div className="list_firnitur">
-              <ul>
-                <div className="list_header">
-                  <p>фото</p>
-                  <p>Опис</p>
-                  <p>Креслення</p>
-                  <p>Колір</p>
-                  <p>Ціна</p>
-                </div>
-                <li>option 1</li>
-              </ul>
-            </div>
+        <ListTheChosenFurniture />
           <div className="footer_calc">
             <div className="summ">
               <div>

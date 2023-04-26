@@ -1,7 +1,8 @@
 import React from "react";
 import "../style/modal.scss";
+import DispalayModalItems from "./DispalayModalItems";
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, furnitureProps }) => {
   if (!isOpen) return null;
 
   return (
@@ -10,7 +11,11 @@ const Modal = ({ isOpen, onClose, children }) => {
         <button className="close-btn" onClick={onClose}>
           X
         </button>
-        {children}
+        <div className="furniture_wrap">
+          {furnitureProps.map((item) => (
+            <DispalayModalItems key={item._id} item={item}/>
+          ))}
+        </div>
       </div>
     </div>
   );

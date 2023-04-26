@@ -114,13 +114,14 @@ h1{
     }
 }
 
-.firnitur{
+.firnitur {
     height: 60px;
     display: flex;
     margin: 20px;
     align-items: center;
     justify-content: center;
-    .button_open{
+
+    .button_open {
         min-width: 200px;
         width: 60%;
         height: 60px;
@@ -133,38 +134,53 @@ h1{
     }
 }
 
-.list_firnitur{
+.list_firnitur {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+}
 
-    ul{
-        width: 80%;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+.list_firnitur_wrap {
+    width: 80%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
 
-        .list_header{
-            display: flex;
-            height: 30px;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            text-transform: uppercase;
-            border-bottom: 1px solid #7a7a7a;
-        }
+.list_header {
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid #7a7a7a;
+}
 
-        li{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 40px;
-            font-size: 15px;
-        }
-    }
+.image_furniture {
+    height: 100%;
+    width: auto;
+}
 
+.list_firnitur_item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    font-size: 15px;
+}
+
+.list_furniture_buttons_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list_furniture_button {
+    border: 1px solid black;
+    padding: 10px;
 }
 
 .footer_calc{
