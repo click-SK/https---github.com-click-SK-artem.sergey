@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
+import ExelPrint from "./ExelPrint";
+import PdfFile from "./PdfFile";
 import Api from "./Api";
 import '../style/shower.scss'
 import '../style/mirrors.scss'
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 const StandartMirrors = ({ data }) => {
 
@@ -232,7 +235,11 @@ const StandartMirrors = ({ data }) => {
               <h3 className="order_sum mirror_sum">Кінцева вартість: <span> 0 грн</span> </h3>
             </div>
             <div className="send_order mirror_button">
-            <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink>
+            {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
+            {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
+            <PDFDownloadLink document={<PdfFile/>} fileName="orderDate">
+              Hello
+            </PDFDownloadLink>
             <button className="mirror_button_order" >Оформити</button>
             </div>
         </div> 
