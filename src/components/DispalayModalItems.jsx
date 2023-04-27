@@ -58,7 +58,7 @@ const DispalayModalItems = ({item}) => {
             </option>
           ))}
         </select>
-        <button onClick={() => addFurniture(item)}>Add</button>
+        <button disabled={colorAndPrice ? false : true} onClick={() => addFurniture(item)}>Add</button>
       </div>
     );
 };
