@@ -54,7 +54,7 @@ const DispalayModalItems = ({item}) => {
           {item?.colorsFurniture.map((col, idx) =>(
             <option key={idx} value={JSON.stringify(col)}>
               {col.color} - 
-              {col.price}$
+              {col.price}
             </option>
           ))}
         </select>
