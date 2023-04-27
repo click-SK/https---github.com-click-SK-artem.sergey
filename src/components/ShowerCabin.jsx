@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import ListTheChosenFurniture from "./ListTheChosenFurniture";
 import { CSVLink } from "react-csv";
+import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
 
 const ShowerCabin = () => {
@@ -10,7 +11,7 @@ const ShowerCabin = () => {
   const [totalSum, setTotalSum] = useState(null);
   const [currentType, setCurrentType] = useState(null);
   const [currentGlass, setCurrentGlass] = useState("");
-  const [currentGlassColor, setCurrentGlassColor] = useState("");
+  const [currentGlassColor, setCurrentGlassColor] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [widthValue, setWidthValue] = useState(0);
   const [heightValue, setHeightValue] = useState(0);
@@ -18,6 +19,8 @@ const ShowerCabin = () => {
   const [widthSum, setWidthSum] = useState(0);
   const [heightSum, setHeightSum] = useState(0);
   const [volumSum, setVolumSum] = useState(0);
+
+  const cart = useSelector((state) => state.cart.items);
 
   const keyCsv = [
     [ "Магазин", "Дзеркала" ],
@@ -46,18 +49,39 @@ const ShowerCabin = () => {
     setCurrentGlass(e.target.value);
   };
   const selectGlassColorFunc = (e) => {
-    setCurrentGlassColor(e.target.value);
+    const selectedGlassColor = JSON.parse(e.target.value);
+    setCurrentGlassColor(selectedGlassColor);
   };
 
   const calcTotalSumFunc = () => {
-    const priceForSize = widthSum + heightSum + volumSum;
-    let total = 0;
-    if(currentType?.price) {
-      total = currentType.price;
-    }
+    const calcSize = Number(widthValue) * Number(heightValue);
+    const calcSquareMeter = calcSize/10000;
+    const resSizePrice = calcSquareMeter * currentGlassColor.price;
 
-    const res = total + priceForSize;
-    setTotalSum(res)
+    let totalSumFurniture = 0;
+
+    cart.forEach((el) => {
+      el.colorsFurniture.forEach((item) => {
+        totalSumFurniture += item.price
+      })
+    })
+
+    const totalSum = resSizePrice + currentType.price + totalSumFurniture;
+
+    const finishedShower = {
+      typeName: currentType.name,
+      typePrice: currentType.price,
+      glass: currentGlass,
+      glassColorName: currentGlassColor.name,
+      glassColorPrice: currentGlassColor.price,
+      width: widthValue,
+      height: heightValue,
+      volume: volumValue,
+      furniture: cart,
+      total: totalSum,
+    }
+    console.log('finishedShower',finishedShower);
+    setTotalSum(totalSum)
   }
 
   const handleOpenModal = () => {
@@ -68,20 +92,25 @@ const ShowerCabin = () => {
     setModalIsOpen(false);
   };
 
-  const changeWidth = (e) => {
-    setWidthValue(e);
-    setWidthSum(Number(e) * 5)
-  }
+  // const changeWidth = (e) => {
+  //   setWidthValue(e);
+  //   setWidthSum(Number(e) * 5)
+  // }
 
-  const changeHeight = (e) => {
-    setHeightValue(e)
-    setHeightSum(Number(e) * 5)
-  }
+  // const changeHeight = (e) => {
+  //   setHeightValue(e)
+  //   setHeightSum(Number(e) * 5)
+  // }
 
-  const changeVolume = (e) => {
-    setVolumValue(e)
-    setVolumSum(Number(e) * 5)
-  }
+  // const changeVolume = (e) => {
+  //   setVolumValue(e)
+  //   setVolumSum(Number(e) * 5)
+  // }
+
+  // console.log('currentType',currentType);
+  // console.log('currentGlass',currentGlass);
+  // console.log('currentGlassColor',currentGlassColor);
+  // console.log('currentGlassColor',currentGlassColor);
 
   return (
     <div className="shower_wrapper">
@@ -114,10 +143,10 @@ const ShowerCabin = () => {
                 Оберіть скло
               </option>
               {currentObject &&
-                currentObject.glassThickness &&
-                currentObject.glassThickness.map((item) => (
-                  <option key={item.name} value={item.name}>
-                    {item.name}
+                currentObject.color &&
+                currentObject.color.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
                 ))}
             </select>
@@ -127,15 +156,15 @@ const ShowerCabin = () => {
         <div className="wrap_item color_glass">
           <h3>Виберіть колір скла</h3>
           <div className="choose_item selected_shower">
-            <select value={currentGlassColor} onChange={selectGlassColorFunc}>
+            <select value={currentGlassColor ? JSON.stringify(currentGlassColor) : ""} onChange={selectGlassColorFunc}>
               <option value="" disabled>
                 Оберіть колір скла
               </option>
               {currentObject &&
-                currentObject.color &&
-                currentObject.color.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
+                currentObject.glassThickness &&
+                currentObject.glassThickness.map((item) => (
+                  <option key={item.name} value={JSON.stringify(item)}>
+                    {item.name}
                   </option>
                 ))}
             </select>
@@ -148,11 +177,11 @@ const ShowerCabin = () => {
           <div className="size_input">
             <div className="size_item" >
               {/* <h4>Ширина:</h4> */}
-              <input type="number" placeholder="Ширина" />
+              <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
             </div>
             <div  className="size_item" >
               {/* <h4>Висота:</h4> */}
-              <input type="number" placeholder="Висота" />
+              <input type="number" placeholder="Висота" value={heightValue} onChange={(e) => setHeightValue(e.target.value)}/>
             </div>
             <div className="size_item" >
               {/* <h4>Глубина:</h4> */}
