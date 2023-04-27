@@ -13,6 +13,7 @@ const EditShower = () => {
     const [showMirrorsBlock, setShowMirrorsBlock] = useState(false);
     const [showTypeBlock, setShowTypeBlock] = useState(false);
     const [showSizeBlock, setShowSizeBlock] = useState(false);
+
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-shower")
           .then((res) => res.json())
@@ -21,6 +22,7 @@ const EditShower = () => {
           })
           .catch((error) => console.error(error));
       }, []);
+      
     return (
         <div>
             <div className="shower-cabin-edit-header">

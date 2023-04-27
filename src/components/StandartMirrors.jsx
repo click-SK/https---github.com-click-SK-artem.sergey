@@ -19,7 +19,10 @@ const StandartMirrors = ({ data }) => {
   const [currentCord, setCurrentCord] = useState('');
   const [isWarmedUp, setIsWarmedUp] = useState(false);
   const [isPainting, setIsPainting] = useState(false);
-
+  const [sizeWidthMirrors,setSizeWidthMirrors] = useState(0);
+  const [sizeHeightMirrors,setSizeHeightMirrors] = useState(0);
+  const [sizeFrame,setSizeFrame] = useState(0);
+  const [totalSum, setTotalSum] = useState(0);
   // const keyCsv = [
   //   {"Форма скла": currentType?.name },
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
@@ -34,8 +37,44 @@ const StandartMirrors = ({ data }) => {
     [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
   ];
 
+  console.log('data',data?.option?.warmedUp?.price);
+
 
   const calcTotalSum = () => {
+    const priceMeterCord = data?.option?.cord?.price;
+
+    const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
+    const calcSquareMeter = calcSize/10000;
+    const warmedUpPrice = data?.option?.warmedUp?.price;
+
+    const resSizePrice = calcSquareMeter * currentGoods.price;
+    const resCordSum = currentCord * priceMeterCord;
+    const resFrameSum = sizeFrame * currentFrame.price;
+
+    const total = resSizePrice + resCordSum + resFrameSum + currentSwitch.price + (isPainting ? currentColor.price : 0) + (isWarmedUp ? warmedUpPrice : 0);
+
+    const finishedMirros = {
+      type: currentType.name,
+      goodsPrice: currentGoods.price,
+      goodsName: currentGoods.name,
+      width: sizeWidthMirrors,
+      height: sizeHeightMirrors,
+      framePrice: currentFrame.price,
+      frameSize: sizeFrame,
+      frameName: currentFrame.name,
+      switchName: currentSwitch.name,
+      switchPrice: currentSwitch.price,
+      cord: currentCord,
+      warmerUp: isWarmedUp ? 'Так' : 'Ні', 
+      painting: isPainting ? 'Так' : 'Ні',
+      colorName: isPainting ? currentColor.name : '-',
+      colorPrice: isPainting ? currentColor.price : '-',
+      total: total
+    }
+
+    setTotalSum(total)
+    console.log('finishedMirros',finishedMirros);
+    console.log('total',total);
   }
 
 
@@ -85,7 +124,18 @@ const StandartMirrors = ({ data }) => {
     setCurrentColor(selectedColor);
   }
 
-
+  // console.log('currentType',currentType);
+  // console.log('currentGoods',currentGoods);
+  // console.log('sizeWidthMirrors',sizeWidthMirrors);
+  // console.log('sizeHeightMirrors',sizeHeightMirrors);
+  // console.log('currentFrame',currentFrame);
+  // console.log('currentBackLight',currentBackLight);
+  // console.log('currentSwitch',currentSwitch);
+  // console.log('currentCord',currentCord);
+  // console.log('isWarmedUp',isWarmedUp);
+  // console.log('isPainting',isPainting);
+  // console.log('currentColor',currentColor);
+  console.log('totalSum',totalSum);
 
   return (
     <div className="wrap_item mirrors_item">
@@ -125,6 +175,14 @@ const StandartMirrors = ({ data }) => {
                 ))}
             </select>
             </div>
+
+            <div className="choose_item item_mirrors">
+            <h3>Вкажіть розмір скла</h3>
+            <div>
+              <input type="number" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
+              <input type="number" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
+            </div>
+            </div>
       
 
       
@@ -145,8 +203,13 @@ const StandartMirrors = ({ data }) => {
             ))}
         </select>
         </div>
-      
 
+        <div className="choose_item item_mirrors">
+            <h3>Вкажіть розмір рамки</h3>
+            <div>
+              <input type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
+            </div>
+            </div>
       
         <div className="choose_item item_mirrors">
         <h3>Виберіть підсвітку:</h3>
@@ -196,7 +259,7 @@ const StandartMirrors = ({ data }) => {
         <h3>Підігрів:</h3>
         <div className="checkbox_wrap">
         <input id="checkbox1" className="checkbox" type='checkbox' checked={isWarmedUp} onChange={changeWarmUpFunc}/>
-        <label className="checkbox-label" for="checkbox1"></label>
+        <label className="checkbox-label" htmlFor="checkbox1"></label>
         </div>
       </div>
 
@@ -204,7 +267,7 @@ const StandartMirrors = ({ data }) => {
         <h3>Покраска:</h3>
         <div className="checkbox_wrap">
         <input id="checkbox2"  className="checkbox" type='checkbox' checked={isPainting} onChange={changePaintingFunc}/>
-        <label className="checkbox-label" for="checkbox2"></label>
+        <label className="checkbox-label" htmlFor="checkbox2"></label>
         </div>
       </div>
 
@@ -232,7 +295,7 @@ const StandartMirrors = ({ data }) => {
               <div>
                 <button className="mirror_buttom" onClick={calcTotalSum}>Підрахувати вартість</button>
               </div>
-              <h3 className="order_sum mirror_sum">Кінцева вартість: <span> 0 грн</span> </h3>
+              <h3 className="order_sum mirror_sum">Кінцева вартість: <span> {totalSum} грн</span> </h3>
             </div>
             <div className="send_order mirror_button">
             {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
