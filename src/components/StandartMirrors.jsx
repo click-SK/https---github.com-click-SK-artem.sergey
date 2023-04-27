@@ -300,8 +300,8 @@ const StandartMirrors = ({ data }) => {
             <div className="send_order mirror_button">
             {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
             {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
-            <PDFDownloadLink document={<PdfFile/>} fileName="orderDate">
-              Hello
+            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile/>} fileName="orderDate">
+              Зберегти
             </PDFDownloadLink>
             <button className="mirror_button_order" >Оформити</button>
             </div>
