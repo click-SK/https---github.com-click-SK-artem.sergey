@@ -61,7 +61,16 @@
 
     .input_miroor{
         display: flex;
-        width: 77%;
+        width: 80%;
+
+    }
+    .input_miroor_item{
+        display: flex;
+        width: 80%;
+    }
+    .input_miroor_frame{
+        display: flex;
+        width: 100%;
     }
 
     .checkbox_wrap {

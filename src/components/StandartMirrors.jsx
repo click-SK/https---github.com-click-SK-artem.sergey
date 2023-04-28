@@ -195,10 +195,14 @@ const StandartMirrors = ({ data }) => {
             <div className="choose_item item_mirrors">
             <h3>Розмір скла (см)</h3>
             <div class=" input_miroor">
+              <div>
               <input class=" input_miroor_item cabel" type="number" placeholder="Ширина" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
               <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
+              </div>
+              <div>
               <input class="input_miroor_item  cabel" type="number" placeholder="Висота" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
               <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
+              </div>
             </div>
             </div>
       
@@ -224,8 +228,8 @@ const StandartMirrors = ({ data }) => {
 
         <div className="choose_item item_mirrors">
             <h3>Вкажіть розмір рамки</h3>
-            <div>
-              <input class="input_miroor cabel" type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
+            <div class="input_miroor">
+              <input class="input_miroor_frame cabel" type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
             </div>
             </div>
       
