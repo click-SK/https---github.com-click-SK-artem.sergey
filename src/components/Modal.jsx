@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/modal.scss";
 import DispalayModalItems from "./DispalayModalItems";
+import {AiOutlineClose} from 'react-icons/ai';
 
 const Modal = ({ isOpen, onClose, furnitureProps }) => {
   if (!isOpen) return null;
@@ -9,7 +10,7 @@ const Modal = ({ isOpen, onClose, furnitureProps }) => {
     <div className="modal-overlay">
       <div className="modal">
         <button className="close-btn" onClick={onClose}>
-          X
+        <AiOutlineClose className="cross"/>
         </button>
         <div className="furniture_wrap">
           {furnitureProps.map((item) => (

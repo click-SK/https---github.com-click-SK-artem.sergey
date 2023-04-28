@@ -80,8 +80,12 @@ const styles = StyleSheet.create({
 ))}
 </View> */}
 
-const PdfFile = () => {
-    const arr = [1,2,3,4,5]
+const PdfFile = ({order}) => {
+    
+    const type = `${order.type}`
+    const goodsPrice = `${order.goodsPrice}`
+    const goodsName = `${order.goodsName}`
+
     return (
         <Document>
             <Page style={styles.body}>
@@ -114,14 +118,13 @@ const PdfFile = () => {
                 </View>
                 <View style={styles.section}>
                     <Text style={styles.text}>
-                        Дзеркало "Стандарт" з фоновою підсвіткою
-                        1х1м
+                        {type} {goodsName}
                     </Text>
                     <Text style={styles.text}>
-                        1 шт
+                        
                     </Text>
                     <Text style={styles.text}>
-                        4200 грн
+                        {goodsPrice} грн
                     </Text>
                 </View>
                 <View style={styles.section}>

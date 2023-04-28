@@ -23,6 +23,7 @@ const StandartMirrors = ({ data }) => {
   const [sizeHeightMirrors,setSizeHeightMirrors] = useState(0);
   const [sizeFrame,setSizeFrame] = useState(0);
   const [totalSum, setTotalSum] = useState(0);
+  const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
   // const keyCsv = [
   //   {"Форма скла": currentType?.name },
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
@@ -69,14 +70,18 @@ const StandartMirrors = ({ data }) => {
       painting: isPainting ? 'Так' : 'Ні',
       colorName: isPainting ? currentColor.name : '-',
       colorPrice: isPainting ? currentColor.price : '-',
-      total: total
+      total: total,
+      print: "hello"
     }
 
+    setFinishMirrorPdf(finishedMirros)
+    
+
     setTotalSum(total)
-    console.log('finishedMirros',finishedMirros);
-    console.log('total',total);
+
   }
 
+  console.log("Type", finishMirrorPdf.type);
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
@@ -300,8 +305,8 @@ const StandartMirrors = ({ data }) => {
             <div className="send_order mirror_button">
             {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
             {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
-            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile/>} fileName="orderDate">
-              Зберегти
+            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
             </PDFDownloadLink>
             <button className="mirror_button_order" >Оформити</button>
             </div>
