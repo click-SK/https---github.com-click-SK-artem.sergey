@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCart, incrementCart, changeFurniture } from '../store/cart';
+import "../style/modal.scss";
 
 const DispalayModalItems = ({item}) => {
     const [colorAndPrice, setColorAndPrice] = useState(null);
@@ -47,8 +48,8 @@ const DispalayModalItems = ({item}) => {
         </div>
         {/* <h4>Image drawind {item.drawingImg}</h4> */}
         <img src='/HDL-301-second.png' className='image_furniture'/>
-        <select value={colorAndPrice ? JSON.stringify(colorAndPrice) : ""} onChange={(e) => handleColorAndPrice(e)}>
-        <option value="" disabled>
+        <select className='choose_color' value={colorAndPrice ? JSON.stringify(colorAndPrice) : ""} onChange={(e) => handleColorAndPrice(e)}>
+        <option  value="" disabled>
                   Оберіть колір
                 </option>
           {item?.colorsFurniture.map((col, idx) =>(
@@ -58,7 +59,7 @@ const DispalayModalItems = ({item}) => {
             </option>
           ))}
         </select>
-        <button disabled={colorAndPrice ? false : true} onClick={() => addFurniture(item)}>Add</button>
+        <button className='add_furniture' disabled={colorAndPrice ? false : true} onClick={() => addFurniture(item)}>Додати <br/> в кошик</button>
       </div>
     );
 };
