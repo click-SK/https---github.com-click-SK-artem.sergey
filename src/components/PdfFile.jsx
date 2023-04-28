@@ -2,10 +2,6 @@ import React from 'react';
 import {Font, View, Page, Image, Text, Document, StyleSheet, Link } from '@react-pdf/renderer';
 import Logo from '../img/logo.png';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
-// import Roboto from '../fonts/roboto/Roboto-Regular.ttf'
-
-// Font.registerHyphenationCallback(word => [word]);
-
 
 
 Font.register({
@@ -41,10 +37,10 @@ const styles = StyleSheet.create({
     },
     image:{
         marginVertical: 15,
-        marginHorizontal: 100
+        marginHorizontal: 100,
     },
     header:{
-        fontSize: 12,
+        fontSize: 10,
         textAlign: 'right',
         color: "grey"
     },
@@ -56,7 +52,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignContent: 'stretch',
         alignItems: 'center',
-        width:'100%'
+        width:'100%', 
+        height: 'auto'
       },
     tableHeder:{
         marginTop: '10px',
@@ -75,18 +72,38 @@ const styles = StyleSheet.create({
 {/* <View style={styles.section}>
 {arr.map((item, idx)=>(
     <Text style={styles.text} key={idx}>
-    {item}
+    {item.type}
     </Text>
 ))}
 </View> */}
 
 const PdfFile = ({order}) => {
 
-    
-    
+
     const type = `${order.type}`
     const goodsPrice = `${order.goodsPrice}`
     const goodsName = `${order.goodsName}`
+    const width = `${order.width}`
+    const height = `${order.height}`
+    const framePrice = `${order.framePrice}`
+    const frameSize = `${order.frameSize}`
+    const frameName = `${order.frameName}`
+    const switchName = `${order.switchName}`
+    const switchPrice = `${order.switchPrice}`
+    const cord = `${order.cord}`
+    const warmerUp = `${order.warmerUp}`
+    const painting = `${order.painting}`
+    const colorName = `${order.colorName}`
+    const colorPrice = `${order.colorPrice}`
+    const total = `${order.total}`
+
+    const pdfPrint = [
+        {
+        type:`${order.type}`,
+        name:goodsName,
+        price:goodsPrice,
+        }
+    ];
 
     return (
         <Document>
@@ -112,100 +129,99 @@ const PdfFile = ({order}) => {
                         Назва
                     </Text>
                     <Text style={styles.Hedertext}>
-                        Кількість
+                        Одиниця
                     </Text>
                     <Text style={styles.Hedertext}>
                         Ціна
                     </Text>
                 </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        {type} {goodsName}
-                    </Text>
-                    <Text style={styles.text}>
-                        
-                    </Text>
-                    <Text style={styles.text}>
-                        {goodsPrice} грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Металева рамка
-                    </Text>
-                    <Text style={styles.text}>
-                        4 м
-                    </Text>
-                    <Text style={styles.text}>
-                        1200 грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Фронтальна підсвітка
-                    </Text>
-                    <Text style={styles.text}>
-                        
-                    </Text>
-                    <Text style={styles.text}>
-                        1200 грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Сенсорний вимикач
-                    </Text>
-                    <Text style={styles.text}>
-                        1шт
-                    </Text>
-                    <Text style={styles.text}>
-                        550 грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Кабель підключення + вилка
-                    </Text>
-                    <Text style={styles.text}>
-                        3м
-                    </Text>
-                    <Text style={styles.text}>
-                        130 грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Підігрів
-                    </Text>
-                    <Text style={styles.text}>
-                        Так
-                    </Text>
-                    <Text style={styles.text}>
-                        1000 грн
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        Покраска 
-                    </Text>
-                    <Text style={styles.text}>
-                        Ні
-                    </Text>
-                    <Text style={styles.text}>
-                        
-                    </Text>
-                </View>
-                <View style={styles.section}>
-                    <Text style={styles.text}>
-                        
-                    </Text>
-                    <Text style={styles.text}>
-                        Заальна вартість
-                    </Text>
-                    <Text style={styles.text}>
-                        8280 грн
-                    </Text>
-                </View>
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            {type} {goodsName}
+                        </Text>
+                        <Text style={styles.text}>
+                            {width} X {height} см2
+                        </Text>
+                        <Text style={styles.text}>
+                            {goodsPrice} грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            {frameName}
+                        </Text>
+                        <Text style={styles.text}>
+                            {frameSize} м
+                        </Text>
+                        <Text style={styles.text}>
+                            {framePrice} грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            {switchName}
+                        </Text>
+                        <Text style={styles.text}>
+                            
+                        </Text>
+                        <Text style={styles.text}>
+                            {switchPrice} грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            Кабель
+                        </Text>
+                        <Text style={styles.text}>
+                            {cord} м
+                        </Text>
+                        <Text style={styles.text}>
+                            Ціна кабель грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            Підігів
+                        </Text>
+                        <Text style={styles.text}>
+                            {warmerUp}
+                        </Text>
+                        <Text style={styles.text}>
+                            Ціна грн
+                        </Text>
+                     </View>                                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            Покраска
+                        </Text>
+                        <Text style={styles.text}>
+                            {painting}
+                        </Text>
+                        <Text style={styles.text}>
+                            {colorPrice }грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            Колір покраски "{colorName}"
+                        </Text>
+                        <Text style={styles.text}>
+                        </Text>
+                        <Text style={styles.text}>
+                            {colorPrice }грн
+                        </Text>
+                     </View>                
+                     <View style={styles.section} >
+                        <Text style={styles.text}>
+                            
+                        </Text>
+                        <Text style={styles.text}>
+                            Загальна сума
+                        </Text>
+                        <Text style={styles.text}>
+                             {total} грн
+                        </Text>
+                     </View>                
             </Page>
         </Document>
     );
