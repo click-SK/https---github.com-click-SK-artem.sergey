@@ -11,9 +11,26 @@ const EditShowerTypeTemplate = ({el}) => {
         setCurrentPriceValue(el.price);
       };
 
-    const handleEditButtonSave = () => {
+      const handleEditButtonSave = () => {
         setIsEdit((isEdit) => !isEdit);
+
+        fetch('http://localhost:4444/update-shower-type', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: currentColorValue,
+            price: currentPriceValue,
+            typeId: el._id
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
       }
+
     return (
         <div >
         <p>{el.name}</p>
