@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+    z-index: 1000;
   }
   
   .modal {
@@ -69,8 +70,41 @@
     border-bottom: 1px solid black;
   }
 
+.add_furniture{
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    background: #0c71a5;
+    color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
 
-  // cursor: pointer;
-  //   width: 100px;
-  //   height: 40px;
-  //   border-radius: 8px;
+    &:disabled{
+      background-color: rgb(235, 150, 150);
+      font-size: 12px;
+    }
+    &:focus{
+      background-color: green;
+    }
+
+}
+
+.choose_color{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  height: 40px;
+  padding-left: 10px;
+}
+
+.list_firnitur_choosen{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+

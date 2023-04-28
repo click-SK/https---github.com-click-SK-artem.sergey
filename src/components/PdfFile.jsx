@@ -81,6 +81,8 @@ const styles = StyleSheet.create({
 </View> */}
 
 const PdfFile = ({order}) => {
+
+    
     
     const type = `${order.type}`
     const goodsPrice = `${order.goodsPrice}`
