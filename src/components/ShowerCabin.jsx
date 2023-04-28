@@ -13,13 +13,13 @@ const ShowerCabin = () => {
   const [currentGlass, setCurrentGlass] = useState("");
   const [currentGlassColor, setCurrentGlassColor] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [widthValue, setWidthValue] = useState(0);
-  const [heightValue, setHeightValue] = useState(0);
+  const [widthValue, setWidthValue] = useState('');
+  const [heightValue, setHeightValue] = useState('');
   const [volumValue, setVolumValue] = useState(0);
   const [widthSum, setWidthSum] = useState(0);
   const [heightSum, setHeightSum] = useState(0);
   const [volumSum, setVolumSum] = useState(0);
-
+  const [validationInput, setValidationInput] = useState(false);
   const cart = useSelector((state) => state.cart.items);
 
   const keyCsv = [
@@ -54,34 +54,45 @@ const ShowerCabin = () => {
   };
 
   const calcTotalSumFunc = () => {
-    const calcSize = Number(widthValue) * Number(heightValue);
-    const calcSquareMeter = calcSize/10000;
-    const resSizePrice = calcSquareMeter * currentGlassColor.price;
-
-    let totalSumFurniture = 0;
-
-    cart.forEach((el) => {
-      el.colorsFurniture.forEach((item) => {
-        totalSumFurniture += item.price
+    if(heightValue && widthValue) {
+      setValidationInput(false);
+      const calcSize = Number(widthValue) * Number(heightValue);
+      const calcSquareMeter = calcSize/10000;
+      const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
+  
+      let totalSumFurniture = 0;
+  
+      cart.forEach((el) => {
+        el.colorsFurniture.forEach((item) => {
+          totalSumFurniture += item.price
+        })
       })
-    })
-
-    const totalSum = resSizePrice + currentType.price + totalSumFurniture;
-
-    const finishedShower = {
-      typeName: currentType.name,
-      typePrice: currentType.price,
-      glass: currentGlass,
-      glassColorName: currentGlassColor.name,
-      glassColorPrice: currentGlassColor.price,
-      width: widthValue,
-      height: heightValue,
-      volume: volumValue,
-      furniture: cart,
-      total: totalSum,
+      console.log('currentGlassColor?.price',currentGlassColor?.price);
+      console.log('calcSize',calcSize);
+      console.log('calcSquareMeter',calcSquareMeter);
+      console.log('resSizePrice',resSizePrice);
+      console.log('currentType?.price',currentType?.price);
+      console.log('totalSumFurniture',totalSumFurniture);
+  
+      const totalSum = resSizePrice + (currentType?.price || 0) + totalSumFurniture;
+  
+      const finishedShower = {
+        typeName: currentType?.name,
+        typePrice: currentType?.price,
+        glass: currentGlass,
+        glassColorName: currentGlassColor?.name,
+        glassColorPrice: currentGlassColor?.price,
+        width: widthValue,
+        height: heightValue,
+        volume: volumValue,
+        furniture: cart,
+        total: totalSum,
+      }
+      console.log('finishedShower',finishedShower);
+      setTotalSum(totalSum)
+    } else {
+      setValidationInput(true);
     }
-    console.log('finishedShower',finishedShower);
-    setTotalSum(totalSum)
   }
 
   const handleOpenModal = () => {
@@ -178,10 +189,12 @@ const ShowerCabin = () => {
             <div className="size_item" >
               {/* <h4>Ширина:</h4> */}
               <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
+            <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
             </div>
             <div  className="size_item" >
               {/* <h4>Висота:</h4> */}
               <input type="number" placeholder="Висота" value={heightValue} onChange={(e) => setHeightValue(e.target.value)}/>
+              <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
             </div>
             <div className="size_item" >
               {/* <h4>Глубина:</h4> */}

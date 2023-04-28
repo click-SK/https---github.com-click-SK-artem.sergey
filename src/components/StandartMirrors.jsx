@@ -19,11 +19,12 @@ const StandartMirrors = ({ data }) => {
   const [currentCord, setCurrentCord] = useState('');
   const [isWarmedUp, setIsWarmedUp] = useState(false);
   const [isPainting, setIsPainting] = useState(false);
-  const [sizeWidthMirrors,setSizeWidthMirrors] = useState(0);
-  const [sizeHeightMirrors,setSizeHeightMirrors] = useState(0);
+  const [sizeWidthMirrors,setSizeWidthMirrors] = useState('');
+  const [sizeHeightMirrors,setSizeHeightMirrors] = useState('');
   const [sizeFrame,setSizeFrame] = useState(0);
   const [totalSum, setTotalSum] = useState(0);
   const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
+  const [validationInput, setValidationInput] = useState(false);
   // const keyCsv = [
   //   {"Форма скла": currentType?.name },
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
@@ -38,50 +39,58 @@ const StandartMirrors = ({ data }) => {
     [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
   ];
 
-  console.log('data',data?.option?.warmedUp?.price);
-
 
   const calcTotalSum = () => {
-    const priceMeterCord = data?.option?.cord?.price;
+    if(sizeWidthMirrors && sizeHeightMirrors || !currentType && !currentGoods) {
+      setValidationInput(false)
+      const priceMeterCord = data?.option?.cord?.price;
 
-    const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
-    const calcSquareMeter = calcSize/10000;
-    const warmedUpPrice = data?.option?.warmedUp?.price;
+      const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
+      const calcSquareMeter = calcSize/10000;
+      const warmedUpPrice = data?.option?.warmedUp?.price;
+  
+      const resSizePrice = calcSquareMeter * currentGoods?.price;
+      const resCordSum = currentCord * priceMeterCord;
+      const resFrameSum = sizeFrame * (currentFrame?.price || 0);
 
-    const resSizePrice = calcSquareMeter * currentGoods.price;
-    const resCordSum = currentCord * priceMeterCord;
-    const resFrameSum = sizeFrame * currentFrame.price;
+      console.log('priceMeterCord',priceMeterCord);
+      console.log('calcSize',calcSize);
+      console.log('calcSquareMeter',calcSquareMeter);
+      console.log('warmedUpPrice',warmedUpPrice);
+      console.log('resCordSum',resCordSum);
+      console.log('resFrameSum',resFrameSum);
 
-    const total = resSizePrice + resCordSum + resFrameSum + currentSwitch.price + (isPainting ? currentColor.price : 0) + (isWarmedUp ? warmedUpPrice : 0);
-
-    const finishedMirros = {
-      type: currentType.name,
-      goodsPrice: currentGoods.price,
-      goodsName: currentGoods.name,
-      width: sizeWidthMirrors,
-      height: sizeHeightMirrors,
-      framePrice: currentFrame.price,
-      frameSize: sizeFrame,
-      frameName: currentFrame.name,
-      switchName: currentSwitch.name,
-      switchPrice: currentSwitch.price,
-      cord: currentCord,
-      warmerUp: isWarmedUp ? 'Так' : 'Ні', 
-      painting: isPainting ? 'Так' : 'Ні',
-      colorName: isPainting ? currentColor.name : '-',
-      colorPrice: isPainting ? currentColor.price : '-',
-      total: total,
-      print: "hello"
+  
+      const total = (resSizePrice || 0) + (resCordSum || 0) + (resFrameSum || 0) + (currentSwitch?.price || 0) + (isPainting ? currentColor?.price || 600 : 0) + (isWarmedUp ? warmedUpPrice : 0);
+  
+      const finishedMirros = {
+        type: currentType?.name,
+        goodsPrice: currentGoods?.price,
+        goodsName: currentGoods?.name,
+        width: sizeWidthMirrors,
+        height: sizeHeightMirrors,
+        framePrice: currentFrame?.price,
+        frameSize: sizeFrame,
+        frameName: currentFrame?.name,
+        switchName: currentSwitch?.name,
+        switchPrice: currentSwitch?.price,
+        cord: currentCord,
+        warmerUp: isWarmedUp ? 'Так' : 'Ні', 
+        painting: isPainting ? 'Так' : 'Ні',
+        colorName: isPainting ? currentColor?.name : '-',
+        colorPrice: isPainting ? currentColor?.price : '-',
+        total: total,
+        print: "hello"
+      }
+  
+      setFinishMirrorPdf(finishedMirros)
+      
+  
+      setTotalSum(total)
+    } else {
+      setValidationInput(true)
     }
-
-    setFinishMirrorPdf(finishedMirros)
-    
-
-    setTotalSum(total)
-
   }
-
-  console.log("Type", finishMirrorPdf.type);
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
@@ -184,8 +193,10 @@ const StandartMirrors = ({ data }) => {
             <div className="choose_item item_mirrors">
             <h3>Вкажіть розмір скла</h3>
             <div>
-              <input type="number" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
-              <input type="number" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
+              <input type="number" placeholder="Ширина" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
+              <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
+              <input type="number" placeholder="Висота" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
+              <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
             </div>
             </div>
       
