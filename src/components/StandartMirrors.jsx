@@ -38,7 +38,7 @@ const StandartMirrors = ({ data }) => {
     [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
   ];
 
-  console.log('data',data?.option?.warmedUp?.price);
+  
 
 
   const calcTotalSum = () => {
@@ -81,7 +81,7 @@ const StandartMirrors = ({ data }) => {
 
   }
 
-  console.log("Type", finishMirrorPdf.type);
+  console.log("Type", finishMirrorPdf);
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
@@ -145,13 +145,13 @@ const StandartMirrors = ({ data }) => {
   return (
     <div className="wrap_item mirrors_item">
       <div className="choose_item item_mirrors">
-      <h3>Оберіть тип скла</h3>
+      <h3>Форма скла:</h3>
         <select
           onChange={selectTypeFunc}
           value={currentType ? JSON.stringify(currentType) : ""}
         >
           <option value="" disabled>
-            Оберіть тип
+            Оберіть форму
           </option>
           {data?.type &&
             data.type.map((item) => (
@@ -164,13 +164,13 @@ const StandartMirrors = ({ data }) => {
 
       
           <div className="choose_item item_mirrors">
-          <h3>Виберіть товар:</h3>
+          <h3>Тип:</h3>
             <select
               onChange={selectGoodsFunc}
               value={currentGoods ? JSON.stringify(currentGoods) : ""}
             >
               <option value="" disabled>
-                Оберіть товар
+                Оберіть тип
               </option>
               {currentTypeArray &&
                 currentTypeArray.map((item) => (
@@ -182,10 +182,10 @@ const StandartMirrors = ({ data }) => {
             </div>
 
             <div className="choose_item item_mirrors">
-            <h3>Вкажіть розмір скла</h3>
-            <div>
-              <input type="number" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
-              <input type="number" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
+            <h3>Розмір скла (см)</h3>
+            <div class=" input_miroor">
+              <input class=" input_miroor_item cabel" type="number" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
+              <input class="input_miroor_item  cabel" type="number" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
             </div>
             </div>
       
@@ -212,7 +212,7 @@ const StandartMirrors = ({ data }) => {
         <div className="choose_item item_mirrors">
             <h3>Вкажіть розмір рамки</h3>
             <div>
-              <input type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
+              <input class="input_miroor cabel" type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
             </div>
             </div>
       

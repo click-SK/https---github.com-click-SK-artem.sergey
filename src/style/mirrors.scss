@@ -13,6 +13,8 @@
     
 }
 
+
+
 .item_mirrors{
     position: relative;
     align-items: center;
@@ -55,6 +57,11 @@
         &::placeholder{
             color: #111;
         }
+    }
+
+    .input_miroor{
+        display: flex;
+        width: 77%;
     }
 
     .checkbox_wrap {
