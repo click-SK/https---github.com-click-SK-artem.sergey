@@ -3,7 +3,7 @@ import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
 import EditShowerFurnitureDepends from "./EditShowerFurnitureDepends";
 import EditShowerFurnitureColorAndPrice from "./EditShowerFurnitureColorAndPrice";
-const EditShowerFurnitureTemplate = ({ el, showerId }) => {
+const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isFurniture, setIsFurniture] = useState(false);
   const [titleValue, setTitlevalue] = useState('');
@@ -12,6 +12,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId }) => {
     setIsEdit((isEdit) => !isEdit)
     setTitlevalue(el.title);
   }
+
   
 
   return (
@@ -53,7 +54,9 @@ const EditShowerFurnitureTemplate = ({ el, showerId }) => {
         <div>
           <div>
             <h1>Редагування підзаголовків:</h1>
-                <EditShowerFurnitureDepends el={el && el}/>
+            {el?.depends.map((item,idx) => (
+               <EditShowerFurnitureDepends key={idx} idx={furnitureIdx} fullArray={el?.depends} el={item} showerId={showerId} showerFurnitureId={el._id}/>
+            ))}
           </div>
           <div>
             <h1>Редагування кольорів та цін:</h1>

@@ -27,13 +27,13 @@ const EditShower = () => {
         <div>
             <div className="shower-cabin-edit-header">
             <h1 onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
-            <h1 onClick={() => setShowColorsBlock(showColorsBlock => !showColorsBlock)}>Кольори</h1>
-            <h1 onClick={() => setShowMirrorsBlock(showMirrorsBlock => !showMirrorsBlock)}>Скло</h1>
+            <h1 onClick={() => setShowColorsBlock(showColorsBlock => !showColorsBlock)}>Скло</h1>
+            <h1 onClick={() => setShowMirrorsBlock(showMirrorsBlock => !showMirrorsBlock)}>Кольори</h1>
             <h1 onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
             <h1 onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
             </div>
-            {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el) => (
-                <EditShowerFurnitureTemplate key={el.title} el={el} showerId={currentObject._id}/>
+            {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
+                <EditShowerFurnitureTemplate key={el.title} el={el} furnitureIdx={furnitureIdx} showerId={currentObject._id}/>
             ))}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
                  <EditShowerColorsTemplate el={el} key={idx} fullColors={currentObject.color} showerId={currentObject._id}/>
