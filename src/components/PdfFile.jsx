@@ -2,10 +2,6 @@ import React from 'react';
 import {Font, View, Page, Image, Text, Document, StyleSheet, Link } from '@react-pdf/renderer';
 import Logo from '../img/logo.png';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
-// import Roboto from '../fonts/roboto/Roboto-Regular.ttf'
-
-// Font.registerHyphenationCallback(word => [word]);
-
 
 
 Font.register({
@@ -56,8 +52,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignContent: 'stretch',
         alignItems: 'center',
-        width:'100%',
-        height: 25
+        width:'100%', 
+        height: 'auto'
       },
     tableHeder:{
         marginTop: '10px',
@@ -76,15 +72,14 @@ const styles = StyleSheet.create({
 {/* <View style={styles.section}>
 {arr.map((item, idx)=>(
     <Text style={styles.text} key={idx}>
-    {item}
+    {item.type}
     </Text>
 ))}
 </View> */}
 
 const PdfFile = ({order}) => {
 
-    
-    
+
     const type = `${order.type}`
     const goodsPrice = `${order.goodsPrice}`
     const goodsName = `${order.goodsName}`
@@ -104,7 +99,7 @@ const PdfFile = ({order}) => {
 
     const pdfPrint = [
         {
-        type:type,
+        type:`${order.type}`,
         name:goodsName,
         price:goodsPrice,
         }
@@ -145,7 +140,7 @@ const PdfFile = ({order}) => {
                             {type} {goodsName}
                         </Text>
                         <Text style={styles.text}>
-                            {width} X {height} м2
+                            {width} X {height} см2
                         </Text>
                         <Text style={styles.text}>
                             {goodsPrice} грн

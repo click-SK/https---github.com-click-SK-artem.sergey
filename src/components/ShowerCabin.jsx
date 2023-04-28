@@ -4,6 +4,7 @@ import ListTheChosenFurniture from "./ListTheChosenFurniture";
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 
 const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
@@ -217,7 +218,9 @@ const ShowerCabin = () => {
               </div>
             </div>
             <div className="send_order">
-            <CSVLink className="exel" data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink>
+            {/* <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShower}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
+            </PDFDownloadLink> */}
             <button>Оформити</button>
             </div>
         </div> 
