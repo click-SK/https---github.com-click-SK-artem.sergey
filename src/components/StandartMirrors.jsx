@@ -156,7 +156,7 @@ const StandartMirrors = ({ data }) => {
   return (
     <div className="wrap_item mirrors_item">
       <div className="choose_item item_mirrors">
-      <h3>Форма скла:</h3>
+      <h3>Форма дзеркала:</h3>
         <select
           onChange={selectTypeFunc}
           value={currentType ? JSON.stringify(currentType) : ""}
@@ -193,7 +193,7 @@ const StandartMirrors = ({ data }) => {
             </div>
 
             <div className="choose_item item_mirrors">
-            <h3>Розмір скла (см)</h3>
+            <h3>Розмір (см)</h3>
             <div class=" input_miroor">
               <div>
               <input class=" input_miroor_item cabel" type="number" placeholder="Ширина" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
@@ -215,7 +215,7 @@ const StandartMirrors = ({ data }) => {
           value={currentFrame ? JSON.stringify(currentFrame) : ""}
         >
           <option value="" disabled>
-            Оберіть Рамку
+            Без рамки
           </option>
           {data?.option?.frame &&
             data.option.frame.map((item) => (
@@ -227,20 +227,20 @@ const StandartMirrors = ({ data }) => {
         </div>
 
         <div className="choose_item item_mirrors">
-            <h3>Вкажіть розмір рамки</h3>
+            <h3>Розмір рамки (м)</h3>
             <div class="input_miroor">
               <input class="input_miroor_frame cabel" type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
             </div>
             </div>
       
         <div className="choose_item item_mirrors">
-        <h3>Виберіть підсвітку:</h3>
+        <h3>Додаткова підсвітка:</h3>
         <select
           onChange={selectBackLightFunc}
           value={currentBackLight ? JSON.stringify(currentBackLight) : ""}
         >
           <option value="" disabled>
-            Оберіть підсвітку
+            Без додаткової підсвітки
           </option>
           {data?.option?.backLight &&
             data.option.backLight.map((item) => (
@@ -273,7 +273,7 @@ const StandartMirrors = ({ data }) => {
       
 
       <div className="choose_item item_mirrors">
-      <h3>Довжину кабелю (м):</h3>
+      <h3>Довжина кабелю (м):</h3>
         <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
       </div>
 
@@ -295,7 +295,7 @@ const StandartMirrors = ({ data }) => {
 
       
         <div className="choose_item item_mirrors">
-        <h3>Виберіть колір:</h3>
+        <h3>Покраска рамки:</h3>
         <select
           onChange={selectedColorFunc}
           value={currentColor ? JSON.stringify(currentColor) : ""}
@@ -311,6 +311,29 @@ const StandartMirrors = ({ data }) => {
             ))}
         </select>
         </div>
+
+        <div className="choose_item item_mirrors">
+      <h3>Монтаж:</h3>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+      </div>
+      <div className="choose_item item_mirrors">
+      <h3>Доставка</h3>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+      </div>
+      <div className="choose_item item_mirrors">
+      <h3>ПІБ:</h3>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+      </div>
+      <div className="choose_item item_mirrors">
+      <h3>Телефон</h3>
+        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+      </div>
+      <div className="choose_item item_mirrors">
+      <h3>Деталі замовлення</h3>
+        <textarea className="cabel" style={{width: "70%", height:100}} name="" id="" cols="30" rows="10"></textarea>
+      </div>
 
         <div className="footer_calc">
             <div className="mirror_sum">
