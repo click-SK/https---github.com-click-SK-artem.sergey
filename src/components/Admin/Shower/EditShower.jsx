@@ -22,6 +22,22 @@ const EditShower = () => {
           })
           .catch((error) => console.error(error));
       }, []);
+
+      const addNewFurniture = () => {
+        fetch('http://localhost:4444/add-furniture', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                showerId: currentObject._id
+            })
+          })
+            .then((res) => res.json())
+            setTimeout(() => {
+              window.location.reload();
+            },1000)
+      }
       
     return (
         <div>
@@ -35,6 +51,7 @@ const EditShower = () => {
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <EditShowerFurnitureTemplate key={el.title} el={el} furnitureIdx={furnitureIdx} showerId={currentObject._id}/>
             ))}
+            {showFurnitureBlock && <button onClick={addNewFurniture}>Додати нову фурнітуру</button>}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
                  <EditShowerColorsTemplate el={el} key={idx} fullColors={currentObject.color} showerId={currentObject._id}/>
             ))

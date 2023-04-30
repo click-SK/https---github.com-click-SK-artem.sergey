@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {AiFillDelete} from 'react-icons/ai';
 const EditShowerFurnitureColorAndPrice = ({item, showerFurnitureId, showerId}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
@@ -33,13 +33,34 @@ const EditShowerFurnitureColorAndPrice = ({item, showerFurnitureId, showerId}) =
             window.location.reload();
           },1000)
       }
+      
+      const handleDeleteColorsFurniture = () => {
+        fetch('http://localhost:4444/remove-shower-furniture-colors', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            currentId: item?._id,
+            showerId: showerId,
+            furnitureId: showerFurnitureId,
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
+      }
 
     return (
     <div >
         <p>{item.color}</p>
         <p>{item.price}</p>
         {!isEdit ? (
+        <>
           <button onClick={handleEditButton}>Редагувати</button>
+          <AiFillDelete onClick={handleDeleteColorsFurniture}/>
+        </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>
         )}
