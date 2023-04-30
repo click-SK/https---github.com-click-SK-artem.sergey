@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import {AiFillDelete} from 'react-icons/ai';
 const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
+
 
   const handleEditButton = () => {
     setIsEdit((isEdit) => !isEdit);
@@ -35,12 +36,39 @@ const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray,
         window.location.reload();
       },1000)
   }
+
+  const handleDeleteDepends = () => {
+    let newArr = [...fullArray];
+    const currentIndex = fullArray.indexOf(el);
+    newArr.splice(currentIndex,1);
+
+    fetch('http://localhost:4444/update-shower-furniture-depends', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        colors: newArr,
+        showerCabinId: showerId,
+        furnitureId: showerFurnitureId,
+        idx: idx
+      })
+    })
+    .then((res) => res.json())
+    setTimeout(() => {
+      window.location.reload();
+    },1000)
+  }
+
     return (
       <div>
       <div key={el} className="edit_shower_color_block">
         {el}
         {!isEdit ? (
+        <>
           <button onClick={handleEditButton}>Редагувати</button>
+          <AiFillDelete onClick={handleDeleteDepends}/>
+        </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>
         )}
