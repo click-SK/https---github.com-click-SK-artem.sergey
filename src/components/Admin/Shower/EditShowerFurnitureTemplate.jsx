@@ -26,7 +26,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     formData.append('furnitureId',el?._id);
     formData.append('showerId',showerId);
 
-    fetch('http://localhost:4444/update-shower-furniture-main-image', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-main-image', {
       method: 'PATCH',
       body: formData
     })
@@ -43,7 +43,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     formData.append('furnitureId',el?._id);
     formData.append('showerId',showerId);
 
-    fetch('http://localhost:4444/update-shower-furniture-second-image', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-second-image', {
       method: 'PATCH',
       body: formData
     })
@@ -56,7 +56,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   const handleEditFurnitureTitle = async () => {
     setIsEdit((isEdit) => !isEdit);
 
-    fetch('http://localhost:4444/update-shower-furniture-title', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-title', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     const currentIndex = fullArray.indexOf(el);
     newArr.push(newValueDepends);
 
-    fetch('http://localhost:4444/update-shower-furniture-depends', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-depends', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   }
 
   const handleAddNewColorsFurniture = () => {
-    fetch('http://localhost:4444/add-new-shower-furniture-colors', {
+    fetch('https://calc-shower.herokuapp.com/add-new-shower-furniture-colors', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   }
 
   const handleDeleteFurniture = () => {
-    fetch('http://localhost:4444/remove-shower-furniture', {
+    fetch('https://calc-shower.herokuapp.com/remove-shower-furniture', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

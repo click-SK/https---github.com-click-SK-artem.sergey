@@ -13,6 +13,11 @@ const EditShower = () => {
     const [showMirrorsBlock, setShowMirrorsBlock] = useState(false);
     const [showTypeBlock, setShowTypeBlock] = useState(false);
     const [showSizeBlock, setShowSizeBlock] = useState(false);
+    const [newValueDepends, setNewValueDepends] = useState('');
+    const [newValueGlassThicknessName, setNewValueGlassThicknessName] = useState('');
+    const [newValueGlassThicknessPrice, setNewValueGlassThicknessPrice] = useState('');
+    const [newValueTypeName, setNewValueTypeName] = useState('');
+    const [newValueTypePrice, setNewValueTypePrice] = useState('');
 
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -23,8 +28,8 @@ const EditShower = () => {
           .catch((error) => console.error(error));
       }, []);
 
-      const addNewFurniture = () => {
-        fetch('http://localhost:4444/add-furniture', {
+      const handleAddNewFurniture = () => {
+        fetch('https://calc-shower.herokuapp.com/add-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
@@ -37,6 +42,64 @@ const EditShower = () => {
             setTimeout(() => {
               window.location.reload();
             },1000)
+      }
+
+      const handleAddNewColors = () => {
+        let fullArray = currentObject.color;
+        let newArr = [...fullArray];
+        const currentIndex = fullArray.indexOf();
+        newArr.push(newValueDepends);
+    
+        fetch('https://calc-shower.herokuapp.com/update-shower-colors', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            colors: newArr,
+            showerCabinId: currentObject._id
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
+      }
+
+      const handleAddNewGlassThicknes = () => {    
+        fetch('https://calc-shower.herokuapp.com/add-new-glass-thickness', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: newValueGlassThicknessName,
+            price: newValueGlassThicknessPrice,
+            showerId: currentObject._id
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
+      }
+
+      const handleAddNewType = () => {    
+        fetch('https://calc-shower.herokuapp.com/add-new-shower-type', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: newValueTypeName,
+            price: newValueTypePrice,
+            showerId: currentObject._id
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
       }
       
     return (
@@ -51,18 +114,38 @@ const EditShower = () => {
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <EditShowerFurnitureTemplate key={el.title} el={el} furnitureIdx={furnitureIdx} showerId={currentObject._id}/>
             ))}
-            {showFurnitureBlock && <button onClick={addNewFurniture}>Додати нову фурнітуру</button>}
+            {showFurnitureBlock && <button onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
                  <EditShowerColorsTemplate el={el} key={idx} fullColors={currentObject.color} showerId={currentObject._id}/>
             ))
             }
+            {currentObject?.color && showColorsBlock && 
+            <>
+            <input placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
+            <button onClick={handleAddNewColors}>Додати новий</button>
+            </>
+            }
             {currentObject?.glassThickness && showMirrorsBlock && currentObject.glassThickness.map((el, idx) => (
-                <EditShowerMirrorsTemplate el={el} key={idx}/>
+                <EditShowerMirrorsTemplate el={el} key={idx} showerId={currentObject._id}/>
             ))
             }
+            {currentObject?.glassThickness && showMirrorsBlock &&
+            <>
+            <input placeholder="Назва" value={newValueGlassThicknessName} onChange={(e) => setNewValueGlassThicknessName(e.target.value)}/>
+            <input placeholder="Ціна" value={newValueGlassThicknessPrice} onChange={(e) => setNewValueGlassThicknessPrice(e.target.value)}/>
+            <button onClick={handleAddNewGlassThicknes}>Додати новий</button>
+            </>
+            }
             {currentObject?.type && showTypeBlock && currentObject.type.map((el, idx) => (
-                <EditShowerTypeTemplate el={el} key={idx}/>
+                <EditShowerTypeTemplate el={el} key={idx} showerId={currentObject._id}/>
             ))
+            }
+            {currentObject?.type && showTypeBlock && 
+            <>
+            <input placeholder="Назва" value={newValueTypeName} onChange={(e) => setNewValueTypeName(e.target.value)}/>
+            <input placeholder="Ціна" value={newValueTypePrice} onChange={(e) => setNewValueTypePrice(e.target.value)}/>
+            <button onClick={handleAddNewType}>Додати новий</button>
+            </>
             }
             {currentObject?.sizeOfTheShower && showSizeBlock && currentObject.sizeOfTheShower.map((el, idx) => (
                 <EditShowerSizeTemplate el={el} key={idx}/>

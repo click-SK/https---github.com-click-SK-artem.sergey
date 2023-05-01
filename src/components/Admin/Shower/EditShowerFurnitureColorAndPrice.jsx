@@ -35,7 +35,7 @@ const EditShowerFurnitureColorAndPrice = ({item, showerFurnitureId, showerId}) =
       }
       
       const handleDeleteColorsFurniture = () => {
-        fetch('http://localhost:4444/remove-shower-furniture-colors', {
+        fetch('https://calc-shower.herokuapp.com/remove-shower-furniture-colors', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'

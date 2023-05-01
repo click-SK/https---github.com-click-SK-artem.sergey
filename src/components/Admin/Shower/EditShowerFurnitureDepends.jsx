@@ -19,7 +19,7 @@ const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray,
 
     // setIsEdit((isEdit) => !isEdit);
 
-    fetch('http://localhost:4444/update-shower-furniture-depends', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-depends', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray,
     const currentIndex = fullArray.indexOf(el);
     newArr.splice(currentIndex,1);
 
-    fetch('http://localhost:4444/update-shower-furniture-depends', {
+    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-depends', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
