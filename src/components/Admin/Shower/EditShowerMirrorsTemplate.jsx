@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
+import '../../../style/admin.scss'
+
 const EditShowerMirrorsTemplate = ({el, showerId}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
@@ -49,24 +51,27 @@ const EditShowerMirrorsTemplate = ({el, showerId}) => {
       }
 
     return (
-        <div >
-        <p>{el.name}</p>
-        <p>{el.price}</p>
-        {!isEdit ? (
-          <>
-          <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDelete}/>
-          </>
-        ) : (
-          <button onClick={handleEditButtonSave}>Зберегти зміни</button>
+        <div className="color_galas_wrap">
+          <div className="edite" >
+          <p>{el.name}</p>
+          <p>{el.price}</p>
+          {!isEdit ? (
+            <>
+            <button onClick={handleEditButton}>Редагувати</button>
+            <AiFillDelete onClick={handleDelete}/>
+            </>
+          ) : (
+            <button onClick={handleEditButtonSave}>Зберегти зміни</button>
+          )}
+          {isEdit && (
+          <div>
+            <input value={currentColorValue} onChange={(e) => setCurrentColorValue(e.target.value)} className="edit_input" />
+            <input value={currentPriceValue} onChange={(e) => setCurrentPriceValue(e.target.value)} className="edit_input" />
+          </div>
         )}
-        {isEdit && (
-        <div>
-          <input value={currentColorValue} onChange={(e) => setCurrentColorValue(e.target.value)} className="edit_input" />
-          <input value={currentPriceValue} onChange={(e) => setCurrentPriceValue(e.target.value)} className="edit_input" />
+      </div>
         </div>
-      )}
-    </div>
+        
     );
 };
 

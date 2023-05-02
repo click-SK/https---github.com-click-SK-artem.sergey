@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import '../../../style/edir-shower.scss';
+import '../../../style/admin.scss'
 import EditShowerFurnitureTemplate from "./EditShowerFurnitureTemplate";
 import EditShowerColorsTemplate from "./EditShowerColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import EditShowerTypeTemplate from './EditShowerTypeTemplate';
 import EditShowerSizeTemplate from "./EditShowerSizeTemplate";
+
 
 const EditShower = () => {
     const [currentObject, setCurrentObject] = useState({});
@@ -105,24 +107,24 @@ const EditShower = () => {
     return (
         <div>
             <div className="shower-cabin-edit-header">
-            <h1 onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
-            <h1 onClick={() => setShowColorsBlock(showColorsBlock => !showColorsBlock)}>Скло</h1>
-            <h1 onClick={() => setShowMirrorsBlock(showMirrorsBlock => !showMirrorsBlock)}>Кольори</h1>
-            <h1 onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
+            <h1 className="header_item" onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
+            <h1 className="header_item"  onClick={() => setShowColorsBlock(showColorsBlock => !showColorsBlock)}>Скло</h1>
+            <h1 className="header_item"  onClick={() => setShowMirrorsBlock(showMirrorsBlock => !showMirrorsBlock)}>Кольори</h1>
+            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
+            <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
             </div>
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <EditShowerFurnitureTemplate key={el.title} el={el} furnitureIdx={furnitureIdx} showerId={currentObject._id}/>
             ))}
-            {showFurnitureBlock && <button onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
+            {showFurnitureBlock && <button className="add_new_furniture" onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
                  <EditShowerColorsTemplate el={el} key={idx} fullColors={currentObject.color} showerId={currentObject._id}/>
             ))
             }
             {currentObject?.color && showColorsBlock && 
             <>
-            <input placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
-            <button onClick={handleAddNewColors}>Додати новий</button>
+            <input className="edit_new_glass_input" placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
+            <button className="edit_new_glass_button" onClick={handleAddNewColors}>Додати новий</button>
             </>
             }
             {currentObject?.glassThickness && showMirrorsBlock && currentObject.glassThickness.map((el, idx) => (
@@ -131,9 +133,9 @@ const EditShower = () => {
             }
             {currentObject?.glassThickness && showMirrorsBlock &&
             <>
-            <input placeholder="Назва" value={newValueGlassThicknessName} onChange={(e) => setNewValueGlassThicknessName(e.target.value)}/>
-            <input placeholder="Ціна" value={newValueGlassThicknessPrice} onChange={(e) => setNewValueGlassThicknessPrice(e.target.value)}/>
-            <button onClick={handleAddNewGlassThicknes}>Додати новий</button>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueGlassThicknessName} onChange={(e) => setNewValueGlassThicknessName(e.target.value)}/>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueGlassThicknessPrice} onChange={(e) => setNewValueGlassThicknessPrice(e.target.value)}/>
+            <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewGlassThicknes}>Додати новий</button>
             </>
             }
             {currentObject?.type && showTypeBlock && currentObject.type.map((el, idx) => (
@@ -142,9 +144,9 @@ const EditShower = () => {
             }
             {currentObject?.type && showTypeBlock && 
             <>
-            <input placeholder="Назва" value={newValueTypeName} onChange={(e) => setNewValueTypeName(e.target.value)}/>
-            <input placeholder="Ціна" value={newValueTypePrice} onChange={(e) => setNewValueTypePrice(e.target.value)}/>
-            <button onClick={handleAddNewType}>Додати новий</button>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueTypeName} onChange={(e) => setNewValueTypeName(e.target.value)}/>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueTypePrice} onChange={(e) => setNewValueTypePrice(e.target.value)}/>
+            <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewType}>Додати новий</button>
             </>
             }
             {currentObject?.sizeOfTheShower && showSizeBlock && currentObject.sizeOfTheShower.map((el, idx) => (

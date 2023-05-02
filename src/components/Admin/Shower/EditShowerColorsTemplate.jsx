@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
+import '../../../style/admin.scss'
+
 const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
@@ -54,9 +56,9 @@ const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
   }
 
   return (
-    <div>
-      <div key={el} className="edit_shower_color_block">
-        {el}
+    <div className="edit_glass_wrap">
+      <div key={el} className="edit_glass_item">
+        <p>{el}</p>
         {!isEdit ? (
           <>
           <button onClick={handleEditButton}>Редагувати</button>
@@ -66,7 +68,6 @@ const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>
         )}
       </div>
-      <div></div>
       {isEdit && (
         <div>
           <input value={currentValue} onChange={(e) => setCurrentValue(e.target.value)} className="edit_input" />

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai";
+import '../../../style/admin.scss'
+
 const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
   const [isEditGood, setIsEditGood] = useState(false);
   const [goodsNameValue, setGoodNameValue] = useState("");
@@ -31,7 +33,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
   }
 
   return (
-    <div style={{ border: "1px solid black" }}>
+    <div >
       {!isEditGood ?
             <AiFillEdit
             style={{ height: "30px", width: "30px", cursor:'pointer' }}
@@ -49,10 +51,12 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
       {isEditGood && (
         <div className="wrap">
           <input
+          className="first_input"
           value={goodsNameValue}
           onChange={(e) => setGoodNameValue(e.target.value)}
           />
           <input
+          className="second_input"
           value={goodsPriceValue}
           onChange={(e) => setGoodPriceValue(e.target.value)}
           />
