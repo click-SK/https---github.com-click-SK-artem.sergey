@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
-import ListTheChosenFurniture from "./ListTheChosenFurniture";
+import ListTheChoseFurniture from "./ListTheChoseFurniture";
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
@@ -62,18 +62,13 @@ const ShowerCabin = () => {
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
   
       let totalSumFurniture = 0;
+
   
       cart.forEach((el) => {
         el.colorsFurniture.forEach((item) => {
-          totalSumFurniture += item.price
+          totalSumFurniture += item.price * el.count
         })
       })
-      console.log('currentGlassColor?.price',currentGlassColor?.price);
-      console.log('calcSize',calcSize);
-      console.log('calcSquareMeter',calcSquareMeter);
-      console.log('resSizePrice',resSizePrice);
-      console.log('currentType?.price',currentType?.price);
-      console.log('totalSumFurniture',totalSumFurniture);
   
       const totalSum = resSizePrice + (currentType?.price || 0) + totalSumFurniture;
   
@@ -207,7 +202,7 @@ const ShowerCabin = () => {
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
         </div>
-        <ListTheChosenFurniture />
+        <ListTheChoseFurniture />
           <div className="footer_calc">
             <div className="summ">
               <div>
