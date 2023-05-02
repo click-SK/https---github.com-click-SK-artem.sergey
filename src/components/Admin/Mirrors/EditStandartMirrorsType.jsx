@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
 import EditStandartMirrorsGoods from './EditStandartMirrorsGoods';
+import '../../../style/admin.scss'
+
 const EditStandartMirrorsType = ({item, idxType}) => {
     const [showBlock, setShowblock] = useState(false);
     const [isShowInput, setIsShowInput] = useState(false);
@@ -31,20 +33,24 @@ const EditStandartMirrorsType = ({item, idxType}) => {
       }
       
     return (
-        <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <div className="mirrors_item_edit">
+        <div className="edit_item_wrap"
+          // style={{
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          // }}
           onClick={() => changeNameSection(item)}
         >
           <h3>{item.name}</h3>
           {isShowInput ?
-          <AiFillCloseCircle style={{ height: "50px", width: "30px", cursor:'pointer' }} onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
+          <AiFillCloseCircle 
+          style={{ height: "30px", width: "20px", cursor:'pointer' }} 
+          onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
           :
-          <AiFillEdit style={{ height: "50px", width: "30px", cursor:'pointer' }} onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
+          <AiFillEdit 
+          style={{ height: "30px", width: "20px", cursor:'pointer' }} 
+          onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
           }
         </div>
         <div>
@@ -56,12 +62,17 @@ const EditStandartMirrorsType = ({item, idxType}) => {
            }
           </div>
         {showBlock ?
-        <BsFillArrowUpCircleFill style={{ height: "50px", width: "30px", cursor: 'pointer' }} onClick={() => setShowblock(showBlock => !showBlock)}/> 
+        <BsFillArrowUpCircleFill 
+        style={{ height: "30px", width: "20px", cursor: 'pointer' }} 
+        onClick={() => setShowblock(showBlock => !showBlock)}/> 
         :
-        <BsFillArrowDownCircleFill style={{ height: "50px", width: "30px", cursor: 'pointer' }} onClick={() => setShowblock(showBlock => !showBlock)}/> 
+        <BsFillArrowDownCircleFill 
+        className="arrow_whow_block"
+        style={{ height: "30px", width: "20px", cursor: 'pointer' }} 
+        onClick={() => setShowblock(showBlock => !showBlock)}/> 
         }
         {showBlock &&
-                <div style={{ border: "5px solid green" }}>
+                <div className="edit_option_wrap">
                 {item.goods.map((el, idxGoods) => (
                   <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} key={el.name}/>
                 ))}

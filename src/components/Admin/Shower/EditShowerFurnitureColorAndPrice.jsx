@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
+import '../../../style/admin.scss'
+
 const EditShowerFurnitureColorAndPrice = ({item, showerFurnitureId, showerId}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
@@ -53,9 +55,11 @@ const EditShowerFurnitureColorAndPrice = ({item, showerFurnitureId, showerId}) =
       }
 
     return (
-    <div >
+    <div className="edit_color_price" >
+        <span>Колір:</span>
         <p>{item.color}</p>
-        <p>{item.price}</p>
+        <span>Ціна:</span>
+        <p>{item.price} грн</p>
         {!isEdit ? (
         <>
           <button onClick={handleEditButton}>Редагувати</button>

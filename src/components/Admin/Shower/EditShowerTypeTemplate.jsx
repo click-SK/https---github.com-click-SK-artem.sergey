@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
+import '../../../style/admin.scss'
+
 const EditShowerTypeTemplate = ({el,showerId}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
@@ -49,7 +51,8 @@ const EditShowerTypeTemplate = ({el,showerId}) => {
       }
 
     return (
-        <div >
+      <div className="edit_type_wrap">
+        <div className="edit_type_wrap-item" >
         <p>{el.name}</p>
         <p>{el.price}</p>
         {!isEdit ? (
@@ -67,6 +70,7 @@ const EditShowerTypeTemplate = ({el,showerId}) => {
         </div>
       )}
     </div>
+      </div>
     );
 };
 

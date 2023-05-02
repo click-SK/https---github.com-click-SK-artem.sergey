@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditStandartMirrorsType from "./EditStandartMirrorsType";
+import '../../../style/admin.scss'
 const EditStandartMirrors = () => {
   const [currentObject, setCurrentObject] = useState({});
 
@@ -13,8 +14,8 @@ const EditStandartMirrors = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Редагування типів та товарів</h1>
+    <div className="mirrors_wraper">
+      <h1>Редагування дзеркал</h1>
       {currentObject?.type &&
         currentObject?.type.map((item, idxType) => (
           <EditStandartMirrorsType key={idxType} idxType={idxType} item={item}/>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
-import ListTheChoseFurniture from "./ListTheChoseFurniture";
+import ListTheChosenFurniture from "./ListTheChosenFurniture";
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
-// import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
@@ -22,6 +22,17 @@ const ShowerCabin = () => {
   const [volumSum, setVolumSum] = useState(0);
   const [validationInput, setValidationInput] = useState(false);
   const cart = useSelector((state) => state.cart.items);
+  const [isAssemblingt, setIsAssembling] = useState(false);
+  const [minInstallation, setMinInstallation] = useState(false);
+  const [adress, setAdress] = useState('');
+  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
+  const [delivery, setDelivery] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [numberPhone, setNumberPhone] = useState('');
+  const [orderComent, setOrderComent] = useState('');
+  const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
 
   const keyCsv = [
     [ "Магазин", "Дзеркала" ],
@@ -62,7 +73,6 @@ const ShowerCabin = () => {
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
   
       let totalSumFurniture = 0;
-
   
       cart.forEach((el) => {
         el.colorsFurniture.forEach((item) => {
@@ -70,7 +80,7 @@ const ShowerCabin = () => {
         })
       })
   
-      const totalSum = resSizePrice + (currentType?.price || 0) + totalSumFurniture;
+      const totalSum = resSizePrice + (currentType?.price || 0) + totalSumFurniture + (minInstallation ? 500 : 0) + (isAssemblingt ? intslPrice : 0) + (delivery ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
         typeName: currentType?.name,
@@ -84,6 +94,9 @@ const ShowerCabin = () => {
         furniture: cart,
         total: totalSum,
       }
+
+      setFinishedShowerPdf(finishedShower)
+
       console.log('finishedShower',finishedShower);
       setTotalSum(totalSum)
     } else {
@@ -98,6 +111,50 @@ const ShowerCabin = () => {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
+  const changeIsAssemblingt = () => {
+    // const paintingObj = data?.option?.painting;
+    setIsAssembling(isAssemblingt => !isAssemblingt)
+  }
+
+    const changeMinInstallationFunc = () => {
+    // const paintingObj = data?.option?.painting;
+    setMinInstallation(minInstallation => !minInstallation)
+  }
+    const isDelivery = () => {
+    // const paintingObj = data?.option?.painting;
+    setDelivery(delivery => !delivery)
+  }
+
+  const addAdress = (e) => {
+    // const cordObj = data?.option?.cord;
+    setAdress(e.target.value);
+  }
+  const roadDistance = (e) => {
+    // const cordObj = data?.option?.cord;
+    setDeliveryRoadDistance(e.target.value);
+  }
+  const addFirstName = (e) => {
+    // const cordObj = data?.option?.cord;
+    setFirstName(e.target.value);
+  }
+  const addLastName = (e) => {
+    // const cordObj = data?.option?.cord;
+    setLastName(e.target.value);
+  }
+  const addSurname = (e) => {
+    // const cordObj = data?.option?.cord;
+    setSurname(e.target.value);
+  }
+  const addPhone = (e) => {
+    // const cordObj = data?.option?.cord;
+    setNumberPhone(e.target.value);
+  }
+  const addComent = (e) => {
+    // const cordObj = data?.option?.cord;
+    setOrderComent(e.target.value);
+  }
+
 
   // const changeWidth = (e) => {
   //   setWidthValue(e);
@@ -202,7 +259,7 @@ const ShowerCabin = () => {
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
         </div>
-        <ListTheChoseFurniture />
+        <ListTheChosenFurniture />
           <div className="footer_calc">
             <div className="summ">
               <div>
@@ -213,9 +270,9 @@ const ShowerCabin = () => {
               </div>
             </div>
             <div className="send_order">
-            {/* <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShower}/>} fileName="orderDate">
+            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf}/>} fileName="orderDate">
              {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
-            </PDFDownloadLink> */}
+            </PDFDownloadLink>
             <button>Оформити</button>
             </div>
         </div> 
