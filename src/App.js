@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/Header';
 import ShowerCabin from './components/ShowerCabin.jsx';
 import Mirrors from './components/Mirrors';
+import GlassPartition from './components/GlassPartition';
+import Dashki from './components/Dashki';
 import AdminPanel from './components/Admin/AdminPanel';
 import EditStandartMirrors from './components/Admin/Mirrors/EditStandartMirrors';
 import EditShower from './components/Admin/Shower/EditShower';
@@ -32,6 +34,8 @@ function App() {
       <Routes>
         <Route path='/' element={<ShowerCabin/>}/>
         <Route path='/mirrors' element={<Mirrors/>}/>
+        <Route path='/glass-partition' element={<GlassPartition/>}/>
+        <Route path='/dashki' element={<Dashki/>}/>
         <Route path='/admin' element={<AdminPanel/>}/>
         <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
         <Route path='/admin-showers' element={<EditShower/>}/>

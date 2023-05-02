@@ -8,7 +8,7 @@ import {
   removeCart,
 } from "../store/cart";
 
-const ListTheChosenFurniture = () => {
+const ListTheChoseFurniture = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
 
@@ -100,4 +100,4 @@ const ListTheChosenFurniture = () => {
   );
 };
 
-export default ListTheChosenFurniture;
+export default ListTheChoseFurniture;
