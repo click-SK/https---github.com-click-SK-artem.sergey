@@ -13,7 +13,7 @@ const EditShowerSizeTemplate = ({el}) => {
       const handleEditButtonSave = () => {
         setIsEdit((isEdit) => !isEdit);
 
-        fetch('http://localhost:4444/update-shower-size', {
+        fetch('https://calc-shower.herokuapp.com/update-shower-size', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
