@@ -3,6 +3,8 @@ import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
 import EditShowerFurnitureDepends from "./EditShowerFurnitureDepends";
 import EditShowerFurnitureColorAndPrice from "./EditShowerFurnitureColorAndPrice";
+import '../../../style/admin.scss'
+
 const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isFurniture, setIsFurniture] = useState(false);
@@ -189,7 +191,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
                     />
           <div>
             <p>Змінити заголовок</p>
-            <input value={titleValue} onChange={(e) => setTitlevalue(e.target.value)}/>
+            <input className="edit_name" value={titleValue} onChange={(e) => setTitlevalue(e.target.value)}/>
             <div>
             <button onClick={handleEditFurnitureTitle}>Підтвердити зміни</button>
             </div>
@@ -206,9 +208,9 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
         </div>
       )}
       {isFurniture && (
-        <div>
-          <div>
-            <h1>Редагування підзаголовків:</h1>
+        <div className="edit_item">
+          <div className="edit_title" >
+            <h3>Редагування підзаголовків:</h3>
             {el?.depends.map((item,idx) => (
               <EditShowerFurnitureDepends key={idx} idx={furnitureIdx} fullArray={el?.depends} el={item} showerId={showerId} showerFurnitureId={el._id}/>
 
@@ -216,14 +218,16 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
             <input placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
             <button onClick={handleAddNewDepends}>Додати новий</button>
           </div>
-          <div>
-            <h1>Редагування кольорів та цін:</h1>
+          <div className="edit_color">
+            <h3>Редагування кольорів та цін:</h3>
             {el.colorsFurniture.map((item, idx) => (
                 <EditShowerFurnitureColorAndPrice key={idx} item={item} showerFurnitureId={el._id} showerId={showerId}/>
             ))}
-             <input placeholder="Назва" value={furnitureColorName} onChange={(e) => setFurnitureColorName(e.target.value)}/>
-             <input placeholder="Ціна" value={furnitureColorPrice} onChange={(e) => setFurnitureColorPrice(e.target.value)}/>
-            <button onClick={handleAddNewColorsFurniture}>Додати новий</button>
+            <div className="add_new_color">
+              <input placeholder="Назва" value={furnitureColorName} onChange={(e) => setFurnitureColorName(e.target.value)}/>
+              <input placeholder="Ціна" value={furnitureColorPrice} onChange={(e) => setFurnitureColorPrice(e.target.value)}/>
+              <button onClick={handleAddNewColorsFurniture}>Додати новий</button>
+            </div>
           </div>
         </div>
       )}

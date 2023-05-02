@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
+import '../../../style/admin.scss'
+
 const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
@@ -61,7 +63,7 @@ const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray,
   }
 
     return (
-      <div>
+      <div className="edit_wraper_title-color">
       <div key={el} className="edit_shower_color_block">
         {el}
         {!isEdit ? (
@@ -73,7 +75,7 @@ const EditShowerFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray,
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>
         )}
       </div>
-      <div></div>
+      {/* <div></div> */}
       {isEdit && (
         <div>
           <input value={currentValue} onChange={(e) => setCurrentValue(e.target.value)} className="edit_input" />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../../../style/admin.scss'
 
 
 const EditShowerSizeTemplate = ({el}) => {
@@ -30,19 +31,21 @@ const EditShowerSizeTemplate = ({el}) => {
       }
 
     return (
-        <div >
-        <p>{el.name}</p>
-        <p>{el.price}</p>
-        {!isEdit ? (
-          <button onClick={handleEditButton}>Редагувати</button>
-        ) : (
-          <button onClick={handleEditButtonSave}>Зберегти зміни</button>
-        )}
-        {isEdit && (
-        <div>
-          <input value={currentPriceValue} onChange={(e) => setCurrentPriceValue(e.target.value)} className="edit_input" />
-        </div>
-      )}
+        <div className="edit_size_wrap" >
+          <div className="edit_size_wrap-item">
+              <p>{el.name}</p>
+              <p>{el.price}</p>
+              {!isEdit ? (
+                <button onClick={handleEditButton}>Редагувати</button>
+              ) : (
+                <button onClick={handleEditButtonSave}>Зберегти зміни</button>
+              )}
+              {isEdit && (
+              <div>
+                <input value={currentPriceValue} onChange={(e) => setCurrentPriceValue(e.target.value)} className="edit_input" />
+              </div>
+            )}
+          </div>
     </div>
     );
 };
