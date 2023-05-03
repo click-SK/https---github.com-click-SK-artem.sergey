@@ -33,6 +33,8 @@ const ShowerCabin = () => {
   const [numberPhone, setNumberPhone] = useState('');
   const [orderComent, setOrderComent] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+  const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
+  const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
 
   const keyCsv = [
     [ "Магазин", "Дзеркала" ],
@@ -105,7 +107,13 @@ const ShowerCabin = () => {
       console.log('currentType?.price',currentType?.price);
       console.log('totalSumFurniture',totalSumFurniture);
   
-      const totalSum = resSizePrice + (currentType?.price || 0) + totalSumFurniture + (minInstallation ? 500 : 0) + (isAssemblingt ? intslPrice : 0) + (delivery ? deliveryPriceOverSity : deliveryPrice);
+      const totalSum = resSizePrice + 
+      (currentType?.price || 0) + 
+      totalSumFurniture + (minInstallation ? 500 : 0) + 
+      (isAssemblingt ? intslPrice : 0) + 
+      (delivery ? deliveryPriceOverSity : deliveryPrice) +
+      (calcSquareMeter * currentProcessingStandart?.price || 0) + 
+      (currentProcessingСutout?.price || 0);
   
       const finishedShower = {
         typeName: currentType?.name,
@@ -180,6 +188,16 @@ const ShowerCabin = () => {
     setOrderComent(e.target.value);
   }
 
+  const selectProcessingStandartFunc = (e) => {
+    const selectedProcessing = JSON.parse(e.target.value);
+    setCurrentProcessingStandart(selectedProcessing);
+  };
+
+  const selectProcessingСutoutFunc = (e) => {
+    const selectedProcessing = JSON.parse(e.target.value);
+    setCurrentProcessingСutout(selectedProcessing);
+  };
+
 
   // const changeWidth = (e) => {
   //   setWidthValue(e);
@@ -201,6 +219,7 @@ const ShowerCabin = () => {
   // console.log('currentGlassColor',currentGlassColor);
   // console.log('currentGlassColor',currentGlassColor);
 
+  console.log('currentObject',currentObject);
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
@@ -280,6 +299,47 @@ const ShowerCabin = () => {
             </div>
           </div>
         </div>
+
+        <div className="wrap_item type_shower">
+            <h3>Виберіть обробку</h3>
+            <div className="choose_item selected_shower">
+              <select
+                value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
+                onChange={selectProcessingStandartFunc}
+              >
+                <option value="" disabled>
+                  Оберіть обробку
+                </option>
+                {currentObject?.processingStandart &&
+                  currentObject.processingStandart.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
+
+        <div className="wrap_item type_shower">
+            <h3>Виберіть обробку</h3>
+            <div className="choose_item selected_shower">
+              <select
+                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
+                onChange={selectProcessingСutoutFunc}
+              >
+                <option value="" disabled>
+                  Оберіть обробку
+                </option>
+                {currentObject?.processingСutout &&
+                  currentObject.processingСutout.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
+
         <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>

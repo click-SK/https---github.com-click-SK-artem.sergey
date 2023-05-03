@@ -11,11 +11,13 @@ const Dashki = () => {
   const [currentType, setCurrentType] = useState(null);
   const [validationInput, setValidationInput] = useState(false);
   const [widthValue, setWidthValue] = useState('');
-  const [volumValue, setVolumValue] = useState(0);
+  const [volumValue, setVolumValue] = useState('');
   const [currentColor, setCurrentColor] = useState(null);
   const [currentProcessing, setCurrentProcessing] = useState(null);
   const [isVanta, setIsVanta] = useState(false);
+  const [vantaValue, setVantaValue] = useState(false);
   const [isDepository, setIsDepository] = useState(false);
+  const [depositoryValue, setDepositoryValue] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const cart = useSelector((state) => state.cart.items);
@@ -60,21 +62,29 @@ const Dashki = () => {
     setModalIsOpen(false);
   };
 
+  console.log('depositoryValue',depositoryValue);
+
   const calcTotalSumFunc = () => {
     if(widthValue) {
       setValidationInput(false);
-    //   const calcSize = Number(widthValue) * Number(heightValue);
-    //   const calcSquareMeter = calcSize/1000000;
+      const calcSize = Number(widthValue) * Number(volumValue);
+      const calcSquareMeter = calcSize/1000000;
   
-    //   let totalSumFurniture = 0;
+      let totalSumFurniture = 0;
   
-    //   cart.forEach((el) => {
-    //     el.colorsFurniture.forEach((item) => {
-    //       totalSumFurniture += item.price * el.count
-    //     })
-    //   })
+      cart.forEach((el) => {
+        el.colorsFurniture.forEach((item) => {
+          totalSumFurniture += item.price * el.count
+        })
+      })
   
-    //   const totalSum = totalSumFurniture + (calcSquareMeter * currentType?.price || 0) + (calcSquareMeter * currentColor?.price || 0) + (calcSquareMeter * currentProcessingStandart?.price || 0) + (currentProcessingСutout?.price || 0);
+      const totalSum = totalSumFurniture + 
+      (calcSquareMeter * currentType?.price || 0) + 
+      (calcSquareMeter * currentColor?.price || 0) + 
+      (calcSquareMeter * currentProcessing?.price || 0) + 
+      (isVanta ? currentObject?.vanta * vantaValue : 0) + 
+      (calcSquareMeter * currentProcessing?.price || 0) + 
+      (isDepository ? currentObject?.depository?.price * depositoryValue : 0);
   
       const finishedShower = {
         // typeName: currentType?.name,
@@ -89,7 +99,7 @@ const Dashki = () => {
         // total: totalSum,
       }
       console.log('finishedShower',finishedShower);
-      setTotalSum(0)
+      setTotalSum(totalSum)
     } else {
       setValidationInput(true);
     }
@@ -182,10 +192,10 @@ const Dashki = () => {
       </div>
       {isVanta &&
             <div className="wrap_item size_shower">
-            <h3>Вкажіть розміри (мм)</h3>
+            <h3>Вкажіть розміри</h3>
             <div className="size_input">
               <div className="size_item" >
-                <input type="number" placeholder="М/погонний" />
+                <input type="number" placeholder="М/погонний" value={vantaValue} onChange={(e) => setVantaValue(e.target.value)}/>
               </div>
             </div>
           </div>
@@ -202,7 +212,7 @@ const Dashki = () => {
             <h3>Вкажіть кількість шт</h3>
             <div className="size_input">
               <div className="size_item" >
-                <input type="number" placeholder="Кількість" />
+                <input type="number" placeholder="Кількість" value={depositoryValue} onChange={(e) => setDepositoryValue(e.target.value)}/>
               </div>
             </div>
           </div>
