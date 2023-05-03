@@ -105,6 +105,24 @@ const GlassPartition = () => {
   return (
     <div className="shower_wrapper">
       <h1>Скляні перегородки</h1>
+      <div className="wrap_item type_glass">
+            <h3>Виберіть перегородку</h3>
+            <div className="choose_item selected_shower">
+            <select value={currentTypePartitions} onChange={selectTypePartitions}>
+              <option value="" disabled>
+                Оберіть тип перегородки
+              </option>
+              {currentObject &&
+                currentObject.typePartitions &&
+                currentObject.typePartitions.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+            </select>
+            {/* <p>Вибране скло: <span>{currentGlass}</span> </p> */}
+            </div>
+        </div> 
       <div className="wrap_item type_shower">
             <h3>Виберіть тип</h3>
             <div className="choose_item selected_shower">
@@ -205,24 +223,7 @@ const GlassPartition = () => {
             </div>
         </div>
 
-        <div className="wrap_item type_glass">
-            <h3>Виберіть перегородку</h3>
-            <div className="choose_item selected_shower">
-            <select value={currentTypePartitions} onChange={selectTypePartitions}>
-              <option value="" disabled>
-                Оберіть тип перегородки
-              </option>
-              {currentObject &&
-                currentObject.typePartitions &&
-                currentObject.typePartitions.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-            </select>
-            {/* <p>Вибране скло: <span>{currentGlass}</span> </p> */}
-            </div>
-        </div>     
+    
         <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <ModalGlassPartitions currentPartitions={currentTypePartitions} isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
