@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../../style/admin.scss'
 
 
-const EditShowerSizeTemplate = ({el}) => {
+const EditShowerSizeTemplate = ({el, pathEdit}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentPriceValue, setCurrentPriceValue] = useState(0);
 
@@ -14,13 +14,14 @@ const EditShowerSizeTemplate = ({el}) => {
       const handleEditButtonSave = () => {
         setIsEdit((isEdit) => !isEdit);
 
-        fetch('https://calc-shower.herokuapp.com/update-shower-size', {
+        fetch(pathEdit, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             price: currentPriceValue,
+            name: el.name,
             typeId: el._id
           })
         })

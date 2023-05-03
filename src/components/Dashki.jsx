@@ -13,13 +13,14 @@ const Dashki = () => {
   const [widthValue, setWidthValue] = useState('');
   const [volumValue, setVolumValue] = useState('');
   const [currentColor, setCurrentColor] = useState(null);
-  const [currentProcessing, setCurrentProcessing] = useState(null);
   const [isVanta, setIsVanta] = useState(false);
   const [vantaValue, setVantaValue] = useState(false);
   const [isDepository, setIsDepository] = useState(false);
   const [depositoryValue, setDepositoryValue] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
+  const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
+  const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const cart = useSelector((state) => state.cart.items);
 
   useEffect(() => {
@@ -39,11 +40,6 @@ const Dashki = () => {
   const selectColorFunc = (e) => {
     const selectedColor = JSON.parse(e.target.value);
     setCurrentColor(selectedColor);
-  };
-
-  const selectProcessing = (e) => {
-    const selectedProcessing = JSON.parse(e.target.value);
-    setCurrentProcessing(selectedProcessing);
   };
 
   const changeVanta = () => {
@@ -77,14 +73,14 @@ const Dashki = () => {
           totalSumFurniture += item.price * el.count
         })
       })
-  
+
       const totalSum = totalSumFurniture + 
-      (calcSquareMeter * currentType?.price || 0) + 
-      (calcSquareMeter * currentColor?.price || 0) + 
-      (calcSquareMeter * currentProcessing?.price || 0) + 
-      (isVanta ? currentObject?.vanta * vantaValue : 0) + 
-      (calcSquareMeter * currentProcessing?.price || 0) + 
-      (isDepository ? currentObject?.depository?.price * depositoryValue : 0);
+      (calcSquareMeter * currentType?.price || 0) +
+      (calcSquareMeter * currentColor?.price || 0) +
+      (isVanta ? currentObject?.vanta * vantaValue : 0) +
+      (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
+      (calcSquareMeter * currentProcessingStandart?.price || 0) +
+      (currentProcessingСutout?.price || 0);
   
       const finishedShower = {
         // typeName: currentType?.name,
@@ -104,6 +100,16 @@ const Dashki = () => {
       setValidationInput(true);
     }
   }
+
+  const selectProcessingStandartFunc = (e) => {
+    const selectedProcessing = JSON.parse(e.target.value);
+    setCurrentProcessingStandart(selectedProcessing);
+  };
+
+  const selectProcessingСutoutFunc = (e) => {
+    const selectedProcessing = JSON.parse(e.target.value);
+    setCurrentProcessingСutout(selectedProcessing);
+  };
 
   return (
     <div className="shower_wrapper">
@@ -168,14 +174,14 @@ const Dashki = () => {
             <h3>Виберіть обробку</h3>
             <div className="choose_item selected_shower">
               <select
-                value={currentProcessing ? JSON.stringify(currentProcessing) : ""}
-                onChange={selectProcessing}
+                value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
+                onChange={selectProcessingStandartFunc}
               >
                 <option value="" disabled>
                   Оберіть обробку
                 </option>
-                {currentObject?.processing &&
-                  currentObject.processing.map((item) => (
+                {currentObject?.processingStandart &&
+                  currentObject.processingStandart.map((item) => (
                     <option key={item.name} value={JSON.stringify(item)}>
                       {item.name}
                     </option>
@@ -183,6 +189,27 @@ const Dashki = () => {
               </select>
             </div>
         </div>
+
+        <div className="wrap_item type_shower">
+            <h3>Виберіть обробку</h3>
+            <div className="choose_item selected_shower">
+              <select
+                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
+                onChange={selectProcessingСutoutFunc}
+              >
+                <option value="" disabled>
+                  Оберіть обробку
+                </option>
+                {currentObject?.processingСutout &&
+                  currentObject.processingСutout.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
+
         <div className="choose_item item_mirrors check-item">
         <h3>Ванта:</h3>
         <div className="checkbox_wrap">

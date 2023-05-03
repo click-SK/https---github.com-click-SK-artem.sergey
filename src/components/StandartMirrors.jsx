@@ -35,6 +35,7 @@ const StandartMirrors = ({ data }) => {
   const [surname, setSurname] = useState('');
   const [numberPhone, setNumberPhone] = useState('');
   const [orderComent, setOrderComent] = useState('');
+  const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   // const [intslPrice, setIntslPrice] = useState(0);
   // const keyCsv = [
   //   {"Форма скла": currentType?.name },
@@ -98,7 +99,14 @@ const StandartMirrors = ({ data }) => {
       console.log('resFrameSum',resFrameSum);
 
   
-      const total = (resSizePrice || 0) + (resCordSum || 0) + (resFrameSum || 0) + (currentSwitch?.price || 0) + (isPainting ? currentColor?.price || 600 : 0) + (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + (isAssemblingt ? intslPrice : 0) + (delivery ? deliveryPriceOverSity : deliveryPrice) ;
+      const total = (resSizePrice || 0) + 
+      (resCordSum || 0) + (resFrameSum || 0) + 
+      (currentSwitch?.price || 0) + 
+      (isPainting ? currentColor?.price || 600 : 0) + 
+      (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
+      (isAssemblingt ? intslPrice : 0) + 
+      (delivery ? deliveryPriceOverSity : deliveryPrice) +
+      (currentProcessingСutout?.price || 0);
   
       const finishedMirros = {
         type: currentType?.name,
@@ -230,6 +238,12 @@ const StandartMirrors = ({ data }) => {
     // const cordObj = data?.option?.cord;
     setOrderComent(e.target.value);
   }
+
+  const selectProcessingСutoutFunc = (e) => {
+    const selectedProcessing = JSON.parse(e.target.value);
+    setCurrentProcessingСutout(selectedProcessing);
+  };
+
 
  
 
@@ -403,6 +417,26 @@ const StandartMirrors = ({ data }) => {
               </option>
             ))}
         </select>
+        </div>
+
+        <div className="wrap_item type_shower">
+            <h3>Виберіть обробку</h3>
+            <div className="choose_item selected_shower">
+              <select
+                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
+                onChange={selectProcessingСutoutFunc}
+              >
+                <option value="" disabled>
+                  Оберіть обробку
+                </option>
+                {data?.processingСutout &&
+                  data.processingСutout.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
         </div>
 
         <div className="choose_item item_mirrors item_montaje">

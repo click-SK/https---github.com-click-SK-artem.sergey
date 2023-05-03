@@ -10,7 +10,7 @@ const AdminPanel = () => {
                 <a href='/admin-showers'>Shower</a>
                 <a href='/admin-showers'>Shower</a>
                 <a href='/admin-showers'>Shower</a>
-                <a href='/admin-showers'>Shower</a>
+                <a href='/admin-dashki'>Dashki</a>
             </div>
         </div>
     );

@@ -4,8 +4,8 @@ import '../../../style/admin.scss'
 import EditShowerFurnitureTemplate from "./EditShowerFurnitureTemplate";
 import EditShowerColorsTemplate from "./EditShowerColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
-import EditShowerTypeTemplate from './EditShowerTypeTemplate';
-import EditShowerSizeTemplate from "./EditShowerSizeTemplate";
+import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
+import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 
 
 const EditShower = () => {
@@ -139,7 +139,9 @@ const EditShower = () => {
             </>
             }
             {currentObject?.type && showTypeBlock && currentObject.type.map((el, idx) => (
-                <EditShowerTypeTemplate el={el} key={idx} showerId={currentObject._id}/>
+                <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                pathDelete='https://calc-shower.herokuapp.com/update-shower-type'
+                pathEdit='https://calc-shower.herokuapp.com/remove-shower-type'/>
             ))
             }
             {currentObject?.type && showTypeBlock && 
@@ -150,7 +152,8 @@ const EditShower = () => {
             </>
             }
             {currentObject?.sizeOfTheShower && showSizeBlock && currentObject.sizeOfTheShower.map((el, idx) => (
-                <EditShowerSizeTemplate el={el} key={idx}/>
+                <O_EditSizeTemplate el={el} key={idx}
+                pathEdit='https://calc-shower.herokuapp.com/update-shower-size'/>
             ))
             }
         </div>
