@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
 import '../../../style/admin.scss'
 
-const EditShowerTypeTemplate = ({el,showerId}) => {
+const O_EditTypeTemplate = ({el,showerId, pathDelete, pathEdit}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
     const [currentPriceValue, setCurrentPriceValue] = useState(0);
@@ -16,7 +16,7 @@ const EditShowerTypeTemplate = ({el,showerId}) => {
       const handleEditButtonSave = () => {
         setIsEdit((isEdit) => !isEdit);
 
-        fetch('https://calc-shower.herokuapp.com/update-shower-type', {
+        fetch(pathEdit, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const EditShowerTypeTemplate = ({el,showerId}) => {
       }
 
       const handleDelete = () => {
-        fetch('https://calc-shower.herokuapp.com/remove-shower-type', {
+        fetch(pathDelete, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -74,4 +74,4 @@ const EditShowerTypeTemplate = ({el,showerId}) => {
     );
 };
 
-export default EditShowerTypeTemplate;
+export default O_EditTypeTemplate;

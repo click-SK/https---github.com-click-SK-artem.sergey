@@ -100,12 +100,6 @@ const ShowerCabin = () => {
           totalSumFurniture += item.price
         })
       })
-      console.log('currentGlassColor?.price',currentGlassColor?.price);
-      console.log('calcSize',calcSize);
-      console.log('calcSquareMeter',calcSquareMeter);
-      console.log('resSizePrice',resSizePrice);
-      console.log('currentType?.price',currentType?.price);
-      console.log('totalSumFurniture',totalSumFurniture);
   
       const totalSum = resSizePrice + 
       (currentType?.price || 0) + 

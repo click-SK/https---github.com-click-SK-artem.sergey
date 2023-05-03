@@ -21,7 +21,7 @@ const Mirrors = () => {
       }, []);
 
       useEffect(() => {
-        fetch("http://localhost:4444/get-all-cosmetic-mirrors")
+        fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
           .then((res) => res.json())
           .then((data) => {
             setMirrorsCosmeticData(data[0])

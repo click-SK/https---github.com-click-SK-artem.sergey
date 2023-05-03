@@ -12,7 +12,6 @@ const CosmeticMirrors = ({ data }) => {
   const [validationInput, setValidationInput] = useState(false);
   const [lightBulbsCount, setLightBulbsCount] = useState('');
   const [patronCount, setPatronCount] = useState('');
-  const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
 
@@ -20,10 +19,7 @@ const CosmeticMirrors = ({ data }) => {
     const selectedType = JSON.parse(e.target.value);
     setCurrentType(selectedType);
   };
-  const selectProcessingStandartFunc = (e) => {
-    const selectedProcessing = JSON.parse(e.target.value);
-    setCurrentProcessingStandart(selectedProcessing);
-  };
+
   const selectProcessingСutoutFunc = (e) => {
     const selectedProcessing = JSON.parse(e.target.value);
     setCurrentProcessingСutout(selectedProcessing);
@@ -40,7 +36,6 @@ const CosmeticMirrors = ({ data }) => {
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
       (data?.lightBulbs * lightBulbsCount || 0) +
       (data?.patron * patronCount || 0) +
-      (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price || 0);
   
       const finishedShower = {
@@ -136,25 +131,6 @@ const CosmeticMirrors = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
-                onChange={selectProcessingStandartFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {data?.processingStandart &&
-                  data.processingStandart.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
 
         <div className="wrap_item type_shower">
             <h3>Виберіть обробку</h3>
@@ -175,6 +151,7 @@ const CosmeticMirrors = ({ data }) => {
               </select>
             </div>
         </div>
+        
         <div className="footer_calc">
             <div className="summ">
               <div>
