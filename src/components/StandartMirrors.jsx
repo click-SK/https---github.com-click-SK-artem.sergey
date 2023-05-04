@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import ExelPrint from "./ExelPrint";
-import PdfFile from "./PdfFile";
+import PdfFile from "./PdfFileMirorrs";
 import Api from "./Api";
 import '../style/shower.scss'
 import '../style/mirrors.scss'
@@ -42,14 +42,7 @@ const StandartMirrors = ({ data }) => {
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
   // ];
 
-  const keyCsv = [
-    [ "Магазин", "Дзеркала" ],
-    [ "Назва", "Модифікація", "Ціна" ],
-    [ 'Форма скла', currentType?.name, "" ],
-    [ 'Тип дзеркала', 'Дзеркало з фоновою підсвідкою', "4700 грн\м2" ],
-    [ 'Розмір', 'В: 1м, Ш:1 ', "4700 грн" ],
-    [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
-  ];
+
 
 
 
@@ -109,25 +102,27 @@ const StandartMirrors = ({ data }) => {
       (currentProcessingСutout?.price || 0);
   
       const finishedMirros = {
-        type: currentType?.name,
-        goodsPrice: currentGoods?.price,
-        goodsName: currentGoods?.name,
-        width: sizeWidthMirrors,
-        height: sizeHeightMirrors,
-        framePrice: currentFrame?.price,
-        frameSize: sizeFrame,
-        frameName: currentFrame?.name,
-        switchName: currentSwitch?.name,
-        switchPrice: currentSwitch?.price,
-        backLight:currentBackLight,
-        cord: currentCord,
-        warmerUp: isWarmedUp ? 'Так' : 'Ні', 
-        painting: isPainting ? 'Так' : 'Ні',
-        colorName: isPainting ? currentColor?.name : '-',
-        colorPrice: isPainting ? currentColor?.price : '-',
-        adress:adress,
-        deliveryPriceOverSity: deliveryPriceOverSity,
-        deliveryPriceOver: deliveryPriceOverSity,
+        type: currentType?.name, /* форма дзеркала */
+        goodsPrice: currentGoods?.price, /* ціна дзеркала */
+        goodsName: currentGoods?.name, /* тип дзеркала */
+        width: sizeWidthMirrors, /* ширина дзеркала */
+        height: sizeHeightMirrors, /* висота дзеркала */
+        framePrice: currentFrame?.price ? currentFrame?.price : '', /* рамка ціна */
+        frameSize: sizeFrame ? sizeFrame : '', /* рамка розмір */
+        frameName: currentFrame?.name ? currentFrame?.name : '' , /* рамка назва */
+        switchName: currentSwitch?.name ? currentSwitch?.name : '', /* перемикач назва */
+        switchPrice: currentSwitch?.price ? currentSwitch?.price : '', /* перемикач ціна */
+        backLightName:currentBackLight?.name ? currentBackLight?.name : '', /* підсвітка назва */
+        backLightPrice:currentBackLight?.price ? currentBackLight?.price : '', /* підсвітка ціна */
+        cord: currentCord ? currentCord : '' , /* довжина кабелю */
+        cordPrice: resCordSum ? resCordSum : '',/* ціна кабелю */
+        warmerUp: isWarmedUp ? 'Так' : 'Ні', /* підігрів */
+        painting: isPainting ? 'Так' : 'Ні', /* покраска рамки */
+        colorName: isPainting ? currentColor?.name : '', /* колір покраски */
+        colorPrice: isPainting ? currentColor?.price : '', /* Ціна кольору */
+        adress:adress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryPriceOverSity ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: deliveryPriceOverSity ? deliveryPriceOverSity : '',  /* ціна доставки по місту */
         firstName: firstName,
         lastName: lastName,
         surname: surname,
@@ -137,6 +132,7 @@ const StandartMirrors = ({ data }) => {
       }
   
       setFinishMirrorPdf(finishedMirros)
+      console.log("файл друк", finishedMirros);
       
   
       setTotalSum(total)
@@ -269,7 +265,7 @@ const StandartMirrors = ({ data }) => {
           value={currentType ? JSON.stringify(currentType) : ""}
         >
           <option value="" disabled>
-            Оберіть форму
+            
           </option>
           {data?.type &&
             data.type.map((item) => (
@@ -288,7 +284,7 @@ const StandartMirrors = ({ data }) => {
               value={currentGoods ? JSON.stringify(currentGoods) : ""}
             >
               <option value="" disabled>
-                Оберіть тип
+                
               </option>
               {currentTypeArray &&
                 currentTypeArray.map((item) => (
@@ -445,6 +441,7 @@ const StandartMirrors = ({ data }) => {
           <div className="checkbox_wrap montaje">
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
+            <p>Монтаж по розміру</p> 
           </div>
           <div className="checkbox_wrap montaje">
             <input id="checkbox4"  className="checkbox" type='checkbox' checked={minInstallation} onChange={changeMinInstallationFunc}/>
@@ -471,10 +468,10 @@ const StandartMirrors = ({ data }) => {
       <h3>ПІБ:</h3>
         <div className="fullname_wrap">
           <div className="name_lastname">
-            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addSurname(e)} />
-            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addFirstName(e)}/>
+            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addFirstName (e)} />
+            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addLastName(e)}/>
           </div>
-          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addLastName(e)}/>
+          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addSurname(e)}/>
         </div>
       </div>
       <div className="choose_item item_mirrors">
