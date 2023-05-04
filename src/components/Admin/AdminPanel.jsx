@@ -11,6 +11,7 @@ const AdminPanel = () => {
                 <a href='/admin-showers'>Shower</a>
                 <a href='/admin-showers'>Shower</a>
                 <a href='/admin-dashki'>Dashki</a>
+                <a href='/admin-glass-partition'>Glass Partition</a>
             </div>
         </div>
     );

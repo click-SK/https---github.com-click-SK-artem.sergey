@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react";
 import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
-import EditShowerFurnitureDepends from "./EditShowerFurnitureDepends";
-import EditShowerFurnitureColorAndPrice from "./EditShowerFurnitureColorAndPrice";
+import O_EditFurnitureDepends from "./O_EditFurnitureDepends";
+import O_EditFurnitureColorAndPrice from "./O_EditFurnitureColorAndPrice";
 import '../../../style/admin.scss'
 
-const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
+const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx, 
+  pathUpdateMainImg, pathUpdateSecondImg, pathUpdateTitle, pathAddNewDepends, 
+  pathAddNewColors, pathDeleteFurniture, pathUpdateFurnitureColors, pathDeleteFurnitureColors,
+  pathUpdateFurnituredepends, pathDeleteFurnituredepends, partitionsType }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isFurniture, setIsFurniture] = useState(false);
   const [titleValue, setTitlevalue] = useState('');
+  const [partitionsTypeValue, setPartitionsTypevalue] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [newValueDepends, setNewValueDepends] = useState('');
@@ -19,6 +23,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   const handleEdit = () => {
     setIsEdit((isEdit) => !isEdit)
     setTitlevalue(el.title);
+    setPartitionsTypevalue(el.partitionsType)
   }
 
   const handleEditMainImage = async () => {
@@ -28,7 +33,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     formData.append('furnitureId',el?._id);
     formData.append('showerId',showerId);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-main-image', {
+    fetch(pathUpdateMainImg, {
       method: 'PATCH',
       body: formData
     })
@@ -45,7 +50,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     formData.append('furnitureId',el?._id);
     formData.append('showerId',showerId);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-second-image', {
+    fetch(pathUpdateSecondImg, {
       method: 'PATCH',
       body: formData
     })
@@ -58,13 +63,14 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   const handleEditFurnitureTitle = async () => {
     setIsEdit((isEdit) => !isEdit);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-title', {
+    fetch(pathUpdateTitle, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title: titleValue,
+        partitionsType: partitionsTypeValue,
         furnitureId: el?._id,
         showerId: showerId
       })
@@ -81,7 +87,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
     const currentIndex = fullArray.indexOf(el);
     newArr.push(newValueDepends);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-furniture-depends', {
+    fetch(pathAddNewDepends, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -100,7 +106,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   }
 
   const handleAddNewColorsFurniture = () => {
-    fetch('https://calc-shower.herokuapp.com/add-new-shower-furniture-colors', {
+    fetch(pathAddNewColors, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -120,7 +126,7 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   }
 
   const handleDeleteFurniture = () => {
-    fetch('https://calc-shower.herokuapp.com/remove-shower-furniture', {
+    fetch(pathDeleteFurniture, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -192,6 +198,8 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
           <div>
             <p>Змінити заголовок</p>
             <input className="edit_name" value={titleValue} onChange={(e) => setTitlevalue(e.target.value)}/>
+            <p>Змінити тип</p>
+            <input className="edit_name" value={partitionsTypeValue} onChange={(e) => setPartitionsTypevalue(e.target.value)}/>
             <div>
             <button onClick={handleEditFurnitureTitle}>Підтвердити зміни</button>
             </div>
@@ -212,7 +220,12 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
           <div className="edit_title" >
             <h3>Редагування підзаголовків:</h3>
             {el?.depends.map((item,idx) => (
-              <EditShowerFurnitureDepends key={idx} idx={furnitureIdx} fullArray={el?.depends} el={item} showerId={showerId} showerFurnitureId={el._id}/>
+              <O_EditFurnitureDepends key={idx} idx={furnitureIdx} 
+              fullArray={el?.depends} el={item} showerId={showerId} 
+              showerFurnitureId={el._id}
+              pathUpdateFurnituredepends={pathUpdateFurnituredepends}
+              pathDeleteFurnituredepends={pathDeleteFurnituredepends}
+              />
 
             ))}
             <input placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
@@ -221,7 +234,11 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
           <div className="edit_color">
             <h3>Редагування кольорів та цін:</h3>
             {el.colorsFurniture.map((item, idx) => (
-                <EditShowerFurnitureColorAndPrice key={idx} item={item} showerFurnitureId={el._id} showerId={showerId}/>
+                <O_EditFurnitureColorAndPrice key={idx} item={item} 
+                showerFurnitureId={el._id} showerId={showerId}
+                pathUpdateFurnitureColors={pathUpdateFurnitureColors}
+                pathDeleteFurnitureColors={pathDeleteFurnitureColors}
+                />
             ))}
             <div className="add_new_color">
               <input placeholder="Назва" value={furnitureColorName} onChange={(e) => setFurnitureColorName(e.target.value)}/>
@@ -235,4 +252,4 @@ const EditShowerFurnitureTemplate = ({ el, showerId, furnitureIdx }) => {
   );
 };
 
-export default EditShowerFurnitureTemplate;
+export default O_EditFurnitureTemplate;

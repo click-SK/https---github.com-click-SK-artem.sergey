@@ -2,30 +2,35 @@ import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
 import '../../../style/admin.scss'
 
-const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
+const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx,pathUpdateFurnituredepends, pathDeleteFurnituredepends }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
 
+
   const handleEditButton = () => {
     setIsEdit((isEdit) => !isEdit);
-    setCurrentValue(el);
+    setCurrentValue(el)
   };
 
-  const handleEditButtonSave = () => {
-    setIsEdit((isEdit) => !isEdit);
+  console.log('idx',idx);
 
-    let newArr = [...fullColors];
-    const currentIndex = fullColors.indexOf(el);
+  const handleEditButtonSave = () => {
+    let newArr = [...fullArray];
+    const currentIndex = fullArray.indexOf(el);
     newArr.splice(currentIndex,1, currentValue);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-colors', {
+    // setIsEdit((isEdit) => !isEdit);
+
+    fetch(pathUpdateFurnituredepends, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         colors: newArr,
-        showerCabinId: showerId
+        showerCabinId: showerId,
+        furnitureId: showerFurnitureId,
+        idx: idx
       })
     })
       .then((res) => res.json())
@@ -34,12 +39,12 @@ const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
       },1000)
   }
 
-  const handleDelete = () => {
-    let newArr = [...fullColors];
-    const currentIndex = fullColors.indexOf(el);
+  const handleDeleteDepends = () => {
+    let newArr = [...fullArray];
+    const currentIndex = fullArray.indexOf(el);
     newArr.splice(currentIndex,1);
 
-    fetch('https://calc-shower.herokuapp.com/update-shower-colors', {
+    fetch(pathDeleteFurnituredepends, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -47,6 +52,8 @@ const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
       body: JSON.stringify({
         colors: newArr,
         showerCabinId: showerId,
+        furnitureId: showerFurnitureId,
+        idx: idx
       })
     })
     .then((res) => res.json())
@@ -55,26 +62,27 @@ const EditShowerColorsTemplate = ({ el, fullColors, showerId }) => {
     },1000)
   }
 
-  return (
-    <div className="edit_glass_wrap">
-      <div key={el} className="edit_glass_item">
-        <p>{el}</p>
+    return (
+      <div className="edit_wraper_title-color">
+      <div key={el} className="edit_shower_color_block">
+        {el}
         {!isEdit ? (
-          <>
+        <>
           <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDelete}/>
-          </>
+          <AiFillDelete onClick={handleDeleteDepends}/>
+        </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>
         )}
       </div>
+      {/* <div></div> */}
       {isEdit && (
         <div>
           <input value={currentValue} onChange={(e) => setCurrentValue(e.target.value)} className="edit_input" />
         </div>
       )}
     </div>
-  );
+    );
 };
 
-export default EditShowerColorsTemplate;
+export default O_EditFurnitureDepends;
