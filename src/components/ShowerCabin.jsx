@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import ListTheChosenFurniture from "./ListTheChoseFurniture";
-import PdfFile from "./PdfFile";
+import PdfFile from "./PdfFileMirorrs";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -348,11 +348,7 @@ const ShowerCabin = () => {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          <div className="checkbox_wrap montaje">
-            <input id="checkbox4"  className="checkbox" type='checkbox' checked={minInstallation} onChange={changeMinInstallationFunc}/>
-            <label className="checkbox-label checkbox-label4" htmlFor="checkbox4"></label>
-            <p>Мінімальний монтаж - 500грн</p> 
-          </div>
+          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
         </div>
       </div>
       <div className="choose_item item_mirrors item_delivery">
@@ -373,10 +369,10 @@ const ShowerCabin = () => {
       <h3>ПІБ:</h3>
         <div className="fullname_wrap">
           <div className="name_lastname">
-            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addSurname(e)} />
-            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addFirstName(e)}/>
+            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addFirstName (e)} />
+            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addLastName(e)}/>
           </div>
-          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addLastName(e)}/>
+          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addSurname(e)}/>
         </div>
       </div>
       <div className="choose_item item_mirrors">
