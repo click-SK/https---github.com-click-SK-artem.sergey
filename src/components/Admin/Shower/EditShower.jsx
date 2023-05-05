@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../../../style/edir-shower.scss';
 import '../../../style/admin.scss'
-import EditShowerFurnitureTemplate from "./EditShowerFurnitureTemplate";
-import EditShowerColorsTemplate from "./EditShowerColorsTemplate";
+import O_EditFurnitureTemplate from "../EditTemplate/O_EditFurnitureTemplate";
+import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
@@ -114,11 +114,27 @@ const EditShower = () => {
             <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
             </div>
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
-                <EditShowerFurnitureTemplate key={el.title} el={el} furnitureIdx={furnitureIdx} showerId={currentObject._id}/>
+                <O_EditFurnitureTemplate key={el.title} el={el} 
+                furnitureIdx={furnitureIdx} showerId={currentObject._id}
+                pathUpdateMainImg='https://calc-shower.herokuapp.com/update-shower-furniture-main-image'
+                pathUpdateSecondImg='https://calc-shower.herokuapp.com/update-shower-furniture-second-image'
+                pathUpdateTitle='https://calc-shower.herokuapp.com/update-shower-furniture-title'
+                pathAddNewDepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
+                pathAddNewColors='https://calc-shower.herokuapp.com/add-new-shower-furniture-colors'
+                pathDeleteFurniture='https://calc-shower.herokuapp.com/remove-shower-furniture'
+                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/update-furniture-color'
+                pathDeleteFurnitureColors='https://calc-shower.herokuapp.com/remove-shower-furniture-colors'
+                pathUpdateFurnituredepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
+                pathDeleteFurnituredepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
+                />
             ))}
             {showFurnitureBlock && <button className="add_new_furniture" onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
-                 <EditShowerColorsTemplate el={el} key={idx} fullColors={currentObject.color} showerId={currentObject._id}/>
+                 <A_EditColorsTemplate el={el} key={idx} 
+                 fullColors={currentObject.color} showerId={currentObject._id}
+                 pathDelete='https://calc-shower.herokuapp.com/update-shower-colors'
+                 pathEdit='https://calc-shower.herokuapp.com/update-shower-colors'
+                 />
             ))
             }
             {currentObject?.color && showColorsBlock && 

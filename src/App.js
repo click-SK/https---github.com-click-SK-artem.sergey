@@ -8,6 +8,7 @@ import Dashki from './components/Dashki';
 import AdminPanel from './components/Admin/AdminPanel';
 import EditStandartMirrors from './components/Admin/Mirrors/EditStandartMirrors';
 import EditShower from './components/Admin/Shower/EditShower';
+import EditGlassPartition from './components/Admin/GlassPartition/EditGlassPartition';
 import EditDashki from './components/Admin/Dashki/EditDashki';
 import {Routes, Route} from 'react-router-dom';
 
@@ -41,6 +42,7 @@ function App() {
         <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
         <Route path='/admin-showers' element={<EditShower/>}/>
         <Route path='/admin-dashki' element={<EditDashki/>}/>
+        <Route path='/admin-glass-partition' element={<EditGlassPartition/>}/>
       </Routes>
         
 
