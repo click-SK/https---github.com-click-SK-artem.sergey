@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import ExelPrint from "./ExelPrint";
-import PdfFile from "./PdfFileMirorrs";
+import PdfFile from "./PdfFile/PdfFileMirorrsManager";
+import PdfFileClient from "./PdfFile/PdfFileMirorrsClient";
 import Api from "./Api";
 import '../style/shower.scss'
 import '../style/mirrors.scss'
@@ -61,7 +62,7 @@ const StandartMirrors = ({ data }) => {
       let intslPrice = 0;
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
-      let deliveryFinalyPrice = 0;
+      let isPaintingPrice = 0;
 
         if (calcSquareMeter < 2){
            intslPrice = calcSquareMeter * 300
@@ -75,6 +76,10 @@ const StandartMirrors = ({ data }) => {
 
         if (delivery){
           deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+        }
+
+        if(isPainting){
+            isPaintingPrice = Number(sizeFrame) * Number( currentColor?.price);
         }
 
         
@@ -95,7 +100,7 @@ const StandartMirrors = ({ data }) => {
       const total = (resSizePrice || 0) + 
       (resCordSum || 0) + (resFrameSum || 0) + 
       (currentSwitch?.price || 0) + 
-      (isPainting ? currentColor?.price || 600 : 0) + 
+      (isPainting ? isPaintingPrice : 0) + 
       (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
       (isAssemblingt ? intslPrice : 0) + 
       (delivery ? deliveryPriceOverSity : deliveryPrice) +
@@ -108,30 +113,47 @@ const StandartMirrors = ({ data }) => {
         width: sizeWidthMirrors, /* ширина дзеркала */
         height: sizeHeightMirrors, /* висота дзеркала */
         framePrice: currentFrame?.price ? currentFrame?.price : '', /* рамка ціна */
-        frameSize: sizeFrame ? sizeFrame : '', /* рамка розмір */
+        frameSize: sizeFrame ? `${sizeFrame} м` : '', /* рамка розмір */
         frameName: currentFrame?.name ? currentFrame?.name : '' , /* рамка назва */
         switchName: currentSwitch?.name ? currentSwitch?.name : '', /* перемикач назва */
+        switchCat: currentSwitch?.name ? 'Перемикач' : '', /* перемикач назва */
         switchPrice: currentSwitch?.price ? currentSwitch?.price : '', /* перемикач ціна */
         backLightName:currentBackLight?.name ? currentBackLight?.name : '', /* підсвітка назва */
+        backLightAdd:currentBackLight?.name ? 'Додаткова підсвітка' : '', /* підсвітка назва */
         backLightPrice:currentBackLight?.price ? currentBackLight?.price : '', /* підсвітка ціна */
-        cord: currentCord ? currentCord : '' , /* довжина кабелю */
+        cord: currentCord ? `${currentCord} м` : '' , /* довжина кабелю */
+        cordName: currentCord ? 'Кабель' : '' , /* назва кабелю */
         cordPrice: resCordSum ? resCordSum : '',/* ціна кабелю */
-        warmerUp: isWarmedUp ? 'Так' : 'Ні', /* підігрів */
-        painting: isPainting ? 'Так' : 'Ні', /* покраска рамки */
+        warmerUp: isWarmedUp ? 'Так' : '', /* підігрів */
+        warmerUpPrice: isWarmedUp ? '500 грн' : '', /* підігрів ціна */
+        warmerUpName: isWarmedUp ? 'Підігрів' : '', /* підігрів ціна */
+        painting: isPainting ? 'Так' : '', /* покраска рамки */
+        paintingPrice: isPainting ? 'Ціна' : '', /* покраска рамки */
         colorName: isPainting ? currentColor?.name : '', /* колір покраски */
-        colorPrice: isPainting ? currentColor?.price : '', /* Ціна кольору */
+        colorFrame: isPainting ? 'Покраска' : '', /* колір покраски */
+        colorPrice: isPainting ? isPaintingPrice : '', /* Ціна кольору */
         adress:adress, /* адреса доставки */
-        deliveryPriceOverSity: deliveryPriceOverSity ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: deliveryPriceOverSity ? deliveryPriceOverSity : '',  /* ціна доставки по місту */
+        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
         firstName: firstName,
         lastName: lastName,
         surname: surname,
         numberPhone: numberPhone,
         orderComent: orderComent,
+        minInstallation: minInstallation ? 500 : '',
+        minInstallationName: minInstallation ? 'Монтаж' : '',
+        minInstallationOption: minInstallation ? "Мінімальний" : '',
+        isAssemblingt: isAssemblingt ? intslPrice : '',
+        isAssemblingtName: isAssemblingt ? 'Монтаж' : '',
+        isAssemblingOption: isAssemblingt ? 'По розміру' : '',
+        selectedProcessingName: currentProcessingСutout ? currentProcessingСutout?.name : '',
+        selectedProcessingPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
+        selectedProcessingCount: currentProcessingСutout ? currentProcessingСutout?.count : '',
         total: total
       }
   
       setFinishMirrorPdf(finishedMirros)
+
       console.log("файл друк", finishedMirros);
       
   
@@ -183,7 +205,7 @@ const StandartMirrors = ({ data }) => {
   }
 
   const changePaintingFunc = () => {
-    const paintingObj = data?.option?.painting;
+    // const paintingObj = data?.option?.painting;
     setIsPainting(isPainting => !isPainting)
   }
   
@@ -414,10 +436,9 @@ const StandartMirrors = ({ data }) => {
             ))}
         </select>
         </div>
-
-        <div className="wrap_item type_shower">
+        <div className="choose_item item_mirrors">
             <h3>Виберіть обробку</h3>
-            <div className="choose_item selected_shower">
+            
               <select
                 value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
                 onChange={selectProcessingСutoutFunc}
@@ -432,7 +453,6 @@ const StandartMirrors = ({ data }) => {
                     </option>
                   ))}
               </select>
-            </div>
         </div>
 
         <div className="choose_item item_mirrors item_montaje">
@@ -493,9 +513,14 @@ const StandartMirrors = ({ data }) => {
             <div className="send_order mirror_button">
             {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
             {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
-            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
+            <div className="mirror_button_exel" style={{fontSize: 14}}>
+            <PDFDownloadLink  document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
             </PDFDownloadLink>
+            <PDFDownloadLink className="" document={< PdfFileClient order={finishMirrorPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            </PDFDownloadLink>
+            </div>
             <button className="mirror_button_order" >Оформити</button>
             </div>
         </div> 
