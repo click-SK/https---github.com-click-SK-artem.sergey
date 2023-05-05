@@ -153,7 +153,7 @@ const EditGlassPartition = () => {
             <div className="shower-cabin-edit-header">
             <h1 className="header_item" onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
             <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowTypePartitionBlock(showTypeBlock => !showTypeBlock)}>Перегородки</h1>
+            <h1 className="header_item"  onClick={() => setShowTypePartitionBlock(showTypePartitionBlock => !showTypePartitionBlock)}>Перегородки</h1>
             <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
             <h1 className="header_item"  onClick={() => setShowColorBlock(showColorBlock => !showColorBlock)}>Колір</h1>
             <h1 className="header_item"  onClick={() => setshowProcessingStandartBlock(showProcessingStandartBlock => !showProcessingStandartBlock)}>Обробка 1</h1>

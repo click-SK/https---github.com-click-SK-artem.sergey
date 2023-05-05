@@ -4,11 +4,13 @@ import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs
 import EditStandartMirrorsGoods from './EditStandartMirrorsGoods';
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsType = ({item, idxType}) => {
+const EditStandartMirrorsType = ({item, idxType, typeName, showerId}) => {
     const [showBlock, setShowblock] = useState(false);
     const [isShowInput, setIsShowInput] = useState(false);
     const [typeNameValue, setTypeNameValue] = useState("");
     const [typeGoodsValue, setTypeGoodsValue] = useState([]);
+    const [newValueGoodsName, setNewValueGoodsName] = useState('');
+    const [newValueGoodsPrice, setNewValueGoodsPrice] = useState('');
     const changeNameSection = (item) => {
         setTypeNameValue(item.name);
         setTypeGoodsValue(item.goods)
@@ -24,6 +26,24 @@ const EditStandartMirrorsType = ({item, idxType}) => {
             typeIndex: idxType,
             name: typeNameValue,
             goods: typeGoodsValue
+          })
+        })
+          .then((res) => res.json())
+          setTimeout(() => {
+            window.location.reload();
+          },1000)
+      }
+
+      const handleAddNewGoods = () => {    
+        fetch('https://calc-shower.herokuapp.com/add-new-goods', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: newValueGoodsName,
+            price: newValueGoodsPrice,
+            typeName: typeName
           })
         })
           .then((res) => res.json())
@@ -74,8 +94,17 @@ const EditStandartMirrorsType = ({item, idxType}) => {
         {showBlock &&
                 <div className="edit_option_wrap">
                 {item.goods.map((el, idxGoods) => (
-                  <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} key={el.name}/>
+                  <>
+                      <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} 
+                      key={el.name} showerId={showerId}
+                      typeName={typeName}/>
+                  </>
                 ))}
+                        <>
+        <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueGoodsName} onChange={(e) => setNewValueGoodsName(e.target.value)}/>
+        <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueGoodsPrice} onChange={(e) => setNewValueGoodsPrice(e.target.value)}/>
+        <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewGoods}>Додати новий</button>
+        </>
               </div>
         }
       </div>

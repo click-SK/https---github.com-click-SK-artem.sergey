@@ -6,7 +6,7 @@ import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
-
+import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 
 const EditShower = () => {
     const [currentObject, setCurrentObject] = useState({});
@@ -31,7 +31,8 @@ const EditShower = () => {
       }, []);
 
       const handleAddNewFurniture = () => {
-        fetch('https://calc-shower.herokuapp.com/add-furniture', {
+        console.log('new furniture');
+        fetch('https://calc-shower.herokuapp.com/add-new-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
