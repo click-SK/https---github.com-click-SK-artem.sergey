@@ -10,6 +10,8 @@ import EditStandartMirrors from './components/Admin/Mirrors/EditStandartMirrors'
 import EditShower from './components/Admin/Shower/EditShower';
 import EditGlassPartition from './components/Admin/GlassPartition/EditGlassPartition';
 import EditDashki from './components/Admin/Dashki/EditDashki';
+import EditCosmeticMirrors from './components/Admin/Mirrors/EditCosmeticMirrors';
+import EditShowerClient from './components/Admin/ShowerClient/EditShowerClient';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -41,8 +43,10 @@ function App() {
         <Route path='/admin' element={<AdminPanel/>}/>
         <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
         <Route path='/admin-showers' element={<EditShower/>}/>
+        <Route path='/admin-showers-client' element={<EditShowerClient/>}/>
         <Route path='/admin-dashki' element={<EditDashki/>}/>
         <Route path='/admin-glass-partition' element={<EditGlassPartition/>}/>
+        <Route path='/admin-cosmetic-mirrors' element={<EditCosmeticMirrors/>}/>
       </Routes>
         
 

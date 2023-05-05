@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai";
+import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
+const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName}) => {
   const [isEditGood, setIsEditGood] = useState(false);
   const [goodsNameValue, setGoodNameValue] = useState("");
   const [goodsPriceValue, setGoodPriceValue] = useState("");
@@ -24,6 +24,23 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
         goodsIndex: idxGoods,
         name: goodsNameValue,
         price: goodsPriceValue
+      })
+    })
+      .then((res) => res.json())
+      setTimeout(() => {
+        window.location.reload();
+      },1000)
+  }
+
+  const handleDelete = () => {
+    fetch('https://calc-shower.herokuapp.com/remove-mirror-goods', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: el.name,
+        typeName: typeName,
       })
     })
       .then((res) => res.json())
@@ -63,6 +80,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods}) => {
           <button onClick={sendData} style={{cursor:'pointer'}}>Підтвердити зміни</button>
         </div>
       )}
+      <AiFillDelete onClick={handleDelete}/>
     </div>
   );
 };
