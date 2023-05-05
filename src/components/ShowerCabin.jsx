@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import ListTheChosenFurniture from "./ListTheChoseFurniture";
-import PdfFile from "./PdfFileMirorrs";
+import PdfFile from "./PdfFile/PdfShowerManadger";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -23,7 +23,7 @@ const ShowerCabin = () => {
   const [validationInput, setValidationInput] = useState(false);
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
-  const [minInstallation, setMinInstallation] = useState(false);
+  const [minInstallation, setMinInstallation] = useState('');
   const [adress, setAdress] = useState('');
   const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
   const [delivery, setDelivery] = useState(false);
@@ -66,6 +66,10 @@ const ShowerCabin = () => {
     const selectedGlassColor = JSON.parse(e.target.value);
     setCurrentGlassColor(selectedGlassColor);
   };
+  const minInstallationFunc = (e) => {
+    const selectedGlassColor = JSON.parse(e.target.value);
+    setMinInstallation(minInstallation);
+  };
 
   const calcTotalSumFunc = () => {
     if(heightValue && widthValue) {
@@ -80,6 +84,22 @@ const ShowerCabin = () => {
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
       let deliveryFinalyPrice = 0;
+
+      const furnitureFin = [];
+
+      cart.forEach((item) => {
+        const itemData = {
+          colorsFurniture: item.colorsFurniture[0].color,
+          colorsFurniturePrice: item.colorsFurniture[0].price,
+          tittleName: item.title,
+          name2: item.depends[0],
+          name3: item.depends[1],
+          drawingImgSrc: item.drawingImg,
+          mainImageSrc: item.mainImage,
+          count: item.count,
+        };
+        furnitureFin.push(itemData);
+      });
 
       if (calcSquareMeter < 2){
         intslPrice = calcSquareMeter * 300
@@ -110,21 +130,56 @@ const ShowerCabin = () => {
       (currentProcessingСutout?.price || 0);
   
       const finishedShower = {
-        typeName: currentType?.name,
-        typePrice: currentType?.price,
-        glass: currentGlass,
-        glassColorName: currentGlassColor?.name,
-        glassColorPrice: currentGlassColor?.price,
-        width: widthValue,
-        height: heightValue,
-        volume: volumValue,
-        furniture: cart,
-        total: totalSum,
+        type: currentType?.name, /* назва душ кабіни */
+        goodsPrice: currentType?.price,  /* ціна душ кабіни */
+        width: widthValue, /* ширина душ кабіни */
+        height: heightValue, /* висота - ціна душ кабіни */ 
+        glass: currentGlass ? currentGlass : '' ,  /* скло - товщина душ кабіни */
+        glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
+        glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
+        volume: volumValue, 
+        furniture: furnitureFin, /* масив фурнітур душ кабіни */
+        adress:adress, /* адреса доставки */
+        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        firstName: firstName,
+        lastName: lastName,
+        surname: surname,
+        numberPhone: numberPhone,
+        orderComent: orderComent,
+        minInstallation: minInstallation ? 500 : '',
+        minInstallationName: minInstallation ? 'Монтаж' : '',
+        minInstallationOption: minInstallation ? "Мінімальний" : '',
+        isAssemblingt: isAssemblingt ? minInstallation : '',
+        isAssemblingtName: isAssemblingt ? 'Монтаж' : '',
+        isAssemblingOption: isAssemblingt ? 'По розміру' : '',
+        currentProcessingStandartName: currentProcessingStandart ? 'Обробка' : '',
+        currentProcessingStandartVal: currentProcessingStandart ? currentProcessingStandart?.name : '',
+        currentProcessingStandartPrice: currentProcessingStandart ? currentProcessingStandart?.price : '',
+        currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
+        currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
+        currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
+        total: totalSum, /* скло - ціна душ кабіни */
       }
+
+
+      // const furnitureFin = {};
+
+      // cart.forEach((item) => {
+      //   Object.entries(item).forEach(([key, value]) => {
+      //     if (value !== '' && value !== null && value !== undefined) {
+      //       furnitureFin[value] = item[key];
+      //     }
+      //   });
+      // });
+
+
 
       setFinishedShowerPdf(finishedShower)
 
-      console.log('finishedShower',finishedShower);
+      // console.log("файл друк", finishedShower);
+      console.log("фурнітура", furnitureFin);
+
       setTotalSum(totalSum)
     } else {
       setValidationInput(true);
@@ -348,7 +403,7 @@ const ShowerCabin = () => {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
+          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => minInstallation(e)}/>
         </div>
       </div>
       <div className="choose_item item_mirrors item_delivery">
