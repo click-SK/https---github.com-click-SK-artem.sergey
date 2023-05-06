@@ -16,6 +16,7 @@ const ShowerCabin = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [widthValue, setWidthValue] = useState('');
   const [heightValue, setHeightValue] = useState('');
+  const [depthValue, setDepthValue] = useState('');
   const [volumValue, setVolumValue] = useState(0);
   const [widthSum, setWidthSum] = useState(0);
   const [heightSum, setHeightSum] = useState(0);
@@ -68,9 +69,12 @@ const ShowerCabin = () => {
   const calcTotalSumFunc = () => {
     if(heightValue && widthValue) {
       setValidationInput(false);
-      const calcSize = Number(widthValue) * Number(heightValue);
+      const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
       const calcSquareMeter = calcSize/10000;
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
+      const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
+
+      console.log("глибина",  resCurrentProcessingStandart );
   
       let totalSumFurniture = 0;
 
@@ -79,55 +83,7 @@ const ShowerCabin = () => {
       let deliveryPriceOverSity = 0;
       let deliveryFinalyPrice = 0;
 
-      const furnitureFinArr = [];
-
-      // cart.forEach((item, index) => {
-      //   const itemData = [
-      //       `${item.depends[0]} ${item.title} ${item.depends[1]} ${item.colorsFurniture.color} ${item.count} ${item.colorsFurniture.price * item.count } грн`
-      //     // colorsFurniture: item.colorsFurniture[0].color,
-      //     // colorsFurniturePrice: item.colorsFurniture[0].price,
-      //     // tittleName: item.title,
-      //     // name2: item.depends[0],
-      //     // name3: item.depends[1],
-      //     // drawingImgSrc: item.drawingImg,
-      //     // mainImageSrc: item.mainImage,
-      //     // count: item.count,
-      //   ];
-      //   furnitureFinArr.push(itemData);
-      // });
-
-      
-      // const furnitureFinArr2 = [];
-      // const furnitureFinObj = {};
-
-
-
-      // furniture.forEach((item, index) => {
-      //     const itemData = {
-      //       colorsFurniture: item.colorsFurniture[0].color,
-      //       colorsFurniturePrice: item.colorsFurniture[0].price,
-      //       tittleName: item.title,
-      //       name2: item.depends[0],
-      //       name3: item.depends[1],
-      //       drawingImgSrc: item.drawingImg,
-      //       mainImageSrc: item.mainImage,
-      //       count: item.count,
-      //     };
-      //     furnitureFinArr.push(itemData);
-      //   });
-      
-
-      // furnitureFinArr.forEach((item, index) => {
-      //     furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
-      //     // setFurniture(furnitureFinArr);
-      //   });
-
-      // // setfurnitureFin(furnitureFinArr)
-      // console.log('фурнітура ТЕСТ', furnitureFinArr);
-      // console.log('фурнітура obj ТЕСТ', furnitureFinObj);
-
      
-      console.log('tset fimal', furniture);
 
       if (calcSquareMeter < 2){
         intslPrice = calcSquareMeter * 300
@@ -151,11 +107,12 @@ const ShowerCabin = () => {
   
       const totalSum = resSizePrice + 
       (currentType?.price || 0) + 
-      totalSumFurniture + (minInstallation ? 500 : 0) + 
-      (isAssemblingt ? intslPrice : 0) + 
+      totalSumFurniture +  
+      (isAssemblingt ? Number(minInstallation) : 0) + 
       (delivery ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price || 0);
+
   
       const finishedShower = {
         type: currentType?.name, /* назва душ кабіни */
@@ -175,7 +132,7 @@ const ShowerCabin = () => {
         surname: surname,
         numberPhone: numberPhone,
         orderComent: orderComent,
-        minInstallation: minInstallation ? 500 : '',
+        minInstallation: minInstallation ? minInstallation : '',
         minInstallationName: minInstallation ? 'Монтаж' : '',
         minInstallationOption: minInstallation ? "Мінімальний" : '',
         isAssemblingt: isAssemblingt ? minInstallation : '',
@@ -183,7 +140,7 @@ const ShowerCabin = () => {
         isAssemblingOption: isAssemblingt ? 'По розміру' : '',
         currentProcessingStandartName: currentProcessingStandart ? 'Обробка' : '',
         currentProcessingStandartVal: currentProcessingStandart ? currentProcessingStandart?.name : '',
-        currentProcessingStandartPrice: currentProcessingStandart ? currentProcessingStandart?.price : '',
+        currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
         currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
         currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
@@ -255,6 +212,12 @@ const ShowerCabin = () => {
     // const cordObj = data?.option?.cord;
     setAdress(e.target.value);
   }
+  const addPriceInstalation = (e) => {
+    // const cordObj = data?.option?.cord;
+    setMinInstallation(e.target.value);
+  }
+
+
   const roadDistance = (e) => {
     // const cordObj = data?.option?.cord;
     setDeliveryRoadDistance(e.target.value);
@@ -434,7 +397,7 @@ const ShowerCabin = () => {
             </div>
             <div className="size_item" >
               {/* <h4>Глубина:</h4> */}
-              <input type="number" placeholder="Глибина" />
+              <input type="number" placeholder="Глибина" value={depthValue} onChange={(e) => setDepthValue(e.target.value)} />
             </div>
           </div>
         </div>
@@ -493,7 +456,7 @@ const ShowerCabin = () => {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => minInstallation(e)}/>
+          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/>
         </div>
       </div>
       <div className="choose_item item_mirrors item_delivery">

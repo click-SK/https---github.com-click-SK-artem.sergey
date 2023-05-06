@@ -8,31 +8,6 @@ function OrderForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      //   const response = await fetch("https://openapi.keycrm.app/v1/order", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //       "Cache-Control": "no-cache",
-  //       "Pragma": "no-cache",
-  //       "Authorization": `Bearer ${token}`
-  //     },
-  //     body: JSON.stringify(order),
-  //     mode: 'no-cors'
-  //   })
-  //   .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('There was a problem with the fetch operation:', error);
-  //     });
-  // };
 
     const order = {
       "source_id": 10,
@@ -50,29 +25,20 @@ function OrderForm() {
       }
     };
     
-    const dataString = JSON.stringify(order);
-
-
-    const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ'
-
-
-
-  fetch('https://openapi.keycrm.app/v1/order', {
-    method: 'POST',
-    headers: {
-      'content-Type': 'application/json',
-      'correlation_id': '3c1cdba9-75bf-4a63-920b-80ff07f142c0',
-      'authorization': 'Bearer . ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ',
-      'accept' : 'application/json',
-      'pragma' : 'no-cache'
-    },
-    body: dataString,
-  })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-};
-
+    const handleAddNewType = () => {    
+      fetch('https://calc-shower.herokuapp.com/add-new-dashki-type', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+      })
+        .then((res) => res.json())
+        setTimeout(() => {
+          window.location.reload();
+        },1000)
+    }
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div>
