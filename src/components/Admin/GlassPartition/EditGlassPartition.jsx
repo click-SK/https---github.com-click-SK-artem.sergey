@@ -133,7 +133,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewFurniture = () => {
-        fetch('https://calc-shower.herokuapp.com/add-furniture', {
+        fetch('https://calc-shower.herokuapp.com/glass-partitions-add-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
@@ -163,13 +163,14 @@ const EditGlassPartition = () => {
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <O_EditFurnitureTemplate key={el.title} el={el} 
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
+                isGlassPartition={true}
                 pathUpdateMainImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-main-image'
                 pathUpdateSecondImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-second-image'
                 pathUpdateTitle='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-title'
                 pathAddNewDepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'
                 pathAddNewColors='https://calc-shower.herokuapp.com/add-new-glass-partitions-furniture-colors'
                 pathDeleteFurniture='https://calc-shower.herokuapp.com/remove-glass-partitions-furniture'
-                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/update-furniture-color'
+                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/glass-partitions-update-furniture-color'
                 pathDeleteFurnitureColors='https://calc-shower.herokuapp.com/remove-glass-partitions-furniture-colors'
                 pathUpdateFurnituredepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'
                 pathDeleteFurnituredepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'

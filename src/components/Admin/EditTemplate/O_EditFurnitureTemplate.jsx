@@ -8,7 +8,7 @@ import '../../../style/admin.scss'
 const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx, 
   pathUpdateMainImg, pathUpdateSecondImg, pathUpdateTitle, pathAddNewDepends, 
   pathAddNewColors, pathDeleteFurniture, pathUpdateFurnitureColors, pathDeleteFurnitureColors,
-  pathUpdateFurnituredepends, pathDeleteFurnituredepends, partitionsType }) => {
+  pathUpdateFurnituredepends, pathDeleteFurnituredepends, isGlassPartition }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isFurniture, setIsFurniture] = useState(false);
   const [titleValue, setTitlevalue] = useState('');
@@ -165,20 +165,28 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
         <div className="main_img_wrap">
         <img src={`${el.drawingImg}`} className="main_img"/>
         </div>
-        <AiFillEdit
-          className="edit_icon"
-          onClick={handleEdit}
-        />
+        {!isEdit 
+        ?
+        <AiFillEdit style={{cursor:'pointer'}}
+        className="edit_icon"
+        onClick={handleEdit}
+      />
+        :
+        <AiFillCloseCircle style={{cursor:'pointer'}}
+        className="edit_icon"
+        onClick={handleEdit}
+      />
+        }
         {!isFurniture ? (
-          <BsFillArrowDownCircleFill
+          <BsFillArrowDownCircleFill style={{cursor:'pointer'}}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         ) : (
-          <BsFillArrowUpCircleFill
+          <BsFillArrowUpCircleFill style={{cursor:'pointer'}}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         )}
-        <AiFillDelete onClick={handleDeleteFurniture}/>
+        <AiFillDelete onClick={handleDeleteFurniture} style={{cursor:'pointer'}}/>
       </div>
       {isEdit && (
         <div className="edit_furniture">
@@ -198,8 +206,12 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
           <div>
             <p>Змінити заголовок</p>
             <input className="edit_name" value={titleValue} onChange={(e) => setTitlevalue(e.target.value)}/>
+            {isGlassPartition &&
+            <>
             <p>Змінити тип</p>
             <input className="edit_name" value={partitionsTypeValue} onChange={(e) => setPartitionsTypevalue(e.target.value)}/>
+            </>
+            }
             <div>
             <button onClick={handleEditFurnitureTitle}>Підтвердити зміни</button>
             </div>

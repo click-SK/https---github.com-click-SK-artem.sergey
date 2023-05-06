@@ -6,7 +6,6 @@ import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
-import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 
 const EditShower = () => {
     const [currentObject, setCurrentObject] = useState({});
@@ -108,11 +107,11 @@ const EditShower = () => {
     return (
         <div>
             <div className="shower-cabin-edit-header">
-            <h1 className="header_item" onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
-            <h1 className="header_item"  onClick={() => setShowColorsBlock(showColorsBlock => !showColorsBlock)}>Скло</h1>
-            <h1 className="header_item"  onClick={() => setShowMirrorsBlock(showMirrorsBlock => !showMirrorsBlock)}>Кольори</h1>
-            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
+            <h1 className="header_item" onClick={() => setShowFurnitureBlock(state => !state)}>Фурнітура</h1>
+            <h1 className="header_item"  onClick={() => setShowColorsBlock(state => !state)}>Скло</h1>
+            <h1 className="header_item"  onClick={() => setShowMirrorsBlock(state => !state)}>Кольори</h1>
+            <h1 className="header_item"  onClick={() => setShowTypeBlock(state => !state)}>Типи</h1>
+            <h1 className="header_item"  onClick={() => setShowSizeBlock(state => !state)}>Розміри</h1>
             </div>
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <O_EditFurnitureTemplate key={el.title} el={el} 
@@ -123,7 +122,7 @@ const EditShower = () => {
                 pathAddNewDepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
                 pathAddNewColors='https://calc-shower.herokuapp.com/add-new-shower-furniture-colors'
                 pathDeleteFurniture='https://calc-shower.herokuapp.com/remove-shower-furniture'
-                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/update-furniture-color'
+                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/update-shower-furniture-color'
                 pathDeleteFurnitureColors='https://calc-shower.herokuapp.com/remove-shower-furniture-colors'
                 pathUpdateFurnituredepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
                 pathDeleteFurnituredepends='https://calc-shower.herokuapp.com/update-shower-furniture-depends'
@@ -132,7 +131,7 @@ const EditShower = () => {
             {showFurnitureBlock && <button className="add_new_furniture" onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
             {currentObject?.color && showColorsBlock && currentObject.color.map((el, idx) => (
                  <A_EditColorsTemplate el={el} key={idx} 
-                 fullColors={currentObject.color} showerId={currentObject._id}
+                 fullArray={currentObject.color} showerId={currentObject._id}
                  pathDelete='https://calc-shower.herokuapp.com/update-shower-colors'
                  pathEdit='https://calc-shower.herokuapp.com/update-shower-colors'
                  />
@@ -157,8 +156,8 @@ const EditShower = () => {
             }
             {currentObject?.type && showTypeBlock && currentObject.type.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
-                pathDelete='https://calc-shower.herokuapp.com/update-shower-type'
-                pathEdit='https://calc-shower.herokuapp.com/remove-shower-type'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-shower-type'
+                pathEdit='https://calc-shower.herokuapp.com/update-shower-type'/>
             ))
             }
             {currentObject?.type && showTypeBlock && 
