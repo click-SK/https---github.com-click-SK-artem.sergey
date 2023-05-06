@@ -322,6 +322,7 @@ const ShowerCabin = () => {
   };
 
   console.log('currentObject',currentObject);
+
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
@@ -506,7 +507,7 @@ const ShowerCabin = () => {
             <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
              {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
             </PDFDownloadLink>
-            <button onClick={testCrm}>Оформити</button>
+               <button onClick={testCrm}>Оформити</button>
             </div>
         </div> 
     </div>

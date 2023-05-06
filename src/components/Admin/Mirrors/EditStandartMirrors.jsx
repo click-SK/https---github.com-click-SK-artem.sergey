@@ -4,9 +4,10 @@ import '../../../style/edir-shower.scss';
 import EditStandartMirrorsType from "./EditStandartMirrorsType";
 import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 import O_EditPriceTemplate from "../EditTemplate/O_EditPriceTemplate";
+import AdminHeader from '../AdminHeader';
 const EditStandartMirrors = () => {
   const [currentObject, setCurrentObject] = useState({});
-  const [showTypeBlock, setShowTypeBlock] = useState(false);
+  const [showTypeBlock, setShowTypeBlock] = useState(true);
   const [showFrameBlock, setShowFrameBlock] = useState(false);
   const [showBackLightBlock, setShowBackLightBlock] = useState(false);
   const [showSwitchBlock, setShowSwitchBlock] = useState(false);
@@ -105,22 +106,111 @@ const EditStandartMirrors = () => {
       },1000)
   }
 
+  const handleShowTypeBlock = () => {
+    setShowTypeBlock(true);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowFrameBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(true);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowBackLightBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(true);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowSwitchBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(true);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowColorsBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(true);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowCordBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(true);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowWarmedUpBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(true);
+    setShowPaintingBlock(false);
+  }
+
+  const handleShowPaintingBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(true);
+  }
+
+
   console.log('currentObject[idxType].type.name',currentObject?.type && currentObject?.type[1]?.name);
 
   return (
     <div>
-    {/* <div className="mirrors_wraper"></div> */}
+      <AdminHeader/>
             <div className="shower-cabin-edit-header">
-            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowFrameBlock(showTypeBlock => !showTypeBlock)}>Рамки</h1>
-            <h1 className="header_item"  onClick={() => setShowBackLightBlock(showTypeBlock => !showTypeBlock)}>Підсвітка</h1>
-            <h1 className="header_item"  onClick={() => setShowSwitchBlock(showTypeBlock => !showTypeBlock)}>Перемикачі</h1>
-            <h1 className="header_item"  onClick={() => setShowColorsBlock(showTypeBlock => !showTypeBlock)}>Колори</h1>
-            <h1 className="header_item"  onClick={() => setShowCordBlock(showTypeBlock => !showTypeBlock)}>Кабель</h1>
-            <h1 className="header_item"  onClick={() => setShowWarmedUpBlock(showTypeBlock => !showTypeBlock)}>Підігрів</h1>
-            <h1 className="header_item"  onClick={() => setShowPaintingBlock(showTypeBlock => !showTypeBlock)}>Покраска</h1>
+            <h1 className={`header_item ${showTypeBlock ? 'active_tab' : ''}`}  onClick={handleShowTypeBlock}>Типи</h1>
+            <h1 className={`header_item ${showFrameBlock ? 'active_tab' : ''}`}  onClick={handleShowFrameBlock}>Рамки</h1>
+            <h1 className={`header_item ${showBackLightBlock ? 'active_tab' : ''}`}  onClick={handleShowBackLightBlock}>Підсвітка</h1>
+            <h1 className={`header_item ${showSwitchBlock ? 'active_tab' : ''}`}  onClick={handleShowSwitchBlock}>Перемикачі</h1>
+            <h1 className={`header_item ${showColorsBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колори</h1>
+            <h1 className={`header_item ${showCordBlock ? 'active_tab' : ''}`}  onClick={handleShowCordBlock}>Кабель</h1>
+            <h1 className={`header_item ${showWarmedUpBlock ? 'active_tab' : ''}`}  onClick={handleShowWarmedUpBlock}>Підігрів</h1>
+            <h1 className={`header_item ${showPaintingBlock ? 'active_tab' : ''}`}  onClick={handleShowPaintingBlock}>Покраска</h1>
             </div>
-        {showTypeBlock &&
+        {showTypeBlock && currentObject?.type &&
         currentObject?.type.map((item, idxType) => (
           <EditStandartMirrorsType key={idxType} idxType={idxType} item={item} 
           typeName={currentObject?.type[idxType]?.name}

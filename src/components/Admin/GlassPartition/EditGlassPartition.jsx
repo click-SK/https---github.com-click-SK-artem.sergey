@@ -8,6 +8,7 @@ import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
 import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import O_EditFurnitureTemplate from "../EditTemplate/O_EditFurnitureTemplate";
+import AdminHeader from '../AdminHeader';
 
 const EditGlassPartition = () => {
     const [currentObject, setCurrentObject] = useState({});
@@ -133,7 +134,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewFurniture = () => {
-        fetch('https://calc-shower.herokuapp.com/add-furniture', {
+        fetch('https://calc-shower.herokuapp.com/glass-partitions-add-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
@@ -148,28 +149,100 @@ const EditGlassPartition = () => {
             },1000)
       }
 
+      const handleShowFurnitureBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(true);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowTypeBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(true);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowSizeBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(true);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowColorsBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(true);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const hndleTypePartitionBlock = () => {
+        setShowTypePartitionBlock(true)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      }
+
+      const handleShowProcessingStandartBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(true);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowProcessingСutoutBlock = () => {
+        setShowTypePartitionBlock(false)
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(true);
+      };
+
     return (
         <div>
+          <AdminHeader/>
             <div className="shower-cabin-edit-header">
-            <h1 className="header_item" onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
-            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowTypePartitionBlock(showTypePartitionBlock => !showTypePartitionBlock)}>Перегородки</h1>
-            <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
-            <h1 className="header_item"  onClick={() => setShowColorBlock(showColorBlock => !showColorBlock)}>Колір</h1>
-            <h1 className="header_item"  onClick={() => setshowProcessingStandartBlock(showProcessingStandartBlock => !showProcessingStandartBlock)}>Обробка 1</h1>
-            <h1 className="header_item"  onClick={() => setshowProcessingСutoutBlock(showProcessingСutoutBlock => !showProcessingСutoutBlock)}>Обробка 2</h1>
+            <h1 className={`header_item ${showFurnitureBlock ? 'active_tab' : ''}`} onClick={handleShowFurnitureBlock}>Фурнітура</h1>
+            <h1 className={`header_item ${showTypeBlock ? 'active_tab' : ''}`}  onClick={handleShowTypeBlock}>Типи</h1>
+            <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`}  onClick={handleShowSizeBlock}>Розміри</h1>
+            <h1 className={`header_item ${showColorBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колір</h1>
+            <h1 className={`header_item ${showTypePartitionBlock ? 'active_tab' : ''}`}  onClick={hndleTypePartitionBlock}>Перегородки</h1>
+            <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка 1</h1>
+            <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка 2</h1>
             </div>
 
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <O_EditFurnitureTemplate key={el.title} el={el} 
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
+                isGlassPartition={true}
                 pathUpdateMainImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-main-image'
                 pathUpdateSecondImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-second-image'
                 pathUpdateTitle='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-title'
                 pathAddNewDepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'
                 pathAddNewColors='https://calc-shower.herokuapp.com/add-new-glass-partitions-furniture-colors'
                 pathDeleteFurniture='https://calc-shower.herokuapp.com/remove-glass-partitions-furniture'
-                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/update-furniture-color'
+                pathUpdateFurnitureColors='https://calc-shower.herokuapp.com/glass-partitions-update-furniture-color'
                 pathDeleteFurnitureColors='https://calc-shower.herokuapp.com/remove-glass-partitions-furniture-colors'
                 pathUpdateFurnituredepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'
                 pathDeleteFurnituredepends='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-depends'

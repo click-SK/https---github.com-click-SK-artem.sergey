@@ -6,6 +6,7 @@ import Mirrors from './components/Mirrors';
 import GlassPartition from './components/GlassPartition';
 import Dashki from './components/Dashki';
 import AdminPanel from './components/Admin/AdminPanel';
+import Login from './components/Admin/Login';
 import EditStandartMirrors from './components/Admin/Mirrors/EditStandartMirrors';
 import EditShower from './components/Admin/Shower/EditShower';
 import EditGlassPartition from './components/Admin/GlassPartition/EditGlassPartition';
@@ -40,7 +41,8 @@ function App() {
         <Route path='/mirrors' element={<Mirrors/>}/>
         <Route path='/glass-partition' element={<GlassPartition/>}/>
         <Route path='/dashki' element={<Dashki/>}/>
-        <Route path='/admin' element={<AdminPanel/>}/>
+        <Route path='/edit' element={<Login/>}/>
+        <Route path='/edit/admin' element={<AdminPanel/>}/>
         <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
         <Route path='/admin-showers' element={<EditShower/>}/>
         <Route path='/admin-showers-client' element={<EditShowerClient/>}/>

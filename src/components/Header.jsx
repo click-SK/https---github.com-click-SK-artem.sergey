@@ -10,7 +10,7 @@ const Header = () => {
                 <a className='navigatin-item' href='/mirrors'>Дзеркала</a>
                 <a className='navigatin-item' href='/glass-partition'>Скляні перегородки</a>
                 <a className='navigatin-item' href='/dashki'>Дашки</a>
-                <a className='navigatin-item' href='/admin'><BsFillGearFill className='gears'/> </a>
+                <a className='navigatin-item' href='/edit'><BsFillGearFill className='gears'/> </a>
             </div>
         </div>
     );
