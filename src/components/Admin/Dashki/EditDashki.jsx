@@ -7,14 +7,15 @@ import O_EditColorTemplate from "../EditTemplate/O_EditColorTemplate";
 import O_EditFurnitureTemplate from "../EditTemplate/O_EditFurnitureTemplate";
 import O_EditProcessingStandartTempalte from "../EditTemplate/O_EditProcessingStandartTempalte";
 import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
+import AdminHeader from '../AdminHeader';
 
 const EditDashki = () => {
     const [showFurnitureBlock, setShowFurnitureBlock] = useState(true);
     const [showColorBlock, setShowColorBlock] = useState(false);
     const [showTypeBlock, setShowTypeBlock] = useState(false);
     const [showSizeBlock, setShowSizeBlock] = useState(false);
-    const [showProcessingStandartBlock, setshowProcessingStandartBlock] = useState(null);
-    const [showProcessingСutoutBlock, setshowProcessingСutoutBlock] = useState(null);
+    const [showProcessingStandartBlock, setshowProcessingStandartBlock] = useState(false);
+    const [showProcessingСutoutBlock, setshowProcessingСutoutBlock] = useState(false);
     const [currentObject, setCurrentObject] = useState({});
     const [newValueTypeName, setNewValueTypeName] = useState('');
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
@@ -124,15 +125,70 @@ const EditDashki = () => {
           },1000)
       }
 
+      const handleShowFurnitureBlock = () => {
+        setShowFurnitureBlock(true);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowTypeBlock = () => {
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(true);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowSizeBlock = () => {
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(true);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowColorsBlock = () => {
+        setShowFurnitureBlock(false);
+        setShowColorBlock(true);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowProcessingStandartBlock = () => {
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(true);
+        setshowProcessingСutoutBlock(false);
+      };
+
+      const handleShowProcessingСutoutBlock = () => {
+        setShowFurnitureBlock(false);
+        setShowColorBlock(false);
+        setShowTypeBlock(false);
+        setShowSizeBlock(false);
+        setshowProcessingStandartBlock(false);
+        setshowProcessingСutoutBlock(true);
+      };
+
     return (
         <div>
+          <AdminHeader/>
             <div className="shower-cabin-edit-header">
-            <h1 className="header_item" onClick={() => setShowFurnitureBlock(showFurnitureBlock => !showFurnitureBlock)}>Фурнітура</h1>
-            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowSizeBlock(showSizeBlock => !showSizeBlock)}>Розміри</h1>
-            <h1 className="header_item"  onClick={() => setShowColorBlock(showColorBlock => !showColorBlock)}>Колір</h1>
-            <h1 className="header_item"  onClick={() => setshowProcessingStandartBlock(showProcessingStandartBlock => !showProcessingStandartBlock)}>Обробка 1</h1>
-            <h1 className="header_item"  onClick={() => setshowProcessingСutoutBlock(showProcessingСutoutBlock => !showProcessingСutoutBlock)}>Обробка 2</h1>
+            <h1 className={`header_item ${showFurnitureBlock ? 'active_tab' : ''}`} onClick={handleShowFurnitureBlock}>Фурнітура</h1>
+            <h1 className={`header_item ${showTypeBlock ? 'active_tab' : ''}`}  onClick={handleShowTypeBlock}>Типи</h1>
+            <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`}  onClick={handleShowSizeBlock}>Розміри</h1>
+            <h1 className={`header_item ${showColorBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колір</h1>
+            <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка 1</h1>
+            <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка 2</h1>
             </div>
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <O_EditFurnitureTemplate key={el.title} el={el} 

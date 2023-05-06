@@ -4,9 +4,10 @@ import '../../../style/admin.scss'
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditDorsHandles from "../EditTemplate/O_EditDorsHandles";
 import O_NamePriceTemplate from '../EditTemplate/O_NamePriceTemplate'
+import AdminHeader from '../AdminHeader';
 const EditShowerClient = () => {
     const [currentObject, setCurrentObject] = useState({});
-    const [showTypeBlock, setShowTypeBlock] = useState(false);
+    const [showTypeBlock, setShowTypeBlock] = useState(true);
     const [showDorsHandlesBlock, setShowDorsHandlesBlock] = useState(false);
     const [newValueTypeName, setNewValueTypeName] = useState('');
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
@@ -60,14 +61,25 @@ const EditShowerClient = () => {
 
       console.log('newValueTypeName',newValueTypeName);
       console.log('newValueTypePrice',newValueTypePrice);
+
+      const handleShowTypeBlock = () => {
+        setShowTypeBlock(true);
+        setShowDorsHandlesBlock(false);
+      }
+
+      const handleShowDorsHandlesBlock = () => {
+        setShowTypeBlock(false);
+        setShowDorsHandlesBlock(true);
+      }
       
     return (
         <div>
+          <AdminHeader/>
             <div className="shower-cabin-edit-header">
-            <h1 className="header_item"  onClick={() => setShowTypeBlock(showTypeBlock => !showTypeBlock)}>Типи</h1>
-            <h1 className="header_item"  onClick={() => setShowDorsHandlesBlock(showTypeBlock => !showTypeBlock)}>Ручки</h1>
+            <h1 className={`header_item ${showTypeBlock ? 'active_tab' : ''}`}  onClick={handleShowTypeBlock}>Типи</h1>
+            <h1 className={`header_item ${showDorsHandlesBlock ? 'active_tab' : ''}`}  onClick={handleShowDorsHandlesBlock}>Ручки</h1>
             </div>
-            {showTypeBlock && currentObject.typeWordpress.map((el, idx) => (
+            {showTypeBlock && currentObject.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
                 pathEdit='https://calc-shower.herokuapp.com/update-shower-client-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-shower-client-type'/>
