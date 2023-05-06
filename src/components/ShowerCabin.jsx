@@ -35,15 +35,9 @@ const ShowerCabin = () => {
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
   const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
+  const [furniture, setFurniture] = useState('none');
 
-  const keyCsv = [
-    [ "Магазин", "Дзеркала" ],
-    [ "Назва", "Модифікація", "Ціна" ],
-    [ 'Форма скла', currentType?.name, "" ],
-    [ 'Тип дзеркала', 'Дзеркало з фоновою підсвідкою', "4700 грн\м2" ],
-    [ 'Розмір', 'В: 1м, Ш:1 ', "4700 грн" ],
-    [ 'Рамка', 'Металева рамка буквою П', "900 грн" ]
-  ];
+ 
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -85,21 +79,55 @@ const ShowerCabin = () => {
       let deliveryPriceOverSity = 0;
       let deliveryFinalyPrice = 0;
 
-      const furnitureFin = [];
+      const furnitureFinArr = [];
 
-      cart.forEach((item) => {
-        const itemData = {
-          colorsFurniture: item.colorsFurniture[0].color,
-          colorsFurniturePrice: item.colorsFurniture[0].price,
-          tittleName: item.title,
-          name2: item.depends[0],
-          name3: item.depends[1],
-          drawingImgSrc: item.drawingImg,
-          mainImageSrc: item.mainImage,
-          count: item.count,
-        };
-        furnitureFin.push(itemData);
-      });
+      // cart.forEach((item, index) => {
+      //   const itemData = [
+      //       `${item.depends[0]} ${item.title} ${item.depends[1]} ${item.colorsFurniture.color} ${item.count} ${item.colorsFurniture.price * item.count } грн`
+      //     // colorsFurniture: item.colorsFurniture[0].color,
+      //     // colorsFurniturePrice: item.colorsFurniture[0].price,
+      //     // tittleName: item.title,
+      //     // name2: item.depends[0],
+      //     // name3: item.depends[1],
+      //     // drawingImgSrc: item.drawingImg,
+      //     // mainImageSrc: item.mainImage,
+      //     // count: item.count,
+      //   ];
+      //   furnitureFinArr.push(itemData);
+      // });
+
+      
+      // const furnitureFinArr2 = [];
+      // const furnitureFinObj = {};
+
+
+
+      // furniture.forEach((item, index) => {
+      //     const itemData = {
+      //       colorsFurniture: item.colorsFurniture[0].color,
+      //       colorsFurniturePrice: item.colorsFurniture[0].price,
+      //       tittleName: item.title,
+      //       name2: item.depends[0],
+      //       name3: item.depends[1],
+      //       drawingImgSrc: item.drawingImg,
+      //       mainImageSrc: item.mainImage,
+      //       count: item.count,
+      //     };
+      //     furnitureFinArr.push(itemData);
+      //   });
+      
+
+      // furnitureFinArr.forEach((item, index) => {
+      //     furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+      //     // setFurniture(furnitureFinArr);
+      //   });
+
+      // // setfurnitureFin(furnitureFinArr)
+      // console.log('фурнітура ТЕСТ', furnitureFinArr);
+      // console.log('фурнітура obj ТЕСТ', furnitureFinObj);
+
+     
+      console.log('tset fimal', furniture);
 
       if (calcSquareMeter < 2){
         intslPrice = calcSquareMeter * 300
@@ -138,7 +166,7 @@ const ShowerCabin = () => {
         glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
         glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
         volume: volumValue, 
-        furniture: furnitureFin, /* масив фурнітур душ кабіни */
+        cart: cart, /* масив фурнітур душ кабіни */
         adress:adress, /* адреса доставки */
         deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
         deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
@@ -162,23 +190,11 @@ const ShowerCabin = () => {
         total: totalSum, /* скло - ціна душ кабіни */
       }
 
-
-      // const furnitureFin = {};
-
-      // cart.forEach((item) => {
-      //   Object.entries(item).forEach(([key, value]) => {
-      //     if (value !== '' && value !== null && value !== undefined) {
-      //       furnitureFin[value] = item[key];
-      //     }
-      //   });
-      // });
-
-
-
       setFinishedShowerPdf(finishedShower)
 
+
       // console.log("файл друк", finishedShower);
-      console.log("фурнітура", furnitureFin);
+      console.log("фурнітура", finishedShower.cart);
 
       setTotalSum(totalSum)
     } else {
@@ -192,6 +208,33 @@ const ShowerCabin = () => {
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
+
+    const furnitureFinObj = {};
+    const furnitureFinArr = [];
+
+
+    cart.forEach((item, index) => {
+        const itemData = {
+          colorsFurniture: item.colorsFurniture[0].color,
+          colorsFurniturePrice: item.colorsFurniture[0].price,
+          tittleName: item.title,
+          name2: item.depends[0],
+          name3: item.depends[1],
+          drawingImgSrc: item.drawingImg,
+          mainImageSrc: item.mainImage,
+          count: item.count,
+        };
+        furnitureFinArr.push(itemData);
+        // setFurniture(furnitureFinObj);
+        
+      });
+    
+    furnitureFinArr.forEach((item, index) => {
+        furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+        // setFurniture(furnitureFinArr);
+        setFurniture(furnitureFinObj);
+      });
+    
   };
 
   const changeIsAssemblingt = () => {
@@ -450,7 +493,7 @@ const ShowerCabin = () => {
               </div>
             </div>
             <div className="send_order">
-            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf}/>} fileName="orderDate">
+            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
              {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
             </PDFDownloadLink>
             <button>Оформити</button>

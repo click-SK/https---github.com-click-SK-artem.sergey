@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         flex: '1'
     },
+    textFur:{
+        margin: 6,
+        fontSize: "8px",
+        textAlign: 'center',
+        flex: '1'
+    },
     textLeft:{
         margin: 6,
         fontSize: "8px",
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
 ))}
 </View> */}
 
-const PdfShowerManadger = ({order}) => {
+const PdfShowerManadger = ({order, cart}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -124,7 +130,9 @@ const PdfShowerManadger = ({order}) => {
         const glass = `${order.glass}` /* адреса доставки */
         const glassColorName = `${order.glassColorName}` /* адреса доставки */
         const glassColorPrice = `${order.glassColorPrice}` /* адреса доставки */
-        const furniture = `${order.furniture}` /* адреса доставки */
+        // const furniture = order.cart
+        // const furniture = JSON.stringify(order.cart);
+        const furniture = order.cart;
         const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
         const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
         const currentProcessingStandartPrice = `${order.currentProcessingStandartPrice}` /* адреса доставки */
@@ -152,8 +160,61 @@ const PdfShowerManadger = ({order}) => {
         const deliverPrice = {
             deliveryPriceOverSity: deliveryPriceOverSity,
             deliveryPriceOver: deliveryPriceOver
-          }
+        }
 
+        const furnitureFinObj = {};
+        const furnitureFinArr = [];
+    
+    
+        cart.forEach((item, index) => {
+            const itemData = {
+              colorsFurniture: item.colorsFurniture[0].color,
+              colorsFurniturePrice: item.colorsFurniture[0].price,
+              tittleName: item.title,
+              name2: item.depends[0],
+              name3: item.depends[1],
+              drawingImgSrc: item.drawingImg,
+              mainImageSrc: item.mainImage,
+              count: item.count,
+            };
+            furnitureFinArr.push(itemData);
+            
+          });
+
+        furnitureFinArr.forEach((item, index) => {
+          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+        });
+
+        let result = JSON.stringify(furnitureFinArr);
+        // result = result.substring(6, result.length - 1); // видаляємо перший та останній символ
+        // let result =  JSON.stringify(furniture)
+        // if (result !== null || result !== undefined ){
+        //     result = result.slice(6, -1); // видаляємо перший та останній символ
+        // }
+        // let result2 =  Object.values(furniture)
+
+        
+
+
+        // let result = '';
+        // furniture.forEach((item) => {
+        // const title = item.title;
+        // const color = item.color;
+        // const count = item.count;
+        // const price = item.price;
+        // const line = `${title} Колір: ${color} ${count}шт Ціна ${price} грн\n`;
+        // result += line;
+        // });
+
+        // const furFin = {
+        //     0 : 'nope'
+        // }
+
+        // if ( furniture !== 'nope' ) {
+        //     Object.entries(furniture).filter(([_, value]) => value !== '').map(([key, value], idx) => (
+        //         furFin[key] = value
+        //     ));
+        // }
 
         const fileFinish = {
             glass:{
@@ -221,6 +282,7 @@ const PdfShowerManadger = ({order}) => {
                             {goodsPrice} грн
                         </Text>
                     </View>               
+
                     <View>
                         {Object.entries(fileFinish).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
                             <View style={styles.section}>
@@ -235,30 +297,20 @@ const PdfShowerManadger = ({order}) => {
                                 </Text>
                             </View>
                         ))}
-                    </View>  
-                    
+                    </View>
+                    <View style={styles.tableHeder}>
+                                <Text style={styles.Hedertext}>
+                                    Фурнітура
+                                </Text>
+                    </View>
                     <View>
-                    {furniture.map((item, idx) => (
-                        item.colorsFurniture &&
-                        item.colorsFurniturePrice &&
-                        item.count &&
-                        item.tittleName &&
-                        item.name2 &&
-                        item.name3 &&
-                        <View style={styles.section} key={idx}>
-                        <Text style={styles.textLeft}>
-                            {item.tittleName}
-                            {item.name2}
-                            {item.name3}
-                        </Text>
-                        <Text style={styles.text}>
-                            {item.count}
-                        </Text>
-                        <Text style={styles.text}>
-                            {item.colorsFurniturePrice} грн
-                        </Text>
-                        </View>
-                    ))}
+                        {Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
+                            <View style={styles.section}>
+                                <Text style={styles.textFur} key={idx}>
+                                    {value}
+                                </Text>
+                            </View>
+                        ))}
                     </View>
 
                     <View style={styles.section} >
