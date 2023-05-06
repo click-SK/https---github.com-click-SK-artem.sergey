@@ -311,6 +311,51 @@ const ShowerCabin = () => {
   // console.log('currentGlassColor',currentGlassColor);
   // console.log('currentGlassColor',currentGlassColor);
 
+
+  const testCrm = async () => {
+    const url = 'https://openapi.keycrm.app/v1/order';
+    const correlationId = '3c1cdba9-75bf-4a63-920b-80ff07f142c0';
+    const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ';
+  
+    const data = {
+      source_id: 10,
+      buyer_comment: "I want this sentence to be my buyer comment on KeyCRM",
+      discount_percent: 11.5,
+      discount_amount: 9.99,
+      shipping_price: 2.5,
+      wrap_price: 3.5,
+      taxes: 2.5,
+      buyer: {
+        full_name: "Test Kushnir",
+        email: "john.doe@mail.app",
+        phone: "+380635530117"
+      }
+    };
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Correlation-Id': correlationId,
+          'Accept': 'application/json',
+          'Pragma': 'no-cache'
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
   console.log('currentObject',currentObject);
   return (
     <div className="shower_wrapper">
@@ -496,7 +541,7 @@ const ShowerCabin = () => {
             <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
              {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
             </PDFDownloadLink>
-            <button>Оформити</button>
+            <button onClick={testCrm}>Оформити</button>
             </div>
         </div> 
     </div>

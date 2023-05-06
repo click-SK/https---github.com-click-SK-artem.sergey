@@ -36,8 +36,7 @@ function OrderForm() {
 
     const order = {
       "source_id": 10,
-      "source_uuid": "115",
-      "buyer_comment": "I want this sentence to be my `buyer` comment on KeyCRM",
+      "buyer_comment": "Тестове замовлення",
       "discount_percent": 11.5,
       "discount_amount": 9.99,
       "shipping_price": 2.5,
@@ -57,45 +56,17 @@ function OrderForm() {
     const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ'
 
 
-    // {"message":"POST https://openapi.keycrm.app/v1/order",
-    // "context":
-    //   {"body":
-    //     {"source_id":10,
-    //     "source_uuid":"115",
-    //     "buyer_comment":"ТЕСТ KeyCRM",
-    //     "discount_percent":11.5,
-    //     "discount_amount":9.99,
-    //     "shipping_price":2.5,
-    //     "wrap_price":3.5,
-    //     "taxes":2.5,
-    //     "ordered_at":"2021-12-21 14:44:00",
-    //       "buyer":
-    //       {"full_name":"Test KeyCRM",
-    //       "email":"john.doe@mail.com",
-    //       "phone":"+380990011222"}},
-    //           "headers":
-    //           {"authorization":["Bearer ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ"],
-    //             "content-type":["application/json"]},
-    //             "correlation_id":"3c1cdba9-75bf-4a63-920b-80ff07f142c0"},
-    //             "level":200,
-    //             "level_name":"INFO",
-    //             "channel":"production",
-    //             "datetime":"2023-04-27T13:23:55.968776+00:00","extra":{}}
-
-
 
   fetch('https://openapi.keycrm.app/v1/order', {
     method: 'POST',
     headers: {
       'content-Type': 'application/json',
       'correlation_id': '3c1cdba9-75bf-4a63-920b-80ff07f142c0',
-      "level": 200,
-      "level_name":"INFO",
-      "channel":"production",
-      'authorization': "Bearer . ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ"
+      'authorization': 'Bearer . ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ',
+      'accept' : 'application/json',
+      'pragma' : 'no-cache'
     },
     body: dataString,
-    mode: 'cors'
   })
   .then(response => response.json())
   .then(data => console.log(data))
