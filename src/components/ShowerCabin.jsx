@@ -353,7 +353,9 @@ const ShowerCabin = () => {
       console.log(responseData);
     } catch (error) {
       console.error('Error:', error.message);
+
     }
+    console.log("press order");
   };
 
   console.log('currentObject',currentObject);
