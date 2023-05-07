@@ -6,6 +6,9 @@ const initialState = {
     deliverySurName: '',
     deliveryNumberPhone: '',
     deliveryOrderComent: '',
+    deliveryDistance: '',
+    deliveryAdress: '',
+    deliveryBoolean: false
 }
 
 export const deliverySlice= createSlice({
@@ -27,8 +30,17 @@ reducers:{
     setOrderComentFunc(state, actions) {
         state.deliveryOrderComent = actions.payload;
     },
+    setDistanceFunc(state, actions) {
+        state.deliveryDistance = actions.payload;
+    },
+    setAdressFunc(state, actions) {
+        state.deliveryAdress = actions.payload;
+    },
+    setBooleanFunc(state, actions) {
+        state.deliveryBoolean = !state.deliveryBoolean;
+    },
    }
 })
 
-export const {setFirstNameFunc, setLastNameFunc, setSurNameFunc, setOrderComentFunc, setNumberPhoneFunc} = deliverySlice.actions;
+export const {setFirstNameFunc, setLastNameFunc, setSurNameFunc, setOrderComentFunc, setNumberPhoneFunc, setDistanceFunc, setAdressFunc, setBooleanFunc} = deliverySlice.actions;
 export default deliverySlice.reducer;

@@ -12,15 +12,15 @@ const ClientShower = () => {
   const [depthValue, setDepthValue] = useState('');
   const [validationInput, setValidationInput] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
-  const [adress, setAdress] = useState('');
-  const [delivery, setDelivery] = useState(false);
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
   
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -92,7 +92,7 @@ const ClientShower = () => {
       setValidationInput(false);
       const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
       const calcSquareMeter = calcSize/10000;
-  
+
       let totalSumFurniture = 0;
 
       let intslPrice = 0;
@@ -108,15 +108,18 @@ const ClientShower = () => {
        intslPrice = calcSquareMeter * 350
      };
      
-     if (adress != ''){
+     if (deliveryAdress != ''){
        deliveryPrice = 200
      }
 
-     if (delivery){
-       deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+     if (deliveryBoolean){
+       deliveryPriceOverSity = Number(deliveryDistance) * 26
      }
 
-      const totalSum = 0;
+     const totalSum = 
+     (currentType?.price || 0) + 
+     totalSumFurniture +  
+     (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
 
   
       const finishedShower = {
@@ -126,21 +129,6 @@ const ClientShower = () => {
     } else {
       setValidationInput(true);
     }
-  }
-
-  const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery(delivery => !delivery)
-  }
-
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  }
-
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
   }
 
   return (
@@ -219,20 +207,6 @@ const ClientShower = () => {
           </select>
           {/* <p>Вибраний тип: <span>{currentType?.name && currentType.name}</span>  </p> */}
         </div>
-      </div>
-      <div className="choose_item item_mirrors item_delivery">
-      <h3>Доставка</h3>
-              <div className="delivery_wrap">
-                  <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e)}/>
-                  <div className="delivery_addres">
-                      <div className="checkbox_wrap ">
-                        <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
-                        <label className="checkbox-label" htmlFor="checkbox5"></label>
-                        <p style={{marginTop: 5}}>За місто</p> 
-                      </div>
-                      <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
-                  </div>
-              </div>
       </div>
       <DeliveryTemplate/>
       <div className="footer_calc">

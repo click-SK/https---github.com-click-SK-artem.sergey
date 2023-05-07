@@ -30,9 +30,6 @@ const ClientStandartMirrors = ({data}) => {
   const [validationInput, setValidationInput] = useState(false);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState(false);
-  const [adress, setAdress] = useState("");
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState("");
-  const [delivery, setDelivery] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
@@ -40,6 +37,9 @@ const ClientStandartMirrors = ({data}) => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
@@ -82,20 +82,20 @@ const ClientStandartMirrors = ({data}) => {
         intslPrice = calcSquareMeter * 350;
       }
 
-      if (adress != "") {
+      if (deliveryAdress != "") {
         deliveryPrice = 200;
       }
 
-      if (delivery) {
-        deliveryPriceOverSity = Number(deliveryRoadDistance) * 26;
+      if (deliveryBoolean) {
+        deliveryPriceOverSity = Number(deliveryDistance) * 26;
       }
 
       if (isPainting) {
         isPaintingPrice = Number(sizeFrame) * Number(currentColor?.price);
       }
 
-      console.log("доставка over sity", deliveryRoadDistance);
-      console.log("adress", adress);
+      console.log("доставка over sity", deliveryDistance);
+      console.log("adress", deliveryAdress);
       console.log("price", deliveryPrice);
 
       console.log("priceMeterCord", priceMeterCord);
@@ -114,7 +114,7 @@ const ClientStandartMirrors = ({data}) => {
         (isWarmedUp ? warmedUpPrice : 0) +
         (minInstallation ? 500 : 0) +
         (isAssemblingt ? intslPrice : 0) +
-        (delivery ? deliveryPriceOverSity : deliveryPrice) +
+        (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
         (currentProcessingСutout?.price || 0);
 
       const finishedMirros = {
@@ -157,11 +157,11 @@ const ClientStandartMirrors = ({data}) => {
         colorName: isPainting ? currentColor?.name : "" /* колір покраски */,
         colorFrame: isPainting ? "Покраска" : "" /* колір покраски */,
         colorPrice: isPainting ? isPaintingPrice : "" /* Ціна кольору */,
-        adress: adress /* адреса доставки */,
-        deliveryPriceOverSity: delivery
+        adress: deliveryAdress /* адреса доставки */,
+        deliveryPriceOverSity: deliveryBoolean
           ? deliveryPriceOverSity
           : "" /* ціна доставки за містом */,
-        deliveryPriceOver: !delivery
+        deliveryPriceOver: !deliveryBoolean
           ? deliveryPrice
           : "" /* ціна доставки по місту */,
           firstName: deliveryFirstName,
@@ -251,19 +251,6 @@ const ClientStandartMirrors = ({data}) => {
   const changeMinInstallationFunc = () => {
     // const paintingObj = data?.option?.painting;
     setMinInstallation((minInstallation) => !minInstallation);
-  };
-  const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery((delivery) => !delivery);
-  };
-
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  };
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
   };
 
   const selectProcessingСutoutFunc = (e) => {
@@ -398,37 +385,6 @@ const ClientStandartMirrors = ({data}) => {
         </div>
       </div>
 
-      <div className="choose_item item_mirrors item_delivery">
-        <h3>Доставка</h3>
-        <div className="delivery_wrap">
-          <input
-            className="cabel"
-            placeholder="Адреса доставки"
-            value={adress}
-            onChange={(e) => addAdress(e)}
-          />
-          <div className="delivery_addres">
-            <div className="checkbox_wrap ">
-              <input
-                id="checkbox5"
-                className="checkbox"
-                type="checkbox"
-                checked={delivery}
-                onChange={isDelivery}
-              />
-              <label className="checkbox-label" htmlFor="checkbox5"></label>
-              <p style={{ marginTop: 5 }}>За місто</p>
-            </div>
-            <input
-              className="cabel width_delivery"
-              type="number"
-              placeholder="Відстань - км"
-              value={deliveryRoadDistance}
-              onChange={(e) => roadDistance(e)}
-            />
-          </div>
-        </div>
-      </div>
       <DeliveryTemplate/>
       <div className="footer_calc">
         <div className="mirror_sum">
