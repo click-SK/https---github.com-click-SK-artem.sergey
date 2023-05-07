@@ -128,12 +128,17 @@ const PdfShowerManadger = ({order, cart}) => {
         const height = `${order.height}` /* висота дзеркала */
         const depth = Number(order.depth) /* глубина */
         const adress = `${order.adress}` /* адреса доставки */
-        const glass = `${order.glass}` /* адреса доставки */
-        const glassColorName = `${order.glassColorName}` /* адреса доставки */
-        const glassColorPrice = `${order.glassColorPrice}` /* адреса доставки */
-        // const furniture = order.cart
-        // const furniture = JSON.stringify(order.cart);
+        const glass = `${order.glassThicknessName}` 
+        const glassPrice = Number(order.glassThicknessPrice) 
+        const glassColorName = `${order.glassColorName}` 
+        const glassColorPrice = Number(order.glassColorPrice) 
         const furniture = order.cart;
+        const vantaName = `${order.vantaName}`
+        const vantaPrice = `${order.vantaPrice}`
+        const vantaValue = `${order.vantaValue}`
+        const depositoryName = `${order.depositoryName}`
+        const depositoryPrice = `${order.depositoryPrice}`
+        const depositoryValue = `${order.depositoryValue}`
         const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
         const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
         const currentProcessingStandartPrice = `${order.currentProcessingStandartPrice}` /* адреса доставки */
@@ -156,37 +161,50 @@ const PdfShowerManadger = ({order, cart}) => {
         const selectedProcessingName  = `${order.selectedProcessingName}`
         const selectedProcessingPrice = `${order.selectedProcessingPrice}`
         const selectedProcessingCount = `${order.selectedProcessingCount}`
-        const total = `${order.total}`
+        const total =  Number(order.total) 
 
         const deliverPrice = {
             deliveryPriceOverSity: deliveryPriceOverSity,
             deliveryPriceOver: deliveryPriceOver
         }
 
+        let resGoodsPrice = ''
+
+        if (goodsPrice != 0){
+            resGoodsPrice = `${goodsPrice} м2/грн`
+        } else {
+            resGoodsPrice = ''
+        }
+
+        
+
+        const resTotal =  total.toFixed(0);
         const resDepth = (depth ? ` X ${depth}` : '')
+        const revGlassPrice = (glassPrice ? glassPrice : glassColorPrice )
+
 
         const furnitureFinObj = {};
         const furnitureFinArr = [];
     
     
-        cart.forEach((item, index) => {
-            const itemData = {
-              colorsFurniture: item.colorsFurniture[0].color,
-              colorsFurniturePrice: item.colorsFurniture[0].price,
-              tittleName: item.title,
-              name2: item.depends[0],
-              name3: item.depends[1],
-              drawingImgSrc: item.drawingImg,
-              mainImageSrc: item.mainImage,
-              count: item.count,
-            };
-            furnitureFinArr.push(itemData);
+        // cart.forEach((item, index) => {
+        //     const itemData = {
+        //       colorsFurniture: item.colorsFurniture[0].color,
+        //       colorsFurniturePrice: item.colorsFurniture[0].price,
+        //       tittleName: item.title,
+        //       name2: item.depends[0],
+        //       name3: item.depends[1],
+        //       drawingImgSrc: item.drawingImg,
+        //       mainImageSrc: item.mainImage,
+        //       count: item.count,
+        //     };
+        //     furnitureFinArr.push(itemData);
             
-          });
+        //   });
 
-        furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
-        });
+        // furnitureFinArr.forEach((item, index) => {
+        //   furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+        // });
 
         let result = JSON.stringify(furnitureFinArr);
         // result = result.substring(6, result.length - 1); // видаляємо перший та останній символ
@@ -221,8 +239,7 @@ const PdfShowerManadger = ({order, cart}) => {
 
         const fileFinish = {
             glass:{
-                price: glassColorPrice,
-                size: glass,
+                price: revGlassPrice,
                 name: glassColorName,
             },
             currentProcessingStandart:{
@@ -235,10 +252,20 @@ const PdfShowerManadger = ({order, cart}) => {
                 size: currentProcessingСutoutCount,
                 name: currentProcessingСutoutName,
             },
-            isAssemblingt:{
-                price: minInstallation,
-                name: isAssemblingtName,
+            vanta:{
+                price: vantaPrice,
+                size: vantaValue,
+                name: vantaName,
             },
+            depository:{
+                price: depositoryPrice,
+                size: depositoryValue,
+                name: depositoryName,
+            },
+            // isAssemblingt:{
+            //     price: minInstallation,
+            //     name: isAssemblingtName,
+            // },
           };
 
 
@@ -269,9 +296,6 @@ const PdfShowerManadger = ({order, cart}) => {
                     <Text style={styles.Hedertext}>
                         Розмір / Тип
                     </Text>
-                    <Text style={styles.Hedertext}>
-                        Ціна
-                    </Text>
                 </View>
                     <View style={styles.section} >
                         <Text style={styles.textLeft}>
@@ -279,10 +303,7 @@ const PdfShowerManadger = ({order, cart}) => {
                            {type}
                         </Text>
                         <Text style={styles.text}>
-                            {width} х {height}{resDepth} 
-                        </Text>
-                        <Text style={styles.text}>
-                            {goodsPrice} грн
+                            {width}{resDepth} 
                         </Text>
                     </View>               
 
@@ -295,23 +316,6 @@ const PdfShowerManadger = ({order, cart}) => {
                                 <Text style={styles.text} key={idx}>
                                     {value.size} 
                                 </Text>
-                                <Text style={styles.text} key={idx}>
-                                    {value.price} грн
-                                </Text>
-                            </View>
-                        ))}
-                    </View>
-                    <View style={styles.tableHeder}>
-                                <Text style={styles.Hedertext}>
-                                    Фурнітура
-                                </Text>
-                    </View>
-                    <View>
-                        {Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
-                            <View style={styles.section}>
-                                <Text style={styles.textFur} key={idx}>
-                                    {value}
-                                </Text>
                             </View>
                         ))}
                     </View>
@@ -323,7 +327,7 @@ const PdfShowerManadger = ({order, cart}) => {
                             Загальна сума 
                         </Text>
                         <Text style={styles.textSum}>
-                            {total} грн
+                            {resTotal} грн
                         </Text>
                     </View> 
                     <View style={styles.tableHeder}>

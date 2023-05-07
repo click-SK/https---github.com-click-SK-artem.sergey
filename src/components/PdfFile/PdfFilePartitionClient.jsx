@@ -119,111 +119,58 @@ const styles = StyleSheet.create({
 ))}
 </View> */}
 
-const PdfShowerManadger = ({order, cart}) => {
+const PdfShowerManadger = ({order}) => {
 
     
-        const type = `${order.type}` /* форма дзеркала */
-        const goodsPrice = `${order.goodsPrice}` /* ціна дзеркала */
-        const width = `${order.width}` /* ширина дзеркала */
-        const height = `${order.height}` /* висота дзеркала */
-        const depth = Number(order.depth) /* глубина */
-        const adress = `${order.adress}` /* адреса доставки */
-        const glass = `${order.glass}` /* адреса доставки */
-        const glassColorName = `${order.glassColorName}` /* адреса доставки */
-        const glassColorPrice = `${order.glassColorPrice}` /* адреса доставки */
-        // const furniture = order.cart
-        // const furniture = JSON.stringify(order.cart);
-        const furniture = order.cart;
-        const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
-        const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
-        const currentProcessingStandartPrice = `${order.currentProcessingStandartPrice}` /* адреса доставки */
-        const currentProcessingСutoutName = `${order.currentProcessingСutoutName}` /* адреса доставки */
-        const currentProcessingСutoutPrice = `${order.currentProcessingСutoutPrice}` /* адреса доставки */
-        const currentProcessingСutoutCount = `${order.currentProcessingСutoutCount}` /* адреса доставки */
-        const deliveryPriceOverSity = `${order.deliveryPriceOverSity}` /* ціна доставки за містом */
-        const deliveryPriceOver = `${order.deliveryPriceOver}` /* ціна доставки по місту */
-        const firstName = `${order.firstName}`
-        const lastName = `${order.lastName}`
-        const surname = `${order.surname}`
-        const numberPhone = `${order.numberPhone}`
-        const orderComent = `${order.orderComent}`
-        const minInstallation = `${order.minInstallation}`
-        const minInstallationName = `${order.minInstallationName}`
-        const minInstallationOption = `${order.minInstallationOption}`
-        const isAssemblingt = `${order.isAssemblingt}`
-        const isAssemblingtName = `${order.isAssemblingtName}`
-        const isAssemblingOption = `${order.isAssemblingOption}`
-        const selectedProcessingName  = `${order.selectedProcessingName}`
-        const selectedProcessingPrice = `${order.selectedProcessingPrice}`
-        const selectedProcessingCount = `${order.selectedProcessingCount}`
-        const total = `${order.total}`
+    const type = `${order.type}` /* форма дзеркала */
+    const goodsPrice = `${order.goodsPrice}` /* ціна дзеркала */
+    const width = `${order.width}` /* ширина дзеркала */
+    const height = `${order.height}` /* висота дзеркала */
+    const depth = Number(order.depth) /* глубина */
+    const adress = `${order.adress}` /* адреса доставки */
+    const glass = `${order.glassThicknessName}` 
+    const glassPrice = Number(order.glassThicknessPrice) 
+    const glassColorName = `${order.glassColorName}` 
+    const glassColorPrice = Number(order.glassColorPrice) 
+    const furniture = order.cart;
+    const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
+    const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
+    const currentProcessingStandartPrice = `${order.currentProcessingStandartPrice}` /* адреса доставки */
+    const currentProcessingСutoutName = `${order.currentProcessingСutoutName}` /* адреса доставки */
+    const currentProcessingСutoutPrice = `${order.currentProcessingСutoutPrice}` /* адреса доставки */
+    const currentProcessingСutoutCount = `${order.currentProcessingСutoutCount}` /* адреса доставки */
+    const deliveryPriceOverSity = `${order.deliveryPriceOverSity}` /* ціна доставки за містом */
+    const deliveryPriceOver = `${order.deliveryPriceOver}` /* ціна доставки по місту */
+    const firstName = `${order.firstName}`
+    const lastName = `${order.lastName}`
+    const surname = `${order.surname}`
+    const numberPhone = `${order.numberPhone}`
+    const orderComent = `${order.orderComent}`
+    const minInstallation = `${order.minInstallation}`
+    const minInstallationName = `${order.minInstallationName}`
+    const minInstallationOption = `${order.minInstallationOption}`
+    const isAssemblingt = `${order.isAssemblingt}`
+    const isAssemblingtName = `${order.isAssemblingtName}`
+    const isAssemblingOption = `${order.isAssemblingOption}`
+    const selectedProcessingName  = `${order.selectedProcessingName}`
+    const selectedProcessingPrice = `${order.selectedProcessingPrice}`
+    const selectedProcessingCount = `${order.selectedProcessingCount}`
+    const total =  Number(order.total) 
 
         const deliverPrice = {
             deliveryPriceOverSity: deliveryPriceOverSity,
             deliveryPriceOver: deliveryPriceOver
         }
 
+        const resTotal =  total.toFixed(0);
+        const revGlassPrice = (glassPrice ? glassPrice : glassColorPrice )
         const resDepth = (depth ? ` X ${depth}` : '')
-
-        const furnitureFinObj = {};
-        const furnitureFinArr = [];
-    
-    
-        cart.forEach((item, index) => {
-            const itemData = {
-              colorsFurniture: item.colorsFurniture[0].color,
-              colorsFurniturePrice: item.colorsFurniture[0].price,
-              tittleName: item.title,
-              name2: item.depends[0],
-              name3: item.depends[1],
-              drawingImgSrc: item.drawingImg,
-              mainImageSrc: item.mainImage,
-              count: item.count,
-            };
-            furnitureFinArr.push(itemData);
-            
-          });
-
-        furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
-        });
-
-        let result = JSON.stringify(furnitureFinArr);
-        // result = result.substring(6, result.length - 1); // видаляємо перший та останній символ
-        // let result =  JSON.stringify(furniture)
-        // if (result !== null || result !== undefined ){
-        //     result = result.slice(6, -1); // видаляємо перший та останній символ
-        // }
-        // let result2 =  Object.values(furniture)
-
-        
-
-
-        // let result = '';
-        // furniture.forEach((item) => {
-        // const title = item.title;
-        // const color = item.color;
-        // const count = item.count;
-        // const price = item.price;
-        // const line = `${title} Колір: ${color} ${count}шт Ціна ${price} грн\n`;
-        // result += line;
-        // });
-
-        // const furFin = {
-        //     0 : 'nope'
-        // }
-
-        // if ( furniture !== 'nope' ) {
-        //     Object.entries(furniture).filter(([_, value]) => value !== '').map(([key, value], idx) => (
-        //         furFin[key] = value
-        //     ));
-        // }
 
         const fileFinish = {
             glass:{
-                price: glassColorPrice,
-                size: glass,
-                name: glassColorName,
+                price: revGlassPrice,
+                name: glass,
+                size: glassColorName,
             },
             currentProcessingStandart:{
                 price: currentProcessingStandartPrice,
@@ -235,10 +182,10 @@ const PdfShowerManadger = ({order, cart}) => {
                 size: currentProcessingСutoutCount,
                 name: currentProcessingСutoutName,
             },
-            isAssemblingt:{
-                price: minInstallation,
-                name: isAssemblingtName,
-            },
+            // isAssemblingt:{
+            //     price: minInstallation,
+            //     name: isAssemblingtName,
+            // },
           };
 
 
@@ -269,9 +216,6 @@ const PdfShowerManadger = ({order, cart}) => {
                     <Text style={styles.Hedertext}>
                         Розмір / Тип
                     </Text>
-                    <Text style={styles.Hedertext}>
-                        Ціна
-                    </Text>
                 </View>
                     <View style={styles.section} >
                         <Text style={styles.textLeft}>
@@ -280,9 +224,6 @@ const PdfShowerManadger = ({order, cart}) => {
                         </Text>
                         <Text style={styles.text}>
                             {width} х {height}{resDepth} 
-                        </Text>
-                        <Text style={styles.text}>
-                            {goodsPrice} грн
                         </Text>
                     </View>               
 
@@ -295,23 +236,6 @@ const PdfShowerManadger = ({order, cart}) => {
                                 <Text style={styles.text} key={idx}>
                                     {value.size} 
                                 </Text>
-                                <Text style={styles.text} key={idx}>
-                                    {value.price} грн
-                                </Text>
-                            </View>
-                        ))}
-                    </View>
-                    <View style={styles.tableHeder}>
-                                <Text style={styles.Hedertext}>
-                                    Фурнітура
-                                </Text>
-                    </View>
-                    <View>
-                        {Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
-                            <View style={styles.section}>
-                                <Text style={styles.textFur} key={idx}>
-                                    {value}
-                                </Text>
                             </View>
                         ))}
                     </View>
@@ -323,7 +247,7 @@ const PdfShowerManadger = ({order, cart}) => {
                             Загальна сума 
                         </Text>
                         <Text style={styles.textSum}>
-                            {total} грн
+                            {resTotal} грн
                         </Text>
                     </View> 
                     <View style={styles.tableHeder}>

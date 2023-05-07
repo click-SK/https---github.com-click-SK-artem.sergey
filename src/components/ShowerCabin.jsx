@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import ListTheChosenFurniture from "./ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfShowerManadger";
+import PdfFileClient from "./PdfFile/PdfShowerClient";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -119,6 +120,7 @@ const ShowerCabin = () => {
         goodsPrice: currentType?.price,  /* ціна душ кабіни */
         width: widthValue, /* ширина душ кабіни */
         height: heightValue, /* висота - ціна душ кабіни */ 
+        depth: depthValue, /* глубина */
         glass: currentGlass ? currentGlass : '' ,  /* скло - товщина душ кабіни */
         glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
         glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
@@ -504,9 +506,14 @@ const ShowerCabin = () => {
               </div>
             </div>
             <div className="send_order">
-            <PDFDownloadLink className="mirror_button_exel" document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Зберегти" )}
+            <div className="mirror_button_exel" style={{fontSize: 14}}>
+            <PDFDownloadLink  document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
             </PDFDownloadLink>
+            <PDFDownloadLink className="" document={< PdfFileClient order={finishedShowerPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            </PDFDownloadLink>
+            </div>
                <button onClick={testCrm}>Оформити</button>
             </div>
         </div> 
