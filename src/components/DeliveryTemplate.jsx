@@ -6,7 +6,10 @@ import {
   setLastNameFunc,
   setSurNameFunc,
   setOrderComentFunc,
-  setNumberPhoneFunc
+  setNumberPhoneFunc,
+  setDistanceFunc, 
+  setAdressFunc, 
+  setBooleanFunc
 } from "../store/delivery";
 const DeliveryTemplate = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +17,9 @@ const DeliveryTemplate = () => {
   const [surname, setSurname] = useState("");
   const [numberPhone, setNumberPhone] = useState("");
   const [orderComent, setOrderComent] = useState("");
+  const [adress, setAdress] = useState('');
+  const [delivery, setDelivery] = useState(false);
+  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
   const disptch = useDispatch();
 
   const addFirstName = (e) => {
@@ -40,7 +46,40 @@ const DeliveryTemplate = () => {
     setOrderComent(e);
     disptch(setOrderComentFunc(e));
   };
+
+  const isDelivery = (e) => {
+    setDelivery(delivery => !delivery)
+    disptch(setBooleanFunc(delivery))
+  }
+
+  const addAdress = (e) => {
+    setAdress(e);
+    disptch(setAdressFunc(e))
+  }
+
+  const roadDistance = (e) => {
+    setDeliveryRoadDistance(e);
+    disptch(setDistanceFunc(e))
+  }
+  console.log('adress',adress);
+  console.log('delivery',delivery);
+  console.log('deliveryRoadDistance',deliveryRoadDistance);
   return (
+    <div>
+          <div className="choose_item item_mirrors item_delivery">
+    <h3>Доставка</h3>
+            <div className="delivery_wrap">
+                <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e.target.value)}/>
+                <div className="delivery_addres">
+                    <div className="checkbox_wrap ">
+                      <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
+                      <label className="checkbox-label" htmlFor="checkbox5"></label>
+                      <p style={{marginTop: 5}}>За місто</p> 
+                    </div>
+                    <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e.target.value)}/>
+                </div>
+            </div>
+    </div>
     <div>
       <div className="choose_item item_mirrors item_fullname">
         <h3>ПІБ:</h3>
@@ -89,6 +128,7 @@ const DeliveryTemplate = () => {
           rows="10"
         ></textarea>
       </div>
+    </div>
     </div>
   );
 };

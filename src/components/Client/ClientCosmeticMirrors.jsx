@@ -22,6 +22,9 @@ const ClientCosmeticMirrors = ({ data }) => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
@@ -47,13 +50,24 @@ const ClientCosmeticMirrors = ({ data }) => {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(heightValue);
       const calcSquareMeter = calcSize/1000000;
+
+      let deliveryPrice = 0;
+      let deliveryPriceOverSity = 0;
+
+      if (deliveryAdress != ''){
+        deliveryPrice = 200
+      }
+ 
+      if (deliveryBoolean){
+        deliveryPriceOverSity = Number(deliveryDistance) * 26
+      }
   
 
   
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
       (currentObject?.lightBulbs * lightBulbsCount || 0) +
       (currentObject?.patron * patronCount || 0) +
-      (currentProcessingСutout?.price || 0);
+      (currentProcessingСutout?.price || 0) + (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
         // typeName: currentType?.name,

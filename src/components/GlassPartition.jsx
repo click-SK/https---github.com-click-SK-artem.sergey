@@ -26,34 +26,52 @@ const GlassPartition = () => {
   const [totalSum, setTotalSum] = useState(null);
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
+  const [isAssemblingtDovod, setIsAssemblingDovod] = useState(false);
+  const [isAssemblingtZaklad, setIsAssemblingZaklad] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
   const [adress, setAdress] = useState('');
   const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
   const [delivery, setDelivery] = useState(false);
   const [typeMontaje, setTypeMontaje] = useState('');
+  const [typeDovod, setTypeDovod] = useState('');
+  const [typeZaklad, setTypeZaklad] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+  const [montaje] = useState([
+    {
+      name: 'Глуха перегородка',
+      price: 450
+    },
+    {
+      name: 'Відкривна перегородка',
+      price: 500
+    }
+  ])
+  const [dovod] = useState([
+    {
+      name: 'Доводчик',
+      price: 500
+    }
+  ])
+  const [zaklad] = useState([
+    {
+      name: 'Закладна 1 ',
+      price: 100
+    },
+    {
+      name: 'Закладна 2 ',
+      price: 150
+    },
+    {
+      name: 'Закладна 3 ',
+      price: 200
+    }
+  ])
   
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-
-  const montaje = {
-      'Глуха перегородка' : 450,
-      'Відкривна перегородка' : 500
-  }
-
-const dovod = {
-    'Доводчик' : 500,
-}
-const zaklad = {
-    'Закладна 1 ' : 100,
-    'Закладна 2 ' : 150,
-    'Закладна 3 ' : 200,
-}
-
-  console.log('На фінал');
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -85,6 +103,22 @@ const zaklad = {
     setCurrentProcessingСutout(selectedProcessing);
   };
 
+  const selectMontajeFunc = (e) => {
+    const selectedMontaje = JSON.parse(e.target.value);
+    setTypeMontaje(selectedMontaje);
+  };
+
+  const selectDovodFunc = (e) => {
+    const selectedDovod = JSON.parse(e.target.value);
+    setTypeDovod(selectedDovod);
+  };
+
+  const selectZakladFunc = (e) => {
+    const selectedZaklad = JSON.parse(e.target.value);
+    setTypeZaklad(selectedZaklad);
+  };
+
+
   const selectTypePartitions = (e) => {
     setCurrentTypePartitions(e.target.value);
   };
@@ -96,8 +130,6 @@ const zaklad = {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
-
-  console.log('currentColor?.price',currentColor?.price);
 
   const calcTotalSumFunc = () => {
     if(heightValue && widthValue) {
@@ -332,36 +364,77 @@ const zaklad = {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          {/* <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/> */}
+
           <div className="choose_item selected_shower">
               <select 
-              value={typeMontaje ? typeMontaje : ""}>
+              value={typeMontaje ? JSON.stringify(typeMontaje) : ""}
+              onChange={selectMontajeFunc}>
                 <option value="" disabled>
                   Тип:
                 </option>
-                {Object.entries(montaje).filter(([_, value]) => value !== '').map(([key, value], idx) => (
-                    <option key={idx} >
-                      {key}
+                {
+                  montaje.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
                     </option>
                   ))}
               </select>
             </div>
         </div>
       </div>
-      <div className="choose_item item_mirrors item_delivery">
-      <h3>Доставка</h3>
-              <div className="delivery_wrap">
-                  <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e)}/>
-                  <div className="delivery_addres">
-                      <div className="checkbox_wrap ">
-                        <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
-                        <label className="checkbox-label" htmlFor="checkbox5"></label>
-                        <p style={{marginTop: 5}}>За місто</p> 
-                      </div>
-                      <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
-                  </div>
-              </div>
+
+      <div className="choose_item item_mirrors item_montaje">
+        <h3>Доводчик:</h3>
+        <div className="montaje_wrap">
+          <div className="checkbox_wrap montaje">
+            <input id="checkbox4"  className="checkbox" type='checkbox' checked={isAssemblingtDovod} onChange={() => setIsAssemblingDovod(state => !state)}/>
+            <label className="checkbox-label" htmlFor="checkbox4"></label>
+          </div>
+
+          <div className="choose_item selected_shower">
+              <select 
+              value={typeDovod ? JSON.stringify(typeDovod) : ""}
+              onChange={selectDovodFunc}>
+                <option value="" disabled>
+                  Тип:
+                </option>
+                {
+                  dovod.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
       </div>
+
+      <div className="choose_item item_mirrors item_montaje">
+        <h3>Закладна:</h3>
+        <div className="montaje_wrap">
+          <div className="checkbox_wrap montaje">
+            <input id="checkbox5"  className="checkbox" type='checkbox' checked={isAssemblingtZaklad} onChange={() => setIsAssemblingZaklad(state => !state)}/>
+            <label className="checkbox-label" htmlFor="checkbox5"></label>
+          </div>
+
+          <div className="choose_item selected_shower">
+              <select 
+              value={typeZaklad ? JSON.stringify(typeZaklad) : ""}
+              onChange={selectZakladFunc}>
+                <option value="" disabled>
+                  Тип:
+                </option>
+                {
+                  zaklad.map((item) => (
+                    <option key={item.name} value={JSON.stringify(item)}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
+      </div>
+      
       <DeliveryTemplate/>
           </div> 
 

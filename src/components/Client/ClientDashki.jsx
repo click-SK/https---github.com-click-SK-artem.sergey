@@ -26,9 +26,6 @@ const ClientDashki = () => {
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
-  const [adress, setAdress] = useState('');
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
-  const [delivery, setDelivery] = useState(false);
   const [typeMontaje, setTypeMontaje] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
 
@@ -37,8 +34,9 @@ const ClientDashki = () => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-
-  console.log('finalFile',depositoryValue );
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-dashki")
@@ -88,12 +86,12 @@ const ClientDashki = () => {
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
 
-      if (adress != ''){
+      if (deliveryAdress != ''){
         deliveryPrice = 200
       }
  
-      if (delivery){
-        deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+      if (deliveryBoolean){
+        deliveryPriceOverSity = Number(deliveryDistance) * 26
       }
   
       cart.forEach((el) => {
@@ -108,7 +106,7 @@ const ClientDashki = () => {
       (isVanta ? currentObject?.vanta * vantaValue : 0) +
       (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) +
-      (currentProcessingСutout?.price || 0);
+      (currentProcessingСutout?.price || 0) + (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
         type:  currentType ?  currentType.name : '', /* назва */
@@ -120,9 +118,9 @@ const ClientDashki = () => {
         // glassThicknessPrice: currentType ? currentType?.price : '', /* скло - ціна */
         glassColorName: currentColor ? currentColor?.name : '', /* скло колір - ціна */
         glassColorPrice: currentColor ? currentColor?.price : '', /* скло колір - ціна */
-        adress:adress, /* адреса доставки */
-        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        adress:deliveryAdress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
         firstName: deliveryFirstName,
         lastName: deliveryLastName,
         surname: deliverySurName,
@@ -172,24 +170,10 @@ const ClientDashki = () => {
     // const paintingObj = data?.option?.painting;
     setMinInstallation(minInstallation => !minInstallation)
   }
-    const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery(delivery => !delivery)
-  }
 
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  }
   const addPriceInstalation = (e) => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
-  }
-
-
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
   }
 
   return (
@@ -250,20 +234,6 @@ const ClientDashki = () => {
         </select>
       </div>
   </div>
-        <div className="choose_item item_mirrors item_delivery">
-      <h3>Доставка</h3>
-              <div className="delivery_wrap">
-                  <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e)}/>
-                  <div className="delivery_addres">
-                      <div className="checkbox_wrap ">
-                        <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
-                        <label className="checkbox-label" htmlFor="checkbox5"></label>
-                        <p style={{marginTop: 5}}>За місто</p> 
-                      </div>
-                      <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
-                  </div>
-              </div>
-      </div>
       <DeliveryTemplate/>
         <div className="footer_calc">
             <div className="summ">

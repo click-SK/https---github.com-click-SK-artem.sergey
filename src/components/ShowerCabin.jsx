@@ -443,20 +443,6 @@ const ShowerCabin = () => {
           <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/>
         </div>
       </div>
-      <div className="choose_item item_mirrors item_delivery">
-      <h3>Доставка</h3>
-              <div className="delivery_wrap">
-                  <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e)}/>
-                  <div className="delivery_addres">
-                      <div className="checkbox_wrap ">
-                        <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
-                        <label className="checkbox-label" htmlFor="checkbox5"></label>
-                        <p style={{marginTop: 5}}>За місто</p> 
-                      </div>
-                      <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
-                  </div>
-              </div>
-      </div>
       <DeliveryTemplate/>
           </div> 
                 
