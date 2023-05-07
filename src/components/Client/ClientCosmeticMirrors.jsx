@@ -4,6 +4,7 @@ import ModalGlassPartitions from ".././ModalGlassPartitions";
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from "react-redux";
 import "../../style/shower.scss";
+import DeliveryTemplate from "../DeliveryTemplate";
 
 const ClientCosmeticMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
@@ -15,6 +16,12 @@ const ClientCosmeticMirrors = ({ data }) => {
   const [patronCount, setPatronCount] = useState('');
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
+
+  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
+  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
+  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
+  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
+  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
@@ -115,7 +122,7 @@ const ClientCosmeticMirrors = ({ data }) => {
           </div>
         </div>
       </div>
-        
+      <DeliveryTemplate/>
         <div className="footer_calc">
             <div className="summ">
               <div>
