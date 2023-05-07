@@ -7,6 +7,7 @@ import PdfFileClient from "./PdfFile/PdfFileDashkiClient";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
+import DeliveryTemplate from "./DeliveryTemplate";
 import '../style/shower.scss'
 
 const Dashki = () => {
@@ -30,13 +31,13 @@ const Dashki = () => {
   const [adress, setAdress] = useState('');
   const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
   const [delivery, setDelivery] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [numberPhone, setNumberPhone] = useState('');
-  const [orderComent, setOrderComent] = useState('');
-  const [typeMontaje, setTypeMontaje] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+
+  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
+  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
+  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
+  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
+  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
 
   console.log('finalFile',depositoryValue );
 
@@ -123,11 +124,11 @@ const Dashki = () => {
         adress:adress, /* адреса доставки */
         deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
         deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
-        firstName: firstName,
-        lastName: lastName,
-        surname: surname,
-        numberPhone: numberPhone,
-        orderComent: orderComent,
+        firstName: deliveryFirstName,
+        lastName: deliveryLastName,
+        surname: deliverySurName,
+        numberPhone: deliveryNumberPhone,
+        orderComent: deliveryOrderComent,
         currentProcessingStandartName: currentProcessingStandart ? 'Обробка' : '',
         currentProcessingStandartVal: currentProcessingStandart ? currentProcessingStandart?.name : '',
         currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
@@ -188,26 +189,6 @@ const Dashki = () => {
   const roadDistance = (e) => {
     // const cordObj = data?.option?.cord;
     setDeliveryRoadDistance(e.target.value);
-  }
-  const addFirstName = (e) => {
-    // const cordObj = data?.option?.cord;
-    setFirstName(e.target.value);
-  }
-  const addLastName = (e) => {
-    // const cordObj = data?.option?.cord;
-    setLastName(e.target.value);
-  }
-  const addSurname = (e) => {
-    // const cordObj = data?.option?.cord;
-    setSurname(e.target.value);
-  }
-  const addPhone = (e) => {
-    // const cordObj = data?.option?.cord;
-    setNumberPhone(e.target.value);
-  }
-  const addComent = (e) => {
-    // const cordObj = data?.option?.cord;
-    setOrderComent(e.target.value);
   }
 
   return (
@@ -362,25 +343,7 @@ const Dashki = () => {
                   </div>
               </div>
       </div>
-      <div className="choose_item item_mirrors item_fullname">
-      <h3>ПІБ:</h3>
-        <div className="fullname_wrap">
-          <div className="name_lastname">
-            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addFirstName (e)} />
-            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addLastName(e)}/>
-          </div>
-          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addSurname(e)}/>
-        </div>
-      </div>
-      <div className="choose_item item_mirrors">
-      <h3>Телефон</h3>
-        <input className="cabel" placeholder="+ 38 (0ХХ) ХХХ ХХ ХХ " value={numberPhone} onChange={(e) => addPhone(e)}/>
-      </div>
-      <div className="choose_item item_mirrors item_textarea">
-      <h3>Деталі замовлення</h3>
-        <textarea className="cabel" style={{width: "70%", height:"100%"}} value={orderComent} name="" id="" cols="30" rows="10" onChange={(e) => addComent(e)}></textarea>
-      </div>
-        
+      <DeliveryTemplate/>
         <div className="footer_calc">
             <div className="summ">
               <div>

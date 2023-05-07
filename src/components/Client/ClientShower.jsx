@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import DeliveryTemplate from "../DeliveryTemplate";
 import "../../style/shower.scss";
 
 const ClientShower = () => {
@@ -12,12 +14,14 @@ const ClientShower = () => {
   const [totalSum, setTotalSum] = useState(null);
   const [adress, setAdress] = useState('');
   const [delivery, setDelivery] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [numberPhone, setNumberPhone] = useState('');
-  const [orderComent, setOrderComent] = useState('');
   const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
+
+  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
+  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
+  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
+  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
+  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
       .then((res) => res.json())
@@ -124,26 +128,6 @@ const ClientShower = () => {
     }
   }
 
-  const addFirstName = (e) => {
-    // const cordObj = data?.option?.cord;
-    setFirstName(e.target.value);
-  }
-  const addLastName = (e) => {
-    // const cordObj = data?.option?.cord;
-    setLastName(e.target.value);
-  }
-  const addSurname = (e) => {
-    // const cordObj = data?.option?.cord;
-    setSurname(e.target.value);
-  }
-  const addPhone = (e) => {
-    // const cordObj = data?.option?.cord;
-    setNumberPhone(e.target.value);
-  }
-  const addComent = (e) => {
-    // const cordObj = data?.option?.cord;
-    setOrderComent(e.target.value);
-  }
   const isDelivery = () => {
     // const paintingObj = data?.option?.painting;
     setDelivery(delivery => !delivery)
@@ -250,24 +234,7 @@ const ClientShower = () => {
                   </div>
               </div>
       </div>
-      <div className="choose_item item_mirrors item_fullname">
-      <h3>ПІБ:</h3>
-        <div className="fullname_wrap">
-          <div className="name_lastname">
-            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addFirstName (e)} />
-            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addLastName(e)}/>
-          </div>
-          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addSurname(e)}/>
-        </div>
-      </div>
-      <div className="choose_item item_mirrors">
-      <h3>Телефон</h3>
-        <input className="cabel" placeholder="+ 38 (0ХХ) ХХХ ХХ ХХ " value={numberPhone} onChange={(e) => addPhone(e)}/>
-      </div>
-      <div className="choose_item item_mirrors item_textarea">
-      <h3>Деталі замовлення</h3>
-        <textarea className="cabel" style={{width: "70%", height:"100%"}} value={orderComent} name="" id="" cols="30" rows="10" onChange={(e) => addComent(e)}></textarea>
-      </div>
+      <DeliveryTemplate/>
       <div className="footer_calc">
             <div className="summ">
               <div>

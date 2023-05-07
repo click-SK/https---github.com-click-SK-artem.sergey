@@ -3,6 +3,7 @@ import ModalGlassPartitions from "./ModalGlassPartitions";
 import ListTheChoseFurniture from "./ListTheChoseFurniture";
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from "react-redux";
+import DeliveryTemplate from "./DeliveryTemplate";
 import "../style/shower.scss";
 
 const CosmeticMirrors = ({ data }) => {
@@ -14,6 +15,12 @@ const CosmeticMirrors = ({ data }) => {
   const [patronCount, setPatronCount] = useState('');
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
+
+  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
+  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
+  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
+  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
+  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
@@ -151,7 +158,7 @@ const CosmeticMirrors = ({ data }) => {
               </select>
             </div>
         </div>
-        
+        <DeliveryTemplate/>
         <div className="footer_calc">
             <div className="summ">
               <div>
