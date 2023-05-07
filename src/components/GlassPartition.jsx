@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./ModalGlassPartitions";
 import ListTheChoseFurniture from "./ListTheChoseFurniture";
+import PdfFile from "./PdfFile/PdfFilePartitionManager";
+import PdfFileClient from "./PdfFile/PdfFilePartitionClient";
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
@@ -21,9 +24,36 @@ const GlassPartition = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const cart = useSelector((state) => state.cart.items);
+  const [isAssemblingt, setIsAssembling] = useState(false);
+  const [minInstallation, setMinInstallation] = useState('');
+  const [adress, setAdress] = useState('');
+  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
+  const [delivery, setDelivery] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [numberPhone, setNumberPhone] = useState('');
+  const [orderComent, setOrderComent] = useState('');
+  const [typeMontaje, setTypeMontaje] = useState('');
+  const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
 
 
-  console.log('На фінал',currentTypePartitions);
+
+  const montaje = {
+      'Глуха перегородка' : 450,
+      'Відкривна перегородка' : 500
+  }
+
+const dovod = {
+    'Доводчик' : 500,
+}
+const zaklad = {
+    'Закладна 1 ' : 100,
+    'Закладна 2 ' : 150,
+    'Закладна 3 ' : 200,
+}
+
+  console.log('На фінал');
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -75,8 +105,22 @@ const GlassPartition = () => {
       const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
       // const calcSize = Number(widthValue) * Number(heightValue);
       const calcSquareMeter = calcSize/1000000;
+      const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
   
       let totalSumFurniture = 0;
+
+      let intslPrice = 0;
+      let deliveryPrice = 0;
+      let deliveryPriceOverSity = 0;
+      let deliveryFinalyPrice = 0;
+
+      if (adress != ''){
+        deliveryPrice = 200
+      }
+ 
+      if (delivery){
+        deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+      }
   
       cart.forEach((el) => {
         el.colorsFurniture.forEach((item) => {
@@ -84,20 +128,36 @@ const GlassPartition = () => {
         })
       })
   
-      const totalSum = totalSumFurniture + (calcSquareMeter * currentType?.price || 0) + (calcSquareMeter * currentColor?.price || 0) + (calcSquareMeter * currentProcessingStandart?.price || 0) + (currentProcessingСutout?.price || 0);
+      const totalSum = totalSumFurniture + (calcSquareMeter * currentType?.price || 0) + (calcSquareMeter * currentColor?.price || 0) + (calcSquareMeter * currentProcessingStandart?.price || 0) + (currentProcessingСutout?.price || 0) + (delivery ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
-        // typeName: currentType?.name,
-        // typePrice: currentType?.price,
-        // glass: currentGlass,
-        // glassColorName: currentGlassColor?.name,
-        // glassColorPrice: currentGlassColor?.price,
-        // width: widthValue,
-        // height: heightValue,
-        // volume: volumValue,
-        // furniture: cart,
-        // total: totalSum,
+        type: currentTypePartitions, /* назва */
+        width: widthValue, /* ширина */
+        height: heightValue, /* висота */
+        depth: depthValue, /* глубина */
+        glassThicknessName:  currentType ? currentType?.name : '', /* скло - товщина */
+        glassThicknessPrice: currentType ? currentType?.price : '', /* скло - ціна */
+        glassColorName: currentColor ? currentColor?.name : '', /* скло колір - ціна */
+        glassColorPrice: currentColor ? currentColor?.price : '', /* скло колір - ціна */
+        adress:adress, /* адреса доставки */
+        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        firstName: firstName,
+        lastName: lastName,
+        surname: surname,
+        numberPhone: numberPhone,
+        orderComent: orderComent,
+        currentProcessingStandartName: currentProcessingStandart ? 'Обробка' : '',
+        currentProcessingStandartVal: currentProcessingStandart ? currentProcessingStandart?.name : '',
+        currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
+        currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
+        currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
+        currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
+        total: totalSum, /* скло - ціна душ кабіни */
       }
+
+      setFinishedShowerPdf(finishedShower)
+
       console.log('finishedShower',finishedShower);
       setTotalSum(totalSum)
     } else {
@@ -105,7 +165,56 @@ const GlassPartition = () => {
     }
   }
 
-  console.log('currentTypePartitions',currentTypePartitions);
+  const changeIsAssemblingt = () => {
+    // const paintingObj = data?.option?.painting;
+    setIsAssembling(isAssemblingt => !isAssemblingt)
+  }
+
+    const changeMinInstallationFunc = () => {
+    // const paintingObj = data?.option?.painting;
+    setMinInstallation(minInstallation => !minInstallation)
+  }
+    const isDelivery = () => {
+    // const paintingObj = data?.option?.painting;
+    setDelivery(delivery => !delivery)
+  }
+
+  const addAdress = (e) => {
+    // const cordObj = data?.option?.cord;
+    setAdress(e.target.value);
+  }
+  const addPriceInstalation = (e) => {
+    // const cordObj = data?.option?.cord;
+    setMinInstallation(e.target.value);
+  }
+
+
+  const roadDistance = (e) => {
+    // const cordObj = data?.option?.cord;
+    setDeliveryRoadDistance(e.target.value);
+  }
+  const addFirstName = (e) => {
+    // const cordObj = data?.option?.cord;
+    setFirstName(e.target.value);
+  }
+  const addLastName = (e) => {
+    // const cordObj = data?.option?.cord;
+    setLastName(e.target.value);
+  }
+  const addSurname = (e) => {
+    // const cordObj = data?.option?.cord;
+    setSurname(e.target.value);
+  }
+  const addPhone = (e) => {
+    // const cordObj = data?.option?.cord;
+    setNumberPhone(e.target.value);
+  }
+  const addComent = (e) => {
+    // const cordObj = data?.option?.cord;
+    setOrderComent(e.target.value);
+  }
+
+
 
   return (
     <div className="shower_wrapper">
@@ -189,14 +298,14 @@ const GlassPartition = () => {
         </div>
 
         <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
+            <h3>Обробка скла</h3>
             <div className="choose_item selected_shower">
               <select
                 value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
                 onChange={selectProcessingStandartFunc}
               >
                 <option value="" disabled>
-                  Оберіть обробку
+                  Без обробки
                 </option>
                 {currentObject?.processingStandart &&
                   currentObject.processingStandart.map((item) => (
@@ -234,6 +343,65 @@ const GlassPartition = () => {
             <ModalGlassPartitions currentPartitions={currentTypePartitions} isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
         </div>
         <ListTheChoseFurniture/>
+
+        <div>
+          <div className="choose_item item_mirrors item_montaje">
+        <h3>Монтаж:</h3>
+        <div className="montaje_wrap">
+          <div className="checkbox_wrap montaje">
+            <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
+            <label className="checkbox-label" htmlFor="checkbox3"></label>
+          </div>
+          {/* <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/> */}
+          <div className="choose_item selected_shower">
+              <select 
+              value={typeMontaje ? typeMontaje : ""}>
+                <option value="" disabled>
+                  Тип:
+                </option>
+                {Object.entries(montaje).filter(([_, value]) => value !== '').map(([key, value], idx) => (
+                    <option key={idx} >
+                      {key}
+                    </option>
+                  ))}
+              </select>
+            </div>
+        </div>
+      </div>
+      <div className="choose_item item_mirrors item_delivery">
+      <h3>Доставка</h3>
+              <div className="delivery_wrap">
+                  <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e)}/>
+                  <div className="delivery_addres">
+                      <div className="checkbox_wrap ">
+                        <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
+                        <label className="checkbox-label" htmlFor="checkbox5"></label>
+                        <p style={{marginTop: 5}}>За місто</p> 
+                      </div>
+                      <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e)}/>
+                  </div>
+              </div>
+      </div>
+      <div className="choose_item item_mirrors item_fullname">
+      <h3>ПІБ:</h3>
+        <div className="fullname_wrap">
+          <div className="name_lastname">
+            <input className="cabel" placeholder="Ім'я" value={firstName} onChange={(e) => addFirstName (e)} />
+            <input className="cabel" placeholder="Прізвище" value={lastName} onChange={(e) => addLastName(e)}/>
+          </div>
+          <input className="cabel" placeholder="По батькові" value={surname} onChange={(e) => addSurname(e)}/>
+        </div>
+      </div>
+      <div className="choose_item item_mirrors">
+      <h3>Телефон</h3>
+        <input className="cabel" placeholder="+ 38 (0ХХ) ХХХ ХХ ХХ " value={numberPhone} onChange={(e) => addPhone(e)}/>
+      </div>
+      <div className="choose_item item_mirrors item_textarea">
+      <h3>Деталі замовлення</h3>
+        <textarea className="cabel" style={{width: "70%", height:"100%"}} value={orderComent} name="" id="" cols="30" rows="10" onChange={(e) => addComent(e)}></textarea>
+      </div>
+          </div> 
+
         <div className="footer_calc">
             <div className="summ">
               <div>
@@ -244,6 +412,14 @@ const GlassPartition = () => {
               </div>
             </div>
             <div className="send_order">
+            <div className="mirror_button_exel" style={{fontSize: 14}}>
+            <PDFDownloadLink  document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
+            </PDFDownloadLink>
+            <PDFDownloadLink className="" document={< PdfFileClient order={finishedShowerPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            </PDFDownloadLink>
+            </div>
             <button>Оформити</button>
             </div>
         </div> 
