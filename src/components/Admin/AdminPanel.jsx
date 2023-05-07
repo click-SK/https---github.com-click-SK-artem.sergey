@@ -6,12 +6,12 @@ const AdminPanel = () => {
         <div className='admin_rout'>
             <h1>Категорії</h1>
             <div>
-                <a href='/admin-mirrors'>Mirrors</a>
-                <a href='/admin-cosmetic-mirrors'>Cosmetic mirrors</a>
-                <a href='/admin-showers'>Shower</a>
-                <a href='/admin-showers-client'>Shower Client</a>
-                <a href='/admin-dashki'>Dashki</a>
-                <a href='/admin-glass-partition'>Glass Partition</a>
+                <a href='/admin-showers'>Душові кабіни</a>
+                <a href='/admin-mirrors'>Дзеркала</a>
+                <a href='/admin-cosmetic-mirrors'>Косметичні дзеркала</a>
+                <a href='/admin-showers-client'>Душ кабіни для клієнта</a>
+                <a href='/admin-dashki'>Дашки</a>
+                <a href='/admin-glass-partition'>Скляні перегородки</a>
             </div>
         </div>
     );

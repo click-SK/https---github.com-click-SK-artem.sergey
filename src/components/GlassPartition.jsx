@@ -15,11 +15,15 @@ const GlassPartition = () => {
   const [currentTypePartitions, setCurrentTypePartitions] = useState('');
   const [widthValue, setWidthValue] = useState('');
   const [heightValue, setHeightValue] = useState('');
+  const [depthValue, setDepthValue] = useState('');
   const [volumValue, setVolumValue] = useState(0);
   const [validationInput, setValidationInput] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const cart = useSelector((state) => state.cart.items);
+
+
+  console.log('На фінал',currentTypePartitions);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -68,7 +72,8 @@ const GlassPartition = () => {
   const calcTotalSumFunc = () => {
     if(heightValue && widthValue) {
       setValidationInput(false);
-      const calcSize = Number(widthValue) * Number(heightValue);
+      const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
+      // const calcSize = Number(widthValue) * Number(heightValue);
       const calcSquareMeter = calcSize/1000000;
   
       let totalSumFurniture = 0;
@@ -110,7 +115,7 @@ const GlassPartition = () => {
             <div className="choose_item selected_shower">
             <select value={currentTypePartitions} onChange={selectTypePartitions}>
               <option value="" disabled>
-                Оберіть тип перегородки
+                
               </option>
               {currentObject &&
                 currentObject.typePartitions &&
@@ -178,7 +183,7 @@ const GlassPartition = () => {
             </div>
             <div className="size_item" >
               {/* <h4>Глубина:</h4> */}
-              <input type="number" placeholder="Глибина" />
+              <input type="number" placeholder="Глибина" value={depthValue} onChange={(e) => setDepthValue(e.target.value)} />
             </div>
           </div>
         </div>

@@ -42,6 +42,8 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
     padding: 10px;
     font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
 
     .edit_item_wrap{
         display: flex;
@@ -128,6 +130,7 @@
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
         height: 50px;
         padding: 0 10px;
+        margin: 5px 10px;
     }
 
 }
@@ -432,5 +435,6 @@
 }
 
 .active_tab {
-    color: red;
+    color: white;
+    background: #2f7ca4;
 }
