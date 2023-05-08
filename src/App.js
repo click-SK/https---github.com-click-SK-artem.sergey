@@ -12,12 +12,16 @@ import EditShower from './components/Admin/Shower/EditShower';
 import EditGlassPartition from './components/Admin/GlassPartition/EditGlassPartition';
 import EditDashki from './components/Admin/Dashki/EditDashki';
 import EditCosmeticMirrors from './components/Admin/Mirrors/EditCosmeticMirrors';
-import EditShowerClient from './components/Admin/ShowerClient/EditShowerClient';
+import EditShowerClient from './components/Admin/EditClient/EditShowerClient';
 import ClientShower from './components/Client/ClientShower';
 import ClientStandartMirrors from './components/Client/ClientStandartMirrors';
 import ClientCosmeticMirrors from './components/Client/ClientCosmeticMirrors';
 import ClientGlassPartition from './components/Client/ClientGlassPartition';
 import ClientDashki from './components/Client/ClientDashki';
+import EditClientDashki from './components/Admin/EditClient/EditClientDashki';
+import EditClientStandartMirror from './components/Admin/EditClient/EditClientStandartMirror';
+import EditClientCosmeticMirror from './components/Admin/EditClient/EditClientCosmeticMirror';
+import EditClientGlassPartition from './components/Admin/EditClient/EditClientGlassPartition';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -50,7 +54,7 @@ function App() {
         <Route path='/edit/admin' element={<AdminPanel/>}/>
         <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
         <Route path='/admin-showers' element={<EditShower/>}/>
-        <Route path='/admin-showers-client' element={<EditShowerClient/>}/>
+        <Route path='/edit-showers-client' element={<EditShowerClient/>}/>
         <Route path='/admin-dashki' element={<EditDashki/>}/>
         <Route path='/admin-glass-partition' element={<EditGlassPartition/>}/>
         <Route path='/admin-cosmetic-mirrors' element={<EditCosmeticMirrors/>}/>
@@ -59,6 +63,10 @@ function App() {
         <Route path='/client-cosmetic-mirrors' element={<ClientCosmeticMirrors/>}/>
         <Route path='/client-glass-partition' element={<ClientGlassPartition/>}/>
         <Route path='/client-dashki' element={<ClientDashki/>}/>
+        <Route path='/edit-client-dashki' element={<EditClientDashki/>}/>
+        <Route path='/edit-client-standart-mirror' element={<EditClientStandartMirror/>}/>
+        <Route path='/edit-client-cosmetic-mirror' element={<EditClientCosmeticMirror/>}/>
+        <Route path='/edit-client-glass-partition' element={<EditClientGlassPartition/>}/>
       </Routes>
         
 
