@@ -4,7 +4,7 @@ import '../../../style/admin.scss'
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditDorsHandles from "../EditTemplate/O_EditDorsHandles";
 import O_NamePriceTemplate from '../EditTemplate/O_NamePriceTemplate'
-import AdminHeader from '../AdminHeader';
+import AdminHeader from '../AdminClientHeader';
 const EditShowerClient = () => {
     const [currentObject, setCurrentObject] = useState({});
     const [showTypeBlock, setShowTypeBlock] = useState(true);

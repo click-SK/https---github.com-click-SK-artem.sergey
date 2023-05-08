@@ -8,7 +8,7 @@ import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
 import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import O_EditFurnitureTemplate from "../EditTemplate/O_EditFurnitureTemplate";
-import AdminHeader from '../AdminHeader';
+import AdminHeader from '../AdminClientHeader';
 
 const EditClientGlassPartition = () => {
     const [currentObject, setCurrentObject] = useState({});

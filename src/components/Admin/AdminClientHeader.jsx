@@ -1,18 +1,9 @@
 import React from 'react';
 import '../../style/admin.scss'
 
-const AdminPanel = () => {
+const AdminClientHeader = () => {
     return (
         <div className='admin_rout'>
-            <h1>Менеджер</h1>
-            <div>
-                <a href='/admin-showers'>Душові кабіни</a>
-                <a href='/admin-mirrors'>Дзеркала</a>
-                <a href='/admin-cosmetic-mirrors'>Косметичні дзеркала</a>
-                <a href='/admin-dashki'>Дашки</a>
-                <a href='/admin-glass-partition'>Скляні перегородки</a>
-            </div>
-            <h1>Клієнт</h1>
             <div>
                 <a href='/edit-showers-client'>Душові кабіни</a>
                 <a href='/edit-client-standart-mirror'>Дзеркала</a>
@@ -24,4 +15,4 @@ const AdminPanel = () => {
     );
 };
 
-export default AdminPanel;
+export default AdminClientHeader;

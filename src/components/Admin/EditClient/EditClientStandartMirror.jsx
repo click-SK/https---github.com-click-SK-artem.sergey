@@ -4,7 +4,7 @@ import '../../../style/edir-shower.scss';
 import EditStandartMirrorsType from "../Mirrors/EditStandartMirrorsType";
 import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 import O_EditPriceTemplate from "../EditTemplate/O_EditPriceTemplate";
-import AdminHeader from '../AdminHeader';
+import AdminHeader from '../AdminClientHeader';
 const EditClientStandartMirror = () => {
   const [currentObject, setCurrentObject] = useState({});
   const [showTypeBlock, setShowTypeBlock] = useState(true);
