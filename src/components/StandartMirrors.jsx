@@ -40,6 +40,9 @@ const StandartMirrors = ({ data }) => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
   // const [intslPrice, setIntslPrice] = useState(0);
   // const keyCsv = [
@@ -63,6 +66,7 @@ const StandartMirrors = ({ data }) => {
       const resSizePrice = calcSquareMeter * currentGoods?.price;
       const resCordSum = currentCord * priceMeterCord;
       const resFrameSum = sizeFrame * (currentFrame?.price || 0);
+
       let intslPrice = 0;
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
@@ -74,23 +78,17 @@ const StandartMirrors = ({ data }) => {
           intslPrice = calcSquareMeter * 350
         };
         
-        if (adress != ''){
+        if (deliveryAdress != ''){
           deliveryPrice = 200
         }
 
-        if (delivery){
-          deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+        if (deliveryBoolean){
+          deliveryPriceOverSity = Number(deliveryDistance) * 26
         }
 
         if(isPainting){
             isPaintingPrice = Number(sizeFrame) * Number( currentColor?.price);
         }
-
-        
-
-        console.log( "доставка over sity", deliveryRoadDistance);
-        console.log( "adress", adress);
-        console.log( "price", deliveryPrice);
 
 
       console.log('priceMeterCord',priceMeterCord);
@@ -107,8 +105,8 @@ const StandartMirrors = ({ data }) => {
       (isPainting ? isPaintingPrice : 0) + 
       (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
       (isAssemblingt ? intslPrice : 0) + 
-      (delivery ? deliveryPriceOverSity : deliveryPrice) +
-      (currentProcessingСutout?.price || 0);
+      (currentProcessingСutout?.price || 0) + 
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedMirros = {
         type: currentType?.name, /* форма дзеркала */
@@ -136,9 +134,9 @@ const StandartMirrors = ({ data }) => {
         colorName: isPainting ? currentColor?.name : '', /* колір покраски */
         colorFrame: isPainting ? 'Покраска' : '', /* колір покраски */
         colorPrice: isPainting ? isPaintingPrice : '', /* Ціна кольору */
-        adress:adress, /* адреса доставки */
-        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        adress:deliveryAdress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
           firstName: deliveryFirstName,
           lastName: deliveryLastName,
           surname: deliverySurName,
@@ -168,9 +166,6 @@ const StandartMirrors = ({ data }) => {
 
 
   }
-
-
-
 
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);

@@ -29,9 +29,6 @@ const GlassPartition = () => {
   const [isAssemblingtDovod, setIsAssemblingDovod] = useState(false);
   const [isAssemblingtZaklad, setIsAssemblingZaklad] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
-  const [adress, setAdress] = useState('');
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
-  const [delivery, setDelivery] = useState(false);
   const [typeMontaje, setTypeMontaje] = useState('');
   const [typeDovod, setTypeDovod] = useState('');
   const [typeZaklad, setTypeZaklad] = useState('');
@@ -72,6 +69,9 @@ const GlassPartition = () => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -146,12 +146,12 @@ const GlassPartition = () => {
       let deliveryPriceOverSity = 0;
       let deliveryFinalyPrice = 0;
 
-      if (adress != ''){
+      if (deliveryAdress != ''){
         deliveryPrice = 200
       }
  
-      if (delivery){
-        deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+      if (deliveryBoolean){
+        deliveryPriceOverSity = Number(deliveryDistance) * 26
       }
   
       cart.forEach((el) => {
@@ -160,7 +160,12 @@ const GlassPartition = () => {
         })
       })
   
-      const totalSum = totalSumFurniture + (calcSquareMeter * currentType?.price || 0) + (calcSquareMeter * currentColor?.price || 0) + (calcSquareMeter * currentProcessingStandart?.price || 0) + (currentProcessingСutout?.price || 0) + (delivery ? deliveryPriceOverSity : deliveryPrice);
+      const totalSum = totalSumFurniture + 
+      (calcSquareMeter * currentType?.price || 0) + 
+      (calcSquareMeter * currentColor?.price || 0) + 
+      (calcSquareMeter * currentProcessingStandart?.price || 0) + 
+      (currentProcessingСutout?.price || 0) + 
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
         type: currentTypePartitions, /* назва */
@@ -171,9 +176,9 @@ const GlassPartition = () => {
         glassThicknessPrice: currentType ? currentType?.price : '', /* скло - ціна */
         glassColorName: currentColor ? currentColor?.name : '', /* скло колір - ціна */
         glassColorPrice: currentColor ? currentColor?.price : '', /* скло колір - ціна */
-        adress:adress, /* адреса доставки */
-        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        adress:deliveryAdress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
         firstName: deliveryFirstName,
         lastName: deliveryLastName,
         surname: deliverySurName,
@@ -206,27 +211,11 @@ const GlassPartition = () => {
     // const paintingObj = data?.option?.painting;
     setMinInstallation(minInstallation => !minInstallation)
   }
-    const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery(delivery => !delivery)
-  }
 
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  }
   const addPriceInstalation = (e) => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
   }
-
-
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
-  }
-
-
 
   return (
     <div className="shower_wrapper">
