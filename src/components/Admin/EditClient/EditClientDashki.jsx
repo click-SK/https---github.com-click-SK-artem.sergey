@@ -7,7 +7,7 @@ import O_EditColorTemplate from "../EditTemplate/O_EditColorTemplate";
 import O_EditFurnitureTemplate from "../EditTemplate/O_EditFurnitureTemplate";
 import O_EditProcessingStandartTempalte from "../EditTemplate/O_EditProcessingStandartTempalte";
 import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
-import AdminHeader from '../AdminHeader';
+import AdminHeader from '../AdminClientHeader';
 
 const EditClientDashki = () => {
     const [showTypeBlock, setShowTypeBlock] = useState(true);

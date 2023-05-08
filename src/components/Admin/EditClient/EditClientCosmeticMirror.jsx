@@ -6,7 +6,7 @@ import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 import N_EditLightBulsTemplate from "../EditTemplate/N_EditLightBulsTemplate";
 import N_EditPatronTemplate from "../EditTemplate/N_EditPatronTemplate";
-import AdminHeader from '../AdminHeader';
+import AdminHeader from '../AdminClientHeader';
 
 const EditClientCosmeticMirror = () => {
     const [currentObject, setCurrentObject] = useState({});
