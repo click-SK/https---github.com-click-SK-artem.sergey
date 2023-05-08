@@ -253,77 +253,87 @@ const ShowerCabin = () => {
   //   setVolumSum(Number(e) * 5)
   // }
 
+  const data = {
+    "source_id": 10,
+    "buyer_comment": finishedShowerPdf.orderComent,
+    "buyer": {
+      "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+      "phone": finishedShowerPdf.numberPhone
+    },
+    "shipping": {
+      "delivery_service_id": 1,
+      "shipping_address_city": finishedShowerPdf.adress,
+    },
+    "products": [
+      {
+        "price": finishedShowerPdf.total,
+        "quantity": 1,
+        "name": finishedShowerPdf.type,
+        "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
+        "properties": [
+          {
+            "name": finishedShowerPdf.currentProcessingStandartName,
+            "value": finishedShowerPdf.currentProcessingStandartVal
+          },
+          {
+            "name": finishedShowerPdf.currentProcessingСutoutName,
+            "value": finishedShowerPdf.currentProcessingСutoutCount
+          },
+        ]
+      }
+    ],
+  };
+
+
+
   // console.log('currentType',currentType);
   // console.log('currentGlass',currentGlass);
   // console.log('currentGlassColor',currentGlassColor);
   // console.log('currentGlassColor',currentGlassColor);
 
 
-  const testCrm = async () => {
-    const url = 'https://openapi.keycrm.app/v1/order';
-    const correlationId = '3c1cdba9-75bf-4a63-920b-80ff07f142c0';
-    const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ';
-    
-    
-
+  const handleFetch = async () => {
     const data = {
-      "source_id": 10,
-      "buyer_comment": finishedShowerPdf.orderComent,
-      "buyer": {
-        "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
-        "phone": finishedShowerPdf.numberPhone
-      },
-      "shipping": {
-        "delivery_service_id": 1,
-        "shipping_address_city": finishedShowerPdf.adress,
-      },
-      "products": [
-        {
-          "price": finishedShowerPdf.total,
-          "quantity": 1,
-          "name": finishedShowerPdf.type,
-          "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
-          "properties": [
-            {
-              "name": finishedShowerPdf.currentProcessingStandartName,
-              "value": finishedShowerPdf.currentProcessingStandartVal
-            },
-            {
-              "name": finishedShowerPdf.currentProcessingСutoutName,
-              "value": finishedShowerPdf.currentProcessingСutoutCount
-            },
-          ]
-        }
-      ],
-    };
+      order: {
+        "source_id": 10,
+    "buyer_comment": finishedShowerPdf.orderComent,
+    "buyer": {
+      "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+      "phone": finishedShowerPdf.numberPhone
+    },
+    "shipping": {
+      "delivery_service_id": 1,
+      "shipping_address_city": finishedShowerPdf.adress,
+    },
+    "products": [
+      {
+        "price": finishedShowerPdf.total,
+        "quantity": 1,
+        "name": finishedShowerPdf.type,
+        "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
+        "properties": [
+          {
+            "name": finishedShowerPdf.currentProcessingStandartName,
+            "value": finishedShowerPdf.currentProcessingStandartVal
+          },
+          {
+            "name": finishedShowerPdf.currentProcessingСutoutName,
+            "value": finishedShowerPdf.currentProcessingСutoutCount
+          },
+        ]
+      }
+    ],
+  }
+}
 
-    console.log(data);
-  
-    // try {
-    //   const response = await fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${token}`,
-    //       'Correlation-Id': correlationId,
-    //       'Accept': 'application/json',
-    //       'Pragma': 'no-cache'
-    //     },
-    //     body: JSON.stringify(data)
-    //   });
-  
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    //   }
-  
-    //   const responseData = await response.json();
-    //   console.log(responseData);
-    // } catch (error) {
-    //   console.error('Error:', error.message);
-
-    // }
-    console.log("press order");
-  };
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+  }
 
   console.log('currentObject',currentObject);
 
@@ -461,7 +471,7 @@ const ShowerCabin = () => {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/>
+          {/* <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/> */}
         </div>
       </div>
       <DeliveryTemplate/>
@@ -485,7 +495,7 @@ const ShowerCabin = () => {
              {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
             </PDFDownloadLink>
             </div>
-               <button onClick={testCrm}>Оформити</button>
+               <button onClick={handleFetch}>Оформити</button>
             </div>
         </div> 
     </div>

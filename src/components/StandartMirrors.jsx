@@ -241,7 +241,48 @@ const StandartMirrors = ({ data }) => {
     setCurrentProcessingСutout(selectedProcessing);
   };
 
+const handleFetch = async () => {
+    const data = {
+      order: {
+        "source_id": 10,
+    "buyer_comment": finishMirrorPdf.orderComent,
+    "buyer": {
+      "full_name": `${finishMirrorPdf.lastName} ${finishMirrorPdf.firstName} ${finishMirrorPdf.surname}`,
+      "phone": finishMirrorPdf.numberPhone
+    },
+    "shipping": {
+      "delivery_service_id": 1,
+      "shipping_address_city": finishMirrorPdf.adress,
+    },
+    "products": [
+      {
+        "price": finishMirrorPdf.total,
+        "quantity": 1,
+        "name": finishMirrorPdf.type,
+        "comment": `${finishMirrorPdf.minInstallationName} ${finishMirrorPdf.minInstallation}`,
+        "properties": [
+          {
+            "name": finishMirrorPdf.currentProcessingStandartName,
+            "value": finishMirrorPdf.currentProcessingStandartVal
+          },
+          {
+            "name": finishMirrorPdf.currentProcessingСutoutName,
+            "value": finishMirrorPdf.currentProcessingСutoutCount
+          },
+        ]
+      }
+    ],
+  }
+}
 
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+  }
  
 
   // console.log('currentType',currentType);
@@ -468,7 +509,7 @@ const StandartMirrors = ({ data }) => {
              {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
             </PDFDownloadLink>
             </div>
-            <button className="mirror_button_order" >Оформити</button>
+            <button className="mirror_button_order" onClick={handleFetch}  >Оформити</button>
             </div>
         </div> 
     </div>
