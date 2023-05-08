@@ -331,14 +331,14 @@ const ShowerCabin = () => {
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
         <div className="wrap_item type_shower">
-            <h3>Виберіть тип</h3>
+            <h3>Варіанти душових</h3>
             <div className="choose_item selected_shower">
               <select
                 value={currentType ? JSON.stringify(currentType) : ""}
                 onChange={selectTypeFunc}
               >
                 <option value="" disabled>
-                  Оберіть тип
+                  Душові:
                 </option>
                 {currentObject?.type &&
                   currentObject.type.map((item) => (
@@ -355,7 +355,7 @@ const ShowerCabin = () => {
             <div className="choose_item selected_shower">
             <select value={currentGlass} onChange={selectGlassFunc}>
               <option value="" disabled>
-                Оберіть скло
+                Тип скла:
               </option>
               {currentObject &&
                 currentObject.color &&
@@ -369,11 +369,11 @@ const ShowerCabin = () => {
             </div>
         </div>            
         <div className="wrap_item color_glass">
-          <h3>Виберіть колір скла</h3>
+          <h3>Колір скла</h3>
           <div className="choose_item selected_shower">
             <select value={currentGlassColor ? JSON.stringify(currentGlassColor) : ""} onChange={selectGlassColorFunc}>
               <option value="" disabled>
-                Оберіть колір скла
+                Оберіть колір
               </option>
               {currentObject &&
                 currentObject.glassThickness &&
@@ -408,7 +408,7 @@ const ShowerCabin = () => {
         </div>
 
         <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
+            <h3>Обробка скла</h3>
             <div className="choose_item selected_shower">
               <select
                 value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
@@ -428,7 +428,7 @@ const ShowerCabin = () => {
         </div>
 
         <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
+            <h3>Додаткова обробка</h3>
             <div className="choose_item selected_shower">
               <select
                 value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}

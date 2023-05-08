@@ -304,9 +304,10 @@ const GlassPartition = () => {
               <select
                 value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
                 onChange={selectProcessingStandartFunc}
+                
               >
                 <option value="" disabled>
-                  Без обробки
+                  
                 </option>
                 {currentObject?.processingStandart &&
                   currentObject.processingStandart.map((item) => (

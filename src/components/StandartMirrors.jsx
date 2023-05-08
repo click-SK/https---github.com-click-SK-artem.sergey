@@ -344,7 +344,7 @@ const StandartMirrors = ({ data }) => {
           value={currentBackLight ? JSON.stringify(currentBackLight) : ""}
         >
           <option value="" disabled>
-            Без додаткової підсвітки
+            
           </option>
           {data?.option?.backLight &&
             data.option.backLight.map((item) => (
@@ -364,7 +364,7 @@ const StandartMirrors = ({ data }) => {
           value={currentSwitch ? JSON.stringify(currentSwitch) : ""}
         >
           <option value="" disabled>
-            Оберіть вимикач
+            
           </option>
           {data?.option?.switch &&
             data.option.switch.map((item) => (
@@ -405,7 +405,7 @@ const StandartMirrors = ({ data }) => {
           value={currentColor ? JSON.stringify(currentColor) : ""}
         >
           <option value="" disabled>
-            Оберіть колір
+            Колір
           </option>
           {isPainting && data?.option?.color &&
             data.option.color.map((item) => (
