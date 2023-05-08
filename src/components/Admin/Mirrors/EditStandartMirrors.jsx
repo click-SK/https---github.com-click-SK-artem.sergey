@@ -214,7 +214,11 @@ const EditStandartMirrors = () => {
         currentObject?.type.map((item, idxType) => (
           <EditStandartMirrorsType key={idxType} idxType={idxType} item={item} 
           typeName={currentObject?.type[idxType]?.name}
-          showerId={currentObject._id}/>
+          showerId={currentObject._id}
+          updateTypePath='https://calc-shower.herokuapp.com/update-type'
+          addNewGoodsPath='https://calc-shower.herokuapp.com/add-new-goods'
+          updateGoodsPath='https://calc-shower.herokuapp.com/update-goods'
+          deleteGoodsPath='https://calc-shower.herokuapp.com/remove-mirror-goods'/>
         ))}
         {showFrameBlock && 
         currentObject?.option?.frame.map((el, idx) => (
