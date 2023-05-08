@@ -6,6 +6,8 @@ import A_EditColorsTemplate from "../EditTemplate/A_EditColorsTemplate";
 import EditShowerMirrorsTemplate from "./EditShowerMirrorsTemplate";
 import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
+import O_EditProcessingStandartTempalte from "../EditTemplate/O_EditProcessingStandartTempalte";
+import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
 import AdminHeader from '../AdminHeader';
 const EditShower = () => {
   const [currentObject, setCurrentObject] = useState({});
@@ -22,6 +24,14 @@ const EditShower = () => {
   const [newValueTypeName, setNewValueTypeName] = useState("");
   const [newValueTypePrice, setNewValueTypePrice] = useState("");
   const [activeTab, setActiveTab] = useState("furniture");
+  const [isFtch, setIsFetch] = useState(false);
+  const [showProcessingStandartBlock, setshowProcessingStandartBlock] = useState(false);
+  const [showProcessingСutoutBlock, setshowProcessingСutoutBlock] = useState(false);
+  const [newValueProcessingStandartName, setNewValueProcessingStandartName] = useState('');
+  const [newValueProcessingStandartPrice, setNewValueProcessingStandartPrice] = useState('');
+  const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
+  const [newValueProcessingСutoutPrice, setNewValueProcessingСutoutPrice] = useState('');
+
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -30,7 +40,7 @@ const EditShower = () => {
         setCurrentObject(data[0]);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [isFtch]);
 
   const handleAddNewFurniture = () => {
     console.log("new furniture");
@@ -44,7 +54,8 @@ const EditShower = () => {
       }),
     }).then((res) => res.json());
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state)
     }, 1000);
   };
 
@@ -65,7 +76,9 @@ const EditShower = () => {
       }),
     }).then((res) => res.json());
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state)
+      setNewValueDepends('');
     }, 1000);
   };
 
@@ -82,7 +95,10 @@ const EditShower = () => {
       }),
     }).then((res) => res.json());
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state);
+      setNewValueGlassThicknessName('');
+      setNewValueGlassThicknessPrice('');
     }, 1000);
   };
 
@@ -99,9 +115,55 @@ const EditShower = () => {
       }),
     }).then((res) => res.json());
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state);
+      setNewValueTypeName('');
+      setNewValueTypePrice('');
     }, 1000);
   };
+
+  const handleAddNewProcessingStandart = () => {
+    fetch('https://calc-shower.herokuapp.com/add-new-shower-processing-standart', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newValueProcessingStandartName,
+        price: newValueProcessingStandartPrice,
+        showerId: currentObject._id
+      })
+    })
+      .then((res) => res.json())
+      setTimeout(() => {
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueProcessingStandartName('');
+        setNewValueProcessingStandartPrice('');
+      },1000)
+  }
+
+  const handleAddNewProcessingСutout = () => {
+    fetch('https://calc-shower.herokuapp.com/add-new-shower-processing-cutout', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newValueProcessingСutoutName,
+        price: newValueProcessingСutoutPrice,
+        count: 1,
+        showerId: currentObject._id
+      })
+    })
+      .then((res) => res.json())
+      setTimeout(() => {
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueProcessingСutoutName('');
+        setNewValueProcessingСutoutPrice('');
+      },1000)
+  }
 
   //-----------------
 
@@ -111,6 +173,9 @@ const EditShower = () => {
     setShowMirrorsBlock(false);
     setShowTypeBlock(false);
     setShowSizeBlock(false);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(false);
+    
   };
 
   const handleShowColorsBlock = () => {
@@ -119,6 +184,8 @@ const EditShower = () => {
     setShowMirrorsBlock(false);
     setShowTypeBlock(false);
     setShowSizeBlock(false);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(false);
   };
 
   const handleShowMirrorsBlock = () => {
@@ -127,6 +194,8 @@ const EditShower = () => {
     setShowMirrorsBlock(true);
     setShowTypeBlock(false);
     setShowSizeBlock(false);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(false);
   };
 
   const handleShowTypeBlock = () => {
@@ -135,6 +204,8 @@ const EditShower = () => {
     setShowMirrorsBlock(false);
     setShowTypeBlock(true);
     setShowSizeBlock(false);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(false);
   };
 
   const handleShowSizeBlock = () => {
@@ -143,6 +214,29 @@ const EditShower = () => {
     setShowMirrorsBlock(false);
     setShowTypeBlock(false);
     setShowSizeBlock(true);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(false);
+  };
+
+  
+  const handleShowProcessingStandartBlock = () => {
+    setShowFurnitureBlock(false);
+    setShowColorsBlock(false);
+    setShowMirrorsBlock(false);
+    setShowTypeBlock(false);
+    setShowSizeBlock(false);
+    setshowProcessingStandartBlock(true);
+    setshowProcessingСutoutBlock(false);
+  };
+
+  const handleShowProcessingСutoutBlock = () => {
+    setShowFurnitureBlock(false);
+    setShowColorsBlock(false);
+    setShowMirrorsBlock(false);
+    setShowTypeBlock(false);
+    setShowSizeBlock(false);
+    setshowProcessingStandartBlock(false);
+    setshowProcessingСutoutBlock(true);
   };
 
   return (
@@ -164,6 +258,8 @@ const EditShower = () => {
         <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`} onClick={handleShowSizeBlock}>
           Розміри
         </h1>
+        <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка 1</h1>
+        <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка 2</h1>
       </div>
       {currentObject?.furniture &&
         showFurnitureBlock &&
@@ -183,6 +279,7 @@ const EditShower = () => {
             pathDeleteFurnitureColors="https://calc-shower.herokuapp.com/remove-shower-furniture-colors"
             pathUpdateFurnituredepends="https://calc-shower.herokuapp.com/update-shower-furniture-depends"
             pathDeleteFurnituredepends="https://calc-shower.herokuapp.com/update-shower-furniture-depends"
+            setIsFetch={setIsFetch}
           />
         ))}
       {showFurnitureBlock && (
@@ -198,6 +295,7 @@ const EditShower = () => {
             key={idx}
             fullArray={currentObject.color}
             showerId={currentObject._id}
+            setIsFetch={setIsFetch}
             pathDelete="https://calc-shower.herokuapp.com/update-shower-colors"
             pathEdit="https://calc-shower.herokuapp.com/update-shower-colors"
           />
@@ -225,6 +323,7 @@ const EditShower = () => {
             el={el}
             key={idx}
             showerId={currentObject._id}
+            setIsFetch={setIsFetch}
           />
         ))}
       {currentObject?.glassThickness && showMirrorsBlock && (
@@ -256,6 +355,7 @@ const EditShower = () => {
             el={el}
             key={idx}
             showerId={currentObject._id}
+            setIsFetch={setIsFetch}
             pathDelete="https://calc-shower.herokuapp.com/remove-shower-type"
             pathEdit="https://calc-shower.herokuapp.com/update-shower-type"
           />
@@ -288,9 +388,39 @@ const EditShower = () => {
           <O_EditSizeTemplate
             el={el}
             key={idx}
+            setIsFetch={setIsFetch}
             pathEdit="https://calc-shower.herokuapp.com/update-shower-size"
           />
         ))}
+
+            {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
+                <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
+                pathEdit='https://calc-shower.herokuapp.com/update-shower-processing-standart'
+                pathDelete='https://calc-shower.herokuapp.com/remove-shower-processing-standart'
+                setIsFetch={setIsFetch}/>
+            ))
+            }
+            {showProcessingStandartBlock && 
+            <>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueProcessingStandartName} onChange={(e) => setNewValueProcessingStandartName(e.target.value)}/>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueProcessingStandartPrice} onChange={(e) => setNewValueProcessingStandartPrice(e.target.value)}/>
+            <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewProcessingStandart}>Додати новий</button>
+            </>
+            }
+            {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
+                <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
+                pathEdit='https://calc-shower.herokuapp.com/update-shower-processing-cutout'
+                pathDelete='https://calc-shower.herokuapp.com/remove-shower-processing-cutout'
+                setIsFetch={setIsFetch}/>
+            ))
+            }
+            {showProcessingСutoutBlock && 
+            <>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueProcessingСutoutName} onChange={(e) => setNewValueProcessingСutoutName(e.target.value)}/>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueProcessingСutoutPrice} onChange={(e) => setNewValueProcessingСutoutPrice(e.target.value)}/>
+            <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewProcessingСutout}>Додати новий</button>
+            </>
+            }
     </div>
   );
 };

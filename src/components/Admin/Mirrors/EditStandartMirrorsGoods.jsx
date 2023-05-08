@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, updateGoodsPath, deleteGoodsPath}) => {
+const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, updateGoodsPath, deleteGoodsPath, setIsFetch}) => {
   const [isEditGood, setIsEditGood] = useState(false);
   const [goodsNameValue, setGoodNameValue] = useState("");
   const [goodsPriceValue, setGoodPriceValue] = useState("");
@@ -28,7 +28,8 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
@@ -45,7 +46,8 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 

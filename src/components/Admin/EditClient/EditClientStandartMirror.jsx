@@ -8,7 +8,7 @@ import AdminHeader from '../AdminHeader';
 const EditClientStandartMirror = () => {
   const [currentObject, setCurrentObject] = useState({});
   const [showTypeBlock, setShowTypeBlock] = useState(true);
-
+  const [isFtch, setIsFetch] = useState(false);
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
@@ -16,7 +16,7 @@ const EditClientStandartMirror = () => {
         setCurrentObject(data[0]);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [isFtch]);
 
   return (
     <div>
@@ -29,6 +29,7 @@ const EditClientStandartMirror = () => {
           <EditStandartMirrorsType key={idxType} idxType={idxType} item={item} 
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           updateTypePath='https://calc-shower.herokuapp.com/update-client-type'
           addNewGoodsPath='https://calc-shower.herokuapp.com/add-new-client-goods'
           updateGoodsPath='https://calc-shower.herokuapp.com/update-client-goods'

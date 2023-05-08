@@ -19,6 +19,7 @@ const EditCosmeticMirrors = () => {
     const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
     const [newValueTypeName, setNewValueTypeName] = useState('');
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
+    const [isFtch, setIsFetch] = useState(false);
     
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
@@ -27,7 +28,7 @@ const EditCosmeticMirrors = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [isFtch]);
 
       const handleAddNewProcessingСutout = () => {
         fetch('https://calc-shower.herokuapp.com/add-new-cosmetic-mirrors-processing-cutout', {
@@ -44,7 +45,10 @@ const EditCosmeticMirrors = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueProcessingСutoutName('');
+            setNewValueProcessingСutoutPrice('');
           },1000)
       }
 
@@ -62,7 +66,10 @@ const EditCosmeticMirrors = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -115,9 +122,11 @@ const EditCosmeticMirrors = () => {
             <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`}  onClick={handleShowSizeBlock}>Розміри</h1>
             <h1 className={`header_item ${showLightBulbsBlock ? 'active_tab' : ''}`}  onClick={handleLightBulbsBlock}>Лампочка</h1>
             <h1 className={`header_item ${showPatronBlock ? 'active_tab' : ''}`}  onClick={handlePatronBlock}>Патрон</h1>
+            <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка</h1>
             </div>
             {showProcessingСutoutBlock && currentObject.processingСutout && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-processing-cutout'
                 pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-processing-cutout'/>
             ))
@@ -132,6 +141,7 @@ const EditCosmeticMirrors = () => {
 
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-type'/>
             ))
@@ -145,13 +155,15 @@ const EditCosmeticMirrors = () => {
             }
 
             {showSizeBlock && currentObject.size.map((el, idx) => (
-                <O_EditSizeTemplate el={el} key={idx} 
+                <O_EditSizeTemplate el={el} key={idx}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-size'/>
             ))
             }
 
             {showLightBulbsBlock &&
                 <N_EditLightBulsTemplate
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-light-bulbs'
                 currentValue={currentObject.lightBulbs}
                 showerId={currentObject._id}/>
@@ -159,6 +171,7 @@ const EditCosmeticMirrors = () => {
 
             {showPatronBlock &&
                 <N_EditPatronTemplate
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-patron'
                 currentValue={currentObject.patron}
                 showerId={currentObject._id}/>

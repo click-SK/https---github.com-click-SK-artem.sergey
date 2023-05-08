@@ -8,7 +8,7 @@ import '../../../style/admin.scss'
 const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx, 
   pathUpdateMainImg, pathUpdateSecondImg, pathUpdateTitle, pathAddNewDepends, 
   pathAddNewColors, pathDeleteFurniture, pathUpdateFurnitureColors, pathDeleteFurnitureColors,
-  pathUpdateFurnituredepends, pathDeleteFurnituredepends, isGlassPartition }) => {
+  pathUpdateFurnituredepends, pathDeleteFurnituredepends, isGlassPartition, setIsFetch }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isFurniture, setIsFurniture] = useState(false);
   const [titleValue, setTitlevalue] = useState('');
@@ -27,7 +27,6 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
   }
 
   const handleEditMainImage = async () => {
-    setIsEdit((isEdit) => !isEdit);
     const formData = new FormData();   
     formData.append('mainImage',selectedFile);
     formData.append('furnitureId',el?._id);
@@ -39,12 +38,12 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
   const handleEditSecondImage = async () => {
-    setIsEdit((isEdit) => !isEdit);
     const formData = new FormData();   
     formData.append('drawingImg',selectedFile);
     formData.append('furnitureId',el?._id);
@@ -56,13 +55,12 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
   const handleEditFurnitureTitle = async () => {
-    setIsEdit((isEdit) => !isEdit);
-
     fetch(pathUpdateTitle, {
       method: 'PATCH',
       headers: {
@@ -77,7 +75,8 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
@@ -101,7 +100,9 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueDepends('');
       },1000)
   }
 
@@ -121,7 +122,10 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setFurnitureColorName('');
+        setFurnitureColorPrice('');
       },1000)
   }
 
@@ -138,7 +142,8 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
@@ -235,6 +240,7 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
               <O_EditFurnitureDepends key={idx} idx={furnitureIdx} 
               fullArray={el?.depends} el={item} showerId={showerId} 
               showerFurnitureId={el._id}
+              setIsFetch={setIsFetch}
               pathUpdateFurnituredepends={pathUpdateFurnituredepends}
               pathDeleteFurnituredepends={pathDeleteFurnituredepends}
               />
@@ -248,6 +254,7 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
             {el.colorsFurniture.map((item, idx) => (
                 <O_EditFurnitureColorAndPrice key={idx} item={item} 
                 showerFurnitureId={el._id} showerId={showerId}
+                setIsFetch={setIsFetch}
                 pathUpdateFurnitureColors={pathUpdateFurnitureColors}
                 pathDeleteFurnitureColors={pathDeleteFurnitureColors}
                 />

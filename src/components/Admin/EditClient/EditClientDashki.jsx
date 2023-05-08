@@ -20,7 +20,7 @@ const EditClientDashki = () => {
     const [newValueProcessingStandartPrice, setNewValueProcessingStandartPrice] = useState('');
     const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
     const [newValueProcessingСutoutPrice, setNewValueProcessingСutoutPrice] = useState('');
-
+    const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-dashki")
@@ -29,7 +29,7 @@ const EditClientDashki = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [isFtch]);
 
       const handleAddNewType = () => {    
         fetch('https://calc-shower.herokuapp.com/add-new-client-dashki-type', {
@@ -45,7 +45,10 @@ const EditClientDashki = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -57,6 +60,7 @@ const EditClientDashki = () => {
             </div>
             {showTypeBlock && currentObject?.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-client-dashki-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-client-dashki-type'/>
             ))
