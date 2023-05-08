@@ -408,7 +408,7 @@ const ShowerCabin = () => {
         </div>
 
         <div className="wrap_item type_shower">
-            <h3>Обробка скла</h3>
+            <h3>Обробка скла:</h3>
             <div className="choose_item selected_shower">
               <select
                 value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
