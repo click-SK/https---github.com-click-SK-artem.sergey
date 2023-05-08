@@ -109,15 +109,14 @@ const ShowerCabin = () => {
         })
       })
   
-      const totalSum = resSizePrice + 
-      (currentType?.price || 0) + 
+      const totalSum = resSizePrice +  
       totalSumFurniture +  
-      (isAssemblingt ? Number(minInstallation) : 0) + 
+      (isAssemblingt ? currentType?.price : 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price || 0);
 
-  
+      
       const finishedShower = {
         type: currentType?.name, /* назва душ кабіни */
         goodsPrice: currentType?.price,  /* ціна душ кабіни */
@@ -264,45 +263,65 @@ const ShowerCabin = () => {
     const url = 'https://openapi.keycrm.app/v1/order';
     const correlationId = '3c1cdba9-75bf-4a63-920b-80ff07f142c0';
     const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ';
-  
-    const data = {
-      source_id: 10,
-      buyer_comment: "I want this sentence to be my buyer comment on KeyCRM",
-      discount_percent: 11.5,
-      discount_amount: 9.99,
-      shipping_price: 2.5,
-      wrap_price: 3.5,
-      taxes: 2.5,
-      buyer: {
-        full_name: "Test Kushnir",
-        email: "john.doe@mail.app",
-        phone: "+380635530117"
-      }
-    };
-  
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'Correlation-Id': correlationId,
-          'Accept': 'application/json',
-          'Pragma': 'no-cache'
-        },
-        body: JSON.stringify(data)
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (error) {
-      console.error('Error:', error.message);
+    
+    
 
-    }
+    const data = {
+      "source_id": 10,
+      "buyer_comment": finishedShowerPdf.orderComent,
+      "buyer": {
+        "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+        "phone": finishedShowerPdf.numberPhone
+      },
+      "shipping": {
+        "delivery_service_id": 1,
+        "shipping_address_city": finishedShowerPdf.adress,
+      },
+      "products": [
+        {
+          "price": finishedShowerPdf.total,
+          "quantity": 1,
+          "name": finishedShowerPdf.type,
+          "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
+          "properties": [
+            {
+              "name": finishedShowerPdf.currentProcessingStandartName,
+              "value": finishedShowerPdf.currentProcessingStandartVal
+            },
+            {
+              "name": finishedShowerPdf.currentProcessingСutoutName,
+              "value": finishedShowerPdf.currentProcessingСutoutCount
+            },
+          ]
+        }
+      ],
+    };
+
+    console.log(data);
+  
+    // try {
+    //   const response = await fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${token}`,
+    //       'Correlation-Id': correlationId,
+    //       'Accept': 'application/json',
+    //       'Pragma': 'no-cache'
+    //     },
+    //     body: JSON.stringify(data)
+    //   });
+  
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! status: ${response.status}`);
+    //   }
+  
+    //   const responseData = await response.json();
+    //   console.log(responseData);
+    // } catch (error) {
+    //   console.error('Error:', error.message);
+
+    // }
     console.log("press order");
   };
 

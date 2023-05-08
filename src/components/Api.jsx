@@ -12,64 +12,89 @@ function OrderForm() {
     const order = {
       "source_id": 10,
       "buyer_comment": "Тестове замовлення",
-      "discount_percent": 11.5,
-      "discount_amount": 9.99,
-      "shipping_price": 2.5,
-      "wrap_price": 3.5,
-      "taxes": 2.5,
       "ordered_at": "2021-12-21 14:44:00",
       "buyer": {
         "full_name": "Test Kushnir",
         "email": "john.doe@mail.app",
         "phone": "+380635530117"
+      },
+      "products": [
+        {
+          "sku": "001-242",
+          "price": 124.5,
+          "quantity": 1,
+          "name": "Iphone XS max 256gb",
+          "comment": "Наклеїти плівку",
+          "properties": [
+            {
+              "name": "Color",
+              "value": "Gold"
+            }
+          ]
+        }
+      ],
+    };
+    const testCrm = async () => {
+      const url = 'https://openapi.keycrm.app/v1/order';
+      const correlationId = '3c1cdba9-75bf-4a63-920b-80ff07f142c0';
+      const token = 'ODQ0MDA5YjE3ZmJhMGYwNzQxMTFlN2FmYmRlZjE0MzEwNDljYzM5OQ';
+    
+      const data = {
+        "source_id": 10,
+        "buyer_comment": "Тестове замовлення",
+        "ordered_at": "2021-12-21 14:44:00",
+        "buyer": {
+          "full_name": "Test Kushnir",
+          "email": "john.doe@mail.app",
+          "phone": "+380635530117"
+        },
+        "products": [
+          {
+            "sku": "001-242",
+            "price": 124.5,
+            "quantity": 1,
+            "name": "Iphone XS max 256gb",
+            "comment": "Наклеїти плівку",
+            "properties": [
+              {
+                "name": "Color",
+                "value": "Gold"
+              }
+            ]
+          }
+        ],
+      };
+    
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Correlation-Id': correlationId,
+            'Accept': 'application/json',
+            'Pragma': 'no-cache'
+          },
+          body: JSON.stringify(data)
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        const responseData = await response.json();
+        console.log(responseData);
+      } catch (error) {
+        console.error('Error:', error.message);
+  
       }
+      console.log("press order");
     };
     
-    const handleAddNewType = () => {    
-      fetch('https://calc-shower.herokuapp.com/add-new-dashki-type', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(order)
-      })
-        .then((res) => res.json())
-        setTimeout(() => {
-          window.location.reload();
-        },1000)
-    }
+
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="price">Price</label>
-        <input
-          type="number"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="phone">Phone</label>
-        <input
-          type="tel"
-          id="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <></>
   );
 }
 
