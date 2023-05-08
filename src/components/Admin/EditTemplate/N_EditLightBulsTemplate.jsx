@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../../../style/admin.scss'
 
-const N_EditLightBulsTemplate = ({currentValue, showerId, pathEdit}) => {
+const N_EditLightBulsTemplate = ({currentValue, showerId, pathEdit, setIsFetch}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [newValue, setNewValue] = useState('');
 
@@ -25,7 +25,8 @@ const N_EditLightBulsTemplate = ({currentValue, showerId, pathEdit}) => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
           },1000)
       }
 

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
+import ModalAllFurniture from "./ModalAllFurniture";
 import ListTheChoseFurniture from "./ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfFileDashkiManager";
 import PdfFileClient from "./PdfFile/PdfFileDashkiClient";
@@ -22,6 +23,7 @@ const Dashki = () => {
   const [isDepository, setIsDepository] = useState(false);
   const [depositoryValue, setDepositoryValue] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalAllFurnitureIsOpen, setModalAllFurnitureIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
@@ -74,6 +76,14 @@ const Dashki = () => {
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
+  };
+
+  const handleOpenAllFurnitureModal = () => {
+    setModalAllFurnitureIsOpen(true);
+  };
+
+  const handleCloseModalAllFurniture = () => {
+    setModalAllFurnitureIsOpen(false);
   };
 
   console.log('depositoryValue',depositoryValue);
@@ -314,6 +324,10 @@ const Dashki = () => {
               <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
+        </div>
+        <div className="firnitur">
+            <button className="button_open" onClick={handleOpenAllFurnitureModal}>Вся фурнітура</button>
+            <ModalAllFurniture isOpen={modalAllFurnitureIsOpen} onClose={handleCloseModalAllFurniture}/>
         </div>
         <ListTheChoseFurniture/>
       <DeliveryTemplate/>

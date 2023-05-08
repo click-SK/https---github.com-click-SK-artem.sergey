@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
 import '../../../style/admin.scss'
 
-const O_EditTypeTemplate = ({el,showerId, pathDelete, pathEdit}) => {
+const O_EditTypeTemplate = ({el,showerId, pathDelete, pathEdit, setIsFetch}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentColorValue, setCurrentColorValue] = useState('');
     const [currentPriceValue, setCurrentPriceValue] = useState(0);
@@ -29,7 +29,8 @@ const O_EditTypeTemplate = ({el,showerId, pathDelete, pathEdit}) => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state)
           },1000)
       }
 
@@ -46,7 +47,8 @@ const O_EditTypeTemplate = ({el,showerId, pathDelete, pathEdit}) => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state)
           },1000)
       }
 

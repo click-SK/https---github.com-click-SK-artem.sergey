@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
 import '../../../style/admin.scss'
 
-const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx,pathUpdateFurnituredepends, pathDeleteFurnituredepends }) => {
+const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx,pathUpdateFurnituredepends, pathDeleteFurnituredepends, setIsFetch }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
 
@@ -15,6 +15,7 @@ const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx
   console.log('idx',idx);
 
   const handleEditButtonSave = () => {
+    setIsEdit((isEdit) => !isEdit);
     let newArr = [...fullArray];
     const currentIndex = fullArray.indexOf(el);
     newArr.splice(currentIndex,1, currentValue);
@@ -35,7 +36,8 @@ const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
@@ -58,7 +60,8 @@ const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx
     })
     .then((res) => res.json())
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state);
     },1000)
   }
 

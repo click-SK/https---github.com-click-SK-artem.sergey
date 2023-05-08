@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {AiFillDelete} from 'react-icons/ai';
 import '../../../style/admin.scss'
 
-const A_EditColorsTemplate = ({ el, fullArray, showerId, pathDelete, pathEdit }) => {
+const A_EditColorsTemplate = ({ el, fullArray, showerId, pathDelete, pathEdit, setIsFetch }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
 
@@ -30,7 +30,8 @@ const A_EditColorsTemplate = ({ el, fullArray, showerId, pathDelete, pathEdit })
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
       },1000)
   }
 
@@ -51,7 +52,8 @@ const A_EditColorsTemplate = ({ el, fullArray, showerId, pathDelete, pathEdit })
     })
     .then((res) => res.json())
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      setIsFetch(state=>!state);
     },1000)
   }
 

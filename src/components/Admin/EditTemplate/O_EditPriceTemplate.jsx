@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../../style/admin.scss'
 
 
-const O_EditPriceTemplate = ({el, pathEdit, showerId}) => {
+const O_EditPriceTemplate = ({el, pathEdit, showerId, setIsFetch}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentPriceValue, setCurrentPriceValue] = useState(0);
 
@@ -26,7 +26,8 @@ const O_EditPriceTemplate = ({el, pathEdit, showerId}) => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
           },1000)
       }
 

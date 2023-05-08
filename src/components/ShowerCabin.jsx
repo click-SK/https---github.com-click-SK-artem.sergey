@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
+import ModalAllFurniture from "./ModalAllFurniture";
 import ListTheChosenFurniture from "./ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfShowerManadger";
 import PdfFileClient from "./PdfFile/PdfShowerClient";
@@ -15,6 +16,7 @@ const ShowerCabin = () => {
   const [currentGlass, setCurrentGlass] = useState("");
   const [currentGlassColor, setCurrentGlassColor] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalAllFurnitureIsOpen, setModalAllFurnitureIsOpen] = useState(false);
   const [widthValue, setWidthValue] = useState('');
   const [heightValue, setHeightValue] = useState('');
   const [depthValue, setDepthValue] = useState('');
@@ -26,13 +28,11 @@ const ShowerCabin = () => {
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
-  const [adress, setAdress] = useState('');
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
-  const [delivery, setDelivery] = useState(false);
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
   const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [furniture, setFurniture] = useState('none');
+
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -167,36 +167,19 @@ const ShowerCabin = () => {
     setModalIsOpen(true);
   };
 
+  const handleOpenAllFurnitureModal = () => {
+    setModalAllFurnitureIsOpen(true);
+  };
+
+  const handleCloseModalAllFurniture = () => {
+    setModalAllFurnitureIsOpen(false);
+  };
+
+
   const handleCloseModal = () => {
     setModalIsOpen(false);
-
-    const furnitureFinObj = {};
-    const furnitureFinArr = [];
-
-
-    cart.forEach((item, index) => {
-        const itemData = {
-          colorsFurniture: item.colorsFurniture[0].color,
-          colorsFurniturePrice: item.colorsFurniture[0].price,
-          tittleName: item.title,
-          name2: item.depends[0],
-          name3: item.depends[1],
-          drawingImgSrc: item.drawingImg,
-          mainImageSrc: item.mainImage,
-          count: item.count,
-        };
-        furnitureFinArr.push(itemData);
-        // setFurniture(furnitureFinObj);
-        
-      });
-    
-    furnitureFinArr.forEach((item, index) => {
-        furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
-        // setFurniture(furnitureFinArr);
-        setFurniture(furnitureFinObj);
-      });
-    
   };
+
 
   const changeIsAssemblingt = () => {
     // const paintingObj = data?.option?.painting;
@@ -207,24 +190,10 @@ const ShowerCabin = () => {
     // const paintingObj = data?.option?.painting;
     setMinInstallation(minInstallation => !minInstallation)
   }
-    const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery(delivery => !delivery)
-  }
 
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  }
   const addPriceInstalation = (e) => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
-  }
-
-
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
   }
 
   const selectProcessingStandartFunc = (e) => {
@@ -450,6 +419,10 @@ const ShowerCabin = () => {
         <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
+        </div>
+        <div className="firnitur">
+            <button className="button_open" onClick={handleOpenAllFurnitureModal}>Вся фурнітура</button>
+            <ModalAllFurniture isOpen={modalAllFurnitureIsOpen} onClose={handleCloseModalAllFurniture}/>
         </div>
         <ListTheChosenFurniture />
 

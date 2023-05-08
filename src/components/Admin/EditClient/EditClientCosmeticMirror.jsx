@@ -13,6 +13,7 @@ const EditClientCosmeticMirror = () => {
     const [showTypeBlock, setShowTypeBlock] = useState(true);
     const [newValueTypeName, setNewValueTypeName] = useState('');
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
+    const [isFtch, setIsFetch] = useState(false);
     
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
@@ -21,7 +22,7 @@ const EditClientCosmeticMirror = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [isFtch]);
 
       const handleAddNewType = () => {    
         fetch('https://calc-shower.herokuapp.com/add-new-client-cosmetic-mirrors-type', {
@@ -37,7 +38,10 @@ const EditClientCosmeticMirror = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -49,6 +53,7 @@ const EditClientCosmeticMirror = () => {
             </div>
             {showTypeBlock && currentObject?.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-client-cosmetic-mirrors-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-client-cosmetic-mirrors-type'/>
             ))

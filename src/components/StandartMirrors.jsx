@@ -30,9 +30,6 @@ const StandartMirrors = ({ data }) => {
   const [validationInput, setValidationInput] = useState(false);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState(false);
-  const [adress, setAdress] = useState('');
-  const [deliveryRoadDistance, setDeliveryRoadDistance] = useState('');
-  const [delivery, setDelivery] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
@@ -55,7 +52,7 @@ const StandartMirrors = ({ data }) => {
 
 
   const calcTotalSum = () => {
-    if(sizeWidthMirrors && sizeHeightMirrors || !currentType && !currentGoods) {
+    if(sizeWidthMirrors && sizeHeightMirrors) {
       setValidationInput(false)
       const priceMeterCord = data?.option?.cord?.price;
 
@@ -221,19 +218,6 @@ const StandartMirrors = ({ data }) => {
     const changeMinInstallationFunc = () => {
     // const paintingObj = data?.option?.painting;
     setMinInstallation(minInstallation => !minInstallation)
-  }
-    const isDelivery = () => {
-    // const paintingObj = data?.option?.painting;
-    setDelivery(delivery => !delivery)
-  }
-
-  const addAdress = (e) => {
-    // const cordObj = data?.option?.cord;
-    setAdress(e.target.value);
-  }
-  const roadDistance = (e) => {
-    // const cordObj = data?.option?.cord;
-    setDeliveryRoadDistance(e.target.value);
   }
 
   const selectProcessingСutoutFunc = (e) => {
