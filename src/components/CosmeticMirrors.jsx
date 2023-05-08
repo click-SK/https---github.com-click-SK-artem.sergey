@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./ModalGlassPartitions";
 import ListTheChoseFurniture from "./ListTheChoseFurniture";
-import { CSVLink } from "react-csv";
+import PdfFile from "./PdfFile/PdfFileCosmeticMirorrsManager";
+import PdfFileClient from "./PdfFile/PdfFileCosmeticMirorrsClient";
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "./DeliveryTemplate";
 import "../style/shower.scss";
@@ -15,6 +17,7 @@ const CosmeticMirrors = ({ data }) => {
   const [patronCount, setPatronCount] = useState('');
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
+  const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -25,6 +28,19 @@ const CosmeticMirrors = ({ data }) => {
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
   const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
   
+  console.log("TEST ",data?.lightBulbs);
+
+  let deliveryPrice = 0;
+  let deliveryPriceOverSity = 0;
+
+  if (deliveryAdress != ''){
+    deliveryPrice = 200
+  }
+
+  if (deliveryBoolean){
+    deliveryPriceOverSity = Number(deliveryDistance) * 26
+  }
+
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
     setCurrentType(selectedType);
@@ -46,27 +62,42 @@ const CosmeticMirrors = ({ data }) => {
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
       (data?.lightBulbs * lightBulbsCount || 0) +
       (data?.patron * patronCount || 0) +
-      (currentProcessingСutout?.price || 0);
+      (currentProcessingСutout?.price || 0)+ 
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
-        // typeName: currentType?.name,
-        // typePrice: currentType?.price,
-        // glass: currentGlass,
-        // glassColorName: currentGlassColor?.name,
-        // glassColorPrice: currentGlassColor?.price,
-        // width: widthValue,
-        // height: heightValue,
-        // volume: volumValue,
-        // furniture: cart,
-        // total: totalSum,
+        type: currentType?.name,
+        typePrice: currentType?.price,
+        width: widthValue ? widthValue : '' ,
+        height: heightValue ? heightValue : '',
+        lightValue: lightBulbsCount ? lightBulbsCount : '',
+        lightPrice: lightBulbsCount ? data?.lightBulbs : '',
+        lightName: lightBulbsCount ? 'Лампочки' : '',
+        patronPrice: patronCount ? data?.patron : '',
+        patronValue: patronCount ? patronCount : '',
+        patronName: patronCount ? 'Патрони' : '',
+        adress:deliveryAdress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
+        firstName: deliveryFirstName,
+        lastName: deliveryLastName,
+        surname: deliverySurName,
+        numberPhone: deliveryNumberPhone,
+        orderComent: deliveryOrderComent,
+        selectedProcessingName: currentProcessingСutout ? currentProcessingСutout?.name : '',
+        selectedProcessingPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
+        selectedProcessingCount: currentProcessingСutout ? currentProcessingСutout?.count : '',
+        total: totalSum,
       }
-      console.log('finishedShower',finishedShower);
+
+      setFinishMirrorPdf(finishedShower)
+
       setTotalSum(totalSum)
     } else {
       setValidationInput(true);
     }
   }
-  console.log("data", data);
+
   return (
     <div>
       <div className="wrap_item type_shower">
@@ -172,6 +203,14 @@ const CosmeticMirrors = ({ data }) => {
               </div>
             </div>
             <div className="send_order">
+            <div className="mirror_button_exel" style={{fontSize: 14}}>
+            <PDFDownloadLink  document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
+            </PDFDownloadLink>
+            <PDFDownloadLink className="" document={< PdfFileClient order={finishMirrorPdf}/>} fileName="orderDate">
+             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            </PDFDownloadLink>
+            </div>
             <button>Оформити</button>
             </div>
         </div> 
