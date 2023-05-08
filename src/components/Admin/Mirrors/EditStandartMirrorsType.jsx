@@ -4,7 +4,7 @@ import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs
 import EditStandartMirrorsGoods from './EditStandartMirrorsGoods';
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsType = ({item, idxType, typeName, showerId}) => {
+const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypePath, deleteGoodsPath, addNewGoodsPath, updateGoodsPath}) => {
     const [showBlock, setShowblock] = useState(false);
     const [isShowInput, setIsShowInput] = useState(false);
     const [typeNameValue, setTypeNameValue] = useState("");
@@ -17,7 +17,7 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId}) => {
       };
 
       const sendData = () => {
-        fetch('https://calc-shower.herokuapp.com/update-type', {
+        fetch(updateTypePath, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId}) => {
       }
 
       const handleAddNewGoods = () => {    
-        fetch('https://calc-shower.herokuapp.com/add-new-goods', {
+        fetch(addNewGoodsPath, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -97,7 +97,9 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId}) => {
                   <>
                       <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} 
                       key={el.name} showerId={showerId}
-                      typeName={typeName}/>
+                      typeName={typeName}
+                      updateGoodsPath={updateGoodsPath}
+                      deleteGoodsPath={deleteGoodsPath}/>
                   </>
                 ))}
                         <>

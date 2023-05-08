@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName}) => {
+const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, updateGoodsPath, deleteGoodsPath}) => {
   const [isEditGood, setIsEditGood] = useState(false);
   const [goodsNameValue, setGoodNameValue] = useState("");
   const [goodsPriceValue, setGoodPriceValue] = useState("");
@@ -14,7 +14,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName}) =
   };
 
   const sendData = () => {
-    fetch('https://calc-shower.herokuapp.com/update-goods', {
+    fetch(updateGoodsPath, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName}) =
   }
 
   const handleDelete = () => {
-    fetch('https://calc-shower.herokuapp.com/remove-mirror-goods', {
+    fetch(deleteGoodsPath, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
