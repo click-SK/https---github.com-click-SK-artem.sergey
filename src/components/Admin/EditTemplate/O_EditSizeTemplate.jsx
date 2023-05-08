@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../../style/admin.scss'
 
 
-const EditShowerSizeTemplate = ({el, pathEdit}) => {
+const EditShowerSizeTemplate = ({el, pathEdit, setIsFetch}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currentPriceValue, setCurrentPriceValue] = useState(0);
 
@@ -27,7 +27,8 @@ const EditShowerSizeTemplate = ({el, pathEdit}) => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
           },1000)
       }
 

@@ -5,6 +5,7 @@ import EditStandartMirrorsType from "./EditStandartMirrorsType";
 import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 import O_EditPriceTemplate from "../EditTemplate/O_EditPriceTemplate";
 import AdminHeader from '../AdminHeader';
+import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
 const EditStandartMirrors = () => {
   const [currentObject, setCurrentObject] = useState({});
   const [showTypeBlock, setShowTypeBlock] = useState(true);
@@ -23,7 +24,10 @@ const EditStandartMirrors = () => {
   const [newValueSwitchPrice, setNewValueSwitchPrice] = useState('');
   const [newValueColorName, setNewValueColorName] = useState('');
   const [newValueColorPrice, setNewValueColorPrice] = useState('');
-
+  const [isFtch, setIsFetch] = useState(false);
+  const [showProcessingСutoutBlock, setshowProcessingСutoutBlock] = useState(false);
+  const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
+  const [newValueProcessingСutoutPrice, setNewValueProcessingСutoutPrice] = useState('');
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
@@ -31,7 +35,7 @@ const EditStandartMirrors = () => {
         setCurrentObject(data[0]);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [isFtch]);
 
   const handleAddNewColor = () => {    
     fetch('https://calc-shower.herokuapp.com/add-new-mirror-color', {
@@ -47,7 +51,10 @@ const EditStandartMirrors = () => {
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueColorName('');
+        setNewValueColorPrice('');
       },1000)
   }
 
@@ -66,7 +73,10 @@ const EditStandartMirrors = () => {
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueSwitchName('');
+        setNewValueSwitchPrice('');
       },1000)
   }
 
@@ -84,7 +94,10 @@ const EditStandartMirrors = () => {
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueBackLightName('');
+        setNewValueBackLightPrice('');
       },1000)
   }
 
@@ -102,7 +115,32 @@ const EditStandartMirrors = () => {
     })
       .then((res) => res.json())
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueFrameName('');
+        setNewValueFramePrice('');
+      },1000)
+  }
+
+  const handleAddNewProcessingСutout = () => {
+    fetch('https://calc-shower.herokuapp.com/add-new-standart-mirror-processing-cutout', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newValueProcessingСutoutName,
+        price: newValueProcessingСutoutPrice,
+        count: 1,
+        showerId: currentObject._id
+      })
+    })
+      .then((res) => res.json())
+      setTimeout(() => {
+        // window.location.reload();
+        setIsFetch(state=>!state);
+        setNewValueProcessingСutoutName('');
+        setNewValueProcessingСutoutPrice('');
       },1000)
   }
 
@@ -115,6 +153,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowFrameBlock = () => {
@@ -126,6 +165,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowBackLightBlock = () => {
@@ -137,6 +177,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowSwitchBlock = () => {
@@ -148,6 +189,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowColorsBlock = () => {
@@ -159,6 +201,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowCordBlock = () => {
@@ -170,6 +213,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(true);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowWarmedUpBlock = () => {
@@ -181,6 +225,7 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(true);
     setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(false);
   }
 
   const handleShowPaintingBlock = () => {
@@ -192,7 +237,20 @@ const EditStandartMirrors = () => {
     setShowCordBlock(false);
     setShowWarmedUpBlock(false);
     setShowPaintingBlock(true);
+    setshowProcessingСutoutBlock(false);
   }
+
+  const handleShowProcessingСutoutBlock = () => {
+    setShowTypeBlock(false);
+    setShowFrameBlock(false);
+    setShowBackLightBlock(false);
+    setShowSwitchBlock(false);
+    setShowColorsBlock(false);
+    setShowCordBlock(false);
+    setShowWarmedUpBlock(false);
+    setShowPaintingBlock(false);
+    setshowProcessingСutoutBlock(true);
+  };
 
 
   console.log('currentObject[idxType].type.name',currentObject?.type && currentObject?.type[1]?.name);
@@ -209,12 +267,14 @@ const EditStandartMirrors = () => {
             <h1 className={`header_item ${showCordBlock ? 'active_tab' : ''}`}  onClick={handleShowCordBlock}>Кабель</h1>
             <h1 className={`header_item ${showWarmedUpBlock ? 'active_tab' : ''}`}  onClick={handleShowWarmedUpBlock}>Підігрів</h1>
             <h1 className={`header_item ${showPaintingBlock ? 'active_tab' : ''}`}  onClick={handleShowPaintingBlock}>Покраска</h1>
+            <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка</h1>
             </div>
         {showTypeBlock && currentObject?.type &&
         currentObject?.type.map((item, idxType) => (
           <EditStandartMirrorsType key={idxType} idxType={idxType} item={item} 
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           updateTypePath='https://calc-shower.herokuapp.com/update-type'
           addNewGoodsPath='https://calc-shower.herokuapp.com/add-new-goods'
           updateGoodsPath='https://calc-shower.herokuapp.com/update-goods'
@@ -223,6 +283,7 @@ const EditStandartMirrors = () => {
         {showFrameBlock && 
         currentObject?.option?.frame.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           pathEdit='https://calc-shower.herokuapp.com/update-mirror-frame'
           pathDelete='https://calc-shower.herokuapp.com/remove-mirror-frame'/>
         ))}
@@ -237,6 +298,7 @@ const EditStandartMirrors = () => {
             {showBackLightBlock &&
         currentObject?.option?.backLight.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           pathEdit='https://calc-shower.herokuapp.com/update-mirror-backlight'
           pathDelete='https://calc-shower.herokuapp.com/remove-mirror-backlight'/>
         ))}
@@ -251,6 +313,7 @@ const EditStandartMirrors = () => {
             {showSwitchBlock &&
         currentObject?.option?.switch.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           pathEdit='https://calc-shower.herokuapp.com/update-mirror-switch'
           pathDelete='https://calc-shower.herokuapp.com/remove-mirror-switch'/>
         ))}
@@ -265,6 +328,7 @@ const EditStandartMirrors = () => {
             {showColorsBlock &&
         currentObject?.option?.color.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+          setIsFetch={setIsFetch}
           pathEdit='https://calc-shower.herokuapp.com/update-mirror-color'
           pathDelete='https://calc-shower.herokuapp.com/remove-mirror-color'/>
         ))}
@@ -277,20 +341,37 @@ const EditStandartMirrors = () => {
             }
             {showCordBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.cord}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-mirror-cord-price'
                 showerId={currentObject?._id}/>
             }
 
             {showWarmedUpBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.warmedUp}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-mirror-warmed-up-price'
                 showerId={currentObject?._id}/>
             }
 
             {showPaintingBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.painting}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-mirror-painting-price'
                 showerId={currentObject?._id}/>
+            }
+            {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
+                <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
+                pathEdit='https://calc-shower.herokuapp.com/update-standart-mirror-processing-cutout'
+                pathDelete='https://calc-shower.herokuapp.com/remove-standart-mirror-processing-cutout'
+                setIsFetch={setIsFetch}/>
+            ))
+            }
+            {showProcessingСutoutBlock && 
+            <>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Назва" value={newValueProcessingСutoutName} onChange={(e) => setNewValueProcessingСutoutName(e.target.value)}/>
+            <input className=" edit_new_glass_input edit_new_glass-color_input" placeholder="Ціна" value={newValueProcessingСutoutPrice} onChange={(e) => setNewValueProcessingСutoutPrice(e.target.value)}/>
+            <button className=" edit_new_glass_button edit_new_glass-color_button" onClick={handleAddNewProcessingСutout}>Додати новий</button>
+            </>
             }
     </div>
   );

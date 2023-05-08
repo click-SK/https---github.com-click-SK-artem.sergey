@@ -25,6 +25,7 @@ const EditDashki = () => {
     const [newValueProcessingStandartPrice, setNewValueProcessingStandartPrice] = useState('');
     const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
     const [newValueProcessingСutoutPrice, setNewValueProcessingСutoutPrice] = useState('');
+    const [isFtch, setIsFetch] = useState(false);
 
 
     useEffect(() => {
@@ -34,7 +35,8 @@ const EditDashki = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+        console.log('WORK&&&&');
+      },[isFtch]);
 
       const handleAddNewFurniture = () => {
         fetch('https://calc-shower.herokuapp.com/add-furniture', {
@@ -48,7 +50,8 @@ const EditDashki = () => {
           })
             .then((res) => res.json())
             setTimeout(() => {
-              window.location.reload();
+              // window.location.reload();
+              setIsFetch(state=>!state)
             },1000)
       }
 
@@ -66,7 +69,10 @@ const EditDashki = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -84,7 +90,10 @@ const EditDashki = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueColorName('');
+            setNewValueColorPrice('');
           },1000)
       }
 
@@ -102,7 +111,10 @@ const EditDashki = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueProcessingStandartName('');
+            setNewValueProcessingStandartPrice('');
           },1000)
       }
 
@@ -121,7 +133,10 @@ const EditDashki = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueProcessingСutoutName('');
+            setNewValueProcessingСutoutPrice('');
           },1000)
       }
 
@@ -193,6 +208,7 @@ const EditDashki = () => {
             {currentObject?.furniture && showFurnitureBlock && currentObject.furniture.map((el, furnitureIdx) => (
                 <O_EditFurnitureTemplate key={el.title} el={el} 
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathUpdateMainImg='https://calc-shower.herokuapp.com/update-dashki-furniture-main-image'
                 pathUpdateSecondImg='https://calc-shower.herokuapp.com/update-dashki-furniture-second-image'
                 pathUpdateTitle='https://calc-shower.herokuapp.com/update-dashki-furniture-title'
@@ -209,7 +225,8 @@ const EditDashki = () => {
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
                 pathEdit='https://calc-shower.herokuapp.com/update-dashki-type'
-                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-type'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-type'
+                setIsFetch={setIsFetch}/>
             ))
             }
             {showTypeBlock && 
@@ -221,13 +238,15 @@ const EditDashki = () => {
             }
             {showSizeBlock && currentObject.size.map((el, idx) => (
                 <O_EditSizeTemplate el={el} key={idx} 
-                pathEdit='https://calc-shower.herokuapp.com/update-dashki-size'/>
+                pathEdit='https://calc-shower.herokuapp.com/update-dashki-size'
+                setIsFetch={setIsFetch}/>
             ))
             }
             {showColorBlock && currentObject.color.map((el, idx) => (
                 <O_EditColorTemplate el={el} key={idx} showerId={currentObject._id}
                 pathEdit='https://calc-shower.herokuapp.com/update-dashki-color'
-                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-color'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-color'
+                setIsFetch={setIsFetch}/>
             ))
             }
             {showColorBlock &&
@@ -240,7 +259,8 @@ const EditDashki = () => {
           {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
                 <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
                 pathEdit='https://calc-shower.herokuapp.com/update-dashki-processing-standart'
-                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-processing-standart'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-processing-standart'
+                setIsFetch={setIsFetch}/>
             ))
             }
             {showProcessingStandartBlock && 
@@ -253,7 +273,8 @@ const EditDashki = () => {
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
                 pathEdit='https://calc-shower.herokuapp.com/update-dashki-processing-cutout'
-                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-processing-cutout'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-dashki-processing-cutout'
+                setIsFetch={setIsFetch}/>
             ))
             }
             {showProcessingСutoutBlock && 

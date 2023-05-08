@@ -13,6 +13,7 @@ const EditShowerClient = () => {
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
     const [newValueDorsHandlesName, setNewValueDorsHandlesName] = useState('');
     const [newValueDorsHandlesPrice, setNewValueDorsHandlesPrice] = useState('');
+    const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -21,7 +22,7 @@ const EditShowerClient = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [isFtch]);
 
       const handleAddNewType = () => {    
         fetch('https://calc-shower.herokuapp.com/add-new-shower-client-type', {
@@ -37,7 +38,10 @@ const EditShowerClient = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -55,7 +59,10 @@ const EditShowerClient = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueDorsHandlesName('');
+            setNewValueDorsHandlesPrice('');
           },1000)
       }
 
@@ -81,6 +88,7 @@ const EditShowerClient = () => {
             </div>
             {showTypeBlock && currentObject.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-shower-client-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-shower-client-type'/>
             ))
@@ -95,6 +103,7 @@ const EditShowerClient = () => {
 
             {showDorsHandlesBlock && currentObject.dorsHandles.map((el, idx) => (
                 <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-shower-handle-dors'
                 pathDelete='https://calc-shower.herokuapp.com/remove-shower-handle-dors'/>
             ))

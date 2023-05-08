@@ -28,6 +28,7 @@ const EditGlassPartition = () => {
     const [newValueTypeName, setNewValueTypeName] = useState('');
     const [newValueTypePrice, setNewValueTypePrice] = useState('');
     const [newValueTypePartition, setNewValueTypePartition] = useState('');
+    const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
         fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -36,7 +37,7 @@ const EditGlassPartition = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [isFtch]);
 
     const handleAddNewProcessingStandart = () => {
         fetch('https://calc-shower.herokuapp.com/add-new-glass-partitions-processing-standart', {
@@ -52,7 +53,10 @@ const EditGlassPartition = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueProcessingStandartName('');
+            setNewValueProcessingStandartPrice('');
           },1000)
       }
 
@@ -71,7 +75,10 @@ const EditGlassPartition = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueProcessingСutoutName('');
+            setNewValueProcessingСutoutPrice('');
           },1000)
       }
 
@@ -89,7 +96,10 @@ const EditGlassPartition = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueColorName('');
+            setNewValueColorPrice('');
           },1000)
       }
 
@@ -107,7 +117,10 @@ const EditGlassPartition = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypeName('');
+            setNewValueTypePrice('');
           },1000)
       }
 
@@ -129,7 +142,9 @@ const EditGlassPartition = () => {
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueTypePartition('');
           },1000)
       }
 
@@ -145,7 +160,8 @@ const EditGlassPartition = () => {
           })
             .then((res) => res.json())
             setTimeout(() => {
-              window.location.reload();
+              // window.location.reload();
+              setIsFetch(state=>!state);
             },1000)
       }
 
@@ -236,6 +252,7 @@ const EditGlassPartition = () => {
                 <O_EditFurnitureTemplate key={el.title} el={el} 
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
                 isGlassPartition={true}
+                setIsFetch={setIsFetch}
                 pathUpdateMainImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-main-image'
                 pathUpdateSecondImg='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-second-image'
                 pathUpdateTitle='https://calc-shower.herokuapp.com/update-glass-partitions-furniture-title'
@@ -252,6 +269,7 @@ const EditGlassPartition = () => {
 
             {showColorBlock && currentObject.color.map((el, idx) => (
                 <O_EditColorTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-color'
                 pathDelete='https://calc-shower.herokuapp.com/remove-glass-partitions-color'/>
             ))
@@ -266,6 +284,7 @@ const EditGlassPartition = () => {
 
             {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
                 <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-processing-standart'
                 pathDelete='https://calc-shower.herokuapp.com/remove-glass-partitions-processing-standart'/>
             ))
@@ -279,6 +298,7 @@ const EditGlassPartition = () => {
             }
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-processing-cutout'
                 pathDelete='https://calc-shower.herokuapp.com/remove-glass-partitions-processing-cutout'/>
             ))
@@ -291,12 +311,14 @@ const EditGlassPartition = () => {
             </>
             }
             {showSizeBlock && currentObject.size.map((el, idx) => (
-                <O_EditSizeTemplate el={el} key={idx} 
+                <O_EditSizeTemplate el={el} key={idx}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-size'/>
             ))
             }
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-glass-partitions-type'/>
             ))
@@ -312,6 +334,7 @@ const EditGlassPartition = () => {
             {showTypePartitionBlock && currentObject.typePartitions.map((el, idx) => (
                  <A_EditColorsTemplate el={el} key={idx} 
                  fullArray={currentObject.typePartitions} showerId={currentObject._id}
+                 setIsFetch={setIsFetch}
                  pathDelete='https://calc-shower.herokuapp.com/update-glass-partitions-colors'
                  pathEdit='https://calc-shower.herokuapp.com/update-glass-partitions-colors'
                  />

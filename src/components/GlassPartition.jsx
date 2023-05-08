@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./ModalGlassPartitions";
+import ModalAllFurniture from "./ModalAllFurniture";
 import ListTheChoseFurniture from "./ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfFilePartitionManager";
 import PdfFileClient from "./PdfFile/PdfFilePartitionClient";
@@ -23,6 +24,7 @@ const GlassPartition = () => {
   const [volumValue, setVolumValue] = useState(0);
   const [validationInput, setValidationInput] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalAllFurnitureIsOpen, setModalAllFurnitureIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
@@ -130,6 +132,16 @@ const GlassPartition = () => {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
+  
+  const handleOpenAllFurnitureModal = () => {
+    setModalAllFurnitureIsOpen(true);
+  };
+
+  const handleCloseModalAllFurniture = () => {
+    setModalAllFurnitureIsOpen(false);
+  };
+
 
   const calcTotalSumFunc = () => {
     if(heightValue && widthValue) {
@@ -343,6 +355,10 @@ const GlassPartition = () => {
         <div className="firnitur">
             <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
             <ModalGlassPartitions currentPartitions={currentTypePartitions} isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
+        </div>
+        <div className="firnitur">
+            <button className="button_open" onClick={handleOpenAllFurnitureModal}>Вся фурнітура</button>
+            <ModalAllFurniture isOpen={modalAllFurnitureIsOpen} onClose={handleCloseModalAllFurniture}/>
         </div>
         <ListTheChoseFurniture/>
 

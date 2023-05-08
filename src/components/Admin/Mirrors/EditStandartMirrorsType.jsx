@@ -4,7 +4,7 @@ import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs
 import EditStandartMirrorsGoods from './EditStandartMirrorsGoods';
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypePath, deleteGoodsPath, addNewGoodsPath, updateGoodsPath}) => {
+const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypePath, deleteGoodsPath, addNewGoodsPath, updateGoodsPath, setIsFetch}) => {
     const [showBlock, setShowblock] = useState(false);
     const [isShowInput, setIsShowInput] = useState(false);
     const [typeNameValue, setTypeNameValue] = useState("");
@@ -30,7 +30,8 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
           },1000)
       }
 
@@ -48,7 +49,10 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
         })
           .then((res) => res.json())
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
+            setIsFetch(state=>!state);
+            setNewValueGoodsName('');
+            setNewValueGoodsPrice('');
           },1000)
       }
       
@@ -98,6 +102,7 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
                       <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} 
                       key={el.name} showerId={showerId}
                       typeName={typeName}
+                      setIsFetch={setIsFetch}
                       updateGoodsPath={updateGoodsPath}
                       deleteGoodsPath={deleteGoodsPath}/>
                   </>
