@@ -72,8 +72,8 @@ const DeliveryTemplate = () => {
                 <input className="cabel" placeholder="Адреса доставки" value={adress} onChange={(e) => addAdress(e.target.value)}/>
                 <div className="delivery_addres">
                     <div className="checkbox_wrap ">
-                      <input id="checkbox5"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
-                      <label className="checkbox-label" htmlFor="checkbox5"></label>
+                      <input id="checkboxdelivery"  className="checkbox" type='checkbox' checked={delivery} onChange={isDelivery}/>
+                      <label className="checkbox-label" htmlFor="checkboxdelivery"></label>
                       <p style={{marginTop: 5}}>За місто</p> 
                     </div>
                     <input className="cabel width_delivery" type="number" placeholder="Відстань - км" value={deliveryRoadDistance} onChange={(e) => roadDistance(e.target.value)}/>

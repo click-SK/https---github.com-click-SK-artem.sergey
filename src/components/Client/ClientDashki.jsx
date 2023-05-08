@@ -106,7 +106,8 @@ const ClientDashki = () => {
       (isVanta ? currentObject?.vanta * vantaValue : 0) +
       (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) +
-      (currentProcessingСutout?.price || 0) + (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
+      (currentProcessingСutout?.price || 0) + 
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
         type:  currentType ?  currentType.name : '', /* назва */

@@ -39,7 +39,9 @@ const ShowerCabin = () => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
  
 
   useEffect(() => {
@@ -93,12 +95,12 @@ const ShowerCabin = () => {
        intslPrice = calcSquareMeter * 350
      };
      
-     if (adress != ''){
+     if (deliveryAdress != ''){
        deliveryPrice = 200
      }
 
-     if (delivery){
-       deliveryPriceOverSity = Number(deliveryRoadDistance) * 26
+     if (deliveryBoolean){
+       deliveryPriceOverSity = Number(deliveryDistance) * 26
      }
   
       cart.forEach((el) => {
@@ -111,7 +113,7 @@ const ShowerCabin = () => {
       (currentType?.price || 0) + 
       totalSumFurniture +  
       (isAssemblingt ? Number(minInstallation) : 0) + 
-      (delivery ? deliveryPriceOverSity : deliveryPrice) +
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price || 0);
 
@@ -127,9 +129,9 @@ const ShowerCabin = () => {
         glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
         volume: volumValue, 
         cart: cart, /* масив фурнітур душ кабіни */
-        adress:adress, /* адреса доставки */
-        deliveryPriceOverSity: delivery ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: !delivery ? deliveryPrice : '',  /* ціна доставки по місту */
+        adress:deliveryAdress, /* адреса доставки */
+        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
+        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
         firstName: deliveryFirstName,
         lastName: deliveryLastName,
         surname: deliverySurName,

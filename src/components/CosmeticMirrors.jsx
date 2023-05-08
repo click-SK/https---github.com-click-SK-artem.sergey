@@ -21,7 +21,10 @@ const CosmeticMirrors = ({ data }) => {
   const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
   const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
   const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-
+  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
+  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
+  
   const selectTypeFunc = (e) => {
     const selectedType = JSON.parse(e.target.value);
     setCurrentType(selectedType);
