@@ -147,7 +147,7 @@ const StandartMirrors = ({ data }) => {
         isAssemblingOption: isAssemblingt ? 'По розміру' : '',
         selectedProcessingName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         selectedProcessingPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
-        selectedProcessingCount: currentProcessingСutout ? currentProcessingСutout?.count : '',
+        selectedProcessingCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '',
         total: total
       }
   
@@ -225,39 +225,129 @@ const StandartMirrors = ({ data }) => {
     setCurrentProcessingСutout(selectedProcessing);
   };
 
-const handleFetch = async () => {
+  const handleFetch = async () => {
+
+    const furnitureFinObj = {
+
+      frameName:{
+        name : finishMirrorPdf.frameName,
+        value : finishMirrorPdf.frameSize
+      },
+      colorFrame:{
+        name : finishMirrorPdf.colorFrame,
+        value : finishMirrorPdf.colorName
+      },
+      switchCat:{
+        name : finishMirrorPdf.switchCat,
+        value : finishMirrorPdf.switchName
+      },
+      backLightAdd:{
+        name : finishMirrorPdf.backLightAdd,
+        value : finishMirrorPdf.backLightName
+      },
+      cordName:{
+        name : finishMirrorPdf.cordName,
+        value : finishMirrorPdf.cord
+      },
+      warmerUpName:{
+        name : finishMirrorPdf.warmerUpName,
+        value : finishMirrorPdf.warmerUp
+      },
+      celect : {
+        name : finishMirrorPdf.selectedProcessingName,
+        value : finishMirrorPdf.selectedProcessingCount
+      },
+      minInstallationName : {
+        name : finishMirrorPdf.minInstallationName,
+        value : `${finishMirrorPdf.minInstallation}`
+      },
+      isAssemblingtName : {
+        name : finishMirrorPdf.isAssemblingtName,
+        value : `${finishMirrorPdf.isAssemblingt}`
+      }
+
+    }
+
+
+     const celect = {
+        name : finishMirrorPdf.selectedProcessingName,
+        value : finishMirrorPdf.selectedProcessingCount
+      }
+      
+    const minInstallationName ={
+        name : finishMirrorPdf.minInstallationName,
+        value : `${finishMirrorPdf.minInstallation}`
+      }
+
+    const isAssemblingtName={
+        name : finishMirrorPdf.isAssemblingtName,
+        value : `${finishMirrorPdf.isAssemblingt}`
+      }
+
+  //   const furnitureFinArr = [];
+
+  //   cart.forEach((item, index) => {
+  //     const itemData = {
+  //       colorsFurniture: item.colorsFurniture[0].color,
+  //       colorsFurniturePrice: item.colorsFurniture[0].price,
+  //       tittleName: item.title,
+  //       name2: item.depends[0],
+  //       name3: item.depends[1],
+  //       drawingImgSrc: item.drawingImg,
+  //       mainImageSrc: item.mainImage,
+  //       count: item.count,
+  //     };
+  //     furnitureFinArr.push(itemData);
+      
+  //   });
+
+  // furnitureFinArr.forEach((item, index) => {
+  //   furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.colorsFurniture} - ${item.count} шт`   
+  // });
+
+  // const resDepth = (finishMirrorPdf.depth ? ` X ${finishMirrorPdf.depth}` : '')
+
+
+    const deliver =  finishMirrorPdf.adress ? finishMirrorPdf.adress : 'Без доставки' ;
+
+
     const data = {
       order: {
         "source_id": 10,
-    "buyer_comment": finishMirrorPdf.orderComent,
-    "buyer": {
-      "full_name": `${finishMirrorPdf.lastName} ${finishMirrorPdf.firstName} ${finishMirrorPdf.surname}`,
-      "phone": finishMirrorPdf.numberPhone
-    },
-    "shipping": {
-      "delivery_service_id": 1,
-      "shipping_address_city": finishMirrorPdf.adress,
-    },
-    "products": [
-      {
-        "price": finishMirrorPdf.total,
-        "quantity": 1,
-        "name": finishMirrorPdf.type,
-        "comment": `${finishMirrorPdf.minInstallationName} ${finishMirrorPdf.minInstallation}`,
-        "properties": [
+        "buyer_comment": finishMirrorPdf.orderComent,
+        "buyer": {
+          "full_name": `${finishMirrorPdf.lastName} ${finishMirrorPdf.firstName} ${finishMirrorPdf.surname}`,
+          "phone": finishMirrorPdf.numberPhone
+        },
+        "shipping": {
+          "delivery_service_id": 2,
+          "shipping_address_city": deliver
+        },
+        "products": [
           {
-            "name": finishMirrorPdf.currentProcessingStandartName,
-            "value": finishMirrorPdf.currentProcessingStandartVal
-          },
-          {
-            "name": finishMirrorPdf.currentProcessingСutoutName,
-            "value": finishMirrorPdf.currentProcessingСutoutCount
-          },
+            "price": finishMirrorPdf.total,
+            "quantity": 1,
+            "name": `${finishMirrorPdf.goodsName} - ${finishMirrorPdf.width} X ${finishMirrorPdf.height}`,
+            "comment": "",
+            "properties": [
+              {
+                "name": 'Форма дзеркала',
+                "value": finishMirrorPdf.type 
+              },
+              ...Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => ({
+                "name": value.name,
+                "value": value.value
+              })),
+            ]
+          }
         ]
       }
-    ],
-  }
-}
+    };
+
+
+
+    console.log('HsI', data );
+
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -493,7 +583,7 @@ const handleFetch = async () => {
              {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
             </PDFDownloadLink>
             </div>
-            <button className="mirror_button_order" onClick={handleFetch}  >Оформити</button>
+            <button className="mirror_button_order" onClick={handleFetch}>Оформити</button>
             </div>
         </div> 
     </div>
