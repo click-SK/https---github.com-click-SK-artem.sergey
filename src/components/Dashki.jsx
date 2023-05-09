@@ -188,6 +188,101 @@ const Dashki = () => {
     setMinInstallation(e.target.value);
   }
 
+  const handleFetch = async () => {
+
+    const furnitureFinObj = {};
+    const furnitureFinArr = [];
+
+    cart.forEach((item, index) => {
+      const itemData = {
+        colorsFurniture: item.colorsFurniture[0].color,
+        colorsFurniturePrice: item.colorsFurniture[0].price,
+        tittleName: item.title,
+        name2: item.depends[0],
+        name3: item.depends[1],
+        drawingImgSrc: item.drawingImg,
+        mainImageSrc: item.mainImage,
+        count: item.count,
+      };
+      furnitureFinArr.push(itemData);
+      
+    });
+
+  furnitureFinArr.forEach((item, index) => {
+    furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.colorsFurniture} - ${item.count} шт`   
+  });
+
+  const resDepth = (finishedShowerPdf.depth ? ` X ${finishedShowerPdf.depth}` : '')
+
+
+  let result = JSON.stringify(furnitureFinObj).replace(/\\|"|\[|\]/g, '').replace(/},{/g, ', ');
+  result = result.replace(/{"\d+":|}/g, '');
+
+  const deliver = finishedShowerPdf.adress ? finishedShowerPdf.adress : 'Без доставки' ;
+
+    const data = {
+      order: {
+        "source_id": 10,
+        "buyer_comment": finishedShowerPdf.orderComent,
+        "buyer": {
+          "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+          "phone": finishedShowerPdf.numberPhone
+        },
+        "shipping": {
+          "delivery_service_id": 2,
+          "shipping_address_city": deliver,
+        },
+        "products": [
+          {
+            "price": finishedShowerPdf.total,
+            "quantity": 1,
+            "name": ` Скляна перегородка ${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.depth} мм2` ,
+            "comment": ` `,
+            "properties": [
+              {
+                "name": `Колір скла`,
+                "value": finishedShowerPdf.glassColorName
+              },
+              {
+                "name": `Ванта`,
+                "value": finishedShowerPdf.vantaValue
+              },
+              {
+                "name": `Закладна`,
+                "value": finishedShowerPdf.depositoryValue
+              },
+              {
+                "name": finishedShowerPdf.currentProcessingStandartName,
+                "value": finishedShowerPdf.currentProcessingStandartVal
+              },
+              {
+                "name": finishedShowerPdf.currentProcessingСutoutName,
+                "value": finishedShowerPdf.currentProcessingСutoutCount
+              },
+              ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
+                "name": 'Фурнітура',
+                "value": value
+              }))
+            ]
+          }
+        ]
+      }
+    };
+
+    // console.log('HI', furnitureFinObj , );
+    console.log('HsI', data  );
+
+
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+  }
+
+
   return (
     <div className="shower_wrapper">
       <h1>Дашки</h1>
@@ -349,7 +444,7 @@ const Dashki = () => {
              {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
             </PDFDownloadLink>
             </div>
-            <button>Оформити</button>
+            <button onClick={handleFetch} >Оформити</button>
             </div>
         </div> 
     </div>
