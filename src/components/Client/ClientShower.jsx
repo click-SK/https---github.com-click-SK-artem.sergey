@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "../DeliveryTemplate";
+import ClientFooter from "../Template/ClientFooter";
+import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import InputTemplate from "../Template/InputTemplate";
 import "../../style/shower.scss";
 
 const ClientShower = () => {
@@ -135,56 +138,60 @@ const ClientShower = () => {
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
       <div className="wrap_item type_shower">
-        <h3>Виберіть тип</h3>
-        <div className="choose_item selected_shower">
-          <select
-            value={currentType ? JSON.stringify(currentType) : ""}
-            onChange={selectTypeFunc}
-          >
-            <option value="" disabled>
-              Оберіть тип
-            </option>
-            {currentObject?.typeWordpress &&
-              currentObject.typeWordpress.map((item) => (
-                <option key={item.name} value={JSON.stringify(item)}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
-          {/* <p>Вибраний тип: <span>{currentType?.name && currentType.name}</span>  </p> */}
-        </div>
+        <SelectObjecTemplate 
+            title={'Оберіть тип'}
+            changeFunc={selectTypeFunc}
+            state={currentType}
+            data={currentObject?.typeWordpress}
+            styleClass={"choose_item selected_shower"}
+            />
       </div>
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (см)</h3>
         <div className="size_input">
           <div className="size_item">
-            {/* <h4>Ширина:</h4> */}
-            <input
+            {/* <input
               type="number"
               placeholder="Ширина"
               value={widthValue}
               onChange={(e) => setWidthValue(e.target.value)}
             />
-            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p>
+            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p> */}
+            <InputTemplate 
+            placeholder={'Ширина'}
+            onChangeFunc={setWidthValue}
+            value={widthValue}
+            validationInput={validationInput}
+            styleClass={'input_miroor_item cabel'}/>
           </div>
           <div className="size_item">
-            {/* <h4>Висота:</h4> */}
-            <input
+            {/* <input
               type="number"
               placeholder="Висота"
               value={heightValue}
               onChange={(e) => setHeightValue(e.target.value)}
             />
-            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p>
+            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p> */}
+            <InputTemplate 
+            placeholder={'Висота'}
+            onChangeFunc={setHeightValue}
+            value={heightValue}
+            validationInput={validationInput}
+            styleClass={'input_miroor_item cabel'}/>
           </div>
           <div className="size_item">
-            {/* <h4>Глубина:</h4> */}
-            <input
+            {/* <input
               type="number"
               placeholder="Глибина"
               value={depthValue}
               onChange={(e) => setDepthValue(e.target.value)}
-            />
+            /> */}
+            <InputTemplate 
+            placeholder={'Глибина'}
+            onChangeFunc={setDepthValue}
+            value={depthValue}
+            validationInput={validationInput}
+            styleClass={'input_miroor_item cabel'}/>
           </div>
         </div>
       </div>
@@ -209,19 +216,9 @@ const ClientShower = () => {
         </div>
       </div>
       <DeliveryTemplate/>
-      <div className="footer_calc">
-            <div className="summ">
-              <div>
-                <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-               <button onClick={testCrm}>Оформити</button>
-            </div>
-        </div> 
+      <ClientFooter
+      calcTotalSumFunc={calcTotalSumFunc}
+      totalSum={totalSum}/>
     </div>
   );
 };

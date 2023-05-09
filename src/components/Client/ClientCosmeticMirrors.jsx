@@ -5,6 +5,7 @@ import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from "react-redux";
 import "../../style/shower.scss";
 import DeliveryTemplate from "../DeliveryTemplate";
+import ClientFooter from "../Template/ClientFooter";
 
 const ClientCosmeticMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
@@ -137,19 +138,9 @@ const ClientCosmeticMirrors = ({ data }) => {
         </div>
       </div>
       <DeliveryTemplate/>
-        <div className="footer_calc">
-            <div className="summ">
-              <div>
-              <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-            <button>Оформити</button>
-            </div>
-        </div> 
+      <ClientFooter
+      calcTotalSumFunc={calcTotalSumFunc}
+      totalSum={totalSum}/>
     </div>
   );
 };

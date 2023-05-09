@@ -396,12 +396,11 @@ const ShowerCabin = () => {
                 </option>
                 {currentObject?.type &&
                   currentObject.type.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
+                    <option key={item._id} value={JSON.stringify(item)}>
                       {item.name}
                     </option>
                   ))}
               </select>
-              {/* <p>Вибраний тип: <span>{currentType?.name && currentType.name}</span>  </p> */}
             </div>
         </div>
         <div className="wrap_item type_glass">
@@ -419,7 +418,6 @@ const ShowerCabin = () => {
                   </option>
                 ))}
             </select>
-            {/* <p>Вибране скло: <span>{currentGlass}</span> </p> */}
             </div>
         </div>            
         <div className="wrap_item color_glass">
@@ -432,12 +430,11 @@ const ShowerCabin = () => {
               {currentObject &&
                 currentObject.glassThickness &&
                 currentObject.glassThickness.map((item) => (
-                  <option key={item.name} value={JSON.stringify(item)}>
+                  <option key={item._id} value={JSON.stringify(item)}>
                     {item.name}
                   </option>
                 ))}
             </select>
-            {/* <p>Вибраний колір скла: <span>{currentGlassColor}</span> </p> */}
           </div>
           
         </div> 
@@ -445,17 +442,14 @@ const ShowerCabin = () => {
           <h3>Вкажіть розміри (см)</h3>
           <div className="size_input">
             <div className="size_item" >
-              {/* <h4>Ширина:</h4> */}
               <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
             <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
             </div>
             <div  className="size_item" >
-              {/* <h4>Висота:</h4> */}
               <input type="number" placeholder="Висота" value={heightValue} onChange={(e) => setHeightValue(e.target.value)}/>
               <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
             </div>
             <div className="size_item" >
-              {/* <h4>Глубина:</h4> */}
               <input type="number" placeholder="Глибина" value={depthValue} onChange={(e) => setDepthValue(e.target.value)} />
             </div>
           </div>
@@ -473,7 +467,7 @@ const ShowerCabin = () => {
                 </option>
                 {currentObject?.processingStandart &&
                   currentObject.processingStandart.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
+                    <option key={item._id} value={JSON.stringify(item)}>
                       {item.name}
                     </option>
                   ))}
@@ -493,7 +487,7 @@ const ShowerCabin = () => {
                 </option>
                 {currentObject?.processingСutout &&
                   currentObject.processingСutout.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
+                    <option key={item._id} value={JSON.stringify(item)}>
                       {item.name}
                     </option>
                   ))}
@@ -519,7 +513,6 @@ const ShowerCabin = () => {
             <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
             <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
-          {/* <input className="cabel width_delivery" type="number" placeholder="Ціна монтажу" value={minInstallation} onChange={(e) => addPriceInstalation(e)}/> */}
         </div>
       </div>
       <DeliveryTemplate/>

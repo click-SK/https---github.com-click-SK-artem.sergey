@@ -37,7 +37,7 @@ const ModalAllFurniture = ({ isOpen, onClose, furnitureProps }) => {
   }, []);
 
   useEffect(() => {
-    let newArr = [...currentShower,...currentDashki,...currentGlassPartition];
+    let newArr = [];
     if(currentShower.length != 0) {
         currentShower.forEach((item) => {
             newArr.push(item)

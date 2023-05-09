@@ -7,6 +7,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "../DeliveryTemplate";
+import ClientFooter from "../Template/ClientFooter";
 import '../../style/shower.scss'
 
 const ClientGlassPartition = () => {
@@ -277,19 +278,9 @@ const zaklad = {
       <DeliveryTemplate/>
           </div> 
 
-        <div className="footer_calc">
-            <div className="summ">
-              <div>
-              <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-            <button>Оформити</button>
-            </div>
-        </div> 
+      <ClientFooter
+      calcTotalSumFunc={calcTotalSumFunc}
+      totalSum={totalSum}/>
     </div>
     
   );
