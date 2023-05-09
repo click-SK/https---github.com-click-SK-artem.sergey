@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import '../style/shower.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import DeliveryTemplate from "./DeliveryTemplate";
+import { json } from "react-router-dom";
 const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
   const [currentObject, setCurrentObject] = useState({});
@@ -119,7 +120,7 @@ const ShowerCabin = () => {
       
       const finishedShower = {
         type: currentType?.name, /* назва душ кабіни */
-        goodsPrice: currentType?.price,  /* ціна душ кабіни */
+        goodsPrice: isAssemblingt ? currentType?.price : '',  /* ціна душ кабіни */
         width: widthValue, /* ширина душ кабіни */
         height: heightValue, /* висота - ціна душ кабіни */ 
         depth: depthValue, /* глубина */
@@ -222,36 +223,36 @@ const ShowerCabin = () => {
   //   setVolumSum(Number(e) * 5)
   // }
 
-  const data = {
-    "source_id": 10,
-    "buyer_comment": finishedShowerPdf.orderComent,
-    "buyer": {
-      "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
-      "phone": finishedShowerPdf.numberPhone
-    },
-    "shipping": {
-      "delivery_service_id": 1,
-      "shipping_address_city": finishedShowerPdf.adress,
-    },
-    "products": [
-      {
-        "price": finishedShowerPdf.total,
-        "quantity": 1,
-        "name": finishedShowerPdf.type,
-        "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
-        "properties": [
-          {
-            "name": finishedShowerPdf.currentProcessingStandartName,
-            "value": finishedShowerPdf.currentProcessingStandartVal
-          },
-          {
-            "name": finishedShowerPdf.currentProcessingСutoutName,
-            "value": finishedShowerPdf.currentProcessingСutoutCount
-          },
-        ]
-      }
-    ],
-  };
+  // const data = {
+  //   "source_id": 10,
+  //   "buyer_comment": finishedShowerPdf.orderComent,
+  //   "buyer": {
+  //     "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+  //     "phone": finishedShowerPdf.numberPhone
+  //   },
+  //   "shipping": {
+  //     "delivery_service_id": 1,
+  //     "shipping_address_city": finishedShowerPdf.adress,
+  //   },
+  //   "products": [
+  //     {
+  //       "price": finishedShowerPdf.total,
+  //       "quantity": 1,
+  //       "name": finishedShowerPdf.type,
+  //       "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
+  //       "properties": [
+  //         {
+  //           "name": finishedShowerPdf.currentProcessingStandartName,
+  //           "value": finishedShowerPdf.currentProcessingStandartVal
+  //         },
+  //         {
+  //           "name": finishedShowerPdf.currentProcessingСutoutName,
+  //           "value": finishedShowerPdf.currentProcessingСutoutCount
+  //         },
+  //       ]
+  //     }
+  //   ],
+  // };
 
 
 
@@ -262,38 +263,112 @@ const ShowerCabin = () => {
 
 
   const handleFetch = async () => {
+
+    const furnitureFinObj = {};
+    const furnitureFinArr = [];
+
+    cart.forEach((item, index) => {
+      const itemData = {
+        colorsFurniture: item.colorsFurniture[0].color,
+        colorsFurniturePrice: item.colorsFurniture[0].price,
+        tittleName: item.title,
+        name2: item.depends[0],
+        name3: item.depends[1],
+        drawingImgSrc: item.drawingImg,
+        mainImageSrc: item.mainImage,
+        count: item.count,
+      };
+      furnitureFinArr.push(itemData);
+      
+    });
+
+  furnitureFinArr.forEach((item, index) => {
+    furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.colorsFurniture} - ${item.count} шт`   
+  });
+
+  const resDepth = (finishedShowerPdf.depth ? ` X ${finishedShowerPdf.depth}` : '')
+
+  // let result = JSON.stringify(furnitureFinObj);
+  let result = JSON.stringify(furnitureFinObj).replace(/\\|"|\[|\]/g, '').replace(/},{/g, ', ');
+  result = result.replace(/{"\d+":|}/g, '');
+
+
+    //  const data = {
+    //       order: {
+    //   "source_id": 10,
+    //   "buyer_comment": finishedShowerPdf.orderComent,
+    //   "buyer": {
+    //     "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+    //     "phone": finishedShowerPdf.numberPhone
+    //   },
+    //   "shipping": {
+    //     "delivery_service_id": 1,
+    //     "shipping_address_city": finishedShowerPdf.adress,
+    //   },
+    //   "products": [
+    //     {
+    //       "price": finishedShowerPdf.total,
+    //       "quantity": 1,
+    //       "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth}` ,
+    //       "comment": ` `,
+    //       "properties": [
+    //         {
+    //           "name": finishedShowerPdf.currentProcessingStandartName,
+    //           "value": finishedShowerPdf.currentProcessingStandartVal
+    //         },
+    //         {
+    //           "name": finishedShowerPdf.currentProcessingСutoutName,
+    //           "value": finishedShowerPdf.currentProcessingСutoutCount
+    //         },
+    //         {
+    //           "name": 'Фурнітура',
+    //           "value": result
+    //         },
+    //       ]
+    //     }
+    //   ],
+    // } };
+
     const data = {
       order: {
         "source_id": 10,
-    "buyer_comment": finishedShowerPdf.orderComent,
-    "buyer": {
-      "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
-      "phone": finishedShowerPdf.numberPhone
-    },
-    "shipping": {
-      "delivery_service_id": 1,
-      "shipping_address_city": finishedShowerPdf.adress,
-    },
-    "products": [
-      {
-        "price": finishedShowerPdf.total,
-        "quantity": 1,
-        "name": finishedShowerPdf.type,
-        "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
-        "properties": [
+        "buyer_comment": finishedShowerPdf.orderComent,
+        "buyer": {
+          "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
+          "phone": finishedShowerPdf.numberPhone
+        },
+        "shipping": {
+          "delivery_service_id": 1,
+          "shipping_address_city": finishedShowerPdf.adress,
+        },
+        "products": [
           {
-            "name": finishedShowerPdf.currentProcessingStandartName,
-            "value": finishedShowerPdf.currentProcessingStandartVal
-          },
-          {
-            "name": finishedShowerPdf.currentProcessingСutoutName,
-            "value": finishedShowerPdf.currentProcessingСutoutCount
-          },
+            "price": finishedShowerPdf.total,
+            "quantity": 1,
+            "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth}` ,
+            "comment": ` `,
+            "properties": [
+              {
+                "name": finishedShowerPdf.currentProcessingStandartName,
+                "value": finishedShowerPdf.currentProcessingStandartVal
+              },
+              {
+                "name": finishedShowerPdf.currentProcessingСutoutName,
+                "value": finishedShowerPdf.currentProcessingСutoutCount
+              },
+              ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
+                "name": 'Фурнітура',
+                "value": value
+              }))
+            ]
+          }
         ]
       }
-    ],
-  }
-}
+    };
+
+    // console.log('HI', furnitureFinObj , );
+    console.log('HsI', Object.entries(furnitureFinObj)  );
+
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
