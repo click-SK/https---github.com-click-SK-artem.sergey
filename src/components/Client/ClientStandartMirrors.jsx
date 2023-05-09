@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../../style/shower.scss";
 import "../../style/mirrors.scss";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "../DeliveryTemplate";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
 import ClientFooter from "../Template/ClientFooter";
 
-const ClientStandartMirrors = ({data}) => {
+const ClientStandartMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
   const [currentType, setCurrentType] = useState(null);
   const [currentTypeArray, setCurrentTypeArray] = useState(null);
@@ -28,20 +28,34 @@ const ClientStandartMirrors = ({data}) => {
   const [minInstallation, setMinInstallation] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
 
-  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
-  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
-  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
-  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
-  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryFirstName = useSelector(
+    (state) => state.delivery.deliveryFirstName
+  );
+  const deliveryLastName = useSelector(
+    (state) => state.delivery.deliveryLastName
+  );
+  const deliverySurName = useSelector(
+    (state) => state.delivery.deliverySurName
+  );
+  const deliveryNumberPhone = useSelector(
+    (state) => state.delivery.deliveryNumberPhone
+  );
+  const deliveryOrderComent = useSelector(
+    (state) => state.delivery.deliveryOrderComent
+  );
+  const deliveryDistance = useSelector(
+    (state) => state.delivery.deliveryDistance
+  );
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
-  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
+  const deliveryBoolean = useSelector(
+    (state) => state.delivery.deliveryBoolean
+  );
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
-        setCurrentObject(data[0])
+        setCurrentObject(data[0]);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -140,11 +154,11 @@ const ClientStandartMirrors = ({data}) => {
         deliveryPriceOver: !deliveryBoolean
           ? deliveryPrice
           : "" /* ціна доставки по місту */,
-          firstName: deliveryFirstName,
-          lastName: deliveryLastName,
-          surname: deliverySurName,
-          numberPhone: deliveryNumberPhone,
-          orderComent: deliveryOrderComent,
+        firstName: deliveryFirstName,
+        lastName: deliveryLastName,
+        surname: deliverySurName,
+        numberPhone: deliveryNumberPhone,
+        orderComent: deliveryOrderComent,
         minInstallation: minInstallation ? 500 : "",
         minInstallationName: minInstallation ? "Монтаж" : "",
         minInstallationOption: minInstallation ? "Мінімальний" : "",
@@ -163,7 +177,7 @@ const ClientStandartMirrors = ({data}) => {
         total: total,
       };
 
-      console.log('finishedMirros',finishedMirros);
+      console.log("finishedMirros", finishedMirros);
 
       setTotalSum(total);
     } else {
@@ -192,53 +206,56 @@ const ClientStandartMirrors = ({data}) => {
     setIsWarmedUp((isWarmedUp) => !isWarmedUp);
   };
 
-  console.log('currentObject',currentObject);
+  console.log("currentObject", currentObject);
 
   return (
     <div className="wrap_item mirrors_item">
-                  <h1>Дзеркала</h1>
+      <h1>Дзеркала</h1>
 
-            <SelectObjecTemplate 
-            title={'Форма дзеркала:'}
-            changeFunc={selectTypeFunc}
-            state={currentType}
-            data={currentObject?.typeWordpress}
-            styleClass={"choose_item item_mirrors"}
-            />
+      <SelectObjecTemplate
+        title={"Форма дзеркала:"}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeWordpress}
+        wrapClass={"choose_item item_mirrors"}
+      />
 
-            <SelectObjecTemplate 
-            title={'Тип:'}
-            changeFunc={selectGoodsFunc}
-            state={currentGoods}
-            data={currentTypeArray}
-            styleClass={"choose_item item_mirrors"}
-            />
+      <SelectObjecTemplate
+        title={"Тип:"}
+        changeFunc={selectGoodsFunc}
+        state={currentGoods}
+        data={currentTypeArray}
+        wrapClass={"choose_item item_mirrors"}
+      />
 
       <div className="choose_item item_mirrors">
         <h3>Розмір (см)</h3>
         <div className=" input_miroor">
-        <InputTemplate 
-            placeholder={'Ширина'}
+          <InputTemplate
+            placeholder={"Ширина"}
             onChangeFunc={setSizeWidthMirrors}
             value={sizeWidthMirrors}
             validationInput={validationInput}
-            styleClass={'input_miroor_item cabel'}/>
-        <InputTemplate 
+            inputClass={"input_miroor_item cabel"}
+          />
+          <InputTemplate
             placeholder={"Висота"}
             onChangeFunc={setSizeHeightMirrors}
             value={sizeHeightMirrors}
             validationInput={validationInput}
-            styleClass={'input_miroor_item cabel'}/>
+            inputClass={"input_miroor_item cabel"}
+          />
         </div>
       </div>
 
-      <SelectObjecTemplate 
-            title={'Виберіть рамку:'}
-            changeFunc={selectFrameFunc}
-            state={currentFrame}
-            data={currentObject?.option?.frame}
-            styleClass={"choose_item item_mirrors"}
-            />
+      <SelectObjecTemplate
+        title={"Виберіть рамку:"}
+        optionName={'Без рамки'}
+        changeFunc={selectFrameFunc}
+        state={currentFrame}
+        data={currentObject?.option?.frame}
+        wrapClass={"choose_item item_mirrors"}
+      />
 
       <div className="choose_item item_mirrors">
         <h3>Розмір рамки (м)</h3>
@@ -266,10 +283,13 @@ const ClientStandartMirrors = ({data}) => {
         </div>
       </div>
 
-      <DeliveryTemplate/>
-      <ClientFooter
-      calcTotalSumFunc={calcTotalSumFunc}
-      totalSum={totalSum}/>
+      <DeliveryTemplate />
+      <div className="footer_calc">
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order mirror_button">
+          <button className="mirror_button_order">Оформити</button>
+        </div>
+      </div>
     </div>
   );
 };

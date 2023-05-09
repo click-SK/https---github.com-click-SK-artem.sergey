@@ -1,10 +1,10 @@
 import React from 'react';
 
-const InputTemplate = ({placeholder, onChangeFunc, value, validationInput, styleClass}) => {
+const InputTemplate = ({placeholder, onChangeFunc, value, validationInput, inputClass}) => {
     return (
           <div>
             <input
-              className={styleClass}
+              className={inputClass}
               type="number"
               placeholder={placeholder}
               value={value}

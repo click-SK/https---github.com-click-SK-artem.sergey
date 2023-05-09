@@ -3,41 +3,58 @@ import Modal from "./../Modal";
 import ListTheChoseFurniture from "./../ListTheChoseFurniture";
 import PdfFile from "./../PdfFile/PdfFileDashkiManager";
 import PdfFileClient from "./../PdfFile/PdfFileDashkiClient";
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { CSVLink } from "react-csv";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
-import '../../style/shower.scss'
+import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import InputTemplate from "../Template/InputTemplate";
+import "../../style/shower.scss";
 const ClientDashki = () => {
   const [currentObject, setCurrentObject] = useState({});
   const [currentType, setCurrentType] = useState(null);
   const [validationInput, setValidationInput] = useState(false);
-  const [widthValue, setWidthValue] = useState('');
-  const [volumValue, setVolumValue] = useState('');
+  const [widthValue, setWidthValue] = useState("");
+  const [volumValue, setVolumValue] = useState("");
   const [currentColor, setCurrentColor] = useState(null);
   const [isVanta, setIsVanta] = useState(false);
   const [vantaValue, setVantaValue] = useState(false);
   const [isDepository, setIsDepository] = useState(false);
-  const [depositoryValue, setDepositoryValue] = useState('');
+  const [depositoryValue, setDepositoryValue] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
-  const [currentProcessingStandart, setCurrentProcessingStandart] = useState(null);
+  const [currentProcessingStandart, setCurrentProcessingStandart] =
+    useState(null);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
-  const [minInstallation, setMinInstallation] = useState('');
-  const [typeMontaje, setTypeMontaje] = useState('');
+  const [minInstallation, setMinInstallation] = useState("");
+  const [typeMontaje, setTypeMontaje] = useState("");
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
 
-  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
-  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
-  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
-  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
-  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryFirstName = useSelector(
+    (state) => state.delivery.deliveryFirstName
+  );
+  const deliveryLastName = useSelector(
+    (state) => state.delivery.deliveryLastName
+  );
+  const deliverySurName = useSelector(
+    (state) => state.delivery.deliverySurName
+  );
+  const deliveryNumberPhone = useSelector(
+    (state) => state.delivery.deliveryNumberPhone
+  );
+  const deliveryOrderComent = useSelector(
+    (state) => state.delivery.deliveryOrderComent
+  );
+  const deliveryDistance = useSelector(
+    (state) => state.delivery.deliveryDistance
+  );
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
-  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
+  const deliveryBoolean = useSelector(
+    (state) => state.delivery.deliveryBoolean
+  );
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-dashki")
@@ -59,12 +76,12 @@ const ClientDashki = () => {
   };
 
   const changeVanta = () => {
-    setIsVanta(isVanta => !isVanta)
-  }
+    setIsVanta((isVanta) => !isVanta);
+  };
 
   const changeDepository = () => {
-    setIsDepository(isDepository => !isDepository)
-  }
+    setIsDepository((isDepository) => !isDepository);
+  };
 
   const handleOpenModal = () => {
     setModalIsOpen(true);
@@ -74,84 +91,108 @@ const ClientDashki = () => {
     setModalIsOpen(false);
   };
 
-  console.log('depositoryValue',depositoryValue);
+  console.log("depositoryValue", depositoryValue);
 
   const calcTotalSumFunc = () => {
-    if(widthValue) {
+    if (widthValue) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(volumValue);
-      const calcSquareMeter = calcSize/1000000;
-      const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
-  
+      const calcSquareMeter = calcSize / 1000000;
+      const resCurrentProcessingStandart =
+        Number(currentProcessingStandart?.price) * calcSquareMeter;
+
       let totalSumFurniture = 0;
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
 
-      if (deliveryAdress != ''){
-        deliveryPrice = 200
+      if (deliveryAdress != "") {
+        deliveryPrice = 200;
       }
- 
-      if (deliveryBoolean){
-        deliveryPriceOverSity = Number(deliveryDistance) * 26
+
+      if (deliveryBoolean) {
+        deliveryPriceOverSity = Number(deliveryDistance) * 26;
       }
-  
+
       cart.forEach((el) => {
         el.colorsFurniture.forEach((item) => {
-          totalSumFurniture += item.price * el.count
-        })
-      })
+          totalSumFurniture += item.price * el.count;
+        });
+      });
 
-      const totalSum = totalSumFurniture + 
-      (calcSquareMeter * currentType?.price || 0) +
-      (calcSquareMeter * currentColor?.price || 0) +
-      (isVanta ? currentObject?.vanta * vantaValue : 0) +
-      (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
-      (calcSquareMeter * currentProcessingStandart?.price || 0) +
-      (currentProcessingСutout?.price || 0) + 
-      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
-  
+      const totalSum =
+        totalSumFurniture +
+        (calcSquareMeter * currentType?.price || 0) +
+        (calcSquareMeter * currentColor?.price || 0) +
+        (isVanta ? currentObject?.vanta * vantaValue : 0) +
+        (isDepository
+          ? currentObject?.depository?.price * depositoryValue
+          : 0) +
+        (calcSquareMeter * currentProcessingStandart?.price || 0) +
+        (currentProcessingСutout?.price || 0) +
+        (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
+
       const finishedShower = {
-        type:  currentType ?  currentType.name : '', /* назва */
-        goodsPrice: currentType ?  currentType.price : '',
-        width: widthValue, /* ширина */
+        type: currentType ? currentType.name : "" /* назва */,
+        goodsPrice: currentType ? currentType.price : "",
+        width: widthValue /* ширина */,
         // height: heightValue, /* висота */
-        depth: volumValue ? volumValue : '', /* глубина */
+        depth: volumValue ? volumValue : "" /* глубина */,
         // glassThicknessName:  currentType ? currentType?.name : '', /* скло - товщина */
         // glassThicknessPrice: currentType ? currentType?.price : '', /* скло - ціна */
-        glassColorName: currentColor ? currentColor?.name : '', /* скло колір - ціна */
-        glassColorPrice: currentColor ? currentColor?.price : '', /* скло колір - ціна */
-        adress:deliveryAdress, /* адреса доставки */
-        deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
-        deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
+        glassColorName: currentColor
+          ? currentColor?.name
+          : "" /* скло колір - ціна */,
+        glassColorPrice: currentColor
+          ? currentColor?.price
+          : "" /* скло колір - ціна */,
+        adress: deliveryAdress /* адреса доставки */,
+        deliveryPriceOverSity: deliveryBoolean
+          ? deliveryPriceOverSity
+          : "" /* ціна доставки за містом */,
+        deliveryPriceOver: !deliveryBoolean
+          ? deliveryPrice
+          : "" /* ціна доставки по місту */,
         firstName: deliveryFirstName,
         lastName: deliveryLastName,
         surname: deliverySurName,
         numberPhone: deliveryNumberPhone,
         orderComent: deliveryOrderComent,
-        currentProcessingStandartName: currentProcessingStandart ? 'Обробка' : '',
-        currentProcessingStandartVal: currentProcessingStandart ? currentProcessingStandart?.name : '',
-        currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
-        currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
-        currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
-        currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
-        vantaName: isVanta ? "Ванта" : '',
-        vantaPrice: isVanta ? currentObject?.vanta : '',
-        vantaValue: isVanta ? vantaValue : '',
-        depositoryName : isDepository ? 'Закладна' : '',
-        depositoryPrice : isDepository ? currentObject?.depository?.price : '',
-        depositoryValue : isDepository ? depositoryValue : '',
-        total: totalSum, /* скло - ціна душ кабіни */
-      }
+        currentProcessingStandartName: currentProcessingStandart
+          ? "Обробка"
+          : "",
+        currentProcessingStandartVal: currentProcessingStandart
+          ? currentProcessingStandart?.name
+          : "",
+        currentProcessingStandartPrice: currentProcessingStandart
+          ? resCurrentProcessingStandart
+          : "",
+        currentProcessingСutoutName: currentProcessingСutout
+          ? currentProcessingСutout?.name
+          : "",
+        currentProcessingСutoutPrice: currentProcessingСutout
+          ? currentProcessingСutout?.price
+          : "",
+        currentProcessingСutoutCount: currentProcessingСutout
+          ? `${currentProcessingСutout?.count} шт`
+          : "1 шт",
+        vantaName: isVanta ? "Ванта" : "",
+        vantaPrice: isVanta ? currentObject?.vanta : "",
+        vantaValue: isVanta ? vantaValue : "",
+        depositoryName: isDepository ? "Закладна" : "",
+        depositoryPrice: isDepository ? currentObject?.depository?.price : "",
+        depositoryValue: isDepository ? depositoryValue : "",
+        total: totalSum /* скло - ціна душ кабіни */,
+      };
 
-      console.log('finishedShower',finishedShower);
+      console.log("finishedShower", finishedShower);
 
-      setFinishedShowerPdf(finishedShower)
-      console.log('finishedShower',finishedShower);
-      setTotalSum(totalSum)
+      setFinishedShowerPdf(finishedShower);
+      console.log("finishedShower", finishedShower);
+      setTotalSum(totalSum);
     } else {
       setValidationInput(true);
     }
-  }
+  };
 
   const selectProcessingStandartFunc = (e) => {
     const selectedProcessing = JSON.parse(e.target.value);
@@ -165,83 +206,66 @@ const ClientDashki = () => {
 
   const changeIsAssemblingt = () => {
     // const paintingObj = data?.option?.painting;
-    setIsAssembling(isAssemblingt => !isAssemblingt)
-  }
+    setIsAssembling((isAssemblingt) => !isAssemblingt);
+  };
 
-    const changeMinInstallationFunc = () => {
+  const changeMinInstallationFunc = () => {
     // const paintingObj = data?.option?.painting;
-    setMinInstallation(minInstallation => !minInstallation)
-  }
+    setMinInstallation((minInstallation) => !minInstallation);
+  };
 
   const addPriceInstalation = (e) => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
-  }
+  };
 
   return (
     <div className="shower_wrapper">
       <h1>Дашки</h1>
 
-<div className="wrap_item type_shower">
-      <h3>Виберіть тип</h3>
-      <div className="choose_item selected_shower">
-        <select
-          value={currentType ? JSON.stringify(currentType) : ""}
-          onChange={selectTypeFunc}
-        >
-          <option value="" disabled>
-            Оберіть тип
-          </option>
-          {currentObject?.typeGlass &&
-            currentObject.typeGlass.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
-  </div>
+        <SelectObjecTemplate
+        title={"Виберіть тип"}
+        optionName={"Оберіть тип"}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeGlass}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+        />
 
-  
-  <div className="wrap_item size_shower">
-    <h3>Вкажіть розміри (мм)</h3>
-    <div className="size_input">
-      <div className="size_item" >
-        <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
-      <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
+      <div className="wrap_item size_shower">
+        <h3>Вкажіть розміри (мм)</h3>
+        <div className="size_input">
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Ширина"}
+              onChangeFunc={setWidthValue}
+              value={widthValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Глибина"}
+              onChangeFunc={setVolumValue}
+              value={volumValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+        </div>
       </div>
-      <div className="size_item" >
-        <input type="number" placeholder="Глибина" value={volumValue} onChange={(e) => setVolumValue(e.target.value)}/>
-        <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
+      
+      <DeliveryTemplate />
+      <div className="footer_calc">
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order mirror_button">
+          <button className="mirror_button_order">Оформити</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div className="wrap_item type_shower">
-      <h3>Виберіть колір</h3>
-      <div className="choose_item selected_shower">
-        <select
-          value={currentColor ? JSON.stringify(currentColor) : ""}
-          onChange={selectColorFunc}
-        >
-          <option value="" disabled>
-            Оберіть колір
-          </option>
-          {currentObject?.color &&
-            currentObject.color.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
-  </div>
-      <DeliveryTemplate/>
-      <ClientFooter
-      calcTotalSumFunc={calcTotalSumFunc}
-      totalSum={totalSum}/>
-    </div>
-    
   );
 };
 

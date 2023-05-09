@@ -1,8 +1,7 @@
 import React from 'react';
 
-const ClientFooter = ({calcTotalSumFunc, totalSum}) => {
+const ClientFooter = ({calcTotalSumFunc, totalSum, wrapClass}) => {
     return (
-        <div className="footer_calc">
         <div className="mirror_sum">
           <div>
             <button className="mirror_buttom" onClick={calcTotalSumFunc}>
@@ -10,13 +9,9 @@ const ClientFooter = ({calcTotalSumFunc, totalSum}) => {
             </button>
           </div>
           <h3 className="order_sum mirror_sum">
-            Кінцева вартість: <span> {totalSum} грн</span>{" "}
+            Кінцева вартість: <span>{totalSum ? totalSum : 0} грн</span>{" "}
           </h3>
         </div>
-        <div className="send_order mirror_button">
-          <button className="mirror_button_order">Оформити</button>
-        </div>
-      </div>
     );
 };
 
