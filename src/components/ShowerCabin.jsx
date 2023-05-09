@@ -106,7 +106,7 @@ const ShowerCabin = () => {
   
       cart.forEach((el) => {
         el.colorsFurniture.forEach((item) => {
-          totalSumFurniture += item.price
+          totalSumFurniture += item.price * el.count
         })
       })
   
@@ -345,7 +345,7 @@ const ShowerCabin = () => {
           {
             "price": finishedShowerPdf.total,
             "quantity": 1,
-            "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth}` ,
+            "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth} см2` ,
             "comment": ` `,
             "properties": [
               {
