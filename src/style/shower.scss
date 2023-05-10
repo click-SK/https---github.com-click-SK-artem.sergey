@@ -31,6 +31,20 @@ h1{
     }
 }
 
+.wrap_item_plus_count {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    h3{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 200px;
+        font-size: 20px;
+        margin-left: 25px;
+    }
+}
+
 .choose_item{
     display: flex;
     justify-content: space-evenly;

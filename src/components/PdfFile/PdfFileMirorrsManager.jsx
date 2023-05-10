@@ -105,14 +105,6 @@ const styles = StyleSheet.create({
 
 });
 
-{/* <View style={styles.section}>
-{arr.map((item, idx)=>(
-    <Text style={styles.text} key={idx}>
-    {item.type}
-    </Text>
-))}
-</View> */}
-
 const PdfFileMirorrsManager = ({order}) => {
 
     
@@ -261,14 +253,14 @@ const PdfFileMirorrsManager = ({order}) => {
                     </View>               
                     <View>
                         {Object.entries(fileFinish).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
-                            <View style={styles.section}>
-                                <Text style={styles.textLeft} key={idx}>
+                            <View style={styles.section} key={idx}>
+                                <Text style={styles.textLeft}>
                                     {value.name}
                                 </Text>
-                                <Text style={styles.text} key={idx}>
+                                <Text style={styles.text}>
                                     {value.size} 
                                 </Text>
-                                <Text style={styles.text} key={idx}>
+                                <Text style={styles.text}>
                                     {value.price} грн
                                 </Text>
                             </View>

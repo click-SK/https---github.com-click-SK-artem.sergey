@@ -9,6 +9,11 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "./DeliveryTemplate";
+import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import InputTemplate from "./Template/InputTemplate";
+import ClientFooter from './Template/ClientFooter';
+import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 import '../style/shower.scss'
 
 const Dashki = () => {
@@ -31,6 +36,7 @@ const Dashki = () => {
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -119,7 +125,7 @@ const Dashki = () => {
       (isVanta ? currentObject?.vanta * vantaValue : 0) +
       (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) +
-      (currentProcessingСutout?.price || 0) + 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);;
   
       const finishedShower = {
@@ -287,168 +293,172 @@ const Dashki = () => {
     <div className="shower_wrapper">
       <h1>Дашки</h1>
 
-      <div className="wrap_item type_shower">
-            <h3>Виберіть тип</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentType ? JSON.stringify(currentType) : ""}
-                onChange={selectTypeFunc}
-              >
-                <option value="" disabled>
-                  Оберіть тип
-                </option>
-                {currentObject?.typeGlass &&
-                  currentObject.typeGlass.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
+      <SelectObjecTemplate
+        title={"Виберіть тип"}
+        optionName={""}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeGlass}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
 
-        
-        <div className="wrap_item size_shower">
-          <h3>Вкажіть розміри (мм)</h3>
-          <div className="size_input">
-            <div className="size_item" >
-              <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
-            <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
-            </div>
-            <div className="size_item" >
-              <input type="number" placeholder="Глибина" value={volumValue} onChange={(e) => setVolumValue(e.target.value)}/>
-              <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
-            </div>
+      <div className="wrap_item size_shower">
+        <h3>Вкажіть розміри (мм)</h3>
+        <div className="size_input">
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Ширина"}
+              onChangeFunc={setWidthValue}
+              value={widthValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Глибина"}
+              onChangeFunc={setVolumValue}
+              value={volumValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
           </div>
         </div>
+      </div>
 
-        <div className="wrap_item type_shower">
-            <h3>Виберіть колір</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentColor ? JSON.stringify(currentColor) : ""}
-                onChange={selectColorFunc}
-              >
-                <option value="" disabled>
-                  Оберіть колір
-                </option>
-                {currentObject?.color &&
-                  currentObject.color.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
+      <SelectObjecTemplate
+        title={"Виберіть обробку"}
+        optionName={""}
+        changeFunc={selectProcessingStandartFunc}
+        state={currentProcessingStandart}
+        data={currentObject?.processingStandart}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
 
-        <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
-                onChange={selectProcessingStandartFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {currentObject?.processingStandart &&
-                  currentObject.processingStandart.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
+<ProcessingCoutPlusCountTemplate
+        title={"Додаткова обробка"}
+        optionName={""}
+        changeFunc={selectProcessingСutoutFunc}
+        state={currentProcessingСutout}
+        data={currentObject?.processingСutout}
+        wrapClass={"wrap_item_plus_count type_shower size_item"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
+      />
 
-        <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
-                onChange={selectProcessingСutoutFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {currentObject?.processingСutout &&
-                  currentObject.processingСutout.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
-
-        <div className="choose_item item_mirrors check-item">
+      <div className="choose_item item_mirrors check-item">
         <h3>Ванта:</h3>
         <div className="checkbox_wrap">
-        <input id="checkbox1" className="checkbox" type='checkbox' checked={isVanta} onChange={changeVanta}/>
-        <label className="checkbox-label" htmlFor="checkbox1"></label>
+          <input
+            id="checkbox1"
+            className="checkbox"
+            type="checkbox"
+            checked={isVanta}
+            onChange={changeVanta}
+          />
+          <label className="checkbox-label" htmlFor="checkbox1"></label>
         </div>
       </div>
-      {isVanta &&
-            <div className="wrap_item size_shower">
-            <h3>Вкажіть розміри</h3>
-            <div className="size_input">
-              <div className="size_item" >
-                <input type="number" placeholder="М/погонний" value={vantaValue} onChange={(e) => setVantaValue(e.target.value)}/>
-              </div>
+      {isVanta && (
+        <div className="wrap_item size_shower">
+          <h3>Вкажіть розміри</h3>
+          <div className="size_input">
+            <div className="size_item">
+              <input
+                type="number"
+                placeholder="М/погонний"
+                value={vantaValue}
+                onChange={(e) => setVantaValue(e.target.value)}
+              />
             </div>
           </div>
-      }
-              <div className="choose_item item_mirrors check-item">
+        </div>
+      )}
+      <div className="choose_item item_mirrors check-item">
         <h3>Закладна:</h3>
         <div className="checkbox_wrap">
-        <input id="checkbox2" className="checkbox" type='checkbox' checked={isDepository} onChange={changeDepository}/>
-        <label className="checkbox-label" htmlFor="checkbox2"></label>
+          <input
+            id="checkbox2"
+            className="checkbox"
+            type="checkbox"
+            checked={isDepository}
+            onChange={changeDepository}
+          />
+          <label className="checkbox-label" htmlFor="checkbox2"></label>
         </div>
       </div>
-      {isDepository &&
-            <div className="wrap_item size_shower">
-            <h3>Вкажіть кількість шт</h3>
-            <div className="size_input">
-              <div className="size_item" >
-                <input type="number" placeholder="Кількість" value={depositoryValue} onChange={(e) => setDepositoryValue(e.target.value)}/>
-              </div>
+      {isDepository && (
+        <div className="wrap_item size_shower">
+          <h3>Вкажіть кількість шт</h3>
+          <div className="size_input">
+            <div className="size_item">
+              <input
+                type="number"
+                placeholder="Кількість"
+                value={depositoryValue}
+                onChange={(e) => setDepositoryValue(e.target.value)}
+              />
             </div>
           </div>
-      }
-              <div className="firnitur">
-            <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
-            <Modal isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
         </div>
-        <div className="firnitur">
-            <button className="button_open" onClick={handleOpenAllFurnitureModal}>Вся фурнітура</button>
-            <ModalAllFurniture isOpen={modalAllFurnitureIsOpen} onClose={handleCloseModalAllFurniture}/>
+      )}
+      <div className="firnitur">
+        <button className="button_open" onClick={handleOpenModal}>
+          Обрати фурнітуру
+        </button>
+        <Modal
+          isOpen={modalIsOpen}
+          onClose={handleCloseModal}
+          furnitureProps={currentObject?.furniture}
+        />
+      </div>
+      <div className="firnitur">
+        <button className="button_open" onClick={handleOpenAllFurnitureModal}>
+          Вся фурнітура
+        </button>
+        <ModalAllFurniture
+          isOpen={modalAllFurnitureIsOpen}
+          onClose={handleCloseModalAllFurniture}
+        />
+      </div>
+      <ListTheChoseFurniture />
+      <DeliveryTemplate />
+      <div className="footer_calc">
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order">
+          <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+            <PDFDownloadLink
+              document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для менеджера"
+              }
+            </PDFDownloadLink>
+            <PDFDownloadLink
+              className=""
+              document={<PdfFileClient order={finishedShowerPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для клієнта"
+              }
+            </PDFDownloadLink>
+          </div>
+          {/* <SendPdfBlockTemplate 
+          finishedPdf={finishedShowerPdf}
+          cart={cart}/> */}
+          <button onClick={handleFetch}>Оформити</button>
         </div>
-        <ListTheChoseFurniture/>
-      <DeliveryTemplate/>
-        <div className="footer_calc">
-            <div className="summ">
-              <div>
-              <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-            <div className="mirror_button_exel" style={{fontSize: 14}}>
-            <PDFDownloadLink  document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
-            </PDFDownloadLink>
-            <PDFDownloadLink className="" document={< PdfFileClient order={finishedShowerPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
-            </PDFDownloadLink>
-            </div>
-            <button onClick={handleFetch} >Оформити</button>
-            </div>
-        </div> 
+      </div>
     </div>
-    
   );
 };
 

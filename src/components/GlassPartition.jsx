@@ -8,6 +8,11 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "./DeliveryTemplate";
+import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import InputTemplate from "./Template/InputTemplate";
+import ClientFooter from './Template/ClientFooter';
+import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 import '../style/shower.scss'
 
 const GlassPartition = () => {
@@ -33,8 +38,10 @@ const GlassPartition = () => {
   const [minInstallation, setMinInstallation] = useState('');
   const [typeMontaje, setTypeMontaje] = useState('');
   const [typeDovod, setTypeDovod] = useState('');
+  const [dovodCout, setdovodCout] = useState('');
   const [typeZaklad, setTypeZaklad] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
   const [montaje] = useState([
     {
       name: 'Глуха перегородка',
@@ -176,7 +183,7 @@ const GlassPartition = () => {
       (calcSquareMeter * currentType?.price || 0) + 
       (calcSquareMeter * currentColor?.price || 0) + 
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
-      (currentProcessingСutout?.price || 0) + 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
@@ -324,240 +331,232 @@ const GlassPartition = () => {
     <div className="shower_wrapper">
       <h1>Скляні перегородки</h1>
       <div className="wrap_item type_glass">
-            <h3>Виберіть перегородку</h3>
+        <h3>Виберіть перегородку</h3>
+        <div className="choose_item selected_shower">
+          <select value={currentTypePartitions} onChange={selectTypePartitions}>
+            <option value="" disabled></option>
+            {currentObject &&
+              currentObject.typePartitions &&
+              currentObject.typePartitions.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+          </select>
+        </div>
+      </div>
+
+      <SelectObjecTemplate
+        title={"Виберіть тип"}
+        optionName={""}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject.typeGlass}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
+
+      <div className="wrap_item size_shower">
+        <h3>Вкажіть розміри (мм)</h3>
+        <div className="size_input">
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Ширина"}
+              onChangeFunc={setWidthValue}
+              value={widthValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Висота"}
+              onChangeFunc={setHeightValue}
+              value={heightValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplate
+              placeholder={"Глибина"}
+              onChangeFunc={setDepthValue}
+              value={depthValue}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+        </div>
+      </div>
+
+      <SelectObjecTemplate
+        title={"Обробка скла:"}
+        optionName={""}
+        changeFunc={selectProcessingStandartFunc}
+        state={currentProcessingStandart}
+        data={currentObject?.processingStandart}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
+
+<ProcessingCoutPlusCountTemplate
+        title={"Додаткова обробка"}
+        optionName={""}
+        changeFunc={selectProcessingСutoutFunc}
+        state={currentProcessingСutout}
+        data={currentObject?.processingСutout}
+        wrapClass={"wrap_item_plus_count type_shower size_item"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
+      />
+
+      <div className="firnitur">
+        <button className="button_open" onClick={handleOpenModal}>
+          Обрати фурнітуру
+        </button>
+        <ModalGlassPartitions
+          currentPartitions={currentTypePartitions}
+          isOpen={modalIsOpen}
+          onClose={handleCloseModal}
+          furnitureProps={currentObject?.furniture}
+        />
+      </div>
+      <div className="firnitur">
+        <button className="button_open" onClick={handleOpenAllFurnitureModal}>
+          Вся фурнітура
+        </button>
+        <ModalAllFurniture
+          isOpen={modalAllFurnitureIsOpen}
+          onClose={handleCloseModalAllFurniture}
+        />
+      </div>
+      <ListTheChoseFurniture />
+
+      <div>
+        <div className="choose_item item_mirrors item_montaje">
+          <h3>Монтаж:</h3>
+          <div className="montaje_wrap">
+            <div className="checkbox_wrap montaje">
+              <input
+                id="checkbox3"
+                className="checkbox"
+                type="checkbox"
+                checked={isAssemblingt}
+                onChange={changeIsAssemblingt}
+              />
+              <label className="checkbox-label" htmlFor="checkbox3"></label>
+            </div>
+
             <div className="choose_item selected_shower">
-            <select value={currentTypePartitions} onChange={selectTypePartitions}>
-              <option value="" disabled>
-                
-              </option>
-              {currentObject &&
-                currentObject.typePartitions &&
-                currentObject.typePartitions.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
+              <select
+                value={typeMontaje ? JSON.stringify(typeMontaje) : ""}
+                onChange={selectMontajeFunc}
+              >
+                <option value="" disabled>
+                  Тип:
+                </option>
+                {montaje.map((item) => (
+                  <option key={item.name} value={JSON.stringify(item)}>
+                    {item.name}
                   </option>
                 ))}
-            </select>
-            {/* <p>Вибране скло: <span>{currentGlass}</span> </p> */}
-            </div>
-        </div> 
-      <div className="wrap_item type_shower">
-            <h3>Виберіть тип</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentType ? JSON.stringify(currentType) : ""}
-                onChange={selectTypeFunc}
-              >
-                <option value="" disabled>
-                  Оберіть тип
-                </option>
-                {currentObject?.typeGlass &&
-                  currentObject.typeGlass.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
               </select>
-            </div>
-        </div>
-
-        <div className="wrap_item type_shower">
-            <h3>Виберіть колір</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentColor ? JSON.stringify(currentColor) : ""}
-                onChange={selectColorFunc}
-              >
-                <option value="" disabled>
-                  Оберіть колір
-                </option>
-                {currentObject?.color &&
-                  currentObject.color.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
-
-        <div className="wrap_item size_shower">
-          <h3>Вкажіть розміри (мм)</h3>
-          <div className="size_input">
-            <div className="size_item" >
-              {/* <h4>Ширина:</h4> */}
-              <input type="number" placeholder="Ширина" value={widthValue} onChange={(e) => setWidthValue(e.target.value)}/>
-            <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
-            </div>
-            <div  className="size_item" >
-              {/* <h4>Висота:</h4> */}
-              <input type="number" placeholder="Висота" value={heightValue} onChange={(e) => setHeightValue(e.target.value)}/>
-              <p style={{color: 'red'}}>{validationInput && 'Введіть данні'}</p>
-            </div>
-            <div className="size_item" >
-              {/* <h4>Глубина:</h4> */}
-              <input type="number" placeholder="Глибина" value={depthValue} onChange={(e) => setDepthValue(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div className="wrap_item type_shower">
-            <h3>Обробка скла</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingStandart ? JSON.stringify(currentProcessingStandart) : ""}
-                onChange={selectProcessingStandartFunc}
-                
-              >
-                <option value="" disabled>
-                  
-                </option>
-                {currentObject?.processingStandart &&
-                  currentObject.processingStandart.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
+        <div className="choose_item item_mirrors item_montaje">
+          <h3>Доводчик:</h3>
+          <div className="montaje_wrap">
+            <div className="checkbox_wrap montaje">
+              <input
+                id="checkbox4"
+                className="checkbox"
+                type="checkbox"
+                checked={isAssemblingtDovod}
+                onChange={() => setIsAssemblingDovod((state) => !state)}
+              />
+              <label className="checkbox-label" htmlFor="checkbox4"></label>
             </div>
-        </div>
 
-        <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
             <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
-                onChange={selectProcessingСutoutFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {currentObject?.processingСutout &&
-                  currentObject.processingСutout.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
+              <input className="input_miroor_item cabel"
+              placeholder="Кількість"
+              value={dovodCout}
+              onChange={(e) => setdovodCout(e.target.value)}/>
             </div>
-        </div>
-
-    
-        <div className="firnitur">
-            <button className="button_open" onClick={handleOpenModal}>Обрати фурнітуру</button>
-            <ModalGlassPartitions currentPartitions={currentTypePartitions} isOpen={modalIsOpen} onClose={handleCloseModal} furnitureProps={currentObject?.furniture}/>
-        </div>
-        <div className="firnitur">
-            <button className="button_open" onClick={handleOpenAllFurnitureModal}>Вся фурнітура</button>
-            <ModalAllFurniture isOpen={modalAllFurnitureIsOpen} onClose={handleCloseModalAllFurniture}/>
-        </div>
-        <ListTheChoseFurniture/>
-
-        <div>
-          <div className="choose_item item_mirrors item_montaje">
-        <h3>Монтаж:</h3>
-        <div className="montaje_wrap">
-          <div className="checkbox_wrap montaje">
-            <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
-            <label className="checkbox-label" htmlFor="checkbox3"></label>
           </div>
+        </div>
 
-          <div className="choose_item selected_shower">
-              <select 
-              value={typeMontaje ? JSON.stringify(typeMontaje) : ""}
-              onChange={selectMontajeFunc}>
+        <div className="choose_item item_mirrors item_montaje">
+          <h3>Закладна:</h3>
+          <div className="montaje_wrap">
+            <div className="checkbox_wrap montaje">
+              <input
+                id="checkbox5"
+                className="checkbox"
+                type="checkbox"
+                checked={isAssemblingtZaklad}
+                onChange={() => setIsAssemblingZaklad((state) => !state)}
+              />
+              <label className="checkbox-label" htmlFor="checkbox5"></label>
+            </div>
+
+            <div className="choose_item selected_shower">
+              <select
+                value={typeZaklad ? JSON.stringify(typeZaklad) : ""}
+                onChange={selectZakladFunc}
+              >
                 <option value="" disabled>
                   Тип:
                 </option>
-                {
-                  montaje.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
+                {zaklad.map((item) => (
+                  <option key={item.name} value={JSON.stringify(item)}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
             </div>
-        </div>
-      </div>
-
-      <div className="choose_item item_mirrors item_montaje">
-        <h3>Доводчик:</h3>
-        <div className="montaje_wrap">
-          <div className="checkbox_wrap montaje">
-            <input id="checkbox4"  className="checkbox" type='checkbox' checked={isAssemblingtDovod} onChange={() => setIsAssemblingDovod(state => !state)}/>
-            <label className="checkbox-label" htmlFor="checkbox4"></label>
           </div>
-
-          <div className="choose_item selected_shower">
-              <select 
-              value={typeDovod ? JSON.stringify(typeDovod) : ""}
-              onChange={selectDovodFunc}>
-                <option value="" disabled>
-                  Тип:
-                </option>
-                {
-                  dovod.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
         </div>
+
+        <DeliveryTemplate />
       </div>
 
-      <div className="choose_item item_mirrors item_montaje">
-        <h3>Закладна:</h3>
-        <div className="montaje_wrap">
-          <div className="checkbox_wrap montaje">
-            <input id="checkbox5"  className="checkbox" type='checkbox' checked={isAssemblingtZaklad} onChange={() => setIsAssemblingZaklad(state => !state)}/>
-            <label className="checkbox-label" htmlFor="checkbox5"></label>
-          </div>
-
-          <div className="choose_item selected_shower">
-              <select 
-              value={typeZaklad ? JSON.stringify(typeZaklad) : ""}
-              onChange={selectZakladFunc}>
-                <option value="" disabled>
-                  Тип:
-                </option>
-                {
-                  zaklad.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-        </div>
-      </div>
-      
-      <DeliveryTemplate/>
-          </div> 
-
-        <div className="footer_calc">
-            <div className="summ">
-              <div>
-              <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-            <div className="mirror_button_exel" style={{fontSize: 14}}>
-            <PDFDownloadLink  document={<PdfFile order={finishedShowerPdf} cart={cart}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
+      <div className="footer_calc">
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order">
+          <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+            <PDFDownloadLink
+              document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для менеджера"
+              }
             </PDFDownloadLink>
-            <PDFDownloadLink className="" document={< PdfFileClient order={finishedShowerPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            <PDFDownloadLink
+              className=""
+              document={<PdfFileClient order={finishedShowerPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для клієнта"
+              }
             </PDFDownloadLink>
-            </div>
-            <button onClick={handleFetch} >Оформити</button>
-            </div>
-        </div> 
+          </div>
+          {/* <SendPdfBlockTemplate 
+          finishedPdf={finishedShowerPdf}
+          cart={cart}/> */}
+          <button onClick={handleFetch}>Оформити</button>
+        </div>
+      </div>
     </div>
-    
   );
 };
 

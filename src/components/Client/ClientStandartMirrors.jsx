@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { CSVLink } from "react-csv";
-import ExelPrint from ".././ExelPrint";
-import PdfFile from ".././PdfFile/PdfFileMirorrsManager";
-import PdfFileClient from ".././PdfFile/PdfFileMirorrsClient";
-import Api from ".././Api";
 import "../../style/shower.scss";
 import "../../style/mirrors.scss";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "../DeliveryTemplate";
+import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import InputTemplate from "../Template/InputTemplate";
+import ClientFooter from "../Template/ClientFooter";
 
-const ClientStandartMirrors = ({data}) => {
+const ClientStandartMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
   const [currentType, setCurrentType] = useState(null);
   const [currentTypeArray, setCurrentTypeArray] = useState(null);
@@ -26,41 +23,45 @@ const ClientStandartMirrors = ({data}) => {
   const [sizeHeightMirrors, setSizeHeightMirrors] = useState("");
   const [sizeFrame, setSizeFrame] = useState(0);
   const [totalSum, setTotalSum] = useState(0);
-  const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
   const [validationInput, setValidationInput] = useState(false);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
 
-  const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
-  const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
-  const deliverySurName = useSelector((state) => state.delivery.deliverySurName);
-  const deliveryNumberPhone = useSelector((state) => state.delivery.deliveryNumberPhone);
-  const deliveryOrderComent = useSelector((state) => state.delivery.deliveryOrderComent);
-  const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
+  const deliveryFirstName = useSelector(
+    (state) => state.delivery.deliveryFirstName
+  );
+  const deliveryLastName = useSelector(
+    (state) => state.delivery.deliveryLastName
+  );
+  const deliverySurName = useSelector(
+    (state) => state.delivery.deliverySurName
+  );
+  const deliveryNumberPhone = useSelector(
+    (state) => state.delivery.deliveryNumberPhone
+  );
+  const deliveryOrderComent = useSelector(
+    (state) => state.delivery.deliveryOrderComent
+  );
+  const deliveryDistance = useSelector(
+    (state) => state.delivery.deliveryDistance
+  );
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
-  const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
+  const deliveryBoolean = useSelector(
+    (state) => state.delivery.deliveryBoolean
+  );
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
-        setCurrentObject(data[0])
+        setCurrentObject(data[0]);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  // const [intslPrice, setIntslPrice] = useState(0);
-  // const keyCsv = [
-  //   {"Форма скла": currentType?.name },
-  //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
-  // ];
-
-  const calcTotalSum = () => {
-    if (
-      (sizeWidthMirrors && sizeHeightMirrors) ||
-      (!currentType && !currentGoods)
-    ) {
+  const calcTotalSumFunc = () => {
+    if (sizeWidthMirrors && sizeHeightMirrors) {
       setValidationInput(false);
       const priceMeterCord = data?.option?.cord?.price;
 
@@ -93,17 +94,6 @@ const ClientStandartMirrors = ({data}) => {
       if (isPainting) {
         isPaintingPrice = Number(sizeFrame) * Number(currentColor?.price);
       }
-
-      console.log("доставка over sity", deliveryDistance);
-      console.log("adress", deliveryAdress);
-      console.log("price", deliveryPrice);
-
-      console.log("priceMeterCord", priceMeterCord);
-      console.log("calcSize", calcSize);
-      console.log("calcSquareMeter", calcSquareMeter);
-      console.log("warmedUpPrice", warmedUpPrice);
-      console.log("resCordSum", resCordSum);
-      console.log("resFrameSum", resFrameSum);
 
       const total =
         (resSizePrice || 0) +
@@ -155,7 +145,7 @@ const ClientStandartMirrors = ({data}) => {
         painting: isPainting ? "Так" : "" /* покраска рамки */,
         paintingPrice: isPainting ? "Ціна" : "" /* покраска рамки */,
         colorName: isPainting ? currentColor?.name : "" /* колір покраски */,
-        colorFrame: isPainting ? "Покраска" : "" /* колір покраски */,
+        colorFrame: isPainting ? "Фарбування" : "" /* колір покраски */,
         colorPrice: isPainting ? isPaintingPrice : "" /* Ціна кольору */,
         adress: deliveryAdress /* адреса доставки */,
         deliveryPriceOverSity: deliveryBoolean
@@ -164,11 +154,11 @@ const ClientStandartMirrors = ({data}) => {
         deliveryPriceOver: !deliveryBoolean
           ? deliveryPrice
           : "" /* ціна доставки по місту */,
-          firstName: deliveryFirstName,
-          lastName: deliveryLastName,
-          surname: deliverySurName,
-          numberPhone: deliveryNumberPhone,
-          orderComent: deliveryOrderComent,
+        firstName: deliveryFirstName,
+        lastName: deliveryLastName,
+        surname: deliverySurName,
+        numberPhone: deliveryNumberPhone,
+        orderComent: deliveryOrderComent,
         minInstallation: minInstallation ? 500 : "",
         minInstallationName: minInstallation ? "Монтаж" : "",
         minInstallationOption: minInstallation ? "Мінімальний" : "",
@@ -187,9 +177,7 @@ const ClientStandartMirrors = ({data}) => {
         total: total,
       };
 
-      setFinishMirrorPdf(finishedMirros);
-
-      console.log("файл друк", finishedMirros);
+      console.log("finishedMirros", finishedMirros);
 
       setTotalSum(total);
     } else {
@@ -213,151 +201,61 @@ const ClientStandartMirrors = ({data}) => {
     setCurrentFrame(selectedFrame);
   };
 
-  const selectBackLightFunc = (e) => {
-    const selectedBackLight = JSON.parse(e.target.value);
-    setCurrentBackLight(selectedBackLight);
-  };
-
-  const selectSwitchFunc = (e) => {
-    const selectedSwitch = JSON.parse(e.target.value);
-    setCurrentSwitch(selectedSwitch);
-  };
-
-  const changeCord = (e) => {
-    const cordObj = data?.option?.cord;
-    setCurrentCord(e.target.value);
-  };
-
   const changeWarmUpFunc = () => {
     const warmeUpObj = data?.option?.warmedUp;
     setIsWarmedUp((isWarmedUp) => !isWarmedUp);
   };
 
-  const changePaintingFunc = () => {
-    // const paintingObj = data?.option?.painting;
-    setIsPainting((isPainting) => !isPainting);
-  };
-
-  const selectedColorFunc = (e) => {
-    const selectedColor = JSON.parse(e.target.value);
-    setCurrentColor(selectedColor);
-  };
-
-  const changeIsAssemblingt = () => {
-    // const paintingObj = data?.option?.painting;
-    setIsAssembling((isAssemblingt) => !isAssemblingt);
-  };
-
-  const changeMinInstallationFunc = () => {
-    // const paintingObj = data?.option?.painting;
-    setMinInstallation((minInstallation) => !minInstallation);
-  };
-
-  const selectProcessingСutoutFunc = (e) => {
-    const selectedProcessing = JSON.parse(e.target.value);
-    setCurrentProcessingСutout(selectedProcessing);
-  };
-
-  // console.log('currentType',currentType);
-  // console.log('currentGoods',currentGoods);
-  // console.log('sizeWidthMirrors',sizeWidthMirrors);
-  // console.log('sizeHeightMirrors',sizeHeightMirrors);
-  // console.log('currentFrame',currentFrame);
-  // console.log('currentBackLight',currentBackLight);
-  // console.log('currentSwitch',currentSwitch);
-  // console.log('currentCord',currentCord);
-  // console.log('isWarmedUp',isWarmedUp);
-  // console.log('isPainting',isPainting);
-  // console.log('currentColor',currentColor);
+  console.log("currentObject", currentObject);
 
   return (
     <div className="wrap_item mirrors_item">
       <h1>Дзеркала</h1>
-      <div className="choose_item item_mirrors">
-        <h3>Форма дзеркала:</h3>
-        <select
-          onChange={selectTypeFunc}
-          value={currentType ? JSON.stringify(currentType) : ""}
-        >
-          <option value="" disabled></option>
-          {currentObject?.typeWordpress &&
-            currentObject.typeWordpress.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
 
-      <div className="choose_item item_mirrors">
-        <h3>Тип:</h3>
-        <select
-          onChange={selectGoodsFunc}
-          value={currentGoods ? JSON.stringify(currentGoods) : ""}
-        >
-          <option value="" disabled></option>
-          {currentTypeArray &&
-            currentTypeArray.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
+      <SelectObjecTemplate
+        title={"Форма дзеркала:"}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeWordpress}
+        wrapClass={"choose_item item_mirrors"}
+      />
+
+      <SelectObjecTemplate
+        title={"Тип:"}
+        changeFunc={selectGoodsFunc}
+        state={currentGoods}
+        data={currentTypeArray}
+        wrapClass={"choose_item item_mirrors"}
+      />
 
       <div className="choose_item item_mirrors">
         <h3>Розмір (см)</h3>
         <div className=" input_miroor">
-          <div>
-            <input
-              className=" input_miroor_item cabel"
-              type="number"
-              placeholder="Ширина"
-              value={sizeWidthMirrors}
-              onChange={(e) => setSizeWidthMirrors(e.target.value)}
-            />
-            <p style={{ color: "red" }}>
-              {validationInput &&
-                currentGoods &&
-                currentType &&
-                "Введіть данні"}
-            </p>
-          </div>
-          <div>
-            <input
-              className="input_miroor_item  cabel"
-              type="number"
-              placeholder="Висота"
-              value={sizeHeightMirrors}
-              onChange={(e) => setSizeHeightMirrors(e.target.value)}
-            />
-            <p style={{ color: "red" }}>
-              {validationInput &&
-                currentGoods &&
-                currentType &&
-                "Введіть данні"}
-            </p>
-          </div>
+          <InputTemplate
+            placeholder={"Ширина"}
+            onChangeFunc={setSizeWidthMirrors}
+            value={sizeWidthMirrors}
+            validationInput={validationInput}
+            inputClass={"input_miroor_item cabel"}
+          />
+          <InputTemplate
+            placeholder={"Висота"}
+            onChangeFunc={setSizeHeightMirrors}
+            value={sizeHeightMirrors}
+            validationInput={validationInput}
+            inputClass={"input_miroor_item cabel"}
+          />
         </div>
       </div>
 
-      <div className="choose_item item_mirrors">
-        <h3>Виберіть рамку:</h3>
-        <select
-          onChange={selectFrameFunc}
-          value={currentFrame ? JSON.stringify(currentFrame) : ""}
-        >
-          <option value="" disabled>
-            Без рамки
-          </option>
-          {currentObject?.option?.frame &&
-            currentObject.option.frame.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
+      <SelectObjecTemplate
+        title={"Виберіть рамку:"}
+        optionName={''}
+        changeFunc={selectFrameFunc}
+        state={currentFrame}
+        data={currentObject?.option?.frame}
+        wrapClass={"choose_item item_mirrors"}
+      />
 
       <div className="choose_item item_mirrors">
         <h3>Розмір рамки (м)</h3>
@@ -385,21 +283,10 @@ const ClientStandartMirrors = ({data}) => {
         </div>
       </div>
 
-      <DeliveryTemplate/>
+      <DeliveryTemplate />
       <div className="footer_calc">
-        <div className="mirror_sum">
-          <div>
-            <button className="mirror_buttom" onClick={calcTotalSum}>
-              Підрахувати вартість
-            </button>
-          </div>
-          <h3 className="order_sum mirror_sum">
-            Кінцева вартість: <span> {totalSum} грн</span>{" "}
-          </h3>
-        </div>
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order mirror_button">
-          {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
-          {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
           <button className="mirror_button_order">Оформити</button>
         </div>
       </div>

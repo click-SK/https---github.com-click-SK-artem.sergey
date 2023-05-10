@@ -6,6 +6,11 @@ import PdfFileClient from "./PdfFile/PdfFileCosmeticMirorrsClient";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "./DeliveryTemplate";
+import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import InputTemplate from "./Template/InputTemplate";
+import ClientFooter from './Template/ClientFooter';
+import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 import "../style/shower.scss";
 
 const CosmeticMirrors = ({ data }) => {
@@ -18,6 +23,7 @@ const CosmeticMirrors = ({ data }) => {
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
   const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -62,7 +68,7 @@ const CosmeticMirrors = ({ data }) => {
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
       (data?.lightBulbs * lightBulbsCount || 0) +
       (data?.patron * patronCount || 0) +
-      (currentProcessingСutout?.price || 0)+ 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
@@ -100,7 +106,7 @@ const CosmeticMirrors = ({ data }) => {
 
   return (
     <div>
-      <div className="wrap_item type_shower">
+      {/* <div className="wrap_item type_shower">
         <h3>Виберіть тип</h3>
         <div className="choose_item selected_shower">
           <select
@@ -118,30 +124,38 @@ const CosmeticMirrors = ({ data }) => {
               ))}
           </select>
         </div>
-      </div>
+      </div> */}
+      <SelectObjecTemplate
+        title={"Виберіть тип"}
+        optionName={""}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={data?.typeGlass}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
 
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
-            {/* <h4>Ширина:</h4> */}
-            <input
-              type="number"
-              placeholder="Ширина"
+            <InputTemplate
+              placeholder={"Ширина"}
+              onChangeFunc={setWidthValue}
               value={widthValue}
-              onChange={(e) => setWidthValue(e.target.value)}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
             />
-            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p>
           </div>
           <div className="size_item">
-            {/* <h4>Висота:</h4> */}
-            <input
-              type="number"
-              placeholder="Висота"
+            <InputTemplate
+              placeholder={"Висота"}
+              onChangeFunc={setHeightValue}
               value={heightValue}
-              onChange={(e) => setHeightValue(e.target.value)}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
             />
-            <p style={{ color: "red" }}>{validationInput && "Введіть данні"}</p>
           </div>
         </div>
       </div>
@@ -173,47 +187,47 @@ const CosmeticMirrors = ({ data }) => {
         </div>
       </div>
 
-        <div className="wrap_item type_shower">
-            <h3>Виберіть обробку</h3>
-            <div className="choose_item selected_shower">
-              <select
-                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
-                onChange={selectProcessingСutoutFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {data?.processingСutout &&
-                  data.processingСutout.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+      <ProcessingCoutPlusCountTemplate
+        title={"Виберіть обробку:"}
+        optionName={""}
+        changeFunc={selectProcessingСutoutFunc}
+        state={currentProcessingСutout}
+        data={data?.processingСutout}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
+      />
+
+      <DeliveryTemplate />
+      <div className="footer_calc">
+      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order">
+          <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+            <PDFDownloadLink
+              document={<PdfFile order={finishMirrorPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для менеджера"
+              }
+            </PDFDownloadLink>
+            <PDFDownloadLink
+              className=""
+              document={<PdfFileClient order={finishMirrorPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для клієнта"
+              }
+            </PDFDownloadLink>
+          </div>
+          {/* <SendPdfBlockTemplate 
+          finishedPdf={finishMirrorPdf}/> */}
+          <button>Оформити</button>
         </div>
-        <DeliveryTemplate/>
-        <div className="footer_calc">
-            <div className="summ">
-              <div>
-              <button onClick={calcTotalSumFunc}>Підрахувати вартість</button>
-              </div>
-              <div className="order_sum">
-              <h3>Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span> </h3>
-              </div>
-            </div>
-            <div className="send_order">
-            <div className="mirror_button_exel" style={{fontSize: 14}}>
-            <PDFDownloadLink  document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
-            </PDFDownloadLink>
-            <PDFDownloadLink className="" document={< PdfFileClient order={finishMirrorPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
-            </PDFDownloadLink>
-            </div>
-            <button>Оформити</button>
-            </div>
-        </div> 
+      </div>
     </div>
   );
 };
