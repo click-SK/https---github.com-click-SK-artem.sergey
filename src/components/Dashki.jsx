@@ -98,7 +98,7 @@ const Dashki = () => {
     if(widthValue) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(volumValue);
-      const calcSquareMeter = calcSize/1000000;
+      const calcSquareMeter = calcSize/10000;
       const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
   
       let totalSumFurniture = 0;
@@ -151,7 +151,7 @@ const Dashki = () => {
         currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
         currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
-        currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
+        currentProcessingСutoutCount: currentProcessingСutoutCount ? `${currentProcessingСutoutCount} шт` : '',
         vantaName: isVanta ? "Ванта" : '',
         vantaPrice: isVanta ? currentObject?.vanta : '',
         vantaValue: isVanta ? vantaValue : '',
@@ -305,7 +305,7 @@ const Dashki = () => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (мм)</h3>
+        <h3>Вкажіть розміри (cм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
@@ -345,8 +345,8 @@ const Dashki = () => {
         changeFunc={selectProcessingСutoutFunc}
         state={currentProcessingСutout}
         data={currentObject?.processingСutout}
-        wrapClass={"wrap_item_plus_count type_shower size_item"}
-        selectWrapClass={"choose_item selected_shower"}
+        wrapClass={"wrap_item size_item "}
+        selectWrapClass={"choose_item choose_procesing  "}
         selectDivWrap={true}
         currentProcessingСutoutCount={currentProcessingСutoutCount}
         setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
@@ -436,7 +436,7 @@ const Dashki = () => {
           <div className="mirror_button_exel" style={{ fontSize: 14 }}>
             <PDFDownloadLink
               document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-              fileName="orderDate"
+              fileName={`Дашки менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
               {({ loading, error }) =>
                 loading ? "завантаження..." : "Для менеджера"
@@ -445,7 +445,7 @@ const Dashki = () => {
             <PDFDownloadLink
               className=""
               document={<PdfFileClient order={finishedShowerPdf} />}
-              fileName="orderDate"
+              fileName={`Дашки клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
               {({ loading, error }) =>
                 loading ? "завантаження..." : "Для клієнта"

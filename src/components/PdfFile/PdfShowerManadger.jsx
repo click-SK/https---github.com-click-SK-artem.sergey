@@ -199,7 +199,7 @@ const PdfShowerManadger = ({order, cart}) => {
                 name: currentProcessingСutoutName,
             },
             isAssemblingt:{
-                price: minInstallation,
+                price: goodsPrice,
                 name: isAssemblingtName,
             },
           };
@@ -245,7 +245,7 @@ const PdfShowerManadger = ({order, cart}) => {
                             {width} х {height}{resDepth} 
                         </Text>
                         <Text style={styles.text}>
-                            {goodsPrice} грн
+                            
                         </Text>
                     </View>               
 

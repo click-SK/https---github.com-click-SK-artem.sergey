@@ -61,7 +61,7 @@ const CosmeticMirrors = ({ data }) => {
     if(heightValue && widthValue) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(heightValue);
-      const calcSquareMeter = calcSize/1000000;
+      const calcSquareMeter = calcSize/10000;
   
 
   
@@ -92,7 +92,7 @@ const CosmeticMirrors = ({ data }) => {
         orderComent: deliveryOrderComent,
         selectedProcessingName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         selectedProcessingPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
-        selectedProcessingCount: currentProcessingСutout ? currentProcessingСutout?.count : '',
+        selectedProcessingCount: currentProcessingСutoutCount ? `${currentProcessingСutoutCount} шт` : '',
         total: totalSum,
       }
 
@@ -137,7 +137,7 @@ const CosmeticMirrors = ({ data }) => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (мм)</h3>
+        <h3>Вкажіть розміри (cм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
@@ -207,7 +207,7 @@ const CosmeticMirrors = ({ data }) => {
           <div className="mirror_button_exel" style={{ fontSize: 14 }}>
             <PDFDownloadLink
               document={<PdfFile order={finishMirrorPdf} />}
-              fileName="orderDate"
+              fileName={`Косметичні дзеркала менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
               {({ loading, error }) =>
                 loading ? "завантаження..." : "Для менеджера"
@@ -216,7 +216,7 @@ const CosmeticMirrors = ({ data }) => {
             <PDFDownloadLink
               className=""
               document={<PdfFileClient order={finishMirrorPdf} />}
-              fileName="orderDate"
+              fileName={`Косметичні дзеркала клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
               {({ loading, error }) =>
                 loading ? "завантаження..." : "Для клієнта"

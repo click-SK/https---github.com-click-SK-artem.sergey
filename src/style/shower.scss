@@ -45,6 +45,9 @@ h1{
     }
 }
 
+
+
+
 .choose_item{
     display: flex;
     justify-content: space-evenly;
@@ -89,6 +92,10 @@ h1{
         }
     }
 
+}
+
+.choose_procesing{
+    width: 340px;
 }
 
 .type_shower{
@@ -329,6 +336,7 @@ h1{
 
 .footer_calc{
     display: flex;
+    
     height: 200px;
     justify-content: center;
     flex-direction: column;
@@ -373,6 +381,50 @@ h1{
         flex-direction: row;
         align-items: end;
         justify-content: space-around;
+        position: relative;
+
+        .print {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 60px;
+            font-size: 18px;
+            background: #fff;
+            color: black;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+
+            &:hover{
+            background: #26a50c;
+            color: #fdfdfd;
+                a{
+                    color: #fdfdfd;
+                }
+            }
+
+            a{
+                color: rgb(6, 6, 6);
+            }
+        } 
+        
+        .print_manager {
+            // top: 30px;
+            // left: 20%;
+            height: 40px;
+        }
+
+        .print_client{
+            top: 40px;
+            // left: 20%;
+            height: 40px;
+
+        }
 
 
         .exel{
@@ -382,6 +434,7 @@ h1{
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
             font-size: 18px;
             background: #fff;
+
             color: #26a50c;
             border: 1px solid #26a50c ;
             font-weight: 500;
@@ -404,8 +457,53 @@ h1{
             color: #ffffff;
             font-weight: 500;
             font-size: 36px;
+
+        }
+
+        .success{
+            font-size: 20px;
+            background: #26a50c;
         }
 
     }
 
 }
+
+
+.print_wrap{
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    left: 20%;
+    top: 9px;
+    // border: 1px solid #fff;
+    height: 80px;
+    width: 200px;
+    overflow: hidden;
+}
+
+
+.close_pdf{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 179px;
+    border-radius: 8px;
+    width: 20px;
+    height: 80px;
+    z-index: 1000;
+    color: rgb(82, 2, 2);
+    background-color: #ffffff;
+    border: 1px solid  rgb(82, 2, 2);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 0px 0px 3px 1px;
+    &:hover{
+        border: 1px solid red;
+        color: red;
+        background-color: rgb(255, 187, 187);
+    }
+}
+

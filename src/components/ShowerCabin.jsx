@@ -41,6 +41,8 @@ const ShowerCabin = () => {
   const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
   const [furniture, setFurniture] = useState('none');
   const [isPrintPDF, setIsPrintPDF] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
@@ -156,7 +158,7 @@ const ShowerCabin = () => {
         currentProcessingStandartPrice: currentProcessingStandart ? resCurrentProcessingStandart : '',
         currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
-        currentProcessingСutoutCount: currentProcessingСutout ? `${currentProcessingСutout?.count} шт` : '1 шт',
+        currentProcessingСutoutCount: currentProcessingСutoutCount ? `${currentProcessingСutoutCount} шт` : '',
         total: totalSum, /* скло - ціна душ кабіни */
       }
 
@@ -336,6 +338,8 @@ const ShowerCabin = () => {
     //   ],
     // } };
 
+    const deliver = finishedShowerPdf.adress ? finishedShowerPdf.adress : 'Без доставки' ;
+
     const data = {
       order: {
         "source_id": 10,
@@ -345,8 +349,8 @@ const ShowerCabin = () => {
           "phone": finishedShowerPdf.numberPhone
         },
         "shipping": {
-          "delivery_service_id": 1,
-          "shipping_address_city": finishedShowerPdf.adress,
+          "delivery_service_id": 2,
+          "shipping_address_city": deliver,
         },
         "products": [
           {
@@ -375,15 +379,21 @@ const ShowerCabin = () => {
 
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', Object.entries(furnitureFinObj)  );
+    setIsLoading(true);
 
-
-    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    });
+    // const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data)
+      
+    // });
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSuccess(true);
+    }, 1500);
   }
 
   console.log('currentObject',currentObject);
@@ -480,8 +490,8 @@ const ShowerCabin = () => {
         changeFunc={selectProcessingСutoutFunc}
         state={currentProcessingСutout}
         data={currentObject?.processingСutout}
-        wrapClass={"wrap_item_plus_count type_shower size_item"}
-        selectWrapClass={"choose_item selected_shower"}
+        wrapClass={"wrap_item size_item "}
+        selectWrapClass={"choose_item choose_procesing  "}
         selectDivWrap={true}
         currentProcessingСutoutCount={currentProcessingСutoutCount}
         setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
@@ -534,41 +544,54 @@ const ShowerCabin = () => {
           {!isPrintPDF && (
             <div
               className="mirror_button_exel"
-              style={{ fontSize: 14 }}
+              style={{ fontSize: 14, }}
               onClick={() => setIsPrintPDF((state) => !state)}
             >
               Роздрукувати PDF
             </div>
           )}
           {isPrintPDF && (
-            <div className="mirror_button_exel">
-              <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+             
+            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
+                 Роздрукувати PDF
+              <div className="print_wrap">
+                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+              {/* <div className="print print_manager" style={{ fontSize: 14 }}> */}
                 <PDFDownloadLink
+                  className="print print_manager" style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-                  fileName="orderDate"
-                >
+                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
-              </div>
-              <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+              {/* </div> */}
+              {/* <div className="print print_client" style={{ fontSize: 14 }}> */}
                 <PDFDownloadLink
-                  className=""
+                  className="print print_client" style={{ fontSize: 14,}}
                   document={<PdfFileClient order={finishedShowerPdf} />}
-                  fileName="orderDate"
-                >
+                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-              </div>
+              {/* </div> */}
+            </div>
             </div>
           )}
           {/* <SendPdfBlockTemplate 
           finishedPdf={finishedShowerPdf}
           furniture={cart}/> */}
-          <button onClick={handleFetch}>Оформити</button>
+          {/* <button onClick={handleFetch}>Оформити</button> */}
+          <button
+            className={isSuccess ? "success" : ""}
+            onClick={handleFetch}
+            disabled={isLoading}
+          >
+            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+          </button>
         </div>
       </div>
     </div>

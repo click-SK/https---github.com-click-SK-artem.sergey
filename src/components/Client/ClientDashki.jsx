@@ -97,7 +97,7 @@ const ClientDashki = () => {
     if (widthValue) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(volumValue);
-      const calcSquareMeter = calcSize / 1000000;
+      const calcSquareMeter = calcSize / 10000;
       const resCurrentProcessingStandart =
         Number(currentProcessingStandart?.price) * calcSquareMeter;
 
@@ -235,7 +235,7 @@ const ClientDashki = () => {
         />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (мм)</h3>
+        <h3>Вкажіть розміри (cм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
