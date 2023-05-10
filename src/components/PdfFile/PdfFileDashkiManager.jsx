@@ -111,14 +111,6 @@ const styles = StyleSheet.create({
 
 });
 
-{/* <View style={styles.section}>
-{arr.map((item, idx)=>(
-    <Text style={styles.text} key={idx}>
-    {item.type}
-    </Text>
-))}
-</View> */}
-
 const PdfShowerManadger = ({order, cart}) => {
 
     
@@ -207,35 +199,6 @@ const PdfShowerManadger = ({order, cart}) => {
         });
 
         let result = JSON.stringify(furnitureFinArr);
-        // result = result.substring(6, result.length - 1); // видаляємо перший та останній символ
-        // let result =  JSON.stringify(furniture)
-        // if (result !== null || result !== undefined ){
-        //     result = result.slice(6, -1); // видаляємо перший та останній символ
-        // }
-        // let result2 =  Object.values(furniture)
-
-        
-
-
-        // let result = '';
-        // furniture.forEach((item) => {
-        // const title = item.title;
-        // const color = item.color;
-        // const count = item.count;
-        // const price = item.price;
-        // const line = `${title} Колір: ${color} ${count}шт Ціна ${price} грн\n`;
-        // result += line;
-        // });
-
-        // const furFin = {
-        //     0 : 'nope'
-        // }
-
-        // if ( furniture !== 'nope' ) {
-        //     Object.entries(furniture).filter(([_, value]) => value !== '').map(([key, value], idx) => (
-        //         furFin[key] = value
-        //     ));
-        // }
 
         const fileFinish = {
             glass:{
@@ -315,14 +278,14 @@ const PdfShowerManadger = ({order, cart}) => {
 
                     <View>
                         {Object.entries(fileFinish).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
-                            <View style={styles.section}>
-                                <Text style={styles.textLeft} key={idx}>
+                            <View style={styles.section} key={idx}>
+                                <Text style={styles.textLeft}>
                                     {value.name}
                                 </Text>
-                                <Text style={styles.text} key={idx}>
+                                <Text style={styles.text}>
                                     {value.size} 
                                 </Text>
-                                <Text style={styles.text} key={idx}>
+                                <Text style={styles.text}>
                                     {value.price} грн
                                 </Text>
                             </View>
@@ -335,8 +298,8 @@ const PdfShowerManadger = ({order, cart}) => {
                     </View>
                     <View>
                         {Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => (
-                            <View style={styles.section}>
-                                <Text style={styles.textFur} key={idx}>
+                            <View style={styles.section} key={idx}>
+                                <Text style={styles.textFur}>
                                     {value}
                                 </Text>
                             </View>

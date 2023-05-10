@@ -105,14 +105,6 @@ const styles = StyleSheet.create({
 
 });
 
-{/* <View style={styles.section}>
-{arr.map((item, idx)=>(
-    <Text style={styles.text} key={idx}>
-    {item.type}
-    </Text>
-))}
-</View> */}
-
 const PdfFileMirorrsClient = ({order}) => {
 
     
@@ -207,41 +199,7 @@ const PdfFileMirorrsClient = ({order}) => {
                 price: selectedProcessingPrice,
             },
           };
-
-    // const fileFinishArr = [
-    //     `${order.framePrice}`, /* рамка ціна */
-    //     `${order.frameSize}`, /* рамка розмір */
-    //     `${order.frameName}` ,/* рамка назва */
-    //     `${order.switchName}`, /* перемикач назва */
-    //     `${order.switchPrice}` ,/* перемикач ціна */
-    //     `${order.backLightName}`, /* підсвітка назва */
-    //     `${order.backLightPrice}` ,/* підсвітка ціна */
-    //     `${order.cord}`, /* довжина кабелю */
-    //     `${order.cordPrice}`, /* ціна кабелю */
-    //     `${order.warmerUp}`, /* підігрів */
-    //     `${order.painting}`, /* покраска рамки */
-    //     `${order.colorName}`, /* колір покраски */
-    //     `${order.colorPrice}`, /* Ціна кольору */
-    //     `${order.adress}`, /* адреса доставки */
-    //     `${order.deliveryPriceOverSity}`, /* ціна доставки за містом */
-    //     `${order.deliveryPriceOver}`, /* ціна доставки по місту */
-    //     `${order.firstName}`,
-    //     `${order.lastName}`,
-    //     `${order.surname}`,
-    //     `${order.numberPhone}`,
-    //     `${order.orderComent}`,
-    //     `${order.total}`
-    // ];
-
-    // const pdfArr =[]
-
-    // fileFinishArr.forEach((item) => {
-    //     if (item !== '') {
-    //       pdfArr.push(item);
-    //     }
-    //   });
              
-
     return (
         <Document>
             <Page style={styles.body}>

@@ -9,6 +9,11 @@ import '../style/mirrors.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "./DeliveryTemplate";
+import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import InputTemplate from "./Template/InputTemplate";
+import ClientFooter from './Template/ClientFooter';
+import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 
 const StandartMirrors = ({ data }) => {
 
@@ -31,6 +36,7 @@ const StandartMirrors = ({ data }) => {
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -51,7 +57,7 @@ const StandartMirrors = ({ data }) => {
 
 
 
-  const calcTotalSum = () => {
+  const calcTotalSumFunc = () => {
     if(sizeWidthMirrors && sizeHeightMirrors) {
       setValidationInput(false)
       const priceMeterCord = data?.option?.cord?.price;
@@ -102,7 +108,7 @@ const StandartMirrors = ({ data }) => {
       (isPainting ? isPaintingPrice : 0) + 
       (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
       (isAssemblingt ? intslPrice : 0) + 
-      (currentProcessingСutout?.price || 0) + 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedMirros = {
@@ -129,7 +135,7 @@ const StandartMirrors = ({ data }) => {
         painting: isPainting ? 'Так' : '', /* покраска рамки */
         paintingPrice: isPainting ? 'Ціна' : '', /* покраска рамки */
         colorName: isPainting ? currentColor?.name : '', /* колір покраски */
-        colorFrame: isPainting ? 'Покраска' : '', /* колір покраски */
+        colorFrame: isPainting ? 'Фарбування' : '', /* колір покраски */
         colorPrice: isPainting ? isPaintingPrice : '', /* Ціна кольору */
         adress:deliveryAdress, /* адреса доставки */
         deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
@@ -357,235 +363,209 @@ const StandartMirrors = ({ data }) => {
       body: JSON.stringify(data)
     });
   }
- 
-
-  // console.log('currentType',currentType);
-  // console.log('currentGoods',currentGoods);
-  // console.log('sizeWidthMirrors',sizeWidthMirrors);
-  // console.log('sizeHeightMirrors',sizeHeightMirrors);
-  // console.log('currentFrame',currentFrame);
-  // console.log('currentBackLight',currentBackLight);
-  // console.log('currentSwitch',currentSwitch);
-  // console.log('currentCord',currentCord);
-  // console.log('isWarmedUp',isWarmedUp);
-  // console.log('isPainting',isPainting);
-  // console.log('currentColor',currentColor);
-
 
   return (
     <div className="wrap_item mirrors_item">
+      <SelectObjecTemplate
+        title={"Форма дзеркала:"}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={data?.type}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
+      <SelectObjecTemplate
+        title={"Тип:"}
+        changeFunc={selectGoodsFunc}
+        state={currentGoods}
+        data={currentTypeArray}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
+
       <div className="choose_item item_mirrors">
-      <h3>Форма дзеркала:</h3>
-        <select
-          onChange={selectTypeFunc}
-          value={currentType ? JSON.stringify(currentType) : ""}
-        >
-          <option value="" disabled>
-            
-          </option>
-          {data?.type &&
-            data.type.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
+        <h3>Розмір (см)</h3>
+        <div className=" input_miroor">
+          <InputTemplate
+            placeholder={"Ширина"}
+            onChangeFunc={setSizeWidthMirrors}
+            value={sizeWidthMirrors}
+            validationInput={validationInput}
+            inputClass={"input_miroor_item cabel"}
+          />
+          <InputTemplate
+            placeholder={"Висота"}
+            onChangeFunc={setSizeHeightMirrors}
+            value={sizeHeightMirrors}
+            validationInput={validationInput}
+            inputClass={"input_miroor_item cabel"}
+          />
+        </div>
       </div>
 
-      
-          <div className="choose_item item_mirrors">
-          <h3>Тип:</h3>
-            <select
-              onChange={selectGoodsFunc}
-              value={currentGoods ? JSON.stringify(currentGoods) : ""}
-            >
-              <option value="" disabled>
-                
-              </option>
-              {currentTypeArray &&
-                currentTypeArray.map((item) => (
-                  <option key={item.name} value={JSON.stringify(item)}>
-                    {item.name}
-                  </option>
-                ))}
-            </select>
-            </div>
-
-            <div className="choose_item item_mirrors">
-            <h3>Розмір (см)</h3>
-            <div className=" input_miroor">
-              <div>
-              <input className=" input_miroor_item cabel" type="number" placeholder="Ширина" value={sizeWidthMirrors} onChange={(e) => setSizeWidthMirrors(e.target.value)}/>
-              <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
-              </div>
-              <div>
-              <input className="input_miroor_item  cabel" type="number" placeholder="Висота" value={sizeHeightMirrors} onChange={(e) => setSizeHeightMirrors(e.target.value)}/>
-              <p style={{color: 'red'}}>{validationInput && currentGoods && currentType && 'Введіть данні'}</p>
-              </div>
-            </div>
-            </div>
-      
-
-      
-        <div className="choose_item item_mirrors">         
-        <h3>Виберіть рамку:</h3>
-        <select
-          onChange={selectFrameFunc}
-          value={currentFrame ? JSON.stringify(currentFrame) : ""}
-        >
-          <option value="" disabled>
-            Без рамки
-          </option>
-          {data?.option?.frame &&
-            data.option.frame.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-        </div>
-
-        <div className="choose_item item_mirrors">
-            <h3>Розмір рамки (м)</h3>
-            <div className="input_miroor">
-              <input className="input_miroor_frame cabel" type="number" value={sizeFrame} onChange={(e) => setSizeFrame(e.target.value)}/>
-            </div>
-            </div>
-      
-        <div className="choose_item item_mirrors">
-        <h3>Додаткова підсвітка:</h3>
-        <select
-          onChange={selectBackLightFunc}
-          value={currentBackLight ? JSON.stringify(currentBackLight) : ""}
-        >
-          <option value="" disabled>
-            
-          </option>
-          {data?.option?.backLight &&
-            data.option.backLight.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-        </div>
-      
-
-      
-        <div className="choose_item item_mirrors">
-        <h3>Виберіть вимикач:</h3>
-        <select
-          onChange={selectSwitchFunc}
-          value={currentSwitch ? JSON.stringify(currentSwitch) : ""}
-        >
-          <option value="" disabled>
-            
-          </option>
-          {data?.option?.switch &&
-            data.option.switch.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-        </div>
-      
+      <SelectObjecTemplate
+        title={"Виберіть рамку:"}
+        optionName={""}
+        changeFunc={selectFrameFunc}
+        state={currentFrame}
+        data={data?.option?.frame}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
 
       <div className="choose_item item_mirrors">
-      <h3>Довжина кабелю (м):</h3>
-        <input className="cabel" placeholder="Довжина кабелю" value={currentCord} onChange={(e) => changeCord(e)}/>
+        <h3>Розмір рамки (м)</h3>
+        <div className="input_miroor">
+          <input
+            className="input_miroor_frame cabel"
+            type="number"
+            value={sizeFrame}
+            onChange={(e) => setSizeFrame(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <SelectObjecTemplate
+        title={"Додаткова підсвітка:"}
+        optionName={""}
+        changeFunc={selectBackLightFunc}
+        state={currentBackLight}
+        data={data?.option?.backLight}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
+
+      <SelectObjecTemplate
+        title={"Виберіть вимикач:"}
+        optionName={""}
+        changeFunc={selectSwitchFunc}
+        state={currentSwitch}
+        data={data?.option?.switch}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
+
+      <div className="choose_item item_mirrors">
+        <h3>Довжина кабелю (м):</h3>
+        <input
+          className="cabel"
+          placeholder="Довжина кабелю"
+          value={currentCord}
+          onChange={(e) => changeCord(e)}
+        />
       </div>
 
       <div className="choose_item item_mirrors check-item">
         <h3>Підігрів:</h3>
         <div className="checkbox_wrap">
-        <input id="checkbox1" className="checkbox" type='checkbox' checked={isWarmedUp} onChange={changeWarmUpFunc}/>
-        <label className="checkbox-label" htmlFor="checkbox1"></label>
+          <input
+            id="checkbox1"
+            className="checkbox"
+            type="checkbox"
+            checked={isWarmedUp}
+            onChange={changeWarmUpFunc}
+          />
+          <label className="checkbox-label" htmlFor="checkbox1"></label>
         </div>
       </div>
 
       <div className="choose_item item_mirrors check-item">
-        <h3>Покраска:</h3>
+        <h3>Фарбування:</h3>
         <div className="checkbox_wrap">
-        <input id="checkbox2"  className="checkbox" type='checkbox' checked={isPainting} onChange={changePaintingFunc}/>
-        <label className="checkbox-label" htmlFor="checkbox2"></label>
+          <input
+            id="checkbox2"
+            className="checkbox"
+            type="checkbox"
+            checked={isPainting}
+            onChange={changePaintingFunc}
+          />
+          <label className="checkbox-label" htmlFor="checkbox2"></label>
         </div>
       </div>
 
-      
-        <div className="choose_item item_mirrors">
-        <h3>Покраска рамки:</h3>
-        <select
-          onChange={selectedColorFunc}
-          value={currentColor ? JSON.stringify(currentColor) : ""}
-        >
-          <option value="" disabled>
-            Колір
-          </option>
-          {isPainting && data?.option?.color &&
-            data.option.color.map((item) => (
-              <option key={item.name} value={JSON.stringify(item)}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-        </div>
-        <div className="choose_item item_mirrors">
-            <h3>Виберіть обробку</h3>
-            
-              <select
-                value={currentProcessingСutout ? JSON.stringify(currentProcessingСutout) : ""}
-                onChange={selectProcessingСutoutFunc}
-              >
-                <option value="" disabled>
-                  Оберіть обробку
-                </option>
-                {data?.processingСutout &&
-                  data.processingСutout.map((item) => (
-                    <option key={item.name} value={JSON.stringify(item)}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-        </div>
+      <SelectObjecTemplate
+        title={"Фарбування рамки:"}
+        optionName={""}
+        changeFunc={selectedColorFunc}
+        state={currentColor}
+        data={data?.option?.color}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+      />
 
-        <div className="choose_item item_mirrors item_montaje">
+      <ProcessingCoutPlusCountTemplate
+        title={"Виберіть обробку:"}
+        optionName={""}
+        changeFunc={selectProcessingСutoutFunc}
+        state={currentProcessingСutout}
+        data={data?.processingСutout}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
+      />
+
+      <div className="choose_item item_mirrors item_montaje">
         <h3>Монтаж:</h3>
         <div className="montaje_wrap">
           <div className="checkbox_wrap montaje">
-            <input id="checkbox3"  className="checkbox" type='checkbox' checked={isAssemblingt} onChange={changeIsAssemblingt}/>
+            <input
+              id="checkbox3"
+              className="checkbox"
+              type="checkbox"
+              checked={isAssemblingt}
+              onChange={changeIsAssemblingt}
+            />
             <label className="checkbox-label" htmlFor="checkbox3"></label>
-            <p>Монтаж по розміру</p> 
+            <p>Монтаж по розміру</p>
           </div>
           <div className="checkbox_wrap montaje">
-            <input id="checkbox4"  className="checkbox" type='checkbox' checked={minInstallation} onChange={changeMinInstallationFunc}/>
-            <label className="checkbox-label checkbox-label4" htmlFor="checkbox4"></label>
-            <p>Мінімальний монтаж - 500грн</p> 
+            <input
+              id="checkbox4"
+              className="checkbox"
+              type="checkbox"
+              checked={minInstallation}
+              onChange={changeMinInstallationFunc}
+            />
+            <label
+              className="checkbox-label checkbox-label4"
+              htmlFor="checkbox4"
+            ></label>
+            <p>Мінімальний монтаж - 500грн</p>
           </div>
         </div>
       </div>
-      <DeliveryTemplate/>
-        <div className="footer_calc">
-            <div className="mirror_sum">
-              <div>
-                <button className="mirror_buttom" onClick={calcTotalSum}>Підрахувати вартість</button>
-              </div>
-              <h3 className="order_sum mirror_sum">Кінцева вартість: <span> {totalSum} грн</span> </h3>
-            </div>
-            <div className="send_order mirror_button">
-            {/* <CSVLink className="mirror_button_exel " data={keyCsv} filename = { "date.csv" } separator={";"} >Друк</CSVLink> */}
-            {/* <ExelPrint className="mirror_button_exel"></ExelPrint> */}
-            <div className="mirror_button_exel" style={{fontSize: 14}}>
-            <PDFDownloadLink  document={<PdfFile order={finishMirrorPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для менеджера" )}
+      <DeliveryTemplate />
+      <div className="footer_calc">
+        <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order mirror_button">
+          <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+            <PDFDownloadLink
+              document={<PdfFile order={finishMirrorPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для менеджера"
+              }
             </PDFDownloadLink>
-            <PDFDownloadLink className="" document={< PdfFileClient order={finishMirrorPdf}/>} fileName="orderDate">
-             {({loading,error})=> (loading? "завантаження..." : "Для клієнта" )}
+            <PDFDownloadLink
+              className=""
+              document={<PdfFileClient order={finishMirrorPdf} />}
+              fileName="orderDate"
+            >
+              {({ loading, error }) =>
+                loading ? "завантаження..." : "Для клієнта"
+              }
             </PDFDownloadLink>
-            </div>
-            <button className="mirror_button_order" onClick={handleFetch}>Оформити</button>
-            </div>
-        </div> 
+          </div>
+          {/* <SendPdfBlockTemplate 
+          finishedPdf={finishMirrorPdf}/> */}
+          <button className="mirror_button_order" onClick={handleFetch}>
+            Оформити
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
