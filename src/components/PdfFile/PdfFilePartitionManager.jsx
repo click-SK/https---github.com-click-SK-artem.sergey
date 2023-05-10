@@ -187,8 +187,8 @@ const PdfShowerManadger = ({order, cart}) => {
         const fileFinish = {
             glass:{
                 price: revGlassPrice,
-                name: glass,
-                size: glassColorName,
+                name: "Скло",
+                size: glass,
             },
             currentProcessingStandart:{
                 price: currentProcessingStandartPrice,
