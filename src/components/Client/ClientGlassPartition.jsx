@@ -251,8 +251,8 @@ const ClientGlassPartition = () => {
         </div>
       </div>
         <SelectObjecTemplate
-          title={"Виберіть скло"}
-          optionName={"Оберіть скло"}
+          title={"Виберіть тип"}
+          optionName={""}
           changeFunc={selectTypeFunc}
           state={currentType}
           data={currentObject.typeGlass}

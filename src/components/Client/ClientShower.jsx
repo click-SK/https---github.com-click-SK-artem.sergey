@@ -154,7 +154,7 @@ const ClientShower = () => {
       <div className="wrap_item type_shower">
         <SelectObjecTemplate
           title={"Варіанти душових"}
-          optionName={"Душові:"}
+          optionName={""}
           changeFunc={selectTypeFunc}
           state={currentType}
           data={currentObject?.typeWordpress}

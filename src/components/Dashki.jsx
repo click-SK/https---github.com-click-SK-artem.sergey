@@ -13,6 +13,7 @@ import SelectObjecTemplate from "./Template/SelectObjecTemplate";
 import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 import '../style/shower.scss'
 
 const Dashki = () => {
@@ -35,6 +36,7 @@ const Dashki = () => {
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -123,7 +125,7 @@ const Dashki = () => {
       (isVanta ? currentObject?.vanta * vantaValue : 0) +
       (isDepository ? currentObject?.depository?.price * depositoryValue : 0) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) +
-      (currentProcessingСutout?.price || 0) + 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);;
   
       const finishedShower = {
@@ -293,7 +295,7 @@ const Dashki = () => {
 
       <SelectObjecTemplate
         title={"Виберіть тип"}
-        optionName={"Оберіть тип"}
+        optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}
         data={currentObject?.typeGlass}
@@ -328,7 +330,7 @@ const Dashki = () => {
 
       <SelectObjecTemplate
         title={"Виберіть обробку"}
-        optionName={"Оберіть обробку"}
+        optionName={""}
         changeFunc={selectProcessingStandartFunc}
         state={currentProcessingStandart}
         data={currentObject?.processingStandart}
@@ -337,15 +339,18 @@ const Dashki = () => {
         selectDivWrap={true}
       />
 
-      <SelectObjecTemplate
-        title={"Виберіть обробку"}
-        optionName={"Оберіть обробку"}
+<ProcessingCoutPlusCountTemplate
+        title={"Додаткова обробка"}
+        optionName={""}
         changeFunc={selectProcessingСutoutFunc}
         state={currentProcessingСutout}
         data={currentObject?.processingСutout}
-        wrapClass={"wrap_item type_shower"}
+        wrapClass={"wrap_item_plus_count type_shower size_item"}
         selectWrapClass={"choose_item selected_shower"}
         selectDivWrap={true}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
       />
 
       <div className="choose_item item_mirrors check-item">

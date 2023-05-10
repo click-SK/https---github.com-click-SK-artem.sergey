@@ -104,20 +104,20 @@ const ClientCosmeticMirrors = ({ data }) => {
       setValidationInput(true);
     }
   };
-  console.log("data", currentObject);
+  console.log("data?.typeWordpress", data?.typeWordpress);
   return (
     <div>
       <h1>Косметичні дзеркала</h1>
         <SelectObjecTemplate
-        title={"Виберіть обробку"}
-        optionName={"Оберіть обробку"}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={data?.processingСutout}
+        title={"Виберіть тип"}
+        optionName={""}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeWordpress}
         wrapClass={"wrap_item type_shower"}
         selectWrapClass={"choose_item selected_shower"}
         selectDivWrap={true}
-        />
+      />
 
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (мм)</h3>

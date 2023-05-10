@@ -3,11 +3,11 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import PdfFileClient from "../PdfFile/PdfFilePartitionClient";
 import PdfFile from "../PdfFile/PdfFilePartitionManager";
 
-const SendPdfBlockTemplate = ({finishedPdf, cart}) => {
+const SendPdfBlockTemplate = ({finishedPdf, furniture}) => {
     return (
         <div className="mirror_button_exel" style={{ fontSize: 14 }}>
         <PDFDownloadLink
-          document={<PdfFile order={finishedPdf} cart={cart} />}
+          document={<PdfFile order={finishedPdf} cart={furniture} />}
           fileName="orderDate"
         >
           {({ loading, error }) =>

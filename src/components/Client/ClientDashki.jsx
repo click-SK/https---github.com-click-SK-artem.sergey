@@ -225,7 +225,7 @@ const ClientDashki = () => {
 
         <SelectObjecTemplate
         title={"Виберіть тип"}
-        optionName={"Оберіть тип"}
+        optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}
         data={currentObject?.typeGlass}

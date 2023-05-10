@@ -13,6 +13,7 @@ import SelectObjecTemplate from "./Template/SelectObjecTemplate";
 import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 
 const StandartMirrors = ({ data }) => {
 
@@ -35,6 +36,7 @@ const StandartMirrors = ({ data }) => {
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState(false);
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -106,7 +108,7 @@ const StandartMirrors = ({ data }) => {
       (isPainting ? isPaintingPrice : 0) + 
       (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
       (isAssemblingt ? intslPrice : 0) + 
-      (currentProcessingСutout?.price || 0) + 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedMirros = {
@@ -133,7 +135,7 @@ const StandartMirrors = ({ data }) => {
         painting: isPainting ? 'Так' : '', /* покраска рамки */
         paintingPrice: isPainting ? 'Ціна' : '', /* покраска рамки */
         colorName: isPainting ? currentColor?.name : '', /* колір покраски */
-        colorFrame: isPainting ? 'Покраска' : '', /* колір покраски */
+        colorFrame: isPainting ? 'Фарбування' : '', /* колір покраски */
         colorPrice: isPainting ? isPaintingPrice : '', /* Ціна кольору */
         adress:deliveryAdress, /* адреса доставки */
         deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
@@ -403,7 +405,7 @@ const StandartMirrors = ({ data }) => {
 
       <SelectObjecTemplate
         title={"Виберіть рамку:"}
-        optionName={"Без рамки"}
+        optionName={""}
         changeFunc={selectFrameFunc}
         state={currentFrame}
         data={data?.option?.frame}
@@ -468,7 +470,7 @@ const StandartMirrors = ({ data }) => {
       </div>
 
       <div className="choose_item item_mirrors check-item">
-        <h3>Покраска:</h3>
+        <h3>Фарбування:</h3>
         <div className="checkbox_wrap">
           <input
             id="checkbox2"
@@ -482,8 +484,8 @@ const StandartMirrors = ({ data }) => {
       </div>
 
       <SelectObjecTemplate
-        title={"Покраска рамки:"}
-        optionName={"Колір"}
+        title={"Фарбування рамки:"}
+        optionName={""}
         changeFunc={selectedColorFunc}
         state={currentColor}
         data={data?.option?.color}
@@ -491,14 +493,17 @@ const StandartMirrors = ({ data }) => {
         selectDivWrap={false}
       />
 
-      <SelectObjecTemplate
+      <ProcessingCoutPlusCountTemplate
         title={"Виберіть обробку:"}
-        optionName={"Оберіть обробку"}
+        optionName={""}
         changeFunc={selectProcessingСutoutFunc}
         state={currentProcessingСutout}
         data={data?.processingСutout}
         wrapClass={"choose_item item_mirrors"}
         selectDivWrap={false}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
       />
 
       <div className="choose_item item_mirrors item_montaje">

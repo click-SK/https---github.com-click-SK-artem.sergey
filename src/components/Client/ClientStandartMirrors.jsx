@@ -145,7 +145,7 @@ const ClientStandartMirrors = ({ data }) => {
         painting: isPainting ? "Так" : "" /* покраска рамки */,
         paintingPrice: isPainting ? "Ціна" : "" /* покраска рамки */,
         colorName: isPainting ? currentColor?.name : "" /* колір покраски */,
-        colorFrame: isPainting ? "Покраска" : "" /* колір покраски */,
+        colorFrame: isPainting ? "Фарбування" : "" /* колір покраски */,
         colorPrice: isPainting ? isPaintingPrice : "" /* Ціна кольору */,
         adress: deliveryAdress /* адреса доставки */,
         deliveryPriceOverSity: deliveryBoolean
@@ -250,7 +250,7 @@ const ClientStandartMirrors = ({ data }) => {
 
       <SelectObjecTemplate
         title={"Виберіть рамку:"}
-        optionName={'Без рамки'}
+        optionName={''}
         changeFunc={selectFrameFunc}
         state={currentFrame}
         data={currentObject?.option?.frame}

@@ -10,6 +10,7 @@ import SelectObjecTemplate from "./Template/SelectObjecTemplate";
 import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
+import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
 import "../style/shower.scss";
 
 const CosmeticMirrors = ({ data }) => {
@@ -22,6 +23,7 @@ const CosmeticMirrors = ({ data }) => {
   const [currentProcessingСutout, setCurrentProcessingСutout] = useState(null);
   const [totalSum, setTotalSum] = useState(null);
   const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
+  const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -66,7 +68,7 @@ const CosmeticMirrors = ({ data }) => {
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
       (data?.lightBulbs * lightBulbsCount || 0) +
       (data?.patron * patronCount || 0) +
-      (currentProcessingСutout?.price || 0)+ 
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
   
       const finishedShower = {
@@ -125,7 +127,7 @@ const CosmeticMirrors = ({ data }) => {
       </div> */}
       <SelectObjecTemplate
         title={"Виберіть тип"}
-        optionName={"Оберіть тип"}
+        optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}
         data={data?.typeGlass}
@@ -185,15 +187,17 @@ const CosmeticMirrors = ({ data }) => {
         </div>
       </div>
 
-      <SelectObjecTemplate
-        title={"Виберіть обробку"}
-        optionName={"Оберіть обробку"}
+      <ProcessingCoutPlusCountTemplate
+        title={"Виберіть обробку:"}
+        optionName={""}
         changeFunc={selectProcessingСutoutFunc}
         state={currentProcessingСutout}
         data={data?.processingСutout}
-        wrapClass={"wrap_item type_shower"}
-        selectWrapClass={"choose_item selected_shower"}
-        selectDivWrap={true}
+        wrapClass={"choose_item item_mirrors"}
+        selectDivWrap={false}
+        currentProcessingСutoutCount={currentProcessingСutoutCount}
+        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
+        inputClass={"input_miroor_item cabel"}
       />
 
       <DeliveryTemplate />
