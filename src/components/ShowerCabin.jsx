@@ -381,14 +381,14 @@ const ShowerCabin = () => {
     console.log('HsI', Object.entries(furnitureFinObj)  );
     setIsLoading(true);
 
-    // const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data)
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
       
-    // });
+    });
     
     setTimeout(() => {
       setIsLoading(false);
@@ -415,7 +415,7 @@ const ShowerCabin = () => {
         selectDivWrap={true}
       />
 
-      <div className="wrap_item type_glass">
+      {/* <div className="wrap_item type_glass">
         <h3>Виберіть скло</h3>
         <div className="choose_item selected_shower">
           <select value={currentGlass} onChange={selectGlassFunc}>
@@ -429,9 +429,9 @@ const ShowerCabin = () => {
               ))}
           </select>
         </div>
-      </div>
+      </div> */}
       <SelectObjecTemplate
-        title={"Колір скла"}
+        title={"Тип скла"}
         optionName={""}
         changeFunc={selectGlassColorFunc}
         state={currentGlassColor}
