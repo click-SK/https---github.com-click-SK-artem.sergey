@@ -348,6 +348,7 @@ const EditShower = () => {
           </button>
         </>
       )}
+      
       {currentObject?.type &&
         showTypeBlock &&
         currentObject.type.map((el, idx) => (

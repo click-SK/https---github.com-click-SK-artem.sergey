@@ -345,7 +345,7 @@ const EditStandartMirrors = () => {
                 pathEdit='https://calc-shower.herokuapp.com/update-mirror-cord-price'
                 showerId={currentObject?._id}/>
             }
-
+            
             {showWarmedUpBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.warmedUp}
                 setIsFetch={setIsFetch}
