@@ -9,7 +9,7 @@ const ClientFooter = ({calcTotalSumFunc, totalSum, wrapClass}) => {
             </button>
           </div>
           <h3 className="order_sum mirror_sum">
-            Кінцева вартість: <span>{totalSum ? totalSum : 0} грн</span>{" "}
+            Кінцева вартість: <span>{totalSum ? totalSum.toFixed(0) : 0} грн</span>{" "}
           </h3>
         </div>
     );
