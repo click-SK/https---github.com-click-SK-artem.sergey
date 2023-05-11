@@ -24,6 +24,9 @@ const CosmeticMirrors = ({ data }) => {
   const [totalSum, setTotalSum] = useState(null);
   const [finishMirrorPdf, setFinishMirrorPdf] = useState({});
   const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
+  const [isPrintPDF, setIsPrintPDF] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -104,27 +107,146 @@ const CosmeticMirrors = ({ data }) => {
     }
   }
 
+  const handleFetch = async () => {
+
+    const furnitureFinObj = {
+
+      frameName:{
+        name : finishMirrorPdf.frameName,
+        value : finishMirrorPdf.frameSize
+      },
+      colorFrame:{
+        name : finishMirrorPdf.colorFrame,
+        value : finishMirrorPdf.colorName
+      },
+      switchCat:{
+        name : finishMirrorPdf.switchCat,
+        value : finishMirrorPdf.switchName
+      },
+      backLightAdd:{
+        name : finishMirrorPdf.backLightAdd,
+        value : finishMirrorPdf.backLightName
+      },
+      cordName:{
+        name : finishMirrorPdf.cordName,
+        value : finishMirrorPdf.cord
+      },
+      warmerUpName:{
+        name : finishMirrorPdf.warmerUpName,
+        value : finishMirrorPdf.warmerUp
+      },
+      celect : {
+        name : finishMirrorPdf.selectedProcessingName,
+        value : finishMirrorPdf.selectedProcessingCount
+      },
+      minInstallationName : {
+        name : finishMirrorPdf.minInstallationName,
+        value : `${finishMirrorPdf.minInstallation}`
+      },
+      isAssemblingtName : {
+        name : finishMirrorPdf.isAssemblingtName,
+        value : `${finishMirrorPdf.isAssemblingt}`
+      }
+
+    }
+
+
+     const celect = {
+        name : finishMirrorPdf.selectedProcessingName,
+        value : finishMirrorPdf.selectedProcessingCount
+      }
+      
+    const minInstallationName ={
+        name : finishMirrorPdf.minInstallationName,
+        value : `${finishMirrorPdf.minInstallation}`
+      }
+
+    const isAssemblingtName={
+        name : finishMirrorPdf.isAssemblingtName,
+        value : `${finishMirrorPdf.isAssemblingt}`
+      }
+
+  //   const furnitureFinArr = [];
+
+  //   cart.forEach((item, index) => {
+  //     const itemData = {
+  //       colorsFurniture: item.colorsFurniture[0].color,
+  //       colorsFurniturePrice: item.colorsFurniture[0].price,
+  //       tittleName: item.title,
+  //       name2: item.depends[0],
+  //       name3: item.depends[1],
+  //       drawingImgSrc: item.drawingImg,
+  //       mainImageSrc: item.mainImage,
+  //       count: item.count,
+  //     };
+  //     furnitureFinArr.push(itemData);
+      
+  //   });
+
+  // furnitureFinArr.forEach((item, index) => {
+  //   furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.colorsFurniture} - ${item.count} шт`   
+  // });
+
+  // const resDepth = (finishMirrorPdf.depth ? ` X ${finishMirrorPdf.depth}` : '')
+
+
+    const deliver =  finishMirrorPdf.adress ? finishMirrorPdf.adress : 'Без доставки' ;
+
+
+    const data = {
+      order: {
+        "source_id": 10,
+        "buyer_comment": finishMirrorPdf.orderComent,
+        "buyer": {
+          "full_name": `${finishMirrorPdf.lastName} ${finishMirrorPdf.firstName} ${finishMirrorPdf.surname}`,
+          "phone": finishMirrorPdf.numberPhone
+        },
+        "shipping": {
+          "delivery_service_id": 2,
+          "shipping_address_city": deliver
+        },
+        "products": [
+          {
+            "price": finishMirrorPdf.total,
+            "quantity": 1,
+            "name": `${finishMirrorPdf.goodsName} - ${finishMirrorPdf.width} X ${finishMirrorPdf.height}`,
+            "comment": "",
+            "properties": [
+              {
+                "name": 'Форма дзеркала',
+                "value": finishMirrorPdf.type 
+              },
+              ...Object.entries(furnitureFinObj).filter(([_, value]) => value.name !== '').map(([key, value], idx) => ({
+                "name": value.name,
+                "value": value.value
+              })),
+            ]
+          }
+        ]
+      }
+    };
+
+
+
+    console.log('HsI', data );
+    setIsLoading(true);
+
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSuccess(true);
+    }, 1500);
+  }
+
   return (
     <div>
-      {/* <div className="wrap_item type_shower">
-        <h3>Виберіть тип</h3>
-        <div className="choose_item selected_shower">
-          <select
-            value={currentType ? JSON.stringify(currentType) : ""}
-            onChange={selectTypeFunc}
-          >
-            <option value="" disabled>
-              Оберіть тип
-            </option>
-            {data?.typeGlass &&
-              data.typeGlass.map((item) => (
-                <option key={item.name} value={JSON.stringify(item)}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
-        </div>
-      </div> */}
       <SelectObjecTemplate
         title={"Виберіть тип"}
         optionName={""}
@@ -201,7 +323,7 @@ const CosmeticMirrors = ({ data }) => {
       />
 
       <DeliveryTemplate />
-      <div className="footer_calc">
+      {/* <div className="footer_calc">
       <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
           <div className="mirror_button_exel" style={{ fontSize: 14 }}>
@@ -223,9 +345,55 @@ const CosmeticMirrors = ({ data }) => {
               }
             </PDFDownloadLink>
           </div>
-          {/* <SendPdfBlockTemplate 
-          finishedPdf={finishMirrorPdf}/> */}
           <button>Оформити</button>
+        </div>
+      </div> */}
+                  <div className="footer_calc">
+        <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order">
+          {!isPrintPDF && (
+            <div
+              className="mirror_button_exel"
+              style={{ fontSize: 14, }}
+              onClick={() => setIsPrintPDF((state) => !state)}
+            >
+              Роздрукувати PDF
+            </div>
+          )}
+          {isPrintPDF && (
+             
+            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
+                 Роздрукувати PDF
+              <div className="print_wrap">
+                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <PDFDownloadLink
+                  className="print print_manager" style={{ fontSize: 14 }}
+                  document={<PdfFile order={finishMirrorPdf}/>}
+                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для менеджера"
+                  }
+                </PDFDownloadLink>
+                <PDFDownloadLink
+                  className="print print_client" style={{ fontSize: 14,}}
+                  document={<PdfFileClient order={finishMirrorPdf} />}
+                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для клієнта"
+                  }
+                </PDFDownloadLink>
+            </div>
+            </div>
+          )}
+          <button
+            className={isSuccess ? "success" : ""}
+            onClick={handleFetch}
+            disabled={isLoading}
+          >
+            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+          </button>
         </div>
       </div>
     </div>

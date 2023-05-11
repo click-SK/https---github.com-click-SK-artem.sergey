@@ -55,12 +55,12 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
     <div >
       {!isEditGood ?
             <AiFillEdit
-            style={{ height: "30px", width: "30px", cursor:'pointer' }}
+            style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
             onClick={() => changeBlock(el)}
           />
           :
           <AiFillCloseCircle
-          style={{ height: "30px", width: "30px", cursor:'pointer' }}
+          style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
           onClick={() => setIsEditGood((isEditGood) => !isEditGood)}
         />
       }
@@ -82,7 +82,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
           <button onClick={sendData} style={{cursor:'pointer'}}>Підтвердити зміни</button>
         </div>
       )}
-      <AiFillDelete onClick={handleDelete}/>
+      <AiFillDelete onClick={handleDelete} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
     </div>
   );
 };

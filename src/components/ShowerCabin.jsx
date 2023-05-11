@@ -43,6 +43,8 @@ const ShowerCabin = () => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [additionalAssemblingName, setAdditionalAssemblingName] = useState('');
+  const [additionalAssemblingPrice, setAdditionalAssemblingPrice] = useState('');
 
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
@@ -87,7 +89,7 @@ const ShowerCabin = () => {
       const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
       const calcSquareMeter = calcSize/10000;
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
-      const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
+      const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter;
 
       console.log("глибина",  resCurrentProcessingStandart );
   
@@ -125,7 +127,8 @@ const ShowerCabin = () => {
       (isAssemblingt ? currentType?.price : 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
-      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0);
+      (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
+      (additionalAssemblingPrice ? Number(additionalAssemblingPrice) : 0);
 
       
       const finishedShower = {
@@ -535,8 +538,15 @@ const ShowerCabin = () => {
             </div>
           </div>
         </div>
-        <DeliveryTemplate />
       </div>
+
+      <div className="size_item" style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <p>Додатковий монтаж</p>
+        <input className="input_miroor_item" value={additionalAssemblingName} onChange={(e) => setAdditionalAssemblingName(e.target.value)} placeholder=""/>
+        <input className="input_miroor_item" value={additionalAssemblingPrice} onChange={(e) => setAdditionalAssemblingPrice(e.target.value)} placeholder="ціна"/>
+      </div>
+
+      <DeliveryTemplate />
 
       <div className="footer_calc">
         <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
@@ -556,7 +566,6 @@ const ShowerCabin = () => {
                  Роздрукувати PDF
               <div className="print_wrap">
                 <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
-              {/* <div className="print print_manager" style={{ fontSize: 14 }}> */}
                 <PDFDownloadLink
                   className="print print_manager" style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
@@ -566,8 +575,6 @@ const ShowerCabin = () => {
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
-              {/* </div> */}
-              {/* <div className="print print_client" style={{ fontSize: 14 }}> */}
                 <PDFDownloadLink
                   className="print print_client" style={{ fontSize: 14,}}
                   document={<PdfFileClient order={finishedShowerPdf} />}
@@ -577,14 +584,9 @@ const ShowerCabin = () => {
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-              {/* </div> */}
             </div>
             </div>
           )}
-          {/* <SendPdfBlockTemplate 
-          finishedPdf={finishedShowerPdf}
-          furniture={cart}/> */}
-          {/* <button onClick={handleFetch}>Оформити</button> */}
           <button
             className={isSuccess ? "success" : ""}
             onClick={handleFetch}

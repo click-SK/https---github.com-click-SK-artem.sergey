@@ -72,7 +72,7 @@ const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx
         {!isEdit ? (
         <>
           <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDeleteDepends}/>
+          <AiFillDelete onClick={handleDeleteDepends} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
         </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>

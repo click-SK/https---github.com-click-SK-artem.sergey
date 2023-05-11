@@ -348,11 +348,11 @@ const EditShower = () => {
           </button>
         </>
       )}
-      
       {currentObject?.type &&
         showTypeBlock &&
         currentObject.type.map((el, idx) => (
-          <O_EditTypeTemplate
+          <>
+            <O_EditTypeTemplate
             el={el}
             key={idx}
             showerId={currentObject._id}
@@ -360,6 +360,7 @@ const EditShower = () => {
             pathDelete="https://calc-shower.herokuapp.com/remove-shower-type"
             pathEdit="https://calc-shower.herokuapp.com/update-shower-type"
           />
+          </>
         ))}
       {currentObject?.type && showTypeBlock && (
         <>
