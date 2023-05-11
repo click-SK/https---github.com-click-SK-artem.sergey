@@ -45,6 +45,9 @@ const GlassPartition = () => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  console.log( "test", typeMontaje);
+
   const [montaje] = useState([
     {
       name: 'Глуха перегородка',
@@ -187,7 +190,7 @@ const GlassPartition = () => {
       (calcSquareMeter * currentColor?.price || 0) + 
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
-      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) + ( isAssemblingt ? typeMontaje.price : 0) + (isAssemblingtZaklad ? typeZaklad.price : 0) + (isAssemblingtDovod ? 500 : 0)  ;
   
       const finishedShower = {
         type: currentTypePartitions, /* назва */
@@ -212,6 +215,15 @@ const GlassPartition = () => {
         currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
         currentProcessingСutoutCount: currentProcessingСutoutCount ? `${currentProcessingСutoutCount} шт` : '',
+        dovodCoutName: isAssemblingtDovod ? `Доводчик` : '',
+        dovodCoutPrice: isAssemblingtDovod ? `500 грн` : '',
+        dovodCoutCount: isAssemblingtDovod ? `${dovodCout} шт` : '',
+        zakladName: isAssemblingtZaklad ? `Закладна` : '',
+        zakladPrice: isAssemblingtZaklad ? `${typeZaklad.price} грн` : '',
+        zakladCount: isAssemblingtZaklad ? typeZaklad.name : '',
+        montajePrice: isAssemblingt ? typeMontaje.price : '',
+        montajeName: isAssemblingt ? 'Монтаж' : '',
+        montajeValue: isAssemblingt ? typeMontaje.name : '',
         total: totalSum, /* скло - ціна душ кабіни */
       }
 
@@ -305,6 +317,18 @@ const GlassPartition = () => {
               {
                 "name": finishedShowerPdf.currentProcessingСutoutName,
                 "value": finishedShowerPdf.currentProcessingСutoutCount
+              },
+              {
+                "name": finishedShowerPdf.montajeName,
+                "value": finishedShowerPdf.montajeValue
+              },
+              {
+                "name": finishedShowerPdf.dovodCoutName,
+                "value": finishedShowerPdf.dovodCoutCount
+              },
+              {
+                "name": finishedShowerPdf.zakladName,
+                "value": finishedShowerPdf.zakladCount
               },
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',

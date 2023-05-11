@@ -123,8 +123,15 @@ const PdfShowerManadger = ({order, cart}) => {
         const glass = `${order.glass}` /* адреса доставки */
         const glassColorName = `${order.glassColorName}` /* адреса доставки */
         const glassColorPrice = `${order.glassColorPrice}` /* адреса доставки */
-        // const furniture = order.cart
-        // const furniture = JSON.stringify(order.cart);
+        const dovodCoutName = `${order.dovodCoutName}`
+        const dovodCoutPrice = `${order.dovodCoutPrice}`
+        const dovodCoutCount = `${order.dovodCoutCount}`
+        const zakladName = `${order.zakladName}`
+        const zakladPrice = `${order.zakladPrice}`
+        const zakladCount = `${order.zakladCount}`
+        const montajePrice = `${order.montajePrice}`
+        const montajeName = `${order.montajeName}`
+        const montajeValue = `${order.montajeValue}`
         const furniture = order.cart;
         const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
         const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
@@ -148,6 +155,9 @@ const PdfShowerManadger = ({order, cart}) => {
         const selectedProcessingName  = `${order.selectedProcessingName}`
         const selectedProcessingPrice = `${order.selectedProcessingPrice}`
         const selectedProcessingCount = `${order.selectedProcessingCount}`
+        const additionalAssemblingValue = `${order.additionalAssemblingValue}`
+        const additionalAssemblingName = `${order.additionalAssemblingName}`
+        const additionalAssemblingPrice = `${order.additionalAssemblingPrice}`
         const total = `${order.total}`
 
         const deliverPrice = {
@@ -202,6 +212,27 @@ const PdfShowerManadger = ({order, cart}) => {
                 price: goodsPrice,
                 name: isAssemblingtName,
             },
+            dditionalAssembling:{
+                price: additionalAssemblingPrice,
+                size: additionalAssemblingValue,
+                name: additionalAssemblingName
+            },
+            mintaje:{
+                price: montajePrice,
+                size: montajeValue,
+                name: montajeName
+            },
+            dovod:{
+                price: dovodCoutPrice,
+                size: dovodCoutCount,
+                name:  dovodCoutName
+            },
+            zaklad:{
+                price: zakladPrice,
+                size: zakladCount,
+                name: zakladName
+            },
+
           };
 
 

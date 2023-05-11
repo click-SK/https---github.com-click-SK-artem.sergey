@@ -162,6 +162,9 @@ const ShowerCabin = () => {
         currentProcessingСutoutName: currentProcessingСutout ? currentProcessingСutout?.name : '',
         currentProcessingСutoutPrice: currentProcessingСutout ? currentProcessingСutout?.price : '',
         currentProcessingСutoutCount: currentProcessingСutoutCount ? `${currentProcessingСutoutCount} шт` : '',
+        additionalAssemblingValue: additionalAssemblingName ? additionalAssemblingName : '',
+        additionalAssemblingName: additionalAssemblingName ? 'Додатковий монтаж' : '',
+        additionalAssemblingPrice: additionalAssemblingPrice ? `${additionalAssemblingPrice}` : '',
         total: totalSum, /* скло - ціна душ кабіни */
       }
 
@@ -370,6 +373,10 @@ const ShowerCabin = () => {
                 "name": finishedShowerPdf.currentProcessingСutoutName,
                 "value": finishedShowerPdf.currentProcessingСutoutCount
               },
+              {
+                "name": finishedShowerPdf.additionalAssemblingName,
+                "value": `${finishedShowerPdf.additionalAssemblingValue} ${finishedShowerPdf.additionalAssemblingPrice}`
+              },
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',
                 "value": value
@@ -382,7 +389,7 @@ const ShowerCabin = () => {
 
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', Object.entries(furnitureFinObj)  );
-    setIsLoading(true);
+    // setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -394,9 +401,9 @@ const ShowerCabin = () => {
     });
     
     setTimeout(() => {
-      setIsLoading(false);
+      // setIsLoading(false);
       setIsSuccess(true);
-    }, 1500);
+    }, 1000);
   }
 
   console.log('currentObject',currentObject);
@@ -540,10 +547,10 @@ const ShowerCabin = () => {
         </div>
       </div>
 
-      <div className="size_item" style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-        <p>Додатковий монтаж</p>
-        <input className="input_miroor_item" value={additionalAssemblingName} onChange={(e) => setAdditionalAssemblingName(e.target.value)} placeholder=""/>
-        <input className="input_miroor_item" value={additionalAssemblingPrice} onChange={(e) => setAdditionalAssemblingPrice(e.target.value)} placeholder="ціна"/>
+      <div className="choose_item item_mirrors item_montaje size_item">
+        <p style={{fontSize:"19px"}}>Додатковий монтаж</p>
+        <input className="input_miroor_item" style={{width:'54%'}} value={additionalAssemblingName} onChange={(e) => setAdditionalAssemblingName(e.target.value)} placeholder=""/>
+        <input type="number" className="input_miroor_item" value={additionalAssemblingPrice} onChange={(e) => setAdditionalAssemblingPrice(e.target.value)} placeholder="ціна"/>
       </div>
 
       <DeliveryTemplate />

@@ -15,6 +15,9 @@ const ClientShower = () => {
   const [depthValue, setDepthValue] = useState("");
   const [validationInput, setValidationInput] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
+  const [isPrintPDF, setIsPrintPDF] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const deliveryFirstName = useSelector(
     (state) => state.delivery.deliveryFirstName
@@ -38,6 +41,8 @@ const ClientShower = () => {
   const deliveryBoolean = useSelector(
     (state) => state.delivery.deliveryBoolean
   );
+
+    console.log('test', currentDorsHandles);
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
@@ -148,6 +153,60 @@ const ClientShower = () => {
     }
   };
 
+
+  const handleFetch = async () => {
+
+    const resDepth = (depthValue ? ` X ${depthValue}` : '')
+
+    const deliver = deliveryAdress ? deliveryAdress : 'Без доставки' ;
+
+    const data = {
+      order: {
+        "source_id": 11,
+        "buyer_comment": deliveryOrderComent,
+        "buyer": {
+          "full_name": `${deliveryFirstName} ${deliveryLastName} ${deliverySurName}`,
+          "phone": deliveryNumberPhone
+        },
+        "shipping": {
+          "delivery_service_id": 2,
+          "shipping_address_city": deliver,
+        },
+        "products": [
+          {
+            "price": totalSum,
+            "quantity": 1,
+            "name": `${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} см2` ,
+            "comment": ` `,
+            "properties": [
+              {
+                "name": currentDorsHandles.name,
+                "value": `${currentDorsHandles.price} грн`
+              },
+            ]
+          }
+        ]
+      }
+    };
+
+    setTimeout(() => {
+      // setIsLoading(false);
+      setIsSuccess(true);
+    }, 1000);
+
+
+    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+      
+    });
+    
+
+  }
+
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
@@ -208,7 +267,13 @@ const ClientShower = () => {
       <div className="footer_calc">
       <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order mirror_button">
-          <button className="mirror_button_order">Оформити</button>
+        <button
+            className={isSuccess ? "success" : ""}
+            onClick={handleFetch}
+            disabled={isLoading}
+          >
+            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+          </button>
         </div>
       </div>
     </div>
