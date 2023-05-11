@@ -110,6 +110,7 @@ const PdfFileMirorrsManager = ({order}) => {
     
    
     const type = `${order.type}` /* форма дзеркала */
+    const typePrice = `${order.typePrice}` /* форма дзеркала */
     const width = `${order.width}` /* ширина дзеркала */
     const height = `${order.height}` /* висота дзеркала */
     const lightPrice = `${order.lightPrice}` /* рамка ціна */
@@ -195,6 +196,7 @@ const PdfFileMirorrsManager = ({order}) => {
                             {width} х {height} см2 
                         </Text>
                         <Text style={styles.text}>
+                            {typePrice}
                         </Text>
                     </View>               
                     <View>

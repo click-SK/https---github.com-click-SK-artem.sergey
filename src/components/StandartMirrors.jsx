@@ -356,7 +356,7 @@ const StandartMirrors = ({ data }) => {
 
 
     console.log('HsI', data );
-    setIsLoading(true);
+    // setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -367,9 +367,9 @@ const StandartMirrors = ({ data }) => {
     });
 
     setTimeout(() => {
-      setIsLoading(false);
+      // setIsLoading(false);
       setIsSuccess(true);
-    }, 1500);
+    }, 1000);
   }
 
   return (
