@@ -14,7 +14,7 @@ const AdminPanel = () => {
             </div>
             <h1>Клієнт</h1>
             <div>
-                <a href='/edit-showers-client'>Душові кабіни</a>
+                <a href='/edit-client-showers'>Душові кабіни</a>
                 <a href='/edit-client-standart-mirror'>Дзеркала</a>
                 <a href='/edit-client-cosmetic-mirror'>Косметичні дзеркала</a>
                 <a href='/edit-client-dashki'>Дашки</a>

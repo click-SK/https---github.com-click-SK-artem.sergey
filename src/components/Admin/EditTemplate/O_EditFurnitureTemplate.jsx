@@ -172,26 +172,26 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
         </div>
         {!isEdit 
         ?
-        <AiFillEdit style={{cursor:'pointer'}}
+        <AiFillEdit style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
         className="edit_icon"
         onClick={handleEdit}
       />
         :
-        <AiFillCloseCircle style={{cursor:'pointer'}}
+        <AiFillCloseCircle style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
         className="edit_icon"
         onClick={handleEdit}
       />
         }
         {!isFurniture ? (
-          <BsFillArrowDownCircleFill style={{cursor:'pointer'}}
+          <BsFillArrowDownCircleFill style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         ) : (
-          <BsFillArrowUpCircleFill style={{cursor:'pointer'}}
+          <BsFillArrowUpCircleFill style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         )}
-        <AiFillDelete onClick={handleDeleteFurniture} style={{cursor:'pointer'}}/>
+        <AiFillDelete onClick={handleDeleteFurniture} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
       </div>
       {isEdit && (
         <div className="edit_furniture">

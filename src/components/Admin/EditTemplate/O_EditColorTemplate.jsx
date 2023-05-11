@@ -59,7 +59,7 @@ const O_EditColorTemplate = ({el, pathDelete, pathEdit, showerId, setIsFetch}) =
         {!isEdit ? (
           <>
           <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDelete}/>
+          <AiFillDelete onClick={handleDelete} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
           </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>

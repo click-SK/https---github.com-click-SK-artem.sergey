@@ -37,6 +37,9 @@ const Dashki = () => {
   const [minInstallation, setMinInstallation] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
   const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
+  const [isPrintPDF, setIsPrintPDF] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -277,7 +280,7 @@ const Dashki = () => {
 
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', data  );
-
+    setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -286,6 +289,11 @@ const Dashki = () => {
       },
       body: JSON.stringify(data)
     });
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSuccess(true);
+    }, 1500);
   }
 
 
@@ -430,7 +438,7 @@ const Dashki = () => {
       </div>
       <ListTheChoseFurniture />
       <DeliveryTemplate />
-      <div className="footer_calc">
+      {/* <div className="footer_calc">
       <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
           <div className="mirror_button_exel" style={{ fontSize: 14 }}>
@@ -452,10 +460,55 @@ const Dashki = () => {
               }
             </PDFDownloadLink>
           </div>
-          {/* <SendPdfBlockTemplate 
-          finishedPdf={finishedShowerPdf}
-          cart={cart}/> */}
           <button onClick={handleFetch}>Оформити</button>
+        </div>
+      </div> */}
+            <div className="footer_calc">
+        <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+        <div className="send_order">
+          {!isPrintPDF && (
+            <div
+              className="mirror_button_exel"
+              style={{ fontSize: 14, }}
+              onClick={() => setIsPrintPDF((state) => !state)}
+            >
+              Роздрукувати PDF
+            </div>
+          )}
+          {isPrintPDF && (
+             
+            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
+                 Роздрукувати PDF
+              <div className="print_wrap">
+                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <PDFDownloadLink
+                  className="print print_manager" style={{ fontSize: 14 }}
+                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для менеджера"
+                  }
+                </PDFDownloadLink>
+                <PDFDownloadLink
+                  className="print print_client" style={{ fontSize: 14,}}
+                  document={<PdfFileClient order={finishedShowerPdf} />}
+                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для клієнта"
+                  }
+                </PDFDownloadLink>
+            </div>
+            </div>
+          )}
+          <button
+            className={isSuccess ? "success" : ""}
+            onClick={handleFetch}
+            disabled={isLoading}
+          >
+            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+          </button>
         </div>
       </div>
     </div>

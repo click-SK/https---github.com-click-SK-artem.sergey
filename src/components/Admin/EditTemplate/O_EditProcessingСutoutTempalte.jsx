@@ -60,7 +60,7 @@ const O_EditProcessingСutoutTempalte = ({el, pathDelete, pathEdit, showerId, se
         {!isEdit ? (
           <>
           <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDelete}/>
+          <AiFillDelete onClick={handleDelete} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
           </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>

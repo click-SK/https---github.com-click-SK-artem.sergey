@@ -65,7 +65,7 @@ const O_EditFurnitureColorAndPrice = ({item, showerFurnitureId, showerId, pathUp
         {!isEdit ? (
         <>
           <button onClick={handleEditButton}>Редагувати</button>
-          <AiFillDelete onClick={handleDeleteColorsFurniture}/>
+          <AiFillDelete onClick={handleDeleteColorsFurniture} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
         </>
         ) : (
           <button onClick={handleEditButtonSave}>Зберегти зміни</button>

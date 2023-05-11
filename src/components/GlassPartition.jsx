@@ -42,6 +42,9 @@ const GlassPartition = () => {
   const [typeZaklad, setTypeZaklad] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
   const [currentProcessingСutoutCount, setCurrentProcessingСutoutCount] = useState('');
+  const [isPrintPDF, setIsPrintPDF] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [montaje] = useState([
     {
       name: 'Глуха перегородка',
@@ -315,7 +318,7 @@ const GlassPartition = () => {
 
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', data  );
-
+    setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -324,6 +327,11 @@ const GlassPartition = () => {
       },
       body: JSON.stringify(data)
     });
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSuccess(true);
+    }, 1500);
   }
 
 
@@ -528,32 +536,52 @@ const GlassPartition = () => {
         <DeliveryTemplate />
       </div>
 
-      <div className="footer_calc">
-      <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
+            <div className="footer_calc">
+        <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
-          <div className="mirror_button_exel" style={{ fontSize: 14 }}>
-            <PDFDownloadLink
-              document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-              fileName={`Перегородки менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+          {!isPrintPDF && (
+            <div
+              className="mirror_button_exel"
+              style={{ fontSize: 14, }}
+              onClick={() => setIsPrintPDF((state) => !state)}
             >
-              {({ loading, error }) =>
-                loading ? "завантаження..." : "Для менеджера"
-              }
-            </PDFDownloadLink>
-            <PDFDownloadLink
-              className=""
-              document={<PdfFileClient order={finishedShowerPdf} />}
-              fileName={`Перегородки клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+              Роздрукувати PDF
+            </div>
+          )}
+          {isPrintPDF && (
+             
+            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
+                 Роздрукувати PDF
+              <div className="print_wrap">
+                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <PDFDownloadLink
+                  className="print print_manager" style={{ fontSize: 14 }}
+                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
-              {({ loading, error }) =>
-                loading ? "завантаження..." : "Для клієнта"
-              }
-            </PDFDownloadLink>
-          </div>
-          {/* <SendPdfBlockTemplate 
-          finishedPdf={finishedShowerPdf}
-          cart={cart}/> */}
-          <button onClick={handleFetch}>Оформити</button>
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для менеджера"
+                  }
+                </PDFDownloadLink>
+                <PDFDownloadLink
+                  className="print print_client" style={{ fontSize: 14,}}
+                  document={<PdfFileClient order={finishedShowerPdf} />}
+                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+            >
+                  {({ loading, error }) =>
+                    loading ? "завантаження..." : "Для клієнта"
+                  }
+                </PDFDownloadLink>
+            </div>
+            </div>
+          )}
+          <button
+            className={isSuccess ? "success" : ""}
+            onClick={handleFetch}
+            disabled={isLoading}
+          >
+            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+          </button>
         </div>
       </div>
     </div>

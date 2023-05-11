@@ -69,11 +69,11 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
           <h3>{item.name}</h3>
           {isShowInput ?
           <AiFillCloseCircle 
-          style={{ height: "30px", width: "20px", cursor:'pointer' }} 
+          style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}} 
           onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
           :
           <AiFillEdit 
-          style={{ height: "30px", width: "20px", cursor:'pointer' }} 
+          style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}} 
           onClick={() => setIsShowInput(isShowInput => !isShowInput)}/>
           }
         </div>
@@ -87,12 +87,12 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
           </div>
         {showBlock ?
         <BsFillArrowUpCircleFill 
-        style={{ height: "30px", width: "20px", cursor: 'pointer' }} 
+        style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}} 
         onClick={() => setShowblock(showBlock => !showBlock)}/> 
         :
         <BsFillArrowDownCircleFill 
         className="arrow_whow_block"
-        style={{ height: "30px", width: "20px", cursor: 'pointer' }} 
+        style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}} 
         onClick={() => setShowblock(showBlock => !showBlock)}/> 
         }
         {showBlock &&
