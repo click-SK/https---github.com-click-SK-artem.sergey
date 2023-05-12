@@ -6,6 +6,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
 import ClientFooter from "../Template/ClientFooter";
+import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 
 const ClientStandartMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
@@ -265,14 +266,11 @@ const ClientStandartMirrors = ({ data }) => {
       body: JSON.stringify(data)
       
     });
-    
-
   }
 
   return (
     <div className="wrap_item mirrors_item">
-      <h1>Дзеркала</h1>
-
+      <ButtonGobackAndTitle title={'Дзеркала'}/>
       <SelectObjecTemplate
         title={"Форма дзеркала:"}
         changeFunc={selectTypeFunc}

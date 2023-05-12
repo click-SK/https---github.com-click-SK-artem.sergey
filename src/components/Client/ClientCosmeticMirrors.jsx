@@ -8,6 +8,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
+import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 
 const ClientCosmeticMirrors = ({ data }) => {
   const [currentObject, setCurrentObject] = useState({});
@@ -158,7 +159,7 @@ const ClientCosmeticMirrors = ({ data }) => {
   console.log("data?.typeWordpress", data?.typeWordpress);
   return (
     <div>
-      <h1>Косметичні дзеркала</h1>
+      <ButtonGobackAndTitle title={'Косметичні дзеркала'}/>
         <SelectObjecTemplate
         title={"Виберіть тип"}
         optionName={""}

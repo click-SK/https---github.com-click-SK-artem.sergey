@@ -10,6 +10,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
+import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 import "../../style/shower.scss";
 
 const ClientGlassPartition = () => {
@@ -287,7 +288,7 @@ const ClientGlassPartition = () => {
 
   return (
     <div className="shower_wrapper">
-      <h1>Скляні перегородки</h1>
+      <ButtonGobackAndTitle title={'Скляні перегородки'}/>
       <div className="wrap_item type_glass">
         <h3>Виберіть перегородку</h3>
         <div className="choose_item selected_shower">

@@ -23,53 +23,22 @@ import EditClientDashki from './components/Admin/EditClient/EditClientDashki';
 import EditClientStandartMirror from './components/Admin/EditClient/EditClientStandartMirror';
 import EditClientCosmeticMirror from './components/Admin/EditClient/EditClientCosmeticMirror';
 import EditClientGlassPartition from './components/Admin/EditClient/EditClientGlassPartition';
+import Logo from './components/Logo';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <div className='color_ref'> 
+      {/* <div className='color_ref'> 
         <p className='prime'></p>
         <p className='second'></p>
         <p className='disab'></p>
         <p className='back'></p>
         <p className='tittle'></p>
-      </div>
-      <div className='logo'>
-        <div className='logo_wrap'>
-        <img className='logo_img' src='/logo.png' alt="My Image" />
-        <div className='info'>
-          <p> +38 (067) 320 60 23 </p>
-          <p> skloexpert.ua@gmail.com </p>
-          <p> Адреса нашого офісу: 46000, м. Тернопіль, вул. Текстильна, 42 ПН-ПТ: 09:00-18:00 </p>
-        </div>
-        </div>
-      </div>
+      </div> */}
+      <Logo/>
       <Header/>
-      {/* <Routes>
-        <Route path='/' element={<ShowerCabin/>}/>
-        <Route path='/mirrors' element={<Mirrors/>}/>
-        <Route path='/glass-partition' element={<GlassPartition/>}/>
-        <Route path='/dashki' element={<Dashki/>}/>
-        <Route path='/edit' element={<Login/>}/>
-        <Route path='/edit/admin' element={<AdminPanel/>}/>
-        <Route path='/admin-mirrors' element={<EditStandartMirrors/>}/>
-        <Route path='/admin-showers' element={<EditShower/>}/>
-        <Route path='/edit-client-showers' element={<EditShowerClient/>}/>
-        <Route path='/admin-dashki' element={<EditDashki/>}/>
-        <Route path='/admin-glass-partition' element={<EditGlassPartition/>}/>
-        <Route path='/admin-cosmetic-mirrors' element={<EditCosmeticMirrors/>}/>
-        <Route path='/client-shower' element={<ClientShower/>}/>
-        <Route path='/client-standart-mirrors' element={<ClientStandartMirrors/>}/>
-        <Route path='/client-cosmetic-mirrors' element={<ClientCosmeticMirrors/>}/>
-        <Route path='/client-glass-partition' element={<ClientGlassPartition/>}/>
-        <Route path='/client-dashki' element={<ClientDashki/>}/>
-        <Route path='/edit-client-dashki' element={<EditClientDashki/>}/>
-        <Route path='/edit-client-standart-mirror' element={<EditClientStandartMirror/>}/>
-        <Route path='/edit-client-cosmetic-mirror' element={<EditClientCosmeticMirror/>}/>
-        <Route path='/edit-client-glass-partition' element={<EditClientGlassPartition/>}/>
-      </Routes> */}
-            <Routes>
+      <Routes>
         <Route path='/' element={<ClientShower/>}/>
         <Route path='/client-standart-mirrors' element={<ClientStandartMirrors/>}/>
         <Route path='/client-cosmetic-mirrors' element={<ClientCosmeticMirrors/>}/>

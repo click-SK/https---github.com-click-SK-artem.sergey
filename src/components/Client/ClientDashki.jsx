@@ -10,6 +10,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
+import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 import "../../style/shower.scss";
 const ClientDashki = () => {
   const [currentObject, setCurrentObject] = useState({});
@@ -274,8 +275,7 @@ const ClientDashki = () => {
 
   return (
     <div className="shower_wrapper">
-      <h1>Дашки</h1>
-
+      <ButtonGobackAndTitle title={'Дашки'}/>
         <SelectObjecTemplate
         title={"Виберіть тип"}
         optionName={""}
