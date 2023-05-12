@@ -26,13 +26,14 @@
   }
   
   .close-btn {
-    position: absolute;
+    position: sticky;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     top: 0;
-    right: 0;
+    /* right: 1px; */
+    left: 100%;
     background: none;
     border: none;
     font-size: 24px;
@@ -45,6 +46,7 @@
     border-radius: 8px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
     transition: all 0.4s ease;
+    background: #FFF;
     &:hover{
       background: rgb(173, 60, 60);
       .cross{
