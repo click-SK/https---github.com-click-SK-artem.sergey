@@ -246,9 +246,9 @@ const EditShower = () => {
         <h1 className={`header_item ${showFurnitureBlock ? 'active_tab' : ''}`} onClick={handleShowFurnitureBlock}>
           Фурнітура
         </h1>
-        <h1 className={`header_item ${showColorsBlock ? 'active_tab' : ''}`} onClick={handleShowColorsBlock}>
+        {/* <h1 className={`header_item ${showColorsBlock ? 'active_tab' : ''}`} onClick={handleShowColorsBlock}>
           Скло
-        </h1>
+        </h1> */}
         <h1 className={`header_item ${showMirrorsBlock ? 'active_tab' : ''}`}onClick={handleShowMirrorsBlock}>
           Кольори
         </h1>
@@ -258,8 +258,8 @@ const EditShower = () => {
         <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`} onClick={handleShowSizeBlock}>
           Розміри
         </h1>
-        <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка 1</h1>
-        <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка 2</h1>
+        <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка скла</h1>
+        <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Додаткова обробка</h1>
       </div>
       {currentObject?.furniture &&
         showFurnitureBlock &&
