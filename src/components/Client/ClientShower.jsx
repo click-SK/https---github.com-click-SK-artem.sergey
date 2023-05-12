@@ -4,6 +4,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
+import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 import "../../style/shower.scss";
 
 const ClientShower = () => {
@@ -203,13 +204,15 @@ const ClientShower = () => {
       body: JSON.stringify(data)
       
     });
-    
-
   }
+
+  const goBack = () => {
+    window.history.back();
+  };
 
   return (
     <div className="shower_wrapper">
-      <h1>Душові кабіни</h1>
+      <ButtonGobackAndTitle title={'Душові кабіни'}/>
       <div className="wrap_item type_shower">
         <SelectObjecTemplate
           title={"Варіанти душових"}
