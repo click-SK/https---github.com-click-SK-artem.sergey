@@ -33,11 +33,13 @@ const DispalayModalItems = ({item}) => {
         setColorAndPrice(selectedColor)
     }
 
+    console.log('item',item);
+
 
     return (
         <div className="furniture_block">
         {/* <h4>Image main {item.mainImage}</h4> */}
-        <img src='/HDL-301-main.png' className='image_furniture'/>
+        <img src={item.mainImage} className='image_furniture'/>
         <div>
         <h2>{item.title}</h2>
           {item?.depends.map((depends) => (
@@ -47,7 +49,7 @@ const DispalayModalItems = ({item}) => {
           ))}
         </div>
         {/* <h4>Image drawind {item.drawingImg}</h4> */}
-        <img src='/HDL-301-second.png' className='image_furniture'/>
+        <img src={item.drawingImg} className='image_furniture'/>
         <select className='choose_color' value={colorAndPrice ? JSON.stringify(colorAndPrice) : ""} onChange={(e) => handleColorAndPrice(e)}>
         <option  value="" disabled>
                   Оберіть колір

@@ -159,6 +159,8 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     reader.readAsDataURL(e.target.files[0]);
 }
 
+console.log('el',el);
+
   
   return (
     <>

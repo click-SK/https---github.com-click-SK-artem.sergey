@@ -39,7 +39,7 @@ const DispalayModalItems = ({item, currentPartitions}) => {
           {currentPartitions == item.partitionsType
           &&
           <>
-          <img src='/HDL-301-main.png' className='image_furniture'/>
+          <img src={item.mainImage} className='image_furniture'/>
         <div>
         <h2>{item.title}</h2>
           {item?.depends.map((depends) => (
@@ -48,7 +48,7 @@ const DispalayModalItems = ({item, currentPartitions}) => {
             </div>
           ))}
         </div>
-        <img src='/HDL-301-second.png' className='image_furniture'/>
+        <img src={item.drawingImg} className='image_furniture'/>
         <select className='choose_color' value={colorAndPrice ? JSON.stringify(colorAndPrice) : ""} onChange={(e) => handleColorAndPrice(e)}>
         <option  value="" disabled>
                   Оберіть колір
