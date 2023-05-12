@@ -201,7 +201,7 @@ const EditDashki = () => {
             <h1 className={`header_item ${showFurnitureBlock ? 'active_tab' : ''}`} onClick={handleShowFurnitureBlock}>Фурнітура</h1>
             <h1 className={`header_item ${showTypeBlock ? 'active_tab' : ''}`}  onClick={handleShowTypeBlock}>Типи</h1>
             <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`}  onClick={handleShowSizeBlock}>Розміри</h1>
-            <h1 className={`header_item ${showColorBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колір</h1>
+            {/* <h1 className={`header_item ${showColorBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колір</h1> */}
             <h1 className={`header_item ${showProcessingStandartBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingStandartBlock}>Обробка скла</h1>
             <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Додаткова обробка</h1>
             </div>

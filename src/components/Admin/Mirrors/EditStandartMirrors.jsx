@@ -263,7 +263,7 @@ const EditStandartMirrors = () => {
             <h1 className={`header_item ${showFrameBlock ? 'active_tab' : ''}`}  onClick={handleShowFrameBlock}>Рамки</h1>
             <h1 className={`header_item ${showBackLightBlock ? 'active_tab' : ''}`}  onClick={handleShowBackLightBlock}>Підсвітка</h1>
             <h1 className={`header_item ${showSwitchBlock ? 'active_tab' : ''}`}  onClick={handleShowSwitchBlock}>Перемикачі</h1>
-            <h1 className={`header_item ${showColorsBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Колори</h1>
+            <h1 className={`header_item ${showColorsBlock ? 'active_tab' : ''}`}  onClick={handleShowColorsBlock}>Кольори</h1>
             <h1 className={`header_item ${showCordBlock ? 'active_tab' : ''}`}  onClick={handleShowCordBlock}>Кабель</h1>
             <h1 className={`header_item ${showWarmedUpBlock ? 'active_tab' : ''}`}  onClick={handleShowWarmedUpBlock}>Підігрів</h1>
             <h1 className={`header_item ${showPaintingBlock ? 'active_tab' : ''}`}  onClick={handleShowPaintingBlock}>Фарбування</h1>

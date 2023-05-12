@@ -122,7 +122,7 @@ const EditCosmeticMirrors = () => {
             <h1 className={`header_item ${showSizeBlock ? 'active_tab' : ''}`}  onClick={handleShowSizeBlock}>Розміри</h1>
             <h1 className={`header_item ${showLightBulbsBlock ? 'active_tab' : ''}`}  onClick={handleLightBulbsBlock}>Лампочка</h1>
             <h1 className={`header_item ${showPatronBlock ? 'active_tab' : ''}`}  onClick={handlePatronBlock}>Патрон</h1>
-            <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка</h1>
+            {/* <h1 className={`header_item ${showProcessingСutoutBlock ? 'active_tab' : ''}`}  onClick={handleShowProcessingСutoutBlock}>Обробка</h1> */}
             </div>
             {showProcessingСutoutBlock && currentObject.processingСutout && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}

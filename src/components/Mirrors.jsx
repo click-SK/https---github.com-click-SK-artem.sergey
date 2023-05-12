@@ -42,8 +42,8 @@ const Mirrors = () => {
     return (
         <div className="mirrors_wrapper">
           <div style={{display: 'flex', justifyContent:'space-around', width:'100%'}}>
-          <h1 className={`header_item ${standartMirrors ? 'active_tab' : ''}`} onClick={handleShowStandartMirrors}>Standart Mirrors</h1>
-          <h1 className={`header_item ${cosmeticMirrors ? 'active_tab' : ''}`} onClick={handleCosmeticMirrors}>Cosmetic Mirrors</h1>
+          <h1 className={`header_item ${standartMirrors ? 'active_tab' : ''}`} onClick={handleShowStandartMirrors}>Стандартні дзеркала</h1>
+          <h1 className={`header_item ${cosmeticMirrors ? 'active_tab' : ''}`} onClick={handleCosmeticMirrors}>Косметичні дзеркала</h1>
           </div>
             {standartMirrors &&
               <StandartMirrors data={mirrorsStandartData}/>

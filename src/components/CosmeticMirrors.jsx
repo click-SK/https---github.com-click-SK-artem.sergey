@@ -369,7 +369,7 @@ const CosmeticMirrors = ({ data }) => {
                 <PDFDownloadLink
                   className="print print_manager" style={{ fontSize: 14 }}
                   document={<PdfFile order={finishMirrorPdf}/>}
-                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+                  fileName={`Дзеркала кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
@@ -378,7 +378,7 @@ const CosmeticMirrors = ({ data }) => {
                 <PDFDownloadLink
                   className="print print_client" style={{ fontSize: 14,}}
                   document={<PdfFileClient order={finishMirrorPdf} />}
-                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+                  fileName={`Дзеркала кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"

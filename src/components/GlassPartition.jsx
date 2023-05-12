@@ -581,7 +581,7 @@ const GlassPartition = () => {
                 <PDFDownloadLink
                   className="print print_manager" style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+                  fileName={`Скляні перегородки менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
@@ -590,7 +590,7 @@ const GlassPartition = () => {
                 <PDFDownloadLink
                   className="print print_client" style={{ fontSize: 14,}}
                   document={<PdfFileClient order={finishedShowerPdf} />}
-                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
+                  fileName={`Скляні перегородки клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
