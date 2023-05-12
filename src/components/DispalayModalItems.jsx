@@ -39,9 +39,9 @@ const DispalayModalItems = ({item}) => {
     return (
         <div className="furniture_block">
         {/* <h4>Image main {item.mainImage}</h4> */}
-        <img src={item.mainImage} className='image_furniture'/>
-        <div>
-        <h2>{item.title}</h2>
+        <img src={item.mainImage} style={{width:'120px'}} className='image_furniture'/>
+        <div style={{maxWidth:'150px'}}>
+        <h2 >{item.title}</h2>
           {item?.depends.map((depends) => (
             <div key={depends}>
               <p>{depends}</p>
@@ -49,7 +49,7 @@ const DispalayModalItems = ({item}) => {
           ))}
         </div>
         {/* <h4>Image drawind {item.drawingImg}</h4> */}
-        <img src={item.drawingImg} className='image_furniture'/>
+        <img style={{width:'120px'}} src={item.drawingImg} className='image_furniture'/>
         <select className='choose_color' value={colorAndPrice ? JSON.stringify(colorAndPrice) : ""} onChange={(e) => handleColorAndPrice(e)}>
         <option  value="" disabled>
                   Оберіть колір
