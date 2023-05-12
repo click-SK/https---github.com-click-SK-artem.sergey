@@ -41,7 +41,7 @@ const ListTheChoseFurniture = () => {
           cart.map((item) => (
             <div className="list_firnitur_choosen" key={item._id}>
               <div className="list_firnitur_item" key={item._id}>
-                <img src="/HDL-301-main.png" className="image_furniture" />
+                <img src={item.mainImage} className="image_furniture" />
                 <div className="title_item">
                   <h3>{item.title}</h3>
                   {item?.depends.map((dep) => (
@@ -51,7 +51,7 @@ const ListTheChoseFurniture = () => {
                   ))}
                 </div>
                 <div className="image_second">
-                    <img src="/HDL-301-second.png" className="image_furniture" />
+                    <img src={item.drawingImg} className="image_furniture" />
                 </div>
                 <div>
                   {item?.colorsFurniture.map((el) => (

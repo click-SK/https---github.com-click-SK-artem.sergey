@@ -409,6 +409,7 @@ const ShowerCabin = () => {
   console.log('currentObject',currentObject);
   console.log('currentGlassColor',currentGlassColor);
   console.log('currentGlass',currentGlass);
+  console.log('cart',cart);
 
   return (
     <div className="shower_wrapper">
