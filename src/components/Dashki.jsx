@@ -124,7 +124,20 @@ const Dashki = () => {
         })
       })
 
-      const totalSum = totalSumFurniture + 
+      let totalSumProcessing = 0
+
+      glassProcessingCountArr.forEach((el) =>{
+          totalSumProcessing += el.price * el.count 
+      })
+
+
+      let totalSumglassProcessing = 0
+
+      glassProcessingArr.forEach((el) =>{
+        totalSumglassProcessing += el.price * calcSquareMeter
+      })
+
+      const totalSum = totalSumFurniture + totalSumProcessing + totalSumglassProcessing +
       (calcSquareMeter * currentType?.price || 0) +
       (calcSquareMeter * currentColor?.price || 0) +
       (isVanta ? currentObject?.vanta * vantaValue : 0) +
@@ -274,7 +287,15 @@ const Dashki = () => {
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',
                 "value": value
-              }))
+              })),
+              glassProcessingArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.price}`}
+              )),
+              glassProcessingCountArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.count}`}
+              ))
             ]
           }
         ]
@@ -314,7 +335,7 @@ const Dashki = () => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
@@ -482,7 +503,12 @@ const Dashki = () => {
                 <PDFDownloadLink
                   className="print print_manager"
                   style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  document={<PdfFile 
+                    order={finishedShowerPdf}
+                     cart={cart} 
+                     glassProcessingCountArr = {glassProcessingCountArr}
+                     glassProcessingArr = {glassProcessingArr}
+                     />}
                   fileName={`Дашки менеджер ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

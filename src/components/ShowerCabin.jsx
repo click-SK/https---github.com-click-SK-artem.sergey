@@ -123,9 +123,23 @@ const ShowerCabin = () => {
           totalSumFurniture += item.price * el.count
         })
       })
+
+      let totalSumProcessing = 0
+
+      glassProcessingCountArr.forEach((el) =>{
+          totalSumProcessing += el.price * el.count 
+      })
+
+
+      let totalSumglassProcessing = 0
+
+      glassProcessingArr.forEach((el) =>{
+        totalSumglassProcessing += el.price * calcSquareMeter
+      })
+
   
       const totalSum = resSizePrice +  
-      totalSumFurniture +  
+      totalSumFurniture + totalSumProcessing + totalSumglassProcessing +
       (isAssemblingt ? currentType?.price : 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
@@ -139,9 +153,9 @@ const ShowerCabin = () => {
         width: widthValue, /* ширина душ кабіни */
         height: heightValue, /* висота - ціна душ кабіни */ 
         depth: depthValue, /* глубина */
-        glass: currentGlass ? currentGlass : '' ,  /* скло - товщина душ кабіни */
-        glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
-        glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
+        glass: currentGlassColor ? currentGlassColor : '' ,  /* скло - товщина душ кабіни */
+        glassColorName:  currentGlassColor ? currentGlassColor?.name : '',  /* скло - колір душ кабіни */
+        glassColorPrice: currentGlassColor ? currentGlassColor?.price : '',  /* скло - ціна душ кабіни */
         volume: volumValue, 
         cart: cart, /* масив фурнітур душ кабіни */
         adress:deliveryAdress, /* адреса доставки */
@@ -221,7 +235,6 @@ const ShowerCabin = () => {
     setCurrentProcessingСutout(selectedProcessing);
   };
 
-  console.log('currentProcessingСutoutCount',currentProcessingСutoutCount);
 
   const handleFetch = async () => {
 
@@ -284,12 +297,21 @@ const ShowerCabin = () => {
               },
               {
                 "name": finishedShowerPdf.additionalAssemblingName,
-                "value": `${finishedShowerPdf.additionalAssemblingValue} ${finishedShowerPdf.additionalAssemblingPrice}`
+                "value": `${finishedShowerPdf.additionalAssemblingValue}`
               },
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',
                 "value": value
-              }))
+              })),
+                glassProcessingArr.forEach((el) => (
+                  {"name": `${el.name}`,
+                  "value": `${el.price}`}
+                )),
+                glassProcessingCountArr.forEach((el) => (
+                  {"name": `${el.name}`,
+                  "value": `${el.count}`}
+                ))
+              
             ]
           }
         ]
@@ -299,6 +321,10 @@ const ShowerCabin = () => {
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', Object.entries(furnitureFinObj)  );
     // setIsLoading(true);
+    setTimeout(() => {
+      // setIsLoading(false);
+      setIsSuccess(true);
+    }, 1000);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -309,11 +335,10 @@ const ShowerCabin = () => {
       
     });
     
-    setTimeout(() => {
-      // setIsLoading(false);
-      setIsSuccess(true);
-    }, 1000);
+
   }
+
+  console.log('glassProcessingArr',glassProcessingArr);
 
   return (
     <div className="shower_wrapper">
@@ -475,7 +500,12 @@ const ShowerCabin = () => {
                 <PDFDownloadLink
                   className="print print_manager"
                   style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  document={<PdfFile 
+                  order={finishedShowerPdf} 
+                  cart={cart} 
+                  glassProcessingCountArr = {glassProcessingCountArr}
+                  glassProcessingArr = {glassProcessingArr}
+                  />}
                   fileName={`Душові кабіни менеджер ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

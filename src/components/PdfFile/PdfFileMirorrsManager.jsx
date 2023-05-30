@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 
 });
 
-const PdfFileMirorrsManager = ({order}) => {
+const PdfFileMirorrsManager = ({order, glassProcessingCountArr}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -206,6 +206,17 @@ const PdfFileMirorrsManager = ({order}) => {
                 price: selectedProcessingPrice,
             },
           };
+
+          glassProcessingCountArr.forEach((item, index) => {
+            const processingKey = `processing${index + 1}`;
+          
+            fileFinish[processingKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          })
 
 
 

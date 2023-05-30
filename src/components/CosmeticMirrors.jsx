@@ -66,10 +66,14 @@ const CosmeticMirrors = ({ data }) => {
       const calcSize = Number(widthValue) * Number(heightValue);
       const calcSquareMeter = calcSize/1000000;
   
+      let totalSumProcessing = 0
 
+      glassProcessingCountArr.forEach((el) =>{
+        totalSumProcessing += el.price * el.count 
+    })
   
       const totalSum = (calcSquareMeter * currentType?.price || 0 ) +
-      (data?.lightBulbs * lightBulbsCount || 0) +
+      (data?.lightBulbs * lightBulbsCount || 0) + totalSumProcessing +
       (data?.patron * patronCount || 0) +
       (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
@@ -220,13 +224,22 @@ const CosmeticMirrors = ({ data }) => {
                 "name": value.name,
                 "value": value.value
               })),
+                glassProcessingCountArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.count}`}
+              ))
             ]
           }
         ]
       }
     };
 
-    setIsLoading(true);
+    // setIsLoading(true);
+
+    setTimeout(() => {
+      // setIsLoading(false);
+      setIsSuccess(true);
+    }, 1500);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -236,10 +249,7 @@ const CosmeticMirrors = ({ data }) => {
       body: JSON.stringify(data)
     });
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSuccess(true);
-    }, 1500);
+
   }
 
   return (
@@ -256,7 +266,7 @@ const CosmeticMirrors = ({ data }) => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
@@ -361,7 +371,10 @@ const CosmeticMirrors = ({ data }) => {
                 <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
                 <PDFDownloadLink
                   className="print print_manager" style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishMirrorPdf}/>}
+                  document={<PdfFile 
+                    order={finishMirrorPdf}
+                    glassProcessingCountArr = {glassProcessingCountArr} 
+                    />}
                   fileName={`Дзеркала кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>
@@ -370,7 +383,8 @@ const CosmeticMirrors = ({ data }) => {
                 </PDFDownloadLink>
                 <PDFDownloadLink
                   className="print print_client" style={{ fontSize: 14,}}
-                  document={<PdfFileClient order={finishMirrorPdf} />}
+                  document={<PdfFileClient 
+                    order={finishMirrorPdf} />}
                   fileName={`Дзеркала кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >
                   {({ loading, error }) =>

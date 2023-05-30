@@ -111,7 +111,7 @@ const styles = StyleSheet?.create({
 
 });
 
-const PdfShowerManadger = ({order, cart}) => {
+const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessingArr}) => {
 
     
         const type = `${order?.type}` /* форма дзеркала */
@@ -187,27 +187,13 @@ const PdfShowerManadger = ({order, cart}) => {
           });
 
         furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName}                        ${item?.name3}                     Колір:  ${item.colorsFurniture} -  ${item.count} шт?.                         ${item.colorsFurniturePrice * item.count } грн`   
+          furnitureFinObj[index] = `${item.name2} ${item.tittleName}                        ${item?.name3}                     Колір:  ${item.colorsFurniture} -  ${item.count} шт.                         ${item.colorsFurniturePrice * item.count } грн`   
         });
 
         let result = JSON.stringify(furnitureFinArr);
 
+
         const fileFinish = {
-            // glass:{
-            //     price: glassColorPrice,
-            //     size: glass,
-            //     name: glassColorName,
-            // },
-            // currentProcessingStandart:{
-            //     price: currentProcessingStandartPrice,
-            //     size: currentProcessingStandartVal,
-            //     name: currentProcessingStandartName,
-            // },
-            // currentProcessingСutout:{
-            //     price: currentProcessingСutoutPrice,
-            //     size: currentProcessingСutoutCount,
-            //     name: currentProcessingСutoutName,
-            // },
             isAssemblingt:{
                 price: goodsPrice,
                 name: isAssemblingtName,
@@ -217,23 +203,30 @@ const PdfShowerManadger = ({order, cart}) => {
                 size: additionalAssemblingValue,
                 name: additionalAssemblingName
             },
-            // mintaje:{
-            //     price: montajePrice,
-            //     size: montajeValue,
-            //     name: montajeName
-            // },
-            // dovod:{
-            //     price: dovodCoutPrice,
-            //     size: dovodCoutCount,
-            //     name:  dovodCoutName
-            // },
-            // zaklad:{
-            //     price: zakladPrice,
-            //     size: zakladCount,
-            //     name: zakladName
-            // },
 
           };
+
+          glassProcessingCountArr.forEach((item, index) => {
+            const processingKey = `processing${index + 1}`;
+          
+            fileFinish[processingKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
+          glassProcessingArr.forEach((item, index) => {
+            const processingGlassKey = `processingGlass${index + 1}`;
+          
+            fileFinish[processingGlassKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
 
 
 

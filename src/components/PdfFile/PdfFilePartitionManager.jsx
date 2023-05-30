@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 
 });
 
-const PdfShowerManadger = ({order, cart}) => {
+const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessingArr}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -202,6 +202,29 @@ const PdfShowerManadger = ({order, cart}) => {
                 name: currentProcessingСutoutName,
             },
           };
+
+          glassProcessingCountArr.forEach((item, index) => {
+            const processingKey = `processing${index + 1}`;
+          
+            fileFinish[processingKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
+          glassProcessingArr.forEach((item, index) => {
+            const processingGlassKey = `processingGlass${index + 1}`;
+          
+            fileFinish[processingGlassKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
 
 
 
