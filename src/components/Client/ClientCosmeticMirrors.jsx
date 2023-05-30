@@ -66,10 +66,10 @@ const ClientCosmeticMirrors = ({ data }) => {
   };
 
   const calcTotalSumFunc = () => {
-    if (heightValue && widthValue) {
+    if ((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(heightValue);
-      const calcSquareMeter = calcSize / 10000;
+      const calcSquareMeter = calcSize / 1000000;
 
       let deliveryPrice = 0;
       let deliveryPriceOverSity = 0;
@@ -101,7 +101,6 @@ const ClientCosmeticMirrors = ({ data }) => {
         // furniture: cart,
         // total: totalSum,
       };
-      console.log("finishedShower", finishedShower);
       setTotalSum(totalSum);
     } else {
       setValidationInput(true);
@@ -156,7 +155,6 @@ const ClientCosmeticMirrors = ({ data }) => {
 
   }
 
-  console.log("data?.typeWordpress", data?.typeWordpress);
   return (
     <div>
       <ButtonGobackAndTitle title={'Косметичні дзеркала'}/>

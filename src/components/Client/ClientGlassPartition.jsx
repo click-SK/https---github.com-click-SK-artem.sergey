@@ -37,8 +37,6 @@ const ClientGlassPartition = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  console.log('test',currentTypePartitions);
-
   const deliveryFirstName = useSelector(
     (state) => state.delivery.deliveryFirstName
   );
@@ -75,8 +73,6 @@ const ClientGlassPartition = () => {
     "Закладна 2 ": 150,
     "Закладна 3 ": 200,
   };
-
-  console.log("На фінал");
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-glass-partitions")
@@ -120,17 +116,15 @@ const ClientGlassPartition = () => {
     setModalIsOpen(false);
   };
 
-  console.log("currentColor?.price", currentColor?.price);
-
   const calcTotalSumFunc = () => {
-    if (heightValue && widthValue) {
+    if ((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
       const calcSize = depthValue
         ? Number(widthValue) * Number(heightValue) +
           Number(heightValue) * Number(depthValue)
         : Number(widthValue) * Number(heightValue) * 2;
       // const calcSize = Number(widthValue) * Number(heightValue);
-      const calcSquareMeter = calcSize / 10000;
+      const calcSquareMeter = calcSize / 1000000;
       const resCurrentProcessingStandart =
         Number(currentProcessingStandart?.price) * calcSquareMeter;
 
@@ -214,8 +208,6 @@ const ClientGlassPartition = () => {
       };
 
       setFinishedShowerPdf(finishedShower);
-
-      console.log("finishedShower", finishedShower);
       setTotalSum(totalSum);
     } else {
       setValidationInput(true);

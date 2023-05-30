@@ -36,8 +36,6 @@ const ClientDashki = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  console.log('test', volumValue);
-
   const deliveryFirstName = useSelector(
     (state) => state.delivery.deliveryFirstName
   );
@@ -96,13 +94,11 @@ const ClientDashki = () => {
     setModalIsOpen(false);
   };
 
-  console.log("depositoryValue", depositoryValue);
-
   const calcTotalSumFunc = () => {
-    if (widthValue) {
+    if (widthValue && widthValue >= 0) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(volumValue);
-      const calcSquareMeter = calcSize / 10000;
+      const calcSquareMeter = calcSize / 1000000;
       const resCurrentProcessingStandart =
         Number(currentProcessingStandart?.price) * calcSquareMeter;
 
@@ -189,10 +185,8 @@ const ClientDashki = () => {
         total: totalSum /* скло - ціна душ кабіни */,
       };
 
-      console.log("finishedShower", finishedShower);
-
       setFinishedShowerPdf(finishedShower);
-      console.log("finishedShower", finishedShower);
+
       setTotalSum(totalSum);
     } else {
       setValidationInput(true);
@@ -277,7 +271,7 @@ const ClientDashki = () => {
     <div className="shower_wrapper">
       <ButtonGobackAndTitle title={'Дашки'}/>
         <SelectObjecTemplate
-        title={"Виберіть тип"}
+        title={"Тип скла"}
         optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}

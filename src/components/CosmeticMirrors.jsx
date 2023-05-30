@@ -11,6 +11,7 @@ import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
+import GlassProcessingCountTemplate from './Template/GlassProcessingCountTemplate';
 import "../style/shower.scss";
 
 const CosmeticMirrors = ({ data }) => {
@@ -27,6 +28,7 @@ const CosmeticMirrors = ({ data }) => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -36,8 +38,6 @@ const CosmeticMirrors = ({ data }) => {
   const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
   const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
-  
-  console.log("TEST ",data?.lightBulbs);
 
   let deliveryPrice = 0;
   let deliveryPriceOverSity = 0;
@@ -61,10 +61,10 @@ const CosmeticMirrors = ({ data }) => {
   };
 
   const calcTotalSumFunc = () => {
-    if(heightValue && widthValue) {
+    if((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(heightValue);
-      const calcSquareMeter = calcSize/10000;
+      const calcSquareMeter = calcSize/1000000;
   
 
   
@@ -226,9 +226,6 @@ const CosmeticMirrors = ({ data }) => {
       }
     };
 
-
-
-    console.log('HsI', data );
     setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
@@ -309,18 +306,14 @@ const CosmeticMirrors = ({ data }) => {
         </div>
       </div>
 
-      <ProcessingCoutPlusCountTemplate
-        title={"Виберіть обробку:"}
-        optionName={""}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={data?.processingСutout}
-        wrapClass={"choose_item item_mirrors"}
-        selectDivWrap={false}
-        currentProcessingСutoutCount={currentProcessingСutoutCount}
-        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
-        inputClass={"input_miroor_item cabel"}
-      />
+        {data?.processingСutout && (
+        <GlassProcessingCountTemplate
+          processingStandart={data?.processingСutout}
+          currentArr={glassProcessingCountArr}
+          setCurrentArr={setGlassProcessingCountArr}
+          title={"Виберіть обробку:"}
+        />
+      )}
 
       <DeliveryTemplate />
       {/* <div className="footer_calc">

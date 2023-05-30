@@ -33,9 +33,6 @@ const DispalayModalItems = ({item}) => {
         setColorAndPrice(selectedColor)
     }
 
-    console.log('item',item);
-
-
     return (
         <div className="furniture_block">
         {/* <h4>Image main {item.mainImage}</h4> */}

@@ -61,9 +61,7 @@ const DeliveryTemplate = () => {
     setDeliveryRoadDistance(e);
     disptch(setDistanceFunc(e))
   }
-  console.log('adress',adress);
-  console.log('delivery',delivery);
-  console.log('deliveryRoadDistance',deliveryRoadDistance);
+  
   return (
     <div>
           <div className="choose_item item_mirrors item_delivery">

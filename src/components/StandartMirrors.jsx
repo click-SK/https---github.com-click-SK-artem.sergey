@@ -14,6 +14,7 @@ import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
+import GlassProcessingCountTemplate from './Template/GlassProcessingCountTemplate';
 
 const StandartMirrors = ({ data }) => {
 
@@ -40,6 +41,7 @@ const StandartMirrors = ({ data }) => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -56,17 +58,15 @@ const StandartMirrors = ({ data }) => {
   //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
   // ];
 
-
-
-
+  console.log('currentType',currentType);
 
   const calcTotalSumFunc = () => {
-    if(sizeWidthMirrors && sizeHeightMirrors) {
+    if((sizeWidthMirrors && sizeWidthMirrors >= 0) && (sizeHeightMirrors && sizeHeightMirrors >= 0)) {
       setValidationInput(false)
       const priceMeterCord = data?.option?.cord?.price;
 
       const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
-      const calcSquareMeter = calcSize/10000;
+      const calcSquareMeter = calcSize/1000000;
       const warmedUpPrice = data?.option?.warmedUp?.price;
   
       const resSizePrice = calcSquareMeter * currentGoods?.price;
@@ -96,15 +96,6 @@ const StandartMirrors = ({ data }) => {
             isPaintingPrice = Number(sizeFrame) * Number( currentColor?.price);
         }
 
-
-      console.log('priceMeterCord',priceMeterCord);
-      console.log('calcSize',calcSize);
-      console.log('calcSquareMeter',calcSquareMeter);
-      console.log('warmedUpPrice',warmedUpPrice);
-      console.log('resCordSum',resCordSum);
-      console.log('resFrameSum',resFrameSum);
-
-  
       const total = (resSizePrice || 0) + 
       (resCordSum || 0) + (resFrameSum || 0) + 
       (currentSwitch?.price || 0) + 
@@ -160,10 +151,7 @@ const StandartMirrors = ({ data }) => {
         total: total
       }
   
-      setFinishMirrorPdf(finishedMirros)
-
-      console.log("файл друк", finishedMirros);
-      
+      setFinishMirrorPdf(finishedMirros)  
   
       setTotalSum(total)
     } else {
@@ -353,9 +341,6 @@ const StandartMirrors = ({ data }) => {
       }
     };
 
-
-
-    console.log('HsI', data );
     // setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
@@ -401,13 +386,15 @@ const StandartMirrors = ({ data }) => {
             validationInput={validationInput}
             inputClass={"input_miroor_item cabel"}
           />
-          <InputTemplate
-            placeholder={"Висота"}
-            onChangeFunc={setSizeHeightMirrors}
-            value={sizeHeightMirrors}
-            validationInput={validationInput}
-            inputClass={"input_miroor_item cabel"}
-          />
+          {currentType?.name != "Круглі" && (
+            <InputTemplate
+              placeholder={"Висота"}
+              onChangeFunc={setSizeHeightMirrors}
+              value={sizeHeightMirrors}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          )}
         </div>
       </div>
 
@@ -500,19 +487,14 @@ const StandartMirrors = ({ data }) => {
         wrapClass={"choose_item item_mirrors"}
         selectDivWrap={false}
       />
-
-      <ProcessingCoutPlusCountTemplate
-        title={"Виберіть обробку:"}
-        optionName={""}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={data?.processingСutout}
-        wrapClass={"choose_item item_mirrors"}
-        selectDivWrap={false}
-        currentProcessingСutoutCount={currentProcessingСutoutCount}
-        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
-        inputClass={"input_miroor_item cabel"}
-      />
+      {data?.processingСutout && (
+        <GlassProcessingCountTemplate
+          processingStandart={data?.processingСutout}
+          currentArr={glassProcessingCountArr}
+          setCurrentArr={setGlassProcessingCountArr}
+          title={"Виберіть обробку:"}
+        />
+      )}
 
       <div className="choose_item item_mirrors item_montaje">
         <h3>Монтаж:</h3>
@@ -545,43 +527,56 @@ const StandartMirrors = ({ data }) => {
         </div>
       </div>
       <DeliveryTemplate />
-            <div className="footer_calc">
+      <div className="footer_calc">
         <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
           {!isPrintPDF && (
             <div
               className="mirror_button_exel"
-              style={{ fontSize: 14, }}
+              style={{ fontSize: 14 }}
               onClick={() => setIsPrintPDF((state) => !state)}
             >
               Роздрукувати PDF
             </div>
           )}
           {isPrintPDF && (
-             
-            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
-                 Роздрукувати PDF
+            <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+              Роздрукувати PDF
               <div className="print_wrap">
-                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <div
+                  className="close_pdf"
+                  onClick={() => setIsPrintPDF((state) => !state)}
+                >
+                  {" "}
+                  x{" "}
+                </div>
                 <PDFDownloadLink
-                  className="print print_manager" style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishMirrorPdf}/>}
-                  fileName={`Дзеркала менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  className="print print_manager"
+                  style={{ fontSize: 14 }}
+                  document={<PdfFile order={finishMirrorPdf} />}
+                  fileName={`Дзеркала менеджер ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
                 <PDFDownloadLink
-                  className="print print_client" style={{ fontSize: 14,}}
+                  className="print print_client"
+                  style={{ fontSize: 14 }}
                   document={<PdfFileClient order={finishMirrorPdf} />}
-                  fileName={`Дзеркала клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Дзеркала клієнт ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-            </div>
+              </div>
             </div>
           )}
           <button
@@ -589,7 +584,11 @@ const StandartMirrors = ({ data }) => {
             onClick={handleFetch}
             disabled={isLoading}
           >
-            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+            {isLoading
+              ? "Зачекайте..."
+              : isSuccess
+              ? "Замовлення відправлено"
+              : "Оформити"}
           </button>
         </div>
       </div>

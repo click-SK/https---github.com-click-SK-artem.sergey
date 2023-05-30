@@ -43,8 +43,6 @@ const ClientShower = () => {
     (state) => state.delivery.deliveryBoolean
   );
 
-    console.log('test', currentDorsHandles);
-
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-shower")
       .then((res) => res.json())
@@ -106,17 +104,16 @@ const ClientShower = () => {
     } catch (error) {
       console.error("Error:", error.message);
     }
-    console.log("press order");
   };
 
   const calcTotalSumFunc = () => {
-    if (heightValue && widthValue) {
+    if ((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
       const calcSize = depthValue
         ? Number(widthValue) * Number(heightValue) +
           Number(heightValue) * Number(depthValue)
         : Number(widthValue) * Number(heightValue) * 2;
-      const calcSquareMeter = calcSize / 10000;
+      const calcSquareMeter = calcSize / 1000000;
 
       let totalSumFurniture = 0;
 

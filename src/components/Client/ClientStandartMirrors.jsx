@@ -54,8 +54,6 @@ const ClientStandartMirrors = ({ data }) => {
     (state) => state.delivery.deliveryBoolean
   );
 
-  console.log('test',currentGoods);
-
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
@@ -66,12 +64,12 @@ const ClientStandartMirrors = ({ data }) => {
   }, []);
 
   const calcTotalSumFunc = () => {
-    if (sizeWidthMirrors && sizeHeightMirrors) {
+    if ((sizeWidthMirrors && sizeWidthMirrors >= 0) && (sizeHeightMirrors && sizeWidthMirrors >= 0)) {
       setValidationInput(false);
       const priceMeterCord = data?.option?.cord?.price;
 
       const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
-      const calcSquareMeter = calcSize / 10000;
+      const calcSquareMeter = calcSize / 1000000;
       const warmedUpPrice = data?.option?.warmedUp?.price;
 
       const resSizePrice = calcSquareMeter * currentGoods?.price;
@@ -182,8 +180,6 @@ const ClientStandartMirrors = ({ data }) => {
         total: total,
       };
 
-      console.log("finishedMirros", finishedMirros);
-
       setTotalSum(total);
     } else {
       setValidationInput(true);
@@ -210,8 +206,6 @@ const ClientStandartMirrors = ({ data }) => {
     const warmeUpObj = data?.option?.warmedUp;
     setIsWarmedUp((isWarmedUp) => !isWarmedUp);
   };
-
-  console.log("currentObject", currentObject);
 
   const handleFetch = async () => {
 
@@ -315,18 +309,6 @@ const ClientStandartMirrors = ({ data }) => {
         data={currentObject?.option?.frame}
         wrapClass={"choose_item item_mirrors"}
       />
-
-      <div className="choose_item item_mirrors">
-        <h3>Розмір рамки (м)</h3>
-        <div className="input_miroor">
-          <input
-            className="input_miroor_frame cabel"
-            type="number"
-            value={sizeFrame}
-            onChange={(e) => setSizeFrame(e.target.value)}
-          />
-        </div>
-      </div>
 
       <div className="choose_item item_mirrors check-item">
         <h3>Підігрів:</h3>
