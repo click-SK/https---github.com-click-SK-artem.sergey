@@ -185,7 +185,7 @@ const PdfShowerManadger = ({order, cart}) => {
               colorsFurniturePrice: item.colorsFurniture[0].price,
               tittleName: item.title,
               name2: item.depends[0],
-              name3: item.depends[1],
+              name3: item.depends[1] ? item.depends[1] : '' ,
               drawingImgSrc: item.drawingImg,
               mainImageSrc: item.mainImage,
               count: item.count,
@@ -195,7 +195,7 @@ const PdfShowerManadger = ({order, cart}) => {
           });
 
         furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+          furnitureFinObj[index] = `${item.name2} ${item.tittleName}                        ${item.name3 }                     Колір:  ${item.colorsFurniture} -  ${item.count} шт.                         ${item.colorsFurniturePrice * item.count } грн`   
         });
 
         let result = JSON.stringify(furnitureFinArr);
