@@ -13,6 +13,8 @@ import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
+import GlassProcessingTemplate from "./Template/GlassProcessingTemplate";
+import GlassProcessingCountTemplate from './Template/GlassProcessingCountTemplate';
 import '../style/shower.scss'
 
 const GlassPartition = () => {
@@ -45,8 +47,8 @@ const GlassPartition = () => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
-  console.log( "test", typeMontaje);
+  const [glassProcessingArr, setGlassProcessingArr] = useState([]);
+  const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
   const [montaje] = useState([
     {
@@ -157,11 +159,11 @@ const GlassPartition = () => {
 
 
   const calcTotalSumFunc = () => {
-    if(heightValue && widthValue) {
+    if((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
       const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
       // const calcSize = Number(widthValue) * Number(heightValue);
-      const calcSquareMeter = calcSize/10000;
+      const calcSquareMeter = calcSize/1000000;
       const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
   
       let totalSumFurniture = 0;
@@ -229,7 +231,6 @@ const GlassPartition = () => {
 
       setFinishedShowerPdf(finishedShower)
 
-      console.log('обробка',currentProcessingСutoutCount);
       setTotalSum(totalSum)
     } else {
       setValidationInput(true);
@@ -340,8 +341,6 @@ const GlassPartition = () => {
       }
     };
 
-    // console.log('HI', furnitureFinObj , );
-    console.log('HsI', data  );
     setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
@@ -422,30 +421,22 @@ const GlassPartition = () => {
         </div>
       </div>
 
-      <SelectObjecTemplate
-        title={"Обробка скла:"}
-        optionName={""}
-        changeFunc={selectProcessingStandartFunc}
-        state={currentProcessingStandart}
-        data={currentObject?.processingStandart}
-        wrapClass={"wrap_item type_shower"}
-        selectWrapClass={"choose_item selected_shower"}
-        selectDivWrap={true}
-      />
+      {currentObject?.processingStandart && (
+        <GlassProcessingTemplate
+          processingStandart={currentObject?.processingStandart}
+          currentArr={glassProcessingArr}
+          setCurrentArr={setGlassProcessingArr}
+        />
+      )}
 
-<ProcessingCoutPlusCountTemplate
-        title={"Додаткова обробка"}
-        optionName={""}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={currentObject?.processingСutout}
-        wrapClass={"wrap_item size_item "}
-        selectWrapClass={"choose_item choose_procesing  "}
-        selectDivWrap={true}
-        currentProcessingСutoutCount={currentProcessingСutoutCount}
-        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
-        inputClass={"input_miroor_item cabel"}
-      />
+      {currentObject?.processingСutout && (
+        <GlassProcessingCountTemplate
+          processingStandart={currentObject?.processingСutout}
+          currentArr={glassProcessingCountArr}
+          setCurrentArr={setGlassProcessingCountArr}
+          title={"Додаткова обробка:"}
+        />
+      )}
 
       <div className="firnitur">
         <button className="button_open" onClick={handleOpenModal}>
@@ -517,10 +508,12 @@ const GlassPartition = () => {
             </div>
 
             <div className="choose_item selected_shower">
-              <input className="input_miroor_item cabel"
-              placeholder="Кількість"
-              value={dovodCout}
-              onChange={(e) => setdovodCout(e.target.value)}/>
+              <input
+                className="input_miroor_item cabel"
+                placeholder="Кількість"
+                value={dovodCout}
+                onChange={(e) => setdovodCout(e.target.value)}
+              />
             </div>
           </div>
         </div>
@@ -560,43 +553,56 @@ const GlassPartition = () => {
         <DeliveryTemplate />
       </div>
 
-            <div className="footer_calc">
+      <div className="footer_calc">
         <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
           {!isPrintPDF && (
             <div
               className="mirror_button_exel"
-              style={{ fontSize: 14, }}
+              style={{ fontSize: 14 }}
               onClick={() => setIsPrintPDF((state) => !state)}
             >
               Роздрукувати PDF
             </div>
           )}
           {isPrintPDF && (
-             
-            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
-                 Роздрукувати PDF
+            <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+              Роздрукувати PDF
               <div className="print_wrap">
-                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <div
+                  className="close_pdf"
+                  onClick={() => setIsPrintPDF((state) => !state)}
+                >
+                  {" "}
+                  x{" "}
+                </div>
                 <PDFDownloadLink
-                  className="print print_manager" style={{ fontSize: 14 }}
+                  className="print print_manager"
+                  style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-                  fileName={`Скляні перегородки менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Скляні перегородки менеджер ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
                 <PDFDownloadLink
-                  className="print print_client" style={{ fontSize: 14,}}
+                  className="print print_client"
+                  style={{ fontSize: 14 }}
                   document={<PdfFileClient order={finishedShowerPdf} />}
-                  fileName={`Скляні перегородки клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Скляні перегородки клієнт ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-            </div>
+              </div>
             </div>
           )}
           <button
@@ -604,7 +610,11 @@ const GlassPartition = () => {
             onClick={handleFetch}
             disabled={isLoading}
           >
-            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+            {isLoading
+              ? "Зачекайте..."
+              : isSuccess
+              ? "Замовлення відправлено"
+              : "Оформити"}
           </button>
         </div>
       </div>

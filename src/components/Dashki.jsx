@@ -14,6 +14,8 @@ import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
+import GlassProcessingTemplate from "./Template/GlassProcessingTemplate";
+import GlassProcessingCountTemplate from './Template/GlassProcessingCountTemplate';
 import '../style/shower.scss'
 
 const Dashki = () => {
@@ -40,6 +42,8 @@ const Dashki = () => {
   const [isPrintPDF, setIsPrintPDF] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [glassProcessingArr, setGlassProcessingArr] = useState([]);
+  const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -49,8 +53,6 @@ const Dashki = () => {
   const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
   const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
-
-  console.log('finalFile',depositoryValue );
 
   useEffect(() => {
     fetch("https://calc-shower.herokuapp.com/get-all-dashki")
@@ -95,13 +97,13 @@ const Dashki = () => {
     setModalAllFurnitureIsOpen(false);
   };
 
-  console.log('depositoryValue',depositoryValue);
+  console.log('widthValue',!!widthValue);
 
   const calcTotalSumFunc = () => {
-    if(widthValue) {
+    if(widthValue && widthValue >= 0) {
       setValidationInput(false);
       const calcSize = Number(widthValue) * Number(volumValue);
-      const calcSquareMeter = calcSize/10000;
+      const calcSquareMeter = calcSize/1000000;
       const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter
   
       let totalSumFurniture = 0;
@@ -165,7 +167,6 @@ const Dashki = () => {
       }
 
       setFinishedShowerPdf(finishedShower)
-      console.log('finishedShower',finishedShower);
       setTotalSum(totalSum)
     } else {
       setValidationInput(true);
@@ -196,6 +197,8 @@ const Dashki = () => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
   }
+
+  console.log('volumValue',volumValue);
 
   const handleFetch = async () => {
 
@@ -278,8 +281,6 @@ const Dashki = () => {
       }
     };
 
-    // console.log('HI', furnitureFinObj , );
-    console.log('HsI', data  );
     setIsLoading(true);
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
@@ -302,7 +303,7 @@ const Dashki = () => {
       <h1>Дашки</h1>
 
       <SelectObjecTemplate
-        title={"Виберіть тип"}
+        title={"Тип скла"}
         optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}
@@ -336,30 +337,22 @@ const Dashki = () => {
         </div>
       </div>
 
-      <SelectObjecTemplate
-        title={"Виберіть обробку"}
-        optionName={""}
-        changeFunc={selectProcessingStandartFunc}
-        state={currentProcessingStandart}
-        data={currentObject?.processingStandart}
-        wrapClass={"wrap_item type_shower"}
-        selectWrapClass={"choose_item selected_shower"}
-        selectDivWrap={true}
-      />
+      {currentObject?.processingStandart && (
+        <GlassProcessingTemplate
+          processingStandart={currentObject?.processingStandart}
+          currentArr={glassProcessingArr}
+          setCurrentArr={setGlassProcessingArr}
+        />
+      )}
 
-<ProcessingCoutPlusCountTemplate
-        title={"Додаткова обробка"}
-        optionName={""}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={currentObject?.processingСutout}
-        wrapClass={"wrap_item size_item "}
-        selectWrapClass={"choose_item choose_procesing  "}
-        selectDivWrap={true}
-        currentProcessingСutoutCount={currentProcessingСutoutCount}
-        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
-        inputClass={"input_miroor_item cabel"}
-      />
+      {currentObject?.processingСutout && (
+        <GlassProcessingCountTemplate
+          processingStandart={currentObject?.processingСutout}
+          currentArr={glassProcessingCountArr}
+          setCurrentArr={setGlassProcessingCountArr}
+          title={"Додаткова обробка:"}
+        />
+      )}
 
       <div className="choose_item item_mirrors check-item">
         <h3>Ванта:</h3>
@@ -463,43 +456,56 @@ const Dashki = () => {
           <button onClick={handleFetch}>Оформити</button>
         </div>
       </div> */}
-            <div className="footer_calc">
+      <div className="footer_calc">
         <ClientFooter calcTotalSumFunc={calcTotalSumFunc} totalSum={totalSum} />
         <div className="send_order">
           {!isPrintPDF && (
             <div
               className="mirror_button_exel"
-              style={{ fontSize: 14, }}
+              style={{ fontSize: 14 }}
               onClick={() => setIsPrintPDF((state) => !state)}
             >
               Роздрукувати PDF
             </div>
           )}
           {isPrintPDF && (
-             
-            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
-                 Роздрукувати PDF
+            <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+              Роздрукувати PDF
               <div className="print_wrap">
-                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <div
+                  className="close_pdf"
+                  onClick={() => setIsPrintPDF((state) => !state)}
+                >
+                  {" "}
+                  x{" "}
+                </div>
                 <PDFDownloadLink
-                  className="print print_manager" style={{ fontSize: 14 }}
+                  className="print print_manager"
+                  style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-                  fileName={`Дашки менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Дашки менеджер ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
                 <PDFDownloadLink
-                  className="print print_client" style={{ fontSize: 14,}}
+                  className="print print_client"
+                  style={{ fontSize: 14 }}
                   document={<PdfFileClient order={finishedShowerPdf} />}
-                  fileName={`Дашкии клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Дашкии клієнт ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-            </div>
+              </div>
             </div>
           )}
           <button
@@ -507,7 +513,11 @@ const Dashki = () => {
             onClick={handleFetch}
             disabled={isLoading}
           >
-            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+            {isLoading
+              ? "Зачекайте..."
+              : isSuccess
+              ? "Замовлення відправлено"
+              : "Оформити"}
           </button>
         </div>
       </div>

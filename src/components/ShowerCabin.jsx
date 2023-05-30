@@ -14,6 +14,8 @@ import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
+import GlassProcessingTemplate from "./Template/GlassProcessingTemplate";
+import GlassProcessingCountTemplate from './Template/GlassProcessingCountTemplate';
 
 const ShowerCabin = () => {
   const [allData, setAllData] = useState([]);
@@ -45,6 +47,8 @@ const ShowerCabin = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [additionalAssemblingName, setAdditionalAssemblingName] = useState('');
   const [additionalAssemblingPrice, setAdditionalAssemblingPrice] = useState('');
+  const [glassProcessingArr, setGlassProcessingArr] = useState([]);
+  const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
@@ -84,14 +88,12 @@ const ShowerCabin = () => {
   };
 
   const calcTotalSumFunc = () => {
-    if(heightValue && widthValue) {
+    if((heightValue && heightValue >= 0) && (widthValue && heightValue >= 0)) {
       setValidationInput(false);
       const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
-      const calcSquareMeter = calcSize/10000;
+      const calcSquareMeter = calcSize/1000000;
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
       const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter;
-
-      console.log("глибина",  resCurrentProcessingStandart );
   
       let totalSumFurniture = 0;
 
@@ -169,8 +171,6 @@ const ShowerCabin = () => {
       }
 
       setFinishedShowerPdf(finishedShower)
-      // console.log("файл друк", finishedShower);
-      console.log("finishedShower", finishedShower);
 
       setTotalSum(totalSum)
     } else {
@@ -221,60 +221,6 @@ const ShowerCabin = () => {
     setCurrentProcessingСutout(selectedProcessing);
   };
 
-
-  // const changeWidth = (e) => {
-  //   setWidthValue(e);
-  //   setWidthSum(Number(e) * 5)
-  // }
-
-  // const changeHeight = (e) => {
-  //   setHeightValue(e)
-  //   setHeightSum(Number(e) * 5)
-  // }
-
-  // const changeVolume = (e) => {
-  //   setVolumValue(e)
-  //   setVolumSum(Number(e) * 5)
-  // }
-
-  // const data = {
-  //   "source_id": 10,
-  //   "buyer_comment": finishedShowerPdf.orderComent,
-  //   "buyer": {
-  //     "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
-  //     "phone": finishedShowerPdf.numberPhone
-  //   },
-  //   "shipping": {
-  //     "delivery_service_id": 1,
-  //     "shipping_address_city": finishedShowerPdf.adress,
-  //   },
-  //   "products": [
-  //     {
-  //       "price": finishedShowerPdf.total,
-  //       "quantity": 1,
-  //       "name": finishedShowerPdf.type,
-  //       "comment": `${finishedShowerPdf.minInstallationName} ${finishedShowerPdf.minInstallation}`,
-  //       "properties": [
-  //         {
-  //           "name": finishedShowerPdf.currentProcessingStandartName,
-  //           "value": finishedShowerPdf.currentProcessingStandartVal
-  //         },
-  //         {
-  //           "name": finishedShowerPdf.currentProcessingСutoutName,
-  //           "value": finishedShowerPdf.currentProcessingСutoutCount
-  //         },
-  //       ]
-  //     }
-  //   ],
-  // };
-
-
-
-  // console.log('currentType',currentType);
-  // console.log('currentGlass',currentGlass);
-  // console.log('currentGlassColor',currentGlassColor);
-  // console.log('currentGlassColor',currentGlassColor);
-
   console.log('currentProcessingСutoutCount',currentProcessingСutoutCount);
 
   const handleFetch = async () => {
@@ -306,43 +252,6 @@ const ShowerCabin = () => {
   // let result = JSON.stringify(furnitureFinObj);
   let result = JSON.stringify(furnitureFinObj).replace(/\\|"|\[|\]/g, '').replace(/},{/g, ', ');
   result = result.replace(/{"\d+":|}/g, '');
-
-
-    //  const data = {
-    //       order: {
-    //   "source_id": 10,
-    //   "buyer_comment": finishedShowerPdf.orderComent,
-    //   "buyer": {
-    //     "full_name": `${finishedShowerPdf.lastName} ${finishedShowerPdf.firstName} ${finishedShowerPdf.surname}`,
-    //     "phone": finishedShowerPdf.numberPhone
-    //   },
-    //   "shipping": {
-    //     "delivery_service_id": 1,
-    //     "shipping_address_city": finishedShowerPdf.adress,
-    //   },
-    //   "products": [
-    //     {
-    //       "price": finishedShowerPdf.total,
-    //       "quantity": 1,
-    //       "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth}` ,
-    //       "comment": ` `,
-    //       "properties": [
-    //         {
-    //           "name": finishedShowerPdf.currentProcessingStandartName,
-    //           "value": finishedShowerPdf.currentProcessingStandartVal
-    //         },
-    //         {
-    //           "name": finishedShowerPdf.currentProcessingСutoutName,
-    //           "value": finishedShowerPdf.currentProcessingСutoutCount
-    //         },
-    //         {
-    //           "name": 'Фурнітура',
-    //           "value": result
-    //         },
-    //       ]
-    //     }
-    //   ],
-    // } };
 
     const deliver = finishedShowerPdf.adress ? finishedShowerPdf.adress : 'Без доставки' ;
 
@@ -406,11 +315,6 @@ const ShowerCabin = () => {
     }, 1000);
   }
 
-  console.log('currentObject',currentObject);
-  console.log('currentGlassColor',currentGlassColor);
-  console.log('currentGlass',currentGlass);
-  console.log('cart',cart);
-
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
@@ -426,21 +330,6 @@ const ShowerCabin = () => {
         selectDivWrap={true}
       />
 
-      {/* <div className="wrap_item type_glass">
-        <h3>Виберіть скло</h3>
-        <div className="choose_item selected_shower">
-          <select value={currentGlass} onChange={selectGlassFunc}>
-            <option value="" disabled></option>
-            {currentObject &&
-              currentObject.color &&
-              currentObject.color.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-          </select>
-        </div>
-      </div> */}
       <SelectObjecTemplate
         title={"Тип скла"}
         optionName={""}
@@ -484,30 +373,22 @@ const ShowerCabin = () => {
         </div>
       </div>
 
-      <SelectObjecTemplate
-        title={"Обробка скла:"}
-        optionName={""}
-        changeFunc={selectProcessingStandartFunc}
-        state={currentProcessingStandart}
-        data={currentObject?.processingStandart}
-        wrapClass={"wrap_item type_shower"}
-        selectWrapClass={"choose_item selected_shower"}
-        selectDivWrap={true}
-      />
+      {currentObject?.processingStandart && (
+        <GlassProcessingTemplate
+          processingStandart={currentObject?.processingStandart}
+          currentArr={glassProcessingArr}
+          setCurrentArr={setGlassProcessingArr}
+        />
+      )}
 
-      <ProcessingCoutPlusCountTemplate
-        title={"Додаткова обробка"}
-        optionName={""}
-        changeFunc={selectProcessingСutoutFunc}
-        state={currentProcessingСutout}
-        data={currentObject?.processingСutout}
-        wrapClass={"wrap_item size_item "}
-        selectWrapClass={"choose_item choose_procesing  "}
-        selectDivWrap={true}
-        currentProcessingСutoutCount={currentProcessingСutoutCount}
-        setCurrentProcessingСutoutCount={setCurrentProcessingСutoutCount}
-        inputClass={"input_miroor_item cabel"}
-      />
+      {currentObject?.processingСutout && (
+        <GlassProcessingCountTemplate
+          processingStandart={currentObject?.processingСutout}
+          currentArr={glassProcessingCountArr}
+          setCurrentArr={setGlassProcessingCountArr}
+          title={'Додаткова обробка:'}
+        />
+      )}
 
       <div className="firnitur">
         <button className="button_open" onClick={handleOpenModal}>
@@ -549,9 +430,21 @@ const ShowerCabin = () => {
       </div>
 
       <div className="choose_item item_mirrors item_montaje size_item">
-        <p style={{fontSize:"19px"}}>Додатковий монтаж</p>
-        <input className="input_miroor_item" style={{width:'54%'}} value={additionalAssemblingName} onChange={(e) => setAdditionalAssemblingName(e.target.value)} placeholder=""/>
-        <input type="number" className="input_miroor_item" value={additionalAssemblingPrice} onChange={(e) => setAdditionalAssemblingPrice(e.target.value)} placeholder="ціна"/>
+        <p style={{ fontSize: "19px" }}>Додатковий монтаж</p>
+        <input
+          className="input_miroor_item"
+          style={{ width: "54%" }}
+          value={additionalAssemblingName}
+          onChange={(e) => setAdditionalAssemblingName(e.target.value)}
+          placeholder=""
+        />
+        <input
+          type="number"
+          className="input_miroor_item"
+          value={additionalAssemblingPrice}
+          onChange={(e) => setAdditionalAssemblingPrice(e.target.value)}
+          placeholder="ціна"
+        />
       </div>
 
       <DeliveryTemplate />
@@ -562,37 +455,50 @@ const ShowerCabin = () => {
           {!isPrintPDF && (
             <div
               className="mirror_button_exel"
-              style={{ fontSize: 14, }}
+              style={{ fontSize: 14 }}
               onClick={() => setIsPrintPDF((state) => !state)}
             >
               Роздрукувати PDF
             </div>
           )}
           {isPrintPDF && (
-             
-            <div className="mirror_button_exel" style={{ fontSize: 14, }}>
-                 Роздрукувати PDF
+            <div className="mirror_button_exel" style={{ fontSize: 14 }}>
+              Роздрукувати PDF
               <div className="print_wrap">
-                <div className="close_pdf" onClick={() => setIsPrintPDF((state) => !state)}> x </div>
+                <div
+                  className="close_pdf"
+                  onClick={() => setIsPrintPDF((state) => !state)}
+                >
+                  {" "}
+                  x{" "}
+                </div>
                 <PDFDownloadLink
-                  className="print print_manager" style={{ fontSize: 14 }}
+                  className="print print_manager"
+                  style={{ fontSize: 14 }}
                   document={<PdfFile order={finishedShowerPdf} cart={cart} />}
-                  fileName={`Душові кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Душові кабіни менеджер ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для менеджера"
                   }
                 </PDFDownloadLink>
                 <PDFDownloadLink
-                  className="print print_client" style={{ fontSize: 14,}}
+                  className="print print_client"
+                  style={{ fontSize: 14 }}
                   document={<PdfFileClient order={finishedShowerPdf} />}
-                  fileName={`Душові кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
-            >
+                  fileName={`Душові кабіни клієнт ${new Date()
+                    .toLocaleString()
+                    .replaceAll("/", "-")
+                    .replaceAll(":", "-")}.pdf`}
+                >
                   {({ loading, error }) =>
                     loading ? "завантаження..." : "Для клієнта"
                   }
                 </PDFDownloadLink>
-            </div>
+              </div>
             </div>
           )}
           <button
@@ -600,7 +506,11 @@ const ShowerCabin = () => {
             onClick={handleFetch}
             disabled={isLoading}
           >
-            {isLoading ? "Зачекайте..." : isSuccess ? "Замовлення відправлено" : "Оформити"}
+            {isLoading
+              ? "Зачекайте..."
+              : isSuccess
+              ? "Замовлення відправлено"
+              : "Оформити"}
           </button>
         </div>
       </div>
