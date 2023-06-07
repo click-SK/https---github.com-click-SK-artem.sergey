@@ -314,7 +314,7 @@ const Dashki = () => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate

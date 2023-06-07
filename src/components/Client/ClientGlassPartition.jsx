@@ -251,7 +251,7 @@ const ClientGlassPartition = () => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Перегородка ${currentTypePartitions}, ${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} см2` ,
+            "name": `Перегородка ${currentTypePartitions}, ${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} мм2` ,
             "comment": ` `,
             "properties": [
             ]
@@ -308,7 +308,7 @@ const ClientGlassPartition = () => {
         />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate

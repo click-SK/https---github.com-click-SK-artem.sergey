@@ -129,7 +129,7 @@ const ClientCosmeticMirrors = ({ data }) => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Косметичне ${currentType.name} - ${widthValue} X ${heightValue} см2` ,
+            "name": `Косметичне ${currentType.name} - ${widthValue} X ${heightValue} мм2` ,
             "comment": ` `,
             
           }
@@ -170,7 +170,7 @@ const ClientCosmeticMirrors = ({ data }) => {
       />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate

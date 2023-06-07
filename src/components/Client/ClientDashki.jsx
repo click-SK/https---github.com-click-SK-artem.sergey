@@ -240,7 +240,7 @@ const ClientDashki = () => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Дашки, ${currentType.name} - ${widthValue} X ${volumValue}  см2` ,
+            "name": `Дашки, ${currentType.name} - ${widthValue} X ${volumValue}  мм2` ,
             "comment": ` `,
             "properties": [
             ]
@@ -282,7 +282,7 @@ const ClientDashki = () => {
         />
 
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (cм)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate

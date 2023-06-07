@@ -174,7 +174,7 @@ const ClientShower = () => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} см2` ,
+            "name": `${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} мм2` ,
             "comment": ` `,
             "properties": [
               {
@@ -223,7 +223,7 @@ const ClientShower = () => {
         />
       </div>
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (см)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
