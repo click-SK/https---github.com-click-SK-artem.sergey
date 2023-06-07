@@ -388,7 +388,7 @@ const StandartMirrors = ({ data }) => {
       />
 
       <div className="choose_item item_mirrors">
-        <h3>Розмір (см)</h3>
+        <h3>Розмір (мм)</h3>
         <div className=" input_miroor">
           <InputTemplate
             placeholder={"Ширина"}

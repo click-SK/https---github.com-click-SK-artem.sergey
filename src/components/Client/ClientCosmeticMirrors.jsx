@@ -129,7 +129,7 @@ const ClientCosmeticMirrors = ({ data }) => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Косметичне ${currentType.name} - ${widthValue} X ${heightValue} см2` ,
+            "name": `Косметичне ${currentType.name} - ${widthValue} X ${heightValue} мм2` ,
             "comment": ` `,
             
           }

@@ -240,7 +240,7 @@ const ClientDashki = () => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Дашки, ${currentType.name} - ${widthValue} X ${volumValue}  см2` ,
+            "name": `Дашки, ${currentType.name} - ${widthValue} X ${volumValue}  мм2` ,
             "comment": ` `,
             "properties": [
             ]

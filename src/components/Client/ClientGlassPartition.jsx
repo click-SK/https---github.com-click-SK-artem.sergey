@@ -251,7 +251,7 @@ const ClientGlassPartition = () => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": `Перегородка ${currentTypePartitions}, ${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} см2` ,
+            "name": `Перегородка ${currentTypePartitions}, ${currentType.name} - ${widthValue} X ${heightValue} ${resDepth} мм2` ,
             "comment": ` `,
             "properties": [
             ]

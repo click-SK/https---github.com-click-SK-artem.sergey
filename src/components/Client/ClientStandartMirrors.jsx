@@ -229,7 +229,7 @@ const ClientStandartMirrors = ({ data }) => {
           {
             "price": totalSum,
             "quantity": 1,
-            "name": ` ${currentGoods.name}, форма${currentType.name} - ${sizeWidthMirrors} X ${sizeHeightMirrors} см2` ,
+            "name": ` ${currentGoods.name}, форма${currentType.name} - ${sizeWidthMirrors} X ${sizeHeightMirrors} мм2` ,
             "comment": ` `,
             "properties": [
               {
@@ -282,7 +282,7 @@ const ClientStandartMirrors = ({ data }) => {
       />
 
       <div className="choose_item item_mirrors">
-        <h3>Розмір (см)</h3>
+        <h3>Розмір (мм)</h3>
         <div className=" input_miroor">
           <InputTemplate
             placeholder={"Ширина"}

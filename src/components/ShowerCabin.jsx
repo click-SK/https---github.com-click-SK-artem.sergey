@@ -284,7 +284,7 @@ const ShowerCabin = () => {
           {
             "price": finishedShowerPdf.total,
             "quantity": 1,
-            "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth} см2` ,
+            "name": `${finishedShowerPdf.type} - ${finishedShowerPdf.width} X ${finishedShowerPdf.height} ${resDepth} мм2` ,
             "comment": ` `,
             "properties": [
               {
@@ -366,7 +366,7 @@ const ShowerCabin = () => {
         selectDivWrap={true}
       />
       <div className="wrap_item size_shower">
-        <h3>Вкажіть розміри (см)</h3>
+        <h3>Вкажіть розміри (мм)</h3>
         <div className="size_input">
           <div className="size_item">
             <InputTemplate
