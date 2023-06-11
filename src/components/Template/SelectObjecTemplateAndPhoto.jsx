@@ -34,7 +34,9 @@ const SelectObjecTemplateAndPhoto = ({
         //     </select>
         //   </div>
         // </div>
-        <div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
+        <div 
+        className="wrap_item"
+        style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
             <h3>{title}</h3>
           <div
             className="custom-select"

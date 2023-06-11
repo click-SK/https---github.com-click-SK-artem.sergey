@@ -492,17 +492,18 @@ const ShowerCabin = () => {
         </div>
       </div>
 
-      <div className="choose_item item_mirrors item_montaje size_item">
+      <div className="choose_item item_mirrors item_montaje  ">
         <p style={{ fontSize: "19px" }}>Додатковий монтаж</p>
         <input
           className="input_miroor_item"
-          style={{ width: "54%" }}
+          style={{ width: "50%" }}
           value={additionalAssemblingName}
           onChange={(e) => setAdditionalAssemblingName(e.target.value)}
           placeholder=""
         />
         <input
           type="number"
+          style={{ width: "50%" }}
           className="input_miroor_item"
           value={additionalAssemblingPrice}
           onChange={(e) => setAdditionalAssemblingPrice(e.target.value)}
