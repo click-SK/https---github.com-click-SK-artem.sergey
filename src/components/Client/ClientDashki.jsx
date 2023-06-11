@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./../Modal";
-import ListTheChoseFurniture from "./../ListTheChoseFurniture";
+import Modal from "../Furniture/Modal";
+import ListTheChoseFurniture from "../Furniture/ListTheChoseFurniture";
 import PdfFile from "./../PdfFile/PdfFileDashkiManager";
 import PdfFileClient from "./../PdfFile/PdfFileDashkiClient";
 import { PDFDownloadLink } from "@react-pdf/renderer";

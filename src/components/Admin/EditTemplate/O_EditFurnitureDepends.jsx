@@ -12,8 +12,6 @@ const O_EditFurnitureDepends = ({el, showerId, showerFurnitureId, fullArray, idx
     setCurrentValue(el)
   };
 
-  console.log('fullArray',fullArray);
-
   const handleEditButtonSave = () => {
     setIsEdit((isEdit) => !isEdit);
     let newArr = [...fullArray];

@@ -3,7 +3,8 @@ import '../../../style/edir-shower.scss';
 import '../../../style/admin.scss'
 import O_EditTypeTemplate from '../EditTemplate/O_EditTypeTemplate';
 import O_EditDorsHandles from "../EditTemplate/O_EditDorsHandles";
-import O_NamePriceTemplate from '../EditTemplate/O_NamePriceTemplate'
+import O_NamePriceTemplate from '../EditTemplate/O_NamePriceTemplate';
+import O_NamePricePhotoTemplate from "../EditTemplate/O_NamePricePhotoTemplate";
 import AdminHeader from '../AdminClientHeader';
 const EditShowerClient = () => {
     const [currentObject, setCurrentObject] = useState({});
@@ -66,9 +67,6 @@ const EditShowerClient = () => {
           },1000)
       }
 
-      console.log('newValueTypeName',newValueTypeName);
-      console.log('newValueTypePrice',newValueTypePrice);
-
       const handleShowTypeBlock = () => {
         setShowTypeBlock(true);
         setShowDorsHandlesBlock(false);
@@ -87,7 +85,7 @@ const EditShowerClient = () => {
             <h1 className={`header_item ${showDorsHandlesBlock ? 'active_tab' : ''}`}  onClick={handleShowDorsHandlesBlock}>Ручки</h1>
             </div>
             {showTypeBlock && currentObject.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
-                <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
+                <O_NamePricePhotoTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-shower-client-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-shower-client-type'/>

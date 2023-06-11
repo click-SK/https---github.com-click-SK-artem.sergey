@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "./DeliveryTemplate";
 import SelectObjecTemplate from "./Template/SelectObjecTemplate";
 import InputTemplate from "./Template/InputTemplate";
+import SelectObjecTemplateAndPhoto from "./Template/SelectObjecTemplateAndPhoto";
+import InputTemplateWithoutValidation from "./Template/InputTemplateWithoutValidation";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
@@ -52,20 +54,20 @@ const StandartMirrors = ({ data }) => {
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
   const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
 
-  // const [intslPrice, setIntslPrice] = useState(0);
-  // const keyCsv = [
-  //   {"Форма скла": currentType?.name },
-  //   {"Тип дзеркала" : 'З фоновою підсвідкою'}
-  // ];
+
+  useEffect(() => {
+    setSizeWidthMirrors('');
+    setSizeHeightMirrors('');
+  },[currentType])
 
   console.log('currentType',currentType);
 
   const calcTotalSumFunc = () => {
-    if((sizeWidthMirrors && sizeWidthMirrors >= 0) && (sizeHeightMirrors && sizeHeightMirrors >= 0)) {
+    if((sizeWidthMirrors && sizeWidthMirrors >= 0) && currentType?.name != "Круглі" ? (sizeHeightMirrors && sizeHeightMirrors >= 0) : true) {
       setValidationInput(false)
       const priceMeterCord = data?.option?.cord?.price;
 
-      const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
+      const calcSize = currentType?.name != "Круглі" ? (Number(sizeWidthMirrors) * Number(sizeHeightMirrors)) : (Number(sizeWidthMirrors) * 2);
       const calcSquareMeter = calcSize/1000000;
       const warmedUpPrice = data?.option?.warmedUp?.price;
   
@@ -168,8 +170,8 @@ const StandartMirrors = ({ data }) => {
   };
 
   const selectGoodsFunc = (e) => {
-    const selectedGoods = JSON.parse(e.target.value);
-    setCurrentGoods(selectedGoods);
+    setCurrentGoods(e);
+    console.log('e',e);
   };
 
   const selectFrameFunc = (e) => {
@@ -281,30 +283,6 @@ const StandartMirrors = ({ data }) => {
         value : `${finishMirrorPdf.isAssemblingt}`
       }
 
-  //   const furnitureFinArr = [];
-
-  //   cart.forEach((item, index) => {
-  //     const itemData = {
-  //       colorsFurniture: item.colorsFurniture[0].color,
-  //       colorsFurniturePrice: item.colorsFurniture[0].price,
-  //       tittleName: item.title,
-  //       name2: item.depends[0],
-  //       name3: item.depends[1],
-  //       drawingImgSrc: item.drawingImg,
-  //       mainImageSrc: item.mainImage,
-  //       count: item.count,
-  //     };
-  //     furnitureFinArr.push(itemData);
-      
-  //   });
-
-  // furnitureFinArr.forEach((item, index) => {
-  //   furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.colorsFurniture} - ${item.count} шт`   
-  // });
-
-  // const resDepth = (finishMirrorPdf.depth ? ` X ${finishMirrorPdf.depth}` : '')
-
-
     const deliver =  finishMirrorPdf.adress ? finishMirrorPdf.adress : 'Без доставки' ;
 
 
@@ -341,8 +319,6 @@ const StandartMirrors = ({ data }) => {
       }
     };
 
-    // setIsLoading(true);
-
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
       headers: {
@@ -352,9 +328,12 @@ const StandartMirrors = ({ data }) => {
     });
 
     setTimeout(() => {
-      // setIsLoading(false);
       setIsSuccess(true);
     }, 1000);
+  }
+
+  if(currentGoods != null) {
+    console.log('currentGoods.mirrorsImage',currentGoods.mirrorsImage);
   }
 
   return (
@@ -367,7 +346,7 @@ const StandartMirrors = ({ data }) => {
         wrapClass={"choose_item item_mirrors"}
         selectDivWrap={false}
       />
-      <SelectObjecTemplate
+      <SelectObjecTemplateAndPhoto
         title={"Тип:"}
         changeFunc={selectGoodsFunc}
         state={currentGoods}
@@ -375,6 +354,12 @@ const StandartMirrors = ({ data }) => {
         wrapClass={"choose_item item_mirrors"}
         selectDivWrap={false}
       />
+
+      <div className="img_standart_mirror_wrap">
+        {currentGoods != null && 
+        <img src={currentGoods.mirrorsImage}/>
+      }
+      </div>
 
       <div className="choose_item item_mirrors">
         <h3>Розмір (мм)</h3>
@@ -386,7 +371,7 @@ const StandartMirrors = ({ data }) => {
             validationInput={validationInput}
             inputClass={"input_miroor_item cabel"}
           />
-          {currentType?.name != "Круглі" && (
+          {currentType?.name != "Круглі" ? 
             <InputTemplate
               placeholder={"Висота"}
               onChangeFunc={setSizeHeightMirrors}
@@ -394,7 +379,14 @@ const StandartMirrors = ({ data }) => {
               validationInput={validationInput}
               inputClass={"input_miroor_item cabel"}
             />
-          )}
+            :
+            <InputTemplateWithoutValidation
+            placeholder={"Висота"}
+            onChangeFunc={setSizeHeightMirrors}
+            value={sizeHeightMirrors}
+            inputClass={"input_miroor_item cabel dispaly_none"}
+          />
+          }
         </div>
       </div>
 

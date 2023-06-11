@@ -17,8 +17,6 @@ const GlassProcessingTemplate = ({
     }
   };
 
-  console.log("currentArr", currentArr);
-
   return (
     <div>
       <h1>Обробка скла:</h1>

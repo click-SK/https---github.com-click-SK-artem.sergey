@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./ModalGlassPartitions";
-import ListTheChoseFurniture from "./ListTheChoseFurniture";
+import ListTheChoseFurniture from "./Furniture/ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfFileCosmeticMirorrsManager";
 import PdfFileClient from "./PdfFile/PdfFileCosmeticMirorrsClient";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "./DeliveryTemplate";
 import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import SelectObjecTemplateAndPhoto from "./Template/SelectObjecTemplateAndPhoto";
 import InputTemplate from "./Template/InputTemplate";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
@@ -51,8 +52,7 @@ const CosmeticMirrors = ({ data }) => {
   }
 
   const selectTypeFunc = (e) => {
-    const selectedType = JSON.parse(e.target.value);
-    setCurrentType(selectedType);
+    setCurrentType(e);
   };
 
   const selectProcessingСutoutFunc = (e) => {
@@ -244,7 +244,7 @@ const CosmeticMirrors = ({ data }) => {
 
   return (
     <div>
-      <SelectObjecTemplate
+      <SelectObjecTemplateAndPhoto
         title={"Виберіть тип"}
         optionName={""}
         changeFunc={selectTypeFunc}
@@ -254,6 +254,12 @@ const CosmeticMirrors = ({ data }) => {
         selectWrapClass={"choose_item selected_shower"}
         selectDivWrap={true}
       />
+
+<div className="img_standart_mirror_wrap">
+        {currentType != null && 
+        <img src={currentType.mirrorsImage}/>
+      }
+      </div>
 
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (мм)</h3>

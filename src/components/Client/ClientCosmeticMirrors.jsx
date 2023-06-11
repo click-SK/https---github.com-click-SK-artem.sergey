@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "../../style/shower.scss";
 import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
-import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import SelectObjecTemplateAndPhoto from "../Template/SelectObjecTemplateAndPhoto";
 import InputTemplate from "../Template/InputTemplate";
 import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 
@@ -56,8 +56,7 @@ const ClientCosmeticMirrors = ({ data }) => {
   }, []);
 
   const selectTypeFunc = (e) => {
-    const selectedType = JSON.parse(e.target.value);
-    setCurrentType(selectedType);
+    setCurrentType(e);
   };
 
   const selectProcessingСutoutFunc = (e) => {
@@ -158,7 +157,7 @@ const ClientCosmeticMirrors = ({ data }) => {
   return (
     <div>
       <ButtonGobackAndTitle title={'Косметичні дзеркала'}/>
-        <SelectObjecTemplate
+        <SelectObjecTemplateAndPhoto
         title={"Виберіть тип"}
         optionName={""}
         changeFunc={selectTypeFunc}
@@ -168,6 +167,12 @@ const ClientCosmeticMirrors = ({ data }) => {
         selectWrapClass={"choose_item selected_shower"}
         selectDivWrap={true}
       />
+
+<div className="img_standart_mirror_wrap">
+        {currentType != null && 
+        <img src={currentType.mirrorsImage}/>
+      }
+      </div>
 
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (мм)</h3>

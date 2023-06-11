@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./ModalGlassPartitions";
 import ModalAllFurniture from "./ModalAllFurniture";
-import ListTheChoseFurniture from "./ListTheChoseFurniture";
+import ListTheChoseFurniture from "./Furniture/ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfFilePartitionManager";
 import PdfFileClient from "./PdfFile/PdfFilePartitionClient";
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeliveryTemplate from "./DeliveryTemplate";
 import SelectObjecTemplate from "./Template/SelectObjecTemplate";
 import InputTemplate from "./Template/InputTemplate";
+import InputTemplateWithoutValidation from "./Template/InputTemplateWithoutValidation";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
@@ -192,7 +193,7 @@ const GlassPartition = () => {
       (calcSquareMeter * currentColor?.price || 0) + 
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
       (currentProcessingСutout?.price * currentProcessingСutoutCount || 0) + 
-      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) + ( isAssemblingt ? typeMontaje.price : 0) + (isAssemblingtZaklad ? typeZaklad.price : 0) + (isAssemblingtDovod ? 500 : 0)  ;
+      (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) + ( isAssemblingt ? (currentTypePartitions == 'Глуха перегородка' ? 450  : 500) : 0) + (isAssemblingtZaklad ? typeZaklad.price : 0) + (isAssemblingtDovod ? 500 : 0)  ;
   
       const finishedShower = {
         type: currentTypePartitions, /* назва */
@@ -223,11 +224,12 @@ const GlassPartition = () => {
         zakladName: isAssemblingtZaklad ? `Закладна` : '',
         zakladPrice: isAssemblingtZaklad ? `${typeZaklad.price} грн` : '',
         zakladCount: isAssemblingtZaklad ? typeZaklad.name : '',
-        montajePrice: isAssemblingt ? typeMontaje.price : '',
+        montajePrice: isAssemblingt ? (currentTypePartitions == 'Глуха перегородка' ? 450  : 500) + 'грн' : '',
         montajeName: isAssemblingt ? 'Монтаж' : '',
-        montajeValue: isAssemblingt ? typeMontaje.name : '',
+        montajeValue: isAssemblingt ? currentTypePartitions : '',
         total: totalSum, /* скло - ціна душ кабіни */
       }
+      // typeMontaje.price
 
       setFinishedShowerPdf(finishedShower)
 
@@ -357,7 +359,15 @@ const GlassPartition = () => {
     }, 1500);
   }
 
+  console.log('currentTypePartitions',currentTypePartitions);
+  
 
+  if(currentTypePartitions == 'Глуха перегородка') {
+    console.log('500');
+  } else {
+    console.log('450');
+
+  }
   return (
     <div className="shower_wrapper">
       <h1>Скляні перегородки</h1>
@@ -410,11 +420,10 @@ const GlassPartition = () => {
             />
           </div>
           <div className="size_item">
-            <InputTemplate
+            <InputTemplateWithoutValidation
               placeholder={"Глибина"}
               onChangeFunc={setDepthValue}
               value={depthValue}
-              validationInput={validationInput}
               inputClass={"input_miroor_item cabel"}
             />
           </div>
@@ -475,7 +484,7 @@ const GlassPartition = () => {
               <label className="checkbox-label" htmlFor="checkbox3"></label>
             </div>
 
-            <div className="choose_item selected_shower">
+            {/* <div className="choose_item selected_shower">
               <select
                 value={typeMontaje ? JSON.stringify(typeMontaje) : ""}
                 onChange={selectMontajeFunc}
@@ -489,7 +498,7 @@ const GlassPartition = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
 

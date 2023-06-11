@@ -18,7 +18,6 @@ const GlassProcessingCountSecondTemplate = ({item, setCurrentArr, currentArr}) =
       const setNewCountFunc = (e) => {
         setCount(e)
         item.count = Number(e);
-        console.log('item',item);
       }
 
     return (

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
-import EditStandartMirrorsGoods from './EditStandartMirrorsGoods';
+import EditClientStandartMirrorsGoods from './EditClientStandartMirrorsGoods';
 import '../../../style/admin.scss'
 
-const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypePath, deleteGoodsPath, addNewGoodsPath, updateGoodsPath, setIsFetch}) => {
+const EditClientStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypePath, deleteGoodsPath, addNewGoodsPath, updateGoodsPath, setIsFetch}) => {
     const [showBlock, setShowblock] = useState(false);
     const [isShowInput, setIsShowInput] = useState(false);
     const [typeNameValue, setTypeNameValue] = useState("");
@@ -98,7 +98,7 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
         {showBlock &&
                 <div className="edit_option_wrap">
                 {item.goods.map((el, idxGoods) => (
-                      <EditStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} 
+                      <EditClientStandartMirrorsGoods el={el} idxType={idxType} idxGoods={idxGoods} 
                       key={el.name} showerId={showerId}
                       typeName={typeName}
                       setIsFetch={setIsFetch}
@@ -116,4 +116,4 @@ const EditStandartMirrorsType = ({item, idxType, typeName, showerId, updateTypeP
     );
 };
 
-export default EditStandartMirrorsType;
+export default EditClientStandartMirrorsType;

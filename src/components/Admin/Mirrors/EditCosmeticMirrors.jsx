@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../../../style/edir-shower.scss';
 import '../../../style/admin.scss'
 import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
-import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
+import O_EditTypeAndPhotoTemplate from '../EditTemplate/O_EditTypeAndPhotoTemplate'
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 import N_EditLightBulsTemplate from "../EditTemplate/N_EditLightBulsTemplate";
 import N_EditPatronTemplate from "../EditTemplate/N_EditPatronTemplate";
@@ -140,10 +140,11 @@ const EditCosmeticMirrors = () => {
             }
 
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
-                <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
+                <O_EditTypeAndPhotoTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-type'
-                pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-type'/>
+                pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-type'
+                pathEditPhoto='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-type-image'/>
             ))
             }
             {showTypeBlock && 

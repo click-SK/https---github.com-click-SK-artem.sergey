@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import SelectObjecTemplateAndPhoto from "../Template/SelectObjecTemplateAndPhoto";
 import InputTemplate from "../Template/InputTemplate";
+import InputTemplateWithoutValidation from "../Template/InputTemplateWithoutValidation";
 import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 import "../../style/shower.scss";
 
@@ -14,6 +16,7 @@ const ClientShower = () => {
   const [widthValue, setWidthValue] = useState("");
   const [heightValue, setHeightValue] = useState("");
   const [depthValue, setDepthValue] = useState("");
+  const [depthSecondValue, setDepthSecondValue] = useState('');
   const [validationInput, setValidationInput] = useState(false);
   const [totalSum, setTotalSum] = useState(null);
   const [isPrintPDF, setIsPrintPDF] = useState(false);
@@ -53,8 +56,7 @@ const ClientShower = () => {
   }, []);
 
   const selectTypeFunc = (e) => {
-    const selectedType = JSON.parse(e.target.value);
-    setCurrentType(selectedType);
+    setCurrentType(e);
   };
 
   const selectDorsHandlesFunc = (e) => {
@@ -100,7 +102,6 @@ const ClientShower = () => {
       }
 
       const responseData = await response.json();
-      console.log(responseData);
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -109,10 +110,14 @@ const ClientShower = () => {
   const calcTotalSumFunc = () => {
     if ((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
-      const calcSize = depthValue
-        ? Number(widthValue) * Number(heightValue) +
-          Number(heightValue) * Number(depthValue)
-        : Number(widthValue) * Number(heightValue) * 2;
+      // const calcSize = depthValue
+      //   ? Number(widthValue) * Number(heightValue) +
+      //     Number(heightValue) * Number(depthValue)
+      //   : Number(widthValue) * Number(heightValue) * 2;
+      const calcSize = (depthValue ? 
+        (((Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) + (depthSecondValue ? (Number(heightValue) * Number(depthSecondValue)) : 0)) * 2) 
+        : (Number(widthValue) * Number(heightValue) * 2));
+        console.log('calcSize',calcSize);
       const calcSquareMeter = calcSize / 1000000;
 
       let totalSumFurniture = 0;
@@ -142,8 +147,6 @@ const ClientShower = () => {
         (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice);
 
       const finishedShower = {};
-
-      console.log("currentType", currentType);
 
       setTotalSum(totalSum);
     } else {
@@ -210,8 +213,8 @@ const ClientShower = () => {
   return (
     <div className="shower_wrapper">
       <ButtonGobackAndTitle title={'Душові кабіни'}/>
-      <div className="wrap_item type_shower">
-        <SelectObjecTemplate
+      {/* <div className="wrap_item type_shower">
+        <SelectObjecTemplateAndPhoto
           title={"Варіанти душових"}
           optionName={""}
           changeFunc={selectTypeFunc}
@@ -221,6 +224,21 @@ const ClientShower = () => {
           selectWrapClass={"choose_item selected_shower"}
           selectDivWrap={true}
         />
+      </div> */}
+        <SelectObjecTemplateAndPhoto
+        title={"Варіанти душових"}
+        optionName={""}
+        changeFunc={selectTypeFunc}
+        state={currentType}
+        data={currentObject?.typeWordpress}
+        wrapClass={"wrap_item type_shower"}
+        selectWrapClass={"choose_item selected_shower"}
+        selectDivWrap={true}
+      />
+      <div className="img_shower_wrap">
+        {currentType && 
+        <img src={currentType.showerImage}/>
+      }
       </div>
       <div className="wrap_item size_shower">
         <h3>Вкажіть розміри (мм)</h3>
@@ -244,11 +262,18 @@ const ClientShower = () => {
             />
           </div>
           <div className="size_item">
-            <InputTemplate
+            <InputTemplateWithoutValidation
               placeholder={"Глибина"}
               onChangeFunc={setDepthValue}
               value={depthValue}
-              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplateWithoutValidation
+              placeholder={"Глибина"}
+              onChangeFunc={setDepthSecondValue}
+              value={depthSecondValue}
               inputClass={"input_miroor_item cabel"}
             />
           </div>
