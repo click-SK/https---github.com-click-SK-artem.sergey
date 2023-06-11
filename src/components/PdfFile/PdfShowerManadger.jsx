@@ -10,7 +10,7 @@ Font.register({
       "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf"
   });
 
-const styles = StyleSheet.create({
+const styles = StyleSheet?.create({
     body:{
         paddingTop: 35,
         paddingBottom: 65,
@@ -111,54 +111,54 @@ const styles = StyleSheet.create({
 
 });
 
-const PdfShowerManadger = ({order, cart}) => {
+const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessingArr}) => {
 
     
-        const type = `${order.type}` /* форма дзеркала */
-        const goodsPrice = `${order.goodsPrice}` /* ціна дзеркала */
-        const width = `${order.width}` /* ширина дзеркала */
-        const height = `${order.height}` /* висота дзеркала */
-        const depth = Number(order.depth) /* глубина */
-        const adress = `${order.adress}` /* адреса доставки */
-        const glass = `${order.glass}` /* адреса доставки */
-        const glassColorName = `${order.glassColorName}` /* адреса доставки */
-        const glassColorPrice = `${order.glassColorPrice}` /* адреса доставки */
-        const dovodCoutName = `${order.dovodCoutName}`
-        const dovodCoutPrice = `${order.dovodCoutPrice}`
-        const dovodCoutCount = `${order.dovodCoutCount}`
-        const zakladName = `${order.zakladName}`
-        const zakladPrice = `${order.zakladPrice}`
-        const zakladCount = `${order.zakladCount}`
-        const montajePrice = `${order.montajePrice}`
-        const montajeName = `${order.montajeName}`
-        const montajeValue = `${order.montajeValue}`
-        const furniture = order.cart;
-        const currentProcessingStandartName = `${order.currentProcessingStandartName}` /* адреса доставки */
-        const currentProcessingStandartVal = `${order.currentProcessingStandartVal}` /* адреса доставки */
-        const currentProcessingStandartPrice = `${order.currentProcessingStandartPrice}` /* адреса доставки */
-        const currentProcessingСutoutName = `${order.currentProcessingСutoutName}` /* адреса доставки */
-        const currentProcessingСutoutPrice = `${order.currentProcessingСutoutPrice}` /* адреса доставки */
-        const currentProcessingСutoutCount = `${order.currentProcessingСutoutCount}` /* адреса доставки */
-        const deliveryPriceOverSity = `${order.deliveryPriceOverSity}` /* ціна доставки за містом */
-        const deliveryPriceOver = `${order.deliveryPriceOver}` /* ціна доставки по місту */
-        const firstName = `${order.firstName}`
-        const lastName = `${order.lastName}`
-        const surname = `${order.surname}`
-        const numberPhone = `${order.numberPhone}`
-        const orderComent = `${order.orderComent}`
-        const minInstallation = `${order.minInstallation}`
-        const minInstallationName = `${order.minInstallationName}`
-        const minInstallationOption = `${order.minInstallationOption}`
-        const isAssemblingt = `${order.isAssemblingt}`
-        const isAssemblingtName = `${order.isAssemblingtName}`
-        const isAssemblingOption = `${order.isAssemblingOption}`
-        const selectedProcessingName  = `${order.selectedProcessingName}`
-        const selectedProcessingPrice = `${order.selectedProcessingPrice}`
-        const selectedProcessingCount = `${order.selectedProcessingCount}`
-        const additionalAssemblingValue = `${order.additionalAssemblingValue}`
-        const additionalAssemblingName = `${order.additionalAssemblingName}`
-        const additionalAssemblingPrice = `${order.additionalAssemblingPrice}`
-        const total = `${order.total}`
+        const type = `${order?.type}` /* форма дзеркала */
+        const goodsPrice = `${order?.goodsPrice}` /* ціна дзеркала */
+        const width = `${order?.width}` /* ширина дзеркала */
+        const height = `${order?.height}` /* висота дзеркала */
+        const depth = Number(order?.depth) /* глубина */
+        const adress = `${order?.adress}` /* адреса доставки */
+        const glass = `${order?.glass}` /* адреса доставки */
+        const glassColorName = `${order?.glassColorName}` /* адреса доставки */
+        const glassColorPrice = `${order?.glassColorPrice}` /* адреса доставки */
+        const dovodCoutName = `${order?.dovodCoutName}`
+        const dovodCoutPrice = `${order?.dovodCoutPrice}`
+        const dovodCoutCount = `${order?.dovodCoutCount}`
+        const zakladName = `${order?.zakladName}`
+        const zakladPrice = `${order?.zakladPrice}`
+        const zakladCount = `${order?.zakladCount}`
+        const montajePrice = `${order?.montajePrice}`
+        const montajeName = `${order?.montajeName}`
+        const montajeValue = `${order?.montajeValue}`
+        const furniture = order?.cart;
+        const currentProcessingStandartName = `${order?.currentProcessingStandartName}` /* адреса доставки */
+        const currentProcessingStandartVal = `${order?.currentProcessingStandartVal}` /* адреса доставки */
+        const currentProcessingStandartPrice = `${order?.currentProcessingStandartPrice}` /* адреса доставки */
+        const currentProcessingСutoutName = `${order?.currentProcessingСutoutName}` /* адреса доставки */
+        const currentProcessingСutoutPrice = `${order?.currentProcessingСutoutPrice}` /* адреса доставки */
+        const currentProcessingСutoutCount = `${order?.currentProcessingСutoutCount}` /* адреса доставки */
+        const deliveryPriceOverSity = `${order?.deliveryPriceOverSity}` /* ціна доставки за містом */
+        const deliveryPriceOver = `${order?.deliveryPriceOver}` /* ціна доставки по місту */
+        const firstName = `${order?.firstName}`
+        const lastName = `${order?.lastName}`
+        const surname = `${order?.surname}`
+        const numberPhone = `${order?.numberPhone}`
+        const orderComent = `${order?.orderComent}`
+        const minInstallation = `${order?.minInstallation}`
+        const minInstallationName = `${order?.minInstallationName}`
+        const minInstallationOption = `${order?.minInstallationOption}`
+        const isAssemblingt = `${order?.isAssemblingt}`
+        const isAssemblingtName = `${order?.isAssemblingtName}`
+        const isAssemblingOption = `${order?.isAssemblingOption}`
+        const selectedProcessingName  = `${order?.selectedProcessingName}`
+        const selectedProcessingPrice = `${order?.selectedProcessingPrice}`
+        const selectedProcessingCount = `${order?.selectedProcessingCount}`
+        const additionalAssemblingValue = `${order?.additionalAssemblingValue}`
+        const additionalAssemblingName = `${order?.additionalAssemblingName}`
+        const additionalAssemblingPrice = `${order?.additionalAssemblingPrice}`
+        const total = `${order?.total}`
 
         const deliverPrice = {
             deliveryPriceOverSity: deliveryPriceOverSity,
@@ -187,27 +187,13 @@ const PdfShowerManadger = ({order, cart}) => {
           });
 
         furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+          furnitureFinObj[index] = `${item.name2} ${item.tittleName}                        ${item?.name3}                     Колір:  ${item.colorsFurniture} -  ${item.count} шт.                         ${item.colorsFurniturePrice * item.count } грн`   
         });
 
         let result = JSON.stringify(furnitureFinArr);
 
+
         const fileFinish = {
-            glass:{
-                price: glassColorPrice,
-                size: glass,
-                name: glassColorName,
-            },
-            currentProcessingStandart:{
-                price: currentProcessingStandartPrice,
-                size: currentProcessingStandartVal,
-                name: currentProcessingStandartName,
-            },
-            currentProcessingСutout:{
-                price: currentProcessingСutoutPrice,
-                size: currentProcessingСutoutCount,
-                name: currentProcessingСutoutName,
-            },
             isAssemblingt:{
                 price: goodsPrice,
                 name: isAssemblingtName,
@@ -217,23 +203,30 @@ const PdfShowerManadger = ({order, cart}) => {
                 size: additionalAssemblingValue,
                 name: additionalAssemblingName
             },
-            mintaje:{
-                price: montajePrice,
-                size: montajeValue,
-                name: montajeName
-            },
-            dovod:{
-                price: dovodCoutPrice,
-                size: dovodCoutCount,
-                name:  dovodCoutName
-            },
-            zaklad:{
-                price: zakladPrice,
-                size: zakladCount,
-                name: zakladName
-            },
 
           };
+
+          glassProcessingCountArr.forEach((item, index) => {
+            const processingKey = `processing${index + 1}`;
+          
+            fileFinish[processingKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
+          glassProcessingArr.forEach((item, index) => {
+            const processingGlassKey = `processingGlass${index + 1}`;
+          
+            fileFinish[processingGlassKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
 
 
 
@@ -269,8 +262,7 @@ const PdfShowerManadger = ({order, cart}) => {
                 </View>
                     <View style={styles.section} >
                         <Text style={styles.textLeft}>
-
-                           {type}
+                           {type}  {glassColorName}
                         </Text>
                         <Text style={styles.text}>
                             {width} х {height}{resDepth} 

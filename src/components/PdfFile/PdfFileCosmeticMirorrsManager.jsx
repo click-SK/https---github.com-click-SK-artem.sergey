@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 
 });
 
-const PdfFileMirorrsManager = ({order}) => {
+const PdfFileMirorrsManager = ({order, glassProcessingCountArr}) => {
 
     
    
@@ -157,6 +157,17 @@ const PdfFileMirorrsManager = ({order}) => {
         },
       };
 
+
+      glassProcessingCountArr.forEach((item, index) => {
+        const processingKey = `processing${index + 1}`;
+      
+        fileFinish[processingKey] = {
+          price: item.price,
+          size: item.count,
+          name: item.name,
+          _id: item._id
+        };
+      });
 
     return (
         <Document>

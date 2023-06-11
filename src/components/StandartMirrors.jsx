@@ -98,8 +98,14 @@ const StandartMirrors = ({ data }) => {
             isPaintingPrice = Number(sizeFrame) * Number( currentColor?.price);
         }
 
+        let totalSumProcessing = 0
+
+        glassProcessingCountArr.forEach((el) =>{
+          totalSumProcessing += el.price * el.count 
+      })
+
       const total = (resSizePrice || 0) + 
-      (resCordSum || 0) + (resFrameSum || 0) + 
+      (resCordSum || 0) + (resFrameSum || 0) + totalSumProcessing +
       (currentSwitch?.price || 0) + 
       (isPainting ? isPaintingPrice : 0) + 
       (isWarmedUp ? warmedUpPrice : 0) + (minInstallation ? 500 : 0) + 
@@ -313,11 +319,23 @@ const StandartMirrors = ({ data }) => {
                 "name": value.name,
                 "value": value.value
               })),
+                glassProcessingCountArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.count}`}
+              ))
             ]
           }
         ]
       }
     };
+
+
+    // setIsLoading(true);
+    setTimeout(() => {
+      // setIsLoading(false);
+      setIsSuccess(true);
+    }, 1000);
+
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -327,9 +345,11 @@ const StandartMirrors = ({ data }) => {
       body: JSON.stringify(data)
     });
 
+
     setTimeout(() => {
       setIsSuccess(true);
     }, 1000);
+
   }
 
   if(currentGoods != null) {
@@ -545,7 +565,10 @@ const StandartMirrors = ({ data }) => {
                 <PDFDownloadLink
                   className="print print_manager"
                   style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishMirrorPdf} />}
+                  document={<PdfFile 
+                    order={finishMirrorPdf}
+                    glassProcessingCountArr = {glassProcessingCountArr} 
+                    />}
                   fileName={`Дзеркала менеджер ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

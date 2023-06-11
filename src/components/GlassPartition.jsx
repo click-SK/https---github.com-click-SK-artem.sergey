@@ -159,6 +159,10 @@ const GlassPartition = () => {
   };
 
 
+
+
+
+
   const calcTotalSumFunc = () => {
     if((heightValue && heightValue >= 0) && (widthValue && widthValue >= 0)) {
       setValidationInput(false);
@@ -188,7 +192,20 @@ const GlassPartition = () => {
         })
       })
   
-      const totalSum = totalSumFurniture + 
+      let totalSumProcessing = 0
+
+      glassProcessingCountArr.forEach((el) =>{
+          totalSumProcessing += el.price * el.count 
+      })
+    
+    
+      let totalSumglassProcessing = 0
+    
+      glassProcessingArr.forEach((el) =>{
+        totalSumglassProcessing += el.price * calcSquareMeter
+      })
+
+      const totalSum = totalSumFurniture + totalSumProcessing + totalSumglassProcessing +
       (calcSquareMeter * currentType?.price || 0) + 
       (calcSquareMeter * currentColor?.price || 0) + 
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
@@ -336,7 +353,15 @@ const GlassPartition = () => {
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',
                 "value": value
-              }))
+              })),
+              glassProcessingArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.price}`}
+              )),
+              glassProcessingCountArr.forEach((el) => (
+                {"name": `${el.name}`,
+                "value": `${el.count}`}
+              ))
             ]
           }
         ]
@@ -588,7 +613,12 @@ const GlassPartition = () => {
                 <PDFDownloadLink
                   className="print print_manager"
                   style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  document={<PdfFile 
+                    order={finishedShowerPdf} 
+                    cart={cart}
+                    glassProcessingCountArr = {glassProcessingCountArr}
+                    glassProcessingArr = {glassProcessingArr} 
+                    />}
                   fileName={`Скляні перегородки менеджер ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

@@ -145,9 +145,23 @@ const ShowerCabin = () => {
           totalSumFurniture += item.price * el.count
         })
       })
+
+      let totalSumProcessing = 0
+
+      glassProcessingCountArr.forEach((el) =>{
+          totalSumProcessing += el.price * el.count 
+      })
+
+
+      let totalSumglassProcessing = 0
+
+      glassProcessingArr.forEach((el) =>{
+        totalSumglassProcessing += el.price * calcSquareMeter
+      })
+
   
       const totalSum = resSizePrice +  
-      totalSumFurniture +  
+      totalSumFurniture + totalSumProcessing + totalSumglassProcessing +
       (isAssemblingt ? currentType?.price : 0) + 
       (deliveryBoolean ? deliveryPriceOverSity : deliveryPrice) +
       (calcSquareMeter * currentProcessingStandart?.price || 0) + 
@@ -161,6 +175,7 @@ const ShowerCabin = () => {
         width: widthValue, /* ширина душ кабіни */
         height: heightValue, /* висота - ціна душ кабіни */ 
         depth: depthValue, /* глубина */
+
         depthSecond: depthSecondValue, /* глубина */
         glass: currentGlass ? currentGlass : '' ,  /* скло - товщина душ кабіни */
         glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
@@ -307,17 +322,36 @@ const ShowerCabin = () => {
               },
               {
                 "name": finishedShowerPdf.additionalAssemblingName,
-                "value": `${finishedShowerPdf.additionalAssemblingValue} ${finishedShowerPdf.additionalAssemblingPrice}`
+                "value": `${finishedShowerPdf.additionalAssemblingValue}`
               },
               ...Object.values(furnitureFinObj).filter(value => value.name !== '').map(value => ({
                 "name": 'Фурнітура',
                 "value": value
-              }))
+              })),
+                glassProcessingArr.forEach((el) => (
+                  {"name": `${el.name}`,
+                  "value": `${el.price}`}
+                )),
+                glassProcessingCountArr.forEach((el) => (
+                  {"name": `${el.name}`,
+                  "value": `${el.count}`}
+                ))
+              
             ]
           }
         ]
       }
     };
+
+
+    // console.log('HI', furnitureFinObj , );
+    console.log('HsI', Object.entries(furnitureFinObj)  );
+    // setIsLoading(true);
+    setTimeout(() => {
+      // setIsLoading(false);
+      setIsSuccess(true);
+    }, 1000);
+
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -328,13 +362,9 @@ const ShowerCabin = () => {
       
     });
     
-    setTimeout(() => {
-      // setIsLoading(false);
-      setIsSuccess(true);
-    }, 1000);
+
   }
 
-  console.log('currentObject?.type',currentObject?.type);
 
   return (
     <div className="shower_wrapper">
@@ -508,7 +538,12 @@ const ShowerCabin = () => {
                 <PDFDownloadLink
                   className="print print_manager"
                   style={{ fontSize: 14 }}
-                  document={<PdfFile order={finishedShowerPdf} cart={cart} />}
+                  document={<PdfFile 
+                  order={finishedShowerPdf} 
+                  cart={cart} 
+                  glassProcessingCountArr = {glassProcessingCountArr}
+                  glassProcessingArr = {glassProcessingArr}
+                  />}
                   fileName={`Душові кабіни менеджер ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

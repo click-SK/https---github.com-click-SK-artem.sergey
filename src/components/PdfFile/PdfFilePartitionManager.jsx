@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 
 });
 
-const PdfShowerManadger = ({order, cart}) => {
+const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessingArr}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -169,7 +169,7 @@ const PdfShowerManadger = ({order, cart}) => {
               colorsFurniturePrice: item.colorsFurniture[0].price,
               tittleName: item.title,
               name2: item.depends[0],
-              name3: item.depends[1],
+              name3: item?.depends[1] ? item?.depends[1] : '' ,
               drawingImgSrc: item.drawingImg,
               mainImageSrc: item.mainImage,
               count: item.count,
@@ -177,9 +177,10 @@ const PdfShowerManadger = ({order, cart}) => {
             furnitureFinArr.push(itemData);
             
           });
+        
 
         furnitureFinArr.forEach((item, index) => {
-          furnitureFinObj[index] = `${item.name2} ${item.tittleName} ${item.name3} ${item.colorsFurniture} ${item.count} ${item.colorsFurniturePrice * item.count } грн`   
+          furnitureFinObj[index] = `${item.name2} ${item.tittleName}            ${item.name3 }            Колір:  ${item.colorsFurniture} -  ${item.count} шт.                                        ${item.colorsFurniturePrice * item.count } грн`   
         });
 
         let result = JSON.stringify(furnitureFinArr);
@@ -201,6 +202,29 @@ const PdfShowerManadger = ({order, cart}) => {
                 name: currentProcessingСutoutName,
             },
           };
+
+          glassProcessingCountArr.forEach((item, index) => {
+            const processingKey = `processing${index + 1}`;
+          
+            fileFinish[processingKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
+          glassProcessingArr.forEach((item, index) => {
+            const processingGlassKey = `processingGlass${index + 1}`;
+          
+            fileFinish[processingGlassKey] = {
+              price: item.price,
+              size: item.count,
+              name: item.name,
+              _id: item._id
+            };
+          });
+
 
 
 
@@ -275,6 +299,19 @@ const PdfShowerManadger = ({order, cart}) => {
                                 </Text>
                             </View>
                         ))}
+                        {/* {furnitureFinArr.forEach((item, index) => (
+                            <View style={styles.section} key={index}>
+                            <Text style={styles.textLeft}>
+                                {item.name2} {item.tittleName} {item.name3}
+                            </Text>
+                            <Text style={styles.text}>
+                                Колір:{item.colorsFurniture} - {item.count} шт.
+                            </Text>
+                            <Text style={styles.text}>
+                                {item.colorsFurniturePrice * item.count } грн
+                            </Text>
+                        </View>
+                        ))} */}
                     </View>
 
                     <View style={styles.section} >
