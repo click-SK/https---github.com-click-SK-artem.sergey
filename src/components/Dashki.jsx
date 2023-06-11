@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
+import Modal from "./Furniture/Modal";
 import ModalAllFurniture from "./ModalAllFurniture";
-import ListTheChoseFurniture from "./ListTheChoseFurniture";
+import ListTheChoseFurniture from "./Furniture/ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfFileDashkiManager";
 import PdfFileClient from "./PdfFile/PdfFileDashkiClient";
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -96,8 +96,6 @@ const Dashki = () => {
   const handleCloseModalAllFurniture = () => {
     setModalAllFurnitureIsOpen(false);
   };
-
-  console.log('widthValue',!!widthValue);
 
   const calcTotalSumFunc = () => {
     if(widthValue && widthValue >= 0) {
@@ -210,8 +208,6 @@ const Dashki = () => {
     // const cordObj = data?.option?.cord;
     setMinInstallation(e.target.value);
   }
-
-  console.log('volumValue',volumValue);
 
   const handleFetch = async () => {
 

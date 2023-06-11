@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
+import Modal from "./Furniture/Modal";
 import ModalAllFurniture from "./ModalAllFurniture";
-import ListTheChosenFurniture from "./ListTheChoseFurniture";
+import ListTheChosenFurniture from "./Furniture/ListTheChoseFurniture";
 import PdfFile from "./PdfFile/PdfShowerManadger";
 import PdfFileClient from "./PdfFile/PdfShowerClient";
 import { useSelector, useDispatch } from 'react-redux';
+import { addCart, removeAll} from '../store/cart';
 import '../style/shower.scss'
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import DeliveryTemplate from "./DeliveryTemplate";
 import { json } from "react-router-dom";
 import SelectObjecTemplate from "./Template/SelectObjecTemplate";
+import SelectObjecTemplateAndPhoto from "./Template/SelectObjecTemplateAndPhoto";
 import InputTemplate from "./Template/InputTemplate";
+import InputTemplateWithoutValidation from "./Template/InputTemplateWithoutValidation";
 import ClientFooter from './Template/ClientFooter';
 import SendPdfBlockTemplate from './Template/SendPdfBlockTemplate';
 import ProcessingCoutPlusCountTemplate from './Template/ProcessingCoutPlusCountTemplate';
@@ -29,12 +32,12 @@ const ShowerCabin = () => {
   const [widthValue, setWidthValue] = useState('');
   const [heightValue, setHeightValue] = useState('');
   const [depthValue, setDepthValue] = useState('');
+  const [depthSecondValue, setDepthSecondValue] = useState('');
   const [volumValue, setVolumValue] = useState(0);
   const [widthSum, setWidthSum] = useState(0);
   const [heightSum, setHeightSum] = useState(0);
   const [volumSum, setVolumSum] = useState(0);
   const [validationInput, setValidationInput] = useState(false);
-  const cart = useSelector((state) => state.cart.items);
   const [isAssemblingt, setIsAssembling] = useState(false);
   const [minInstallation, setMinInstallation] = useState('');
   const [finishedShowerPdf, setFinishedShowerPdf] = useState({});
@@ -50,6 +53,13 @@ const ShowerCabin = () => {
   const [glassProcessingArr, setGlassProcessingArr] = useState([]);
   const [glassProcessingCountArr, setGlassProcessingCountArr] = useState([]);
 
+  const cart = useSelector((state) => state.cart.items);
+  const copyCart = useSelector((state) => state.cart.copyItems);
+
+  const dispatch = useDispatch();
+
+  console.log('currentType',currentType);
+
 
   const deliveryFirstName = useSelector((state) => state.delivery.deliveryFirstName);
   const deliveryLastName = useSelector((state) => state.delivery.deliveryLastName);
@@ -59,6 +69,15 @@ const ShowerCabin = () => {
   const deliveryDistance = useSelector((state) => state.delivery.deliveryDistance);
   const deliveryAdress = useSelector((state) => state.delivery.deliveryAdress);
   const deliveryBoolean = useSelector((state) => state.delivery.deliveryBoolean);
+
+  useEffect(() => {
+    if(currentType) {
+      dispatch(removeAll())
+      currentType?.defaultFurniture.forEach((item) => {
+        dispatch(addCart(item))
+      })
+    }
+  },[currentType])
  
 
   useEffect(() => {
@@ -72,8 +91,8 @@ const ShowerCabin = () => {
   }, []);
 
   const selectTypeFunc = (e) => {
-    const selectedType = JSON.parse(e.target.value);
-    setCurrentType(selectedType);
+    // const selectedType = JSON.parse(e.target.value);
+    setCurrentType(e);
   };
   const selectGlassFunc = (e) => {
     setCurrentGlass(e.target.value);
@@ -90,7 +109,10 @@ const ShowerCabin = () => {
   const calcTotalSumFunc = () => {
     if((heightValue && heightValue >= 0) && (widthValue && heightValue >= 0)) {
       setValidationInput(false);
-      const calcSize = (depthValue ? (Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) : (Number(widthValue) * Number(heightValue) * 2));
+      const calcSize = (depthValue ? 
+        (((Number(widthValue) * Number(heightValue)) + (Number(heightValue) * Number(depthValue)) + (depthSecondValue ? (Number(heightValue) * Number(depthSecondValue)) : 0)) * 2) 
+        : (Number(widthValue) * Number(heightValue) * 2));
+
       const calcSquareMeter = calcSize/1000000;
       const resSizePrice = calcSquareMeter * (currentGlassColor?.price || 0);
       const resCurrentProcessingStandart = Number(currentProcessingStandart?.price)  * calcSquareMeter;
@@ -153,11 +175,13 @@ const ShowerCabin = () => {
         width: widthValue, /* ширина душ кабіни */
         height: heightValue, /* висота - ціна душ кабіни */ 
         depth: depthValue, /* глубина */
-        glass: currentGlassColor ? currentGlassColor : '' ,  /* скло - товщина душ кабіни */
-        glassColorName:  currentGlassColor ? currentGlassColor?.name : '',  /* скло - колір душ кабіни */
-        glassColorPrice: currentGlassColor ? currentGlassColor?.price : '',  /* скло - ціна душ кабіни */
+
+        depthSecond: depthSecondValue, /* глубина */
+        glass: currentGlass ? currentGlass : '' ,  /* скло - товщина душ кабіни */
+        glassColorName:  currentGlass ? currentGlassColor?.name : '', /* скло - колір душ кабіни */
+        glassColorPrice: currentGlass ? currentGlassColor?.price : '', /* скло - ціна душ кабіни */
         volume: volumValue, 
-        cart: cart, /* масив фурнітур душ кабіни */
+        cart: copyCart, /* масив фурнітур душ кабіни */
         adress:deliveryAdress, /* адреса доставки */
         deliveryPriceOverSity: deliveryBoolean ? deliveryPriceOverSity : '', /* ціна доставки за містом */
         deliveryPriceOver: !deliveryBoolean ? deliveryPrice : '',  /* ціна доставки по місту */
@@ -183,6 +207,8 @@ const ShowerCabin = () => {
         additionalAssemblingPrice: additionalAssemblingPrice ? `${additionalAssemblingPrice}` : '',
         total: totalSum, /* скло - ціна душ кабіни */
       }
+
+      console.log('finishedShower',finishedShower);
 
       setFinishedShowerPdf(finishedShower)
 
@@ -234,7 +260,6 @@ const ShowerCabin = () => {
     const selectedProcessing = JSON.parse(e.target.value);
     setCurrentProcessingСutout(selectedProcessing);
   };
-
 
   const handleFetch = async () => {
 
@@ -318,6 +343,7 @@ const ShowerCabin = () => {
       }
     };
 
+
     // console.log('HI', furnitureFinObj , );
     console.log('HsI', Object.entries(furnitureFinObj)  );
     // setIsLoading(true);
@@ -325,6 +351,7 @@ const ShowerCabin = () => {
       // setIsLoading(false);
       setIsSuccess(true);
     }, 1000);
+
 
     const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
       method: 'POST',
@@ -338,13 +365,12 @@ const ShowerCabin = () => {
 
   }
 
-  console.log('glassProcessingArr',glassProcessingArr);
 
   return (
     <div className="shower_wrapper">
       <h1>Душові кабіни</h1>
 
-      <SelectObjecTemplate
+      <SelectObjecTemplateAndPhoto
         title={"Варіанти душових"}
         optionName={""}
         changeFunc={selectTypeFunc}
@@ -354,6 +380,11 @@ const ShowerCabin = () => {
         selectWrapClass={"choose_item selected_shower"}
         selectDivWrap={true}
       />
+      <div className="img_shower_wrap">
+        {currentType && 
+        <img src={currentType.showerImage}/>
+      }
+      </div>
 
       <SelectObjecTemplate
         title={"Тип скла"}
@@ -387,11 +418,18 @@ const ShowerCabin = () => {
             />
           </div>
           <div className="size_item">
-            <InputTemplate
+            <InputTemplateWithoutValidation
               placeholder={"Глибина"}
               onChangeFunc={setDepthValue}
               value={depthValue}
-              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+          </div>
+          <div className="size_item">
+            <InputTemplateWithoutValidation
+              placeholder={"Глибина"}
+              onChangeFunc={setDepthSecondValue}
+              value={depthSecondValue}
               inputClass={"input_miroor_item cabel"}
             />
           </div>

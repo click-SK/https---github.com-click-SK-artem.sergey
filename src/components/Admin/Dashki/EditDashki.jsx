@@ -35,7 +35,6 @@ const EditDashki = () => {
             setCurrentObject(data[0]);
           })
           .catch((error) => console.error(error));
-        console.log('WORK&&&&');
       },[isFtch]);
 
       const handleAddNewFurniture = () => {

@@ -3,7 +3,7 @@ import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import '../../../style/admin.scss'
 import "../../../style/edir-shower.scss";
 
-const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, updateGoodsPath, deleteGoodsPath, setIsFetch}) => {
+const EditClientStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, updateGoodsPath, deleteGoodsPath, setIsFetch}) => {
   const [isEditGood, setIsEditGood] = useState(false);
   const [goodsNameValue, setGoodNameValue] = useState("");
   const [goodsPriceValue, setGoodPriceValue] = useState("");
@@ -41,7 +41,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
     formData.append('name',el.name);
     formData.append('price',el.price);
 
-    fetch('https://calc-shower.herokuapp.com/update-mirror-standart-goods-image', {
+    fetch('https://calc-shower.herokuapp.com/update-client-mirror-standart-goods-image', {
       method: 'PATCH',
       body: formData
     })
@@ -120,8 +120,8 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
         />
       }
 
-<div className="img_shower_wrap_admin">          
-      {imageSrc ? (
+<div className="img_shower_wrap_admin">
+{imageSrc ? (
         <img src={imageSrc} />
         
       ) : (
@@ -167,4 +167,4 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
   );
 };
 
-export default EditStandartMirrorsGoods;
+export default EditClientStandartMirrorsGoods;

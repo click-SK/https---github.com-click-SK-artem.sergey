@@ -8,6 +8,7 @@ import O_EditTypeTemplate from "../EditTemplate/O_EditTypeTemplate";
 import O_EditSizeTemplate from "../EditTemplate/O_EditSizeTemplate";
 import O_EditProcessingStandartTempalte from "../EditTemplate/O_EditProcessingStandartTempalte";
 import O_EditProcessingСutoutTempalte from "../EditTemplate/O_EditProcessingСutoutTempalte";
+import EditShowerTypeWithFurniture from '../Shower/EditShowerTypeWithFurniture';
 import AdminHeader from '../AdminHeader';
 const EditShower = () => {
   const [currentObject, setCurrentObject] = useState({});
@@ -43,7 +44,6 @@ const EditShower = () => {
   }, [isFtch]);
 
   const handleAddNewFurniture = () => {
-    console.log("new furniture");
     fetch("https://calc-shower.herokuapp.com/add-new-furniture", {
       method: "PATCH",
       headers: {
@@ -351,16 +351,16 @@ const EditShower = () => {
       {currentObject?.type &&
         showTypeBlock &&
         currentObject.type.map((el, idx) => (
-          <>
-            <O_EditTypeTemplate
+            <EditShowerTypeWithFurniture
             el={el}
+            allFurniture={currentObject?.furniture}
             key={idx}
+            idx={idx}
             showerId={currentObject._id}
             setIsFetch={setIsFetch}
             pathDelete="https://calc-shower.herokuapp.com/remove-shower-type"
             pathEdit="https://calc-shower.herokuapp.com/update-shower-type"
           />
-          </>
         ))}
       {currentObject?.type && showTypeBlock && (
         <>

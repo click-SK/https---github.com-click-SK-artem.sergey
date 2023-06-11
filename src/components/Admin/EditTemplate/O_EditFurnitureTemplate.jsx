@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AiFillEdit, AiFillCloseCircle, AiFillDelete } from "react-icons/ai";
 import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs';
 import O_EditFurnitureDepends from "./O_EditFurnitureDepends";
@@ -19,6 +19,16 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
   const [furnitureColorName, setFurnitureColorName] = useState('')
   const [furnitureColorPrice, setFurnitureColorPrice] = useState('');
   const inputFileRef = useRef(null);
+
+  console.log('partitionsTypeValue',partitionsTypeValue);
+
+  // useEffect(() => {  
+  //   if(el?.partitionsType == "Відкривна") { 
+  //     setPartitionsTypevalue("Відкривна");
+  //   } else {
+  //     setPartitionsTypevalue("Розсувна");
+  //   }
+  // },[el])
 
   const handleEdit = () => {
     setIsEdit((isEdit) => !isEdit)
@@ -159,112 +169,184 @@ const O_EditFurnitureTemplate = ({ el, showerId, furnitureIdx,
     reader.readAsDataURL(e.target.files[0]);
 }
 
-console.log('el',el);
+console.log('el',el?.partitionsType);
 
   
   return (
     <>
       <div className="furniture_edit_block">
         <div className="main_img_wrap">
-        <img src={`${el.mainImage}`} className="main_img"/>
+          <img src={`${el.mainImage}`} className="main_img" />
         </div>
         <p>{el.title}</p>
         <div className="main_img_wrap">
-        <img src={`${el.drawingImg}`} className="main_img"/>
+          <img src={`${el.drawingImg}`} className="main_img" />
         </div>
-        {!isEdit 
-        ?
-        <AiFillEdit style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
-        className="edit_icon"
-        onClick={handleEdit}
-      />
-        :
-        <AiFillCloseCircle style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
-        className="edit_icon"
-        onClick={handleEdit}
-      />
-        }
+        {!isEdit ? (
+          <AiFillEdit
+            style={{
+              cursor: "pointer",
+              width: "auto",
+              height: "20px",
+              color: "rgb(44 44 44)",
+            }}
+            className="edit_icon"
+            onClick={handleEdit}
+          />
+        ) : (
+          <AiFillCloseCircle
+            style={{
+              cursor: "pointer",
+              width: "auto",
+              height: "20px",
+              color: "rgb(44 44 44)",
+            }}
+            className="edit_icon"
+            onClick={handleEdit}
+          />
+        )}
         {!isFurniture ? (
-          <BsFillArrowDownCircleFill style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
+          <BsFillArrowDownCircleFill
+            style={{
+              cursor: "pointer",
+              width: "auto",
+              height: "20px",
+              color: "rgb(44 44 44)",
+            }}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         ) : (
-          <BsFillArrowUpCircleFill style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}
+          <BsFillArrowUpCircleFill
+            style={{
+              cursor: "pointer",
+              width: "auto",
+              height: "20px",
+              color: "rgb(44 44 44)",
+            }}
             onClick={() => setIsFurniture((isFurniture) => !isFurniture)}
           />
         )}
-        <AiFillDelete onClick={handleDeleteFurniture} style={{cursor:'pointer',width:'auto', height:'20px', color:'rgb(44 44 44)'}}/>
+        <AiFillDelete
+          onClick={handleDeleteFurniture}
+          style={{
+            cursor: "pointer",
+            width: "auto",
+            height: "20px",
+            color: "rgb(44 44 44)",
+          }}
+        />
       </div>
       {isEdit && (
         <div className="edit_furniture">
-          <div >
           <div>
-            <button onClick={() => inputFileRef.current.click()}>Змінити фото</button>
-          </div>
-          <div>
-          <button onClick={handleEditMainImage}>Підтвердити зміни</button>
-          </div>
-          </div>
-          <input type='file'
-                        hidden
-                        ref={inputFileRef}
-                        onChange={changeFunc}
-                    />
-          <div>
-            <p>Змінити заголовок</p>
-            <input className="edit_name" value={titleValue} onChange={(e) => setTitlevalue(e.target.value)}/>
-            {isGlassPartition &&
-            <>
-            <p>Змінити тип</p>
-            <input className="edit_name" value={partitionsTypeValue} onChange={(e) => setPartitionsTypevalue(e.target.value)}/>
-            </>
-            }
             <div>
-            <button onClick={handleEditFurnitureTitle}>Підтвердити зміни</button>
+              <button onClick={() => inputFileRef.current.click()}>
+                Змінити фото
+              </button>
+            </div>
+            <div>
+              <button onClick={handleEditMainImage}>Підтвердити зміни</button>
             </div>
           </div>
-          <div >
+          <input type="file" hidden ref={inputFileRef} onChange={changeFunc} />
           <div>
-            <button onClick={() => inputFileRef.current.click()}>Змінити фото</button>
+            <p>Змінити заголовок</p>
+            <input
+              className="edit_name"
+              value={titleValue}
+              onChange={(e) => setTitlevalue(e.target.value)}
+            />
+            {isGlassPartition && (
+              <>
+                <p>Змінити тип</p>
+                {/* {el?.partitionsType == "Відкривна" ? (
+                  <select
+                    onChange={(e) => setPartitionsTypevalue(e.target.value)}
+                  >
+                    <option value={"Відкривна"}>Відкривна</option>
+                    <option value={"Розсувна"}>Розсувна</option>
+                  </select>
+                ) : (
+                  <select
+                    onChange={(e) => setPartitionsTypevalue(e.target.value)}
+                  >
+                    <option value={"Розсувна"}>Розсувна</option>
+                    <option value={"Відкривна"}>Відкривна</option>
+                  </select>
+                )} */}
+                <input className="edit_name" value={partitionsTypeValue}/>
+              </>
+            )}
+            <div>
+              <button onClick={handleEditFurnitureTitle}>
+                Підтвердити зміни
+              </button>
+            </div>
           </div>
           <div>
-          <button onClick={handleEditSecondImage}>Підтвердити зміни</button>
-          </div>
+            <div>
+              <button onClick={() => inputFileRef.current.click()}>
+                Змінити фото
+              </button>
+            </div>
+            <div>
+              <button onClick={handleEditSecondImage}>Підтвердити зміни</button>
+            </div>
           </div>
           {/* <button onClick={handleEditMainImage}>Підтвердити зміни</button> */}
         </div>
       )}
       {isFurniture && (
         <div className="edit_item">
-          <div className="edit_title" >
+          <div className="edit_title">
             <h3>Редагування підзаголовків:</h3>
-            {el?.depends.map((item,idx) => (
-              <O_EditFurnitureDepends key={idx} idx={furnitureIdx} 
-              fullArray={el?.depends} el={item} showerId={showerId} 
-              showerFurnitureId={el._id}
-              setIsFetch={setIsFetch}
-              pathUpdateFurnituredepends={pathUpdateFurnituredepends}
-              pathDeleteFurnituredepends={pathDeleteFurnituredepends}
+            {el?.depends.map((item, idx) => (
+              <O_EditFurnitureDepends
+                key={idx}
+                idx={furnitureIdx}
+                fullArray={el?.depends}
+                el={item}
+                showerId={showerId}
+                showerFurnitureId={el._id}
+                setIsFetch={setIsFetch}
+                pathUpdateFurnituredepends={pathUpdateFurnituredepends}
+                pathDeleteFurnituredepends={pathDeleteFurnituredepends}
               />
-
             ))}
-            <input placeholder="Назва" value={newValueDepends} onChange={(e) => setNewValueDepends(e.target.value)}/>
+            <input
+              placeholder="Назва"
+              value={newValueDepends}
+              onChange={(e) => setNewValueDepends(e.target.value)}
+            />
             <button onClick={handleAddNewDepends}>Додати новий</button>
           </div>
           <div className="edit_color">
             <h3>Редагування кольорів та цін:</h3>
             {el.colorsFurniture.map((item, idx) => (
-                <O_EditFurnitureColorAndPrice key={idx} item={item} 
-                showerFurnitureId={el._id} showerId={showerId}
+              <O_EditFurnitureColorAndPrice
+                key={idx}
+                item={item}
+                showerFurnitureId={el._id}
+                showerId={showerId}
                 setIsFetch={setIsFetch}
                 pathUpdateFurnitureColors={pathUpdateFurnitureColors}
                 pathDeleteFurnitureColors={pathDeleteFurnitureColors}
-                />
+              />
             ))}
             <div className="add_new_color">
-              <input placeholder="Назва" value={furnitureColorName} onChange={(e) => setFurnitureColorName(e.target.value)}/>
-              <input placeholder="Ціна" value={furnitureColorPrice} onChange={(e) => setFurnitureColorPrice(e.target.value)}/>
-              <button onClick={handleAddNewColorsFurniture}>Додати новий</button>
+              <input
+                placeholder="Назва"
+                value={furnitureColorName}
+                onChange={(e) => setFurnitureColorName(e.target.value)}
+              />
+              <input
+                placeholder="Ціна"
+                value={furnitureColorPrice}
+                onChange={(e) => setFurnitureColorPrice(e.target.value)}
+              />
+              <button onClick={handleAddNewColorsFurniture}>
+                Додати новий
+              </button>
             </div>
           </div>
         </div>

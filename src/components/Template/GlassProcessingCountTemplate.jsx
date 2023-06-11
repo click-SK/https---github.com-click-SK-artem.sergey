@@ -9,8 +9,6 @@ const GlassProcessingCountTemplate = ({
   title
 }) => {
 
-  console.log("currentArr", currentArr);
-
   return (
     <div>
       <h1>{title}</h1>

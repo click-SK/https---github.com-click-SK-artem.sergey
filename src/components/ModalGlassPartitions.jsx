@@ -14,7 +14,6 @@ const ModalGlassPartitions = ({ isOpen, onClose, furnitureProps, currentPartitio
   }, [furnitureProps, currentPartitions]);
   
     if (!isOpen) return null;
-    console.log('furnitureProps',furnitureProps);
     return (
         <div className="modal-overlay">
           <div className="modal">

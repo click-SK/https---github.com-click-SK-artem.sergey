@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/modal.scss";
+import "../../style/modal.scss";
 import DispalayModalItems from "./DispalayModalItems";
 import {AiOutlineClose} from 'react-icons/ai';
 

@@ -4,7 +4,9 @@ import "../../style/mirrors.scss";
 import { useSelector, useDispatch } from "react-redux";
 import DeliveryTemplate from "../DeliveryTemplate";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
+import SelectObjecTemplateAndPhoto from "../Template/SelectObjecTemplateAndPhoto";
 import InputTemplate from "../Template/InputTemplate";
+import InputTemplateWithoutValidation from "../Template/InputTemplateWithoutValidation";
 import ClientFooter from "../Template/ClientFooter";
 import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 
@@ -64,11 +66,11 @@ const ClientStandartMirrors = ({ data }) => {
   }, []);
 
   const calcTotalSumFunc = () => {
-    if ((sizeWidthMirrors && sizeWidthMirrors >= 0) && (sizeHeightMirrors && sizeWidthMirrors >= 0)) {
+    if ((sizeWidthMirrors && sizeWidthMirrors >= 0) && currentType?.name != "Круглі" ? (sizeHeightMirrors && sizeHeightMirrors >= 0) : true) {
       setValidationInput(false);
       const priceMeterCord = data?.option?.cord?.price;
 
-      const calcSize = Number(sizeWidthMirrors) * Number(sizeHeightMirrors);
+      const calcSize = currentType?.name != "Круглі" ? (Number(sizeWidthMirrors) * Number(sizeHeightMirrors)) : (Number(sizeWidthMirrors) * 2);
       const calcSquareMeter = calcSize / 1000000;
       const warmedUpPrice = data?.option?.warmedUp?.price;
 
@@ -193,8 +195,7 @@ const ClientStandartMirrors = ({ data }) => {
   };
 
   const selectGoodsFunc = (e) => {
-    const selectedGoods = JSON.parse(e.target.value);
-    setCurrentGoods(selectedGoods);
+    setCurrentGoods(e);
   };
 
   const selectFrameFunc = (e) => {
@@ -273,13 +274,19 @@ const ClientStandartMirrors = ({ data }) => {
         wrapClass={"choose_item item_mirrors"}
       />
 
-      <SelectObjecTemplate
+      <SelectObjecTemplateAndPhoto
         title={"Тип:"}
         changeFunc={selectGoodsFunc}
         state={currentGoods}
         data={currentTypeArray}
         wrapClass={"choose_item item_mirrors"}
       />
+
+<div className="img_standart_mirror_wrap">
+        {currentGoods != null && 
+        <img src={currentGoods.mirrorsImage}/>
+      }
+      </div>
 
       <div className="choose_item item_mirrors">
         <h3>Розмір (мм)</h3>
@@ -291,13 +298,22 @@ const ClientStandartMirrors = ({ data }) => {
             validationInput={validationInput}
             inputClass={"input_miroor_item cabel"}
           />
-          <InputTemplate
+          {currentType?.name != "Круглі" ? 
+            <InputTemplate
+              placeholder={"Висота"}
+              onChangeFunc={setSizeHeightMirrors}
+              value={sizeHeightMirrors}
+              validationInput={validationInput}
+              inputClass={"input_miroor_item cabel"}
+            />
+            :
+            <InputTemplateWithoutValidation
             placeholder={"Висота"}
             onChangeFunc={setSizeHeightMirrors}
             value={sizeHeightMirrors}
-            validationInput={validationInput}
-            inputClass={"input_miroor_item cabel"}
+            inputClass={"input_miroor_item cabel dispaly_none"}
           />
+          }
         </div>
       </div>
 

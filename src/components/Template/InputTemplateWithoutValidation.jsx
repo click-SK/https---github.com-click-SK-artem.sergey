@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-const InputTemplate = ({placeholder, onChangeFunc, value, validationInput, inputClass}) => {
+const InputTemplateWithoutValidation = ({placeholder, onChangeFunc, value, inputClass}) => {
   const [validationValues, setValidationValues] = useState(0);
   if(value < 0) {
     console.log('ERROR',value);
   }
-  
+
     return (
           <div>
             <input
@@ -16,10 +16,6 @@ const InputTemplate = ({placeholder, onChangeFunc, value, validationInput, input
               onChange={(e) => onChangeFunc(e.target.value)}
             />
             <p style={{ color: "red" }}>
-              {validationInput &&
-                "Введіть данні"}
-            </p>
-            <p style={{ color: "red" }}>
               {value < 0 && "Значення не може бути менше 0"}
             </p>
             <p style={{ color: "red" }}>
@@ -29,4 +25,4 @@ const InputTemplate = ({placeholder, onChangeFunc, value, validationInput, input
     );
 };
 
-export default InputTemplate;
+export default InputTemplateWithoutValidation;

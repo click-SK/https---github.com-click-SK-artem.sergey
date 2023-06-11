@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../style/modal.scss";
-import DispalayModalItems from "./DispalayModalItems";
+import DispalayModalItems from "./Furniture/DispalayModalItems";
 import {AiOutlineClose} from 'react-icons/ai';
 
 const ModalAllFurniture = ({ isOpen, onClose, furnitureProps }) => {

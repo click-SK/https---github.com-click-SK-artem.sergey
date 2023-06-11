@@ -252,9 +252,6 @@ const EditStandartMirrors = () => {
     setshowProcessingСutoutBlock(true);
   };
 
-
-  console.log('currentObject[idxType].type.name',currentObject?.type && currentObject?.type[1]?.name);
-
   return (
     <div>
       <AdminHeader/>

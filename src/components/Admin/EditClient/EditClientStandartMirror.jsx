@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../../../style/admin.scss'
 import '../../../style/edir-shower.scss';
-import EditStandartMirrorsType from "../Mirrors/EditStandartMirrorsType";
+import EditClientStandartMirrorsType from "./EditClientStandartMirrorsType";
 import O_NamePriceTemplate from "../EditTemplate/O_NamePriceTemplate";
 import O_EditPriceTemplate from "../EditTemplate/O_EditPriceTemplate";
 import AdminHeader from '../AdminClientHeader';
@@ -26,7 +26,7 @@ const EditClientStandartMirror = () => {
             </div>
         {showTypeBlock && currentObject?.typeWordpress &&
         currentObject?.typeWordpress.map((item, idxType) => (
-          <EditStandartMirrorsType key={idxType} idxType={idxType} item={item} 
+          <EditClientStandartMirrorsType key={idxType} idxType={idxType} item={item} 
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
           setIsFetch={setIsFetch}

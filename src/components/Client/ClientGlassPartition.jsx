@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalGlassPartitions from "./../ModalGlassPartitions";
-import ListTheChoseFurniture from "./../ListTheChoseFurniture";
+import ListTheChoseFurniture from "../Furniture/ListTheChoseFurniture";
 import PdfFile from "./../PdfFile/PdfFilePartitionManager";
 import PdfFileClient from "./../PdfFile/PdfFilePartitionClient";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -10,6 +10,7 @@ import DeliveryTemplate from "../DeliveryTemplate";
 import ClientFooter from "../Template/ClientFooter";
 import SelectObjecTemplate from "../Template/SelectObjecTemplate";
 import InputTemplate from "../Template/InputTemplate";
+import InputTemplateWithoutValidation from "../Template/InputTemplateWithoutValidation";
 import ButtonGobackAndTitle from "../ButtonGobackAndTitle";
 import "../../style/shower.scss";
 
@@ -329,11 +330,10 @@ const ClientGlassPartition = () => {
             />
           </div>
           <div className="size_item">
-            <InputTemplate
+            <InputTemplateWithoutValidation
               placeholder={"Глибина"}
               onChangeFunc={setDepthValue}
               value={depthValue}
-              validationInput={validationInput}
               inputClass={"input_miroor_item cabel"}
             />
           </div>
