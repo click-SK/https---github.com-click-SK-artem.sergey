@@ -56,7 +56,7 @@ const EditClientCosmeticMirror = () => {
                 setIsFetch={setIsFetch}
                 pathEdit='https://calc-shower.herokuapp.com/update-client-cosmetic-mirrors-type'
                 pathDelete='https://calc-shower.herokuapp.com/remove-client-cosmetic-mirrors-type'
-                pathEditPhoto='update-client-cosmetic-mirrors-type-image'/>
+                pathEditPhoto='https://calc-shower.herokuapp.com/update-client-cosmetic-mirrors-type-image'/>
             ))
             }
             {showTypeBlock && 
