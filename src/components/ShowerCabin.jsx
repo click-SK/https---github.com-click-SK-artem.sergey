@@ -365,6 +365,7 @@ const ShowerCabin = () => {
 
   }
 
+  
 
   return (
     <div className="shower_wrapper">
@@ -542,6 +543,7 @@ const ShowerCabin = () => {
                   document={<PdfFile 
                   order={finishedShowerPdf} 
                   cart={cart} 
+                  img={currentType.showerImage}
                   glassProcessingCountArr = {glassProcessingCountArr}
                   glassProcessingArr = {glassProcessingArr}
                   />}
@@ -557,7 +559,10 @@ const ShowerCabin = () => {
                 <PDFDownloadLink
                   className="print print_client"
                   style={{ fontSize: 14 }}
-                  document={<PdfFileClient order={finishedShowerPdf} />}
+                  document={<PdfFileClient 
+                    order={finishedShowerPdf}
+                    img={currentType.showerImage}
+                     />}
                   fileName={`Душові кабіни клієнт ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")

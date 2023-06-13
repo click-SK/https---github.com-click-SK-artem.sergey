@@ -567,6 +567,7 @@ const StandartMirrors = ({ data }) => {
                   style={{ fontSize: 14 }}
                   document={<PdfFile 
                     order={finishMirrorPdf}
+                    img={currentGoods.mirrorsImage}
                     glassProcessingCountArr = {glassProcessingCountArr} 
                     />}
                   fileName={`Дзеркала менеджер ${new Date()
@@ -581,7 +582,9 @@ const StandartMirrors = ({ data }) => {
                 <PDFDownloadLink
                   className="print print_client"
                   style={{ fontSize: 14 }}
-                  document={<PdfFileClient order={finishMirrorPdf} />}
+                  document={<PdfFileClient 
+                    img={currentGoods.mirrorsImage}
+                    order={finishMirrorPdf} />}
                   fileName={`Дзеркала клієнт ${new Date()
                     .toLocaleString()
                     .replaceAll("/", "-")
