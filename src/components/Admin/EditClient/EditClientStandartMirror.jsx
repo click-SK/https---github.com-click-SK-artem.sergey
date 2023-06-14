@@ -10,7 +10,7 @@ const EditClientStandartMirror = () => {
   const [showTypeBlock, setShowTypeBlock] = useState(true);
   const [isFtch, setIsFetch] = useState(false);
   useEffect(() => {
-    fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
+    fetch("https://sklo-expert.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -30,10 +30,10 @@ const EditClientStandartMirror = () => {
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          updateTypePath='https://calc-shower.herokuapp.com/update-client-type'
-          addNewGoodsPath='https://calc-shower.herokuapp.com/add-new-client-goods'
-          updateGoodsPath='https://calc-shower.herokuapp.com/update-client-goods'
-          deleteGoodsPath='https://calc-shower.herokuapp.com/remove-client-mirror-goods'/>
+          updateTypePath='https://sklo-expert.herokuapp.com/update-client-type'
+          addNewGoodsPath='https://sklo-expert.herokuapp.com/add-new-client-goods'
+          updateGoodsPath='https://sklo-expert.herokuapp.com/update-client-goods'
+          deleteGoodsPath='https://sklo-expert.herokuapp.com/remove-client-mirror-goods'/>
         ))}
     </div>
   );

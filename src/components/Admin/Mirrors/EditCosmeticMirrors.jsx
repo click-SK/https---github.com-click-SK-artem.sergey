@@ -22,7 +22,7 @@ const EditCosmeticMirrors = () => {
     const [isFtch, setIsFetch] = useState(false);
     
     useEffect(() => {
-        fetch("https://calc-shower.herokuapp.com/get-all-cosmetic-mirrors")
+        fetch("https://sklo-expert.herokuapp.com/get-all-cosmetic-mirrors")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -31,7 +31,7 @@ const EditCosmeticMirrors = () => {
       }, [isFtch]);
 
       const handleAddNewProcessingСutout = () => {
-        fetch('https://calc-shower.herokuapp.com/add-new-cosmetic-mirrors-processing-cutout', {
+        fetch('https://sklo-expert.herokuapp.com/add-new-cosmetic-mirrors-processing-cutout', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const EditCosmeticMirrors = () => {
       }
 
       const handleAddNewType = () => {    
-        fetch('https://calc-shower.herokuapp.com/add-new-cosmetic-mirrors-type', {
+        fetch('https://sklo-expert.herokuapp.com/add-new-cosmetic-mirrors-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -127,8 +127,8 @@ const EditCosmeticMirrors = () => {
             {showProcessingСutoutBlock && currentObject.processingСutout && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-processing-cutout'
-                pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-processing-cutout'/>
+                pathEdit='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-processing-cutout'
+                pathDelete='https://sklo-expert.herokuapp.com/remove-cosmetic-mirrors-processing-cutout'/>
             ))
             }
             {showProcessingСutoutBlock && 
@@ -142,9 +142,9 @@ const EditCosmeticMirrors = () => {
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeAndPhotoTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-type'
-                pathDelete='https://calc-shower.herokuapp.com/remove-cosmetic-mirrors-type'
-                pathEditPhoto='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-type-image'/>
+                pathEdit='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-type'
+                pathDelete='https://sklo-expert.herokuapp.com/remove-cosmetic-mirrors-type'
+                pathEditPhoto='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-type-image'/>
             ))
             }
             {showTypeBlock && 
@@ -158,14 +158,14 @@ const EditCosmeticMirrors = () => {
             {showSizeBlock && currentObject.size.map((el, idx) => (
                 <O_EditSizeTemplate el={el} key={idx}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-size'/>
+                pathEdit='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-size'/>
             ))
             }
 
             {showLightBulbsBlock &&
                 <N_EditLightBulsTemplate
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-light-bulbs'
+                pathEdit='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-light-bulbs'
                 currentValue={currentObject.lightBulbs}
                 showerId={currentObject._id}/>
             }
@@ -173,7 +173,7 @@ const EditCosmeticMirrors = () => {
             {showPatronBlock &&
                 <N_EditPatronTemplate
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-cosmetic-mirrors-patron'
+                pathEdit='https://sklo-expert.herokuapp.com/update-cosmetic-mirrors-patron'
                 currentValue={currentObject.patron}
                 showerId={currentObject._id}/>
             }

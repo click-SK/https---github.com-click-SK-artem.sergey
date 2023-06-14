@@ -29,7 +29,7 @@ const EditStandartMirrors = () => {
   const [newValueProcessingСutoutName, setNewValueProcessingСutoutName] = useState('');
   const [newValueProcessingСutoutPrice, setNewValueProcessingСutoutPrice] = useState('');
   useEffect(() => {
-    fetch("https://calc-shower.herokuapp.com/get-all-standart-mirrors")
+    fetch("https://sklo-expert.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -38,7 +38,7 @@ const EditStandartMirrors = () => {
   }, [isFtch]);
 
   const handleAddNewColor = () => {    
-    fetch('https://calc-shower.herokuapp.com/add-new-mirror-color', {
+    fetch('https://sklo-expert.herokuapp.com/add-new-mirror-color', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ const EditStandartMirrors = () => {
 
   
   const handleAddNewSwitch = () => {    
-    fetch('https://calc-shower.herokuapp.com/add-new-mirror-switch', {
+    fetch('https://sklo-expert.herokuapp.com/add-new-mirror-switch', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ const EditStandartMirrors = () => {
   }
 
   const handleAddNewBackLight = () => {    
-    fetch('https://calc-shower.herokuapp.com/add-new-mirror-backlight', {
+    fetch('https://sklo-expert.herokuapp.com/add-new-mirror-backlight', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ const EditStandartMirrors = () => {
   }
 
   const handleAddNewFrame = () => {    
-    fetch('https://calc-shower.herokuapp.com/add-new-mirror-frame', {
+    fetch('https://sklo-expert.herokuapp.com/add-new-mirror-frame', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ const EditStandartMirrors = () => {
   }
 
   const handleAddNewProcessingСutout = () => {
-    fetch('https://calc-shower.herokuapp.com/add-new-standart-mirror-processing-cutout', {
+    fetch('https://sklo-expert.herokuapp.com/add-new-standart-mirror-processing-cutout', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -272,17 +272,17 @@ const EditStandartMirrors = () => {
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          updateTypePath='https://calc-shower.herokuapp.com/update-type'
-          addNewGoodsPath='https://calc-shower.herokuapp.com/add-new-goods'
-          updateGoodsPath='https://calc-shower.herokuapp.com/update-goods'
-          deleteGoodsPath='https://calc-shower.herokuapp.com/remove-mirror-goods'/>
+          updateTypePath='https://sklo-expert.herokuapp.com/update-type'
+          addNewGoodsPath='https://sklo-expert.herokuapp.com/add-new-goods'
+          updateGoodsPath='https://sklo-expert.herokuapp.com/update-goods'
+          deleteGoodsPath='https://sklo-expert.herokuapp.com/remove-mirror-goods'/>
         ))}
         {showFrameBlock && 
         currentObject?.option?.frame.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          pathEdit='https://calc-shower.herokuapp.com/update-mirror-frame'
-          pathDelete='https://calc-shower.herokuapp.com/remove-mirror-frame'/>
+          pathEdit='https://sklo-expert.herokuapp.com/update-mirror-frame'
+          pathDelete='https://sklo-expert.herokuapp.com/remove-mirror-frame'/>
         ))}
             {showFrameBlock && 
             <>
@@ -296,8 +296,8 @@ const EditStandartMirrors = () => {
         currentObject?.option?.backLight.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          pathEdit='https://calc-shower.herokuapp.com/update-mirror-backlight'
-          pathDelete='https://calc-shower.herokuapp.com/remove-mirror-backlight'/>
+          pathEdit='https://sklo-expert.herokuapp.com/update-mirror-backlight'
+          pathDelete='https://sklo-expert.herokuapp.com/remove-mirror-backlight'/>
         ))}
             {showBackLightBlock && 
             <>
@@ -311,8 +311,8 @@ const EditStandartMirrors = () => {
         currentObject?.option?.switch.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          pathEdit='https://calc-shower.herokuapp.com/update-mirror-switch'
-          pathDelete='https://calc-shower.herokuapp.com/remove-mirror-switch'/>
+          pathEdit='https://sklo-expert.herokuapp.com/update-mirror-switch'
+          pathDelete='https://sklo-expert.herokuapp.com/remove-mirror-switch'/>
         ))}
             {showSwitchBlock && 
             <>
@@ -326,8 +326,8 @@ const EditStandartMirrors = () => {
         currentObject?.option?.color.map((el, idx) => (
           <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          pathEdit='https://calc-shower.herokuapp.com/update-mirror-color'
-          pathDelete='https://calc-shower.herokuapp.com/remove-mirror-color'/>
+          pathEdit='https://sklo-expert.herokuapp.com/update-mirror-color'
+          pathDelete='https://sklo-expert.herokuapp.com/remove-mirror-color'/>
         ))}
             {showColorsBlock && 
             <>
@@ -339,27 +339,27 @@ const EditStandartMirrors = () => {
             {showCordBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.cord}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-mirror-cord-price'
+                pathEdit='https://sklo-expert.herokuapp.com/update-mirror-cord-price'
                 showerId={currentObject?._id}/>
             }
             
             {showWarmedUpBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.warmedUp}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-mirror-warmed-up-price'
+                pathEdit='https://sklo-expert.herokuapp.com/update-mirror-warmed-up-price'
                 showerId={currentObject?._id}/>
             }
 
             {showPaintingBlock &&
                 <O_EditPriceTemplate el={currentObject?.option?.painting}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-mirror-painting-price'
+                pathEdit='https://sklo-expert.herokuapp.com/update-mirror-painting-price'
                 showerId={currentObject?._id}/>
             }
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://calc-shower.herokuapp.com/update-standart-mirror-processing-cutout'
-                pathDelete='https://calc-shower.herokuapp.com/remove-standart-mirror-processing-cutout'
+                pathEdit='https://sklo-expert.herokuapp.com/update-standart-mirror-processing-cutout'
+                pathDelete='https://sklo-expert.herokuapp.com/remove-standart-mirror-processing-cutout'
                 setIsFetch={setIsFetch}/>
             ))
             }

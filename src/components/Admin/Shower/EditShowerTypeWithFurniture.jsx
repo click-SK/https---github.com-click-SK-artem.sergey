@@ -94,7 +94,7 @@ const EditShowerTypeWithFurniture = ({el,showerId, pathDelete, pathEdit, setIsFe
         formData.append('typeId',el?._id);
         formData.append('showerId',showerId);
     
-        fetch('https://calc-shower.herokuapp.com/update-shower-type-image', {
+        fetch('https://sklo-expert.herokuapp.com/update-shower-type-image', {
           method: 'PATCH',
           body: formData
         })

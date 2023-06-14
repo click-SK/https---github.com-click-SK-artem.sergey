@@ -17,7 +17,7 @@ const EditShowerClient = () => {
     const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
-        fetch("https://calc-shower.herokuapp.com/get-all-shower")
+        fetch("https://sklo-expert.herokuapp.com/get-all-shower")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -26,7 +26,7 @@ const EditShowerClient = () => {
       }, [isFtch]);
 
       const handleAddNewType = () => {    
-        fetch('https://calc-shower.herokuapp.com/add-new-shower-client-type', {
+        fetch('https://sklo-expert.herokuapp.com/add-new-shower-client-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ const EditShowerClient = () => {
       }
 
       const handleAddNewHandleDors = () => {    
-        fetch('https://calc-shower.herokuapp.com/add-new-shower-handle-dors', {
+        fetch('https://sklo-expert.herokuapp.com/add-new-shower-handle-dors', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -87,8 +87,8 @@ const EditShowerClient = () => {
             {showTypeBlock && currentObject.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_NamePricePhotoTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-shower-client-type'
-                pathDelete='https://calc-shower.herokuapp.com/remove-shower-client-type'/>
+                pathEdit='https://sklo-expert.herokuapp.com/update-shower-client-type'
+                pathDelete='https://sklo-expert.herokuapp.com/remove-shower-client-type'/>
             ))
             }
             {showTypeBlock && 
@@ -102,8 +102,8 @@ const EditShowerClient = () => {
             {showDorsHandlesBlock && currentObject.dorsHandles.map((el, idx) => (
                 <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://calc-shower.herokuapp.com/update-shower-handle-dors'
-                pathDelete='https://calc-shower.herokuapp.com/remove-shower-handle-dors'/>
+                pathEdit='https://sklo-expert.herokuapp.com/update-shower-handle-dors'
+                pathDelete='https://sklo-expert.herokuapp.com/remove-shower-handle-dors'/>
             ))
             }
             {showDorsHandlesBlock && 
