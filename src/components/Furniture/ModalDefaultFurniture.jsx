@@ -13,7 +13,7 @@ const ModalDefaultFurniture = ({ isOpen, onClose, defaultFurnitureProps, allFurn
   if (!isOpen) return null;
 
   const handleAddNewType = () => {    
-    fetch('https://calc-shower.herokuapp.com/update-default-furniture', {
+    fetch('https://sklo-expert.herokuapp.com/update-default-furniture', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'

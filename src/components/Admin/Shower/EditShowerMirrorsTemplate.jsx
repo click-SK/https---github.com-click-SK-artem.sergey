@@ -16,7 +16,7 @@ const EditShowerMirrorsTemplate = ({el, showerId, setIsFetch}) => {
       const handleEditButtonSave = () => {
         setIsEdit((isEdit) => !isEdit);
 
-        fetch('https://calc-shower.herokuapp.com/update-shower-color', {
+        fetch('https://sklo-expert.herokuapp.com/update-shower-color', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const EditShowerMirrorsTemplate = ({el, showerId, setIsFetch}) => {
       }
 
       const handleDelete = () => {
-        fetch('https://calc-shower.herokuapp.com/remove-shower-glass-thickness', {
+        fetch('https://sklo-expert.herokuapp.com/remove-shower-glass-thickness', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'

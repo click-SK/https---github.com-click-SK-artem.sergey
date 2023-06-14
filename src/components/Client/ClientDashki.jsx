@@ -60,7 +60,7 @@ const ClientDashki = () => {
   );
 
   useEffect(() => {
-    fetch("https://calc-shower.herokuapp.com/get-all-dashki")
+    fetch("https://sklo-expert.herokuapp.com/get-all-dashki")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -255,7 +255,7 @@ const ClientDashki = () => {
     }, 1000);
 
 
-    const response = await fetch('https://calc-shower.herokuapp.com/create-crm', {
+    const response = await fetch('https://sklo-expert.herokuapp.com/create-crm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
