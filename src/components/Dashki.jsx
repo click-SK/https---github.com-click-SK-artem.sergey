@@ -392,7 +392,7 @@ const Dashki = () => {
               <input
                 type="number"
                 placeholder="М/погонний"
-                value={vantaValue}
+                value={vantaValue < 0 ? 1 : vantaValue}
                 onChange={(e) => setVantaValue(e.target.value)}
               />
             </div>
@@ -420,7 +420,7 @@ const Dashki = () => {
               <input
                 type="number"
                 placeholder="Кількість"
-                value={depositoryValue}
+                value={depositoryValue < 0 ? 1 : depositoryValue}
                 onChange={(e) => setDepositoryValue(e.target.value)}
               />
             </div>

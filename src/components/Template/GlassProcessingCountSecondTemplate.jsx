@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const GlassProcessingCountSecondTemplate = ({item, setCurrentArr, currentArr}) => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState('');
 
     const setNewArrayFunc = (e) => {
         const foundIndex = currentArr.findIndex((el) => el.name === item.name);
@@ -37,7 +37,7 @@ const GlassProcessingCountSecondTemplate = ({item, setCurrentArr, currentArr}) =
           <input
             placeholder="Кількість"
             className="input_miroor_item cabel"
-            value={count}
+            value={count < 0 ? 1 : count}
             onChange={(e) => setNewCountFunc(e.target.value)}
           />
         </div>

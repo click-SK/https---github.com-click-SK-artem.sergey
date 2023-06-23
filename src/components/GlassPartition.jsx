@@ -413,7 +413,7 @@ const GlassPartition = () => {
       </div>
 
       <SelectObjecTemplate
-        title={"Виберіть тип"}
+        title={"Виберіть скло"}
         optionName={""}
         changeFunc={selectTypeFunc}
         state={currentType}

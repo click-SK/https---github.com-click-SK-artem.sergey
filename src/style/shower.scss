@@ -522,7 +522,7 @@ h1{
     width: 300px;
     overflow: hidden;
     position: fixed;
-    right: 14%;
+    right: 5%;
     top: 33%;
     z-index: 100;
     img{
@@ -629,3 +629,15 @@ h1{
     }
 }
 
+@media(max-width: 1470px) {
+    .img_shower_wrap {
+        right: 0;
+    }
+}
+@media(max-width: 1350px) {
+    .img_shower_wrap {
+        right: 0;
+        height: 200px;
+        width: 200px;
+    }
+}
