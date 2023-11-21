@@ -47,7 +47,7 @@ const ClientShower = () => {
   );
 
   useEffect(() => {
-    fetch("https://sklo-expert.herokuapp.com/get-all-shower")
+    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-shower")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -196,7 +196,7 @@ const ClientShower = () => {
     }, 1000);
 
 
-    const response = await fetch('https://sklo-expert.herokuapp.com/create-crm', {
+    const response = await fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/create-crm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ const EditDashki = () => {
 
 
     useEffect(() => {
-        fetch("https://sklo-expert.herokuapp.com/get-all-dashki")
+        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-dashki")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -38,7 +38,7 @@ const EditDashki = () => {
       },[isFtch]);
 
       const handleAddNewFurniture = () => {
-        fetch('https://sklo-expert.herokuapp.com/add-furniture', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const EditDashki = () => {
       }
 
       const handleAddNewType = () => {    
-        fetch('https://sklo-expert.herokuapp.com/add-new-dashki-type', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-dashki-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ const EditDashki = () => {
       }
 
       const handleAddNewColor = () => {
-        fetch('https://sklo-expert.herokuapp.com/add-new-dashki-color', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-dashki-color', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ const EditDashki = () => {
       }
 
       const handleAddNewProcessingStandart = () => {
-        fetch('https://sklo-expert.herokuapp.com/add-new-dashki-processing-standart', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-dashki-processing-standart', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ const EditDashki = () => {
       }
 
       const handleAddNewProcessingСutout = () => {
-        fetch('https://sklo-expert.herokuapp.com/add-new-dashki-processing-cutout', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-dashki-processing-cutout', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -208,23 +208,23 @@ const EditDashki = () => {
                 <O_EditFurnitureTemplate key={el.title} el={el} 
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathUpdateMainImg='https://sklo-expert.herokuapp.com/update-dashki-furniture-main-image'
-                pathUpdateSecondImg='https://sklo-expert.herokuapp.com/update-dashki-furniture-second-image'
-                pathUpdateTitle='https://sklo-expert.herokuapp.com/update-dashki-furniture-title'
-                pathAddNewDepends='https://sklo-expert.herokuapp.com/update-dashki-furniture-depends'
-                pathAddNewColors='https://sklo-expert.herokuapp.com/add-new-dashki-furniture-colors'
-                pathDeleteFurniture='https://sklo-expert.herokuapp.com/remove-dashki-furniture'
-                pathUpdateFurnitureColors='https://sklo-expert.herokuapp.com/update-furniture-color'
-                pathDeleteFurnitureColors='https://sklo-expert.herokuapp.com/remove-dashki-furniture-colors'
-                pathUpdateFurnituredepends='https://sklo-expert.herokuapp.com/update-dashki-furniture-depends'
-                pathDeleteFurnituredepends='https://sklo-expert.herokuapp.com/update-dashki-furniture-depends'
+                pathUpdateMainImg='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-main-image'
+                pathUpdateSecondImg='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-second-image'
+                pathUpdateTitle='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-title'
+                pathAddNewDepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-depends'
+                pathAddNewColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-dashki-furniture-colors'
+                pathDeleteFurniture='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-furniture'
+                pathUpdateFurnitureColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-furniture-color'
+                pathDeleteFurnitureColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-furniture-colors'
+                pathUpdateFurnituredepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-depends'
+                pathDeleteFurnituredepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-furniture-depends'
                 />
             ))}
             {showFurnitureBlock && <button className="add_new_furniture" onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert.herokuapp.com/update-dashki-type'
-                pathDelete='https://sklo-expert.herokuapp.com/remove-dashki-type'
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-type'
+                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-type'
                 setIsFetch={setIsFetch}/>
             ))
             }
@@ -237,14 +237,14 @@ const EditDashki = () => {
             }
             {showSizeBlock && currentObject.size.map((el, idx) => (
                 <O_EditSizeTemplate el={el} key={idx} 
-                pathEdit='https://sklo-expert.herokuapp.com/update-dashki-size'
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-size'
                 setIsFetch={setIsFetch}/>
             ))
             }
             {showColorBlock && currentObject.color.map((el, idx) => (
                 <O_EditColorTemplate el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert.herokuapp.com/update-dashki-color'
-                pathDelete='https://sklo-expert.herokuapp.com/remove-dashki-color'
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-color'
+                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-color'
                 setIsFetch={setIsFetch}/>
             ))
             }
@@ -257,8 +257,8 @@ const EditDashki = () => {
             }
           {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
                 <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert.herokuapp.com/update-dashki-processing-standart'
-                pathDelete='https://sklo-expert.herokuapp.com/remove-dashki-processing-standart'
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-processing-standart'
+                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-processing-standart'
                 setIsFetch={setIsFetch}/>
             ))
             }
@@ -271,8 +271,8 @@ const EditDashki = () => {
             }
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert.herokuapp.com/update-dashki-processing-cutout'
-                pathDelete='https://sklo-expert.herokuapp.com/remove-dashki-processing-cutout'
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-dashki-processing-cutout'
+                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-dashki-processing-cutout'
                 setIsFetch={setIsFetch}/>
             ))
             }
