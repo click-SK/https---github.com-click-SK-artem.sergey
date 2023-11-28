@@ -1,0 +1,53 @@
+// @import './styles/admin/global-template.scss';
+
+.login_wrap {
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+
+.login_block {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.input_wrap {
+    margin: 30px 0px;
+
+    input {
+        width: 500px;
+        height: 50px;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 2vh;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.login_button_wrap {
+    text-align: center
+}
+
+.login_button {
+    border: 1px solid transparent;
+    background: #3378FE;
+    border-radius: 7px;
+    color: white;
+    padding: 8px 45px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all;
+    font-weight: 600;
+
+    &:hover{
+        transition: 1s;
+        background-color: rgba(0, 0, 0, 0);
+        color: #3378FE;
+        border: 1px solid #3378FE;
+    }
+}
+
+.login_title {
+    font-size: 2vh;
+}

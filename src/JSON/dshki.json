@@ -1,0 +1,203 @@
+{
+    "name": "Душові кабіни",
+    "typeGlass": [
+      {
+        "name": "Скло 8 мм (без кольору)",
+        "price": 2600
+      },
+          {
+        "name": "Скло 10 мм (без кольору)",
+        "price": 3200
+      },
+              {
+        "name": "Триплекс (без кольору)",
+        "price": 0
+      },
+           {
+        "name": "Скло 8 мм (колір)",
+        "price": 0
+      },
+           {
+        "name": "Скло 10 мм (колір)",
+        "price": 0
+      },
+          {
+        "name": "Триплекс (колір)",
+        "price": 0
+      }
+    ],
+        "size": [
+          {
+        "name": "Ширина (в мм)",
+        "price": 0
+      },
+          {
+        "name": "Глибина (в мм)",
+        "price": 0
+      }
+    ],
+        "typeWordpress": [
+      {
+        "name": "Скло 8 мм (без кольору)",
+        "price": 2600
+      },
+          {
+        "name": "Скло 10 мм (без кольору)",
+        "price": 3200
+      },
+              {
+        "name": "Триплекс (без кольору)",
+        "price": 0
+      },
+           {
+        "name": "Скло 8 мм (колір)",
+        "price": 0
+      },
+           {
+        "name": "Скло 10 мм (колір)",
+        "price": 0
+      },
+          {
+        "name": "Триплекс (колір)",
+        "price": 0
+      }
+    ],
+        "size": [
+          {
+        "name": "Ширина (в мм)",
+        "price": 0
+      },
+          {
+        "name": "Глибина (в мм)",
+        "price": 0
+      }
+    ],
+    "color": [
+      {
+        "name": "Флот (8 мм)",
+        "price": 0
+      },
+              {
+        "name": "Флот (10 мм)",
+        "price": 0
+      },
+          {
+        "name": "Флот (триплекс)",
+        "price": 0
+      },
+          {
+        "name": "Бронза 8 мм",
+        "price": 3700
+      },
+          {
+        "name": "Бронза 10 мм",
+        "price": 4200
+      },
+          {
+        "name": "Бронза (триплекс)",
+        "price": 0
+      },
+          {
+        "name": "Графіт 8 мм",
+        "price": 3700
+      },
+          {
+        "name": "Графіт 10 мм",
+        "price": 4950
+      },
+          {
+        "name": "Графіт (триплекс)",
+        "price": 0
+      },
+          {
+        "name": "Діамант 8 мм",
+        "price": 3500
+      },
+          {
+        "name": "Діамант 10 мм",
+        "price": 4550
+      },
+          {
+        "name": "Діамант (триплекс)",
+        "price": 0
+      }
+    ],
+            "processingStandart": [
+      {
+        "name": "Матування",
+        "price": 300
+      },
+              {
+        "name": "Матування по плотеру",
+        "price": 500
+      },
+          {
+        "name": "Фарбування ",
+        "price": 600
+      },
+          {
+        "name": "Фарбування по плотеру",
+        "price": 1000
+      }
+    ],
+          "processingСutout": [
+          {
+        "name": "Отвір",
+        "price": 50,
+              "count": 1
+      },
+          {
+        "name": "Виріз",
+        "price": 100,
+              "count": 1
+      },
+          {
+        "name": "Виріз ЧПУ",
+        "price": 350,
+              "count": 1
+      }
+    ],
+      "vanta": 600,
+      "depository": {
+          "price": 350,
+          "count": 1
+      },
+    "furniture": [
+          {
+          "count": 1,
+          "mainImage": "url",
+          "title": "HDL-800-T1",
+          "drawingImg": "url",
+          "depends": ["Коннектор", "Стена-Стекло"],
+          "colorsFurniture": [{
+              "color": "SSS",
+              "price": 1000
+          }
+      ]
+      },
+          {
+          "count": 1,
+          "mainImage": "url",
+          "title": "HDL-800-T2",
+          "drawingImg": "url",
+          "depends": ["Коннектор", "Стена-Стекло"],
+          "colorsFurniture": [{
+              "color": "SSS",
+              "price": 920
+          }
+      ]
+      },
+                  {
+          "count": 1,
+          "mainImage": "url",
+          "title": "HDL-800-T3",
+          "drawingImg": "url",
+          "depends": ["Коннектор", "Стена-Стекло"],
+          "colorsFurniture": [{
+              "color": "SSS",
+              "price": 840
+          }
+      ]
+      }
+   ]
+  }

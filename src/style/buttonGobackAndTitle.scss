@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    // justify-content: center;
+}
+
+.wrapper_button {
+    display: flex;
+    width: 35%;
+    justify-content: start;
+    padding-left: 10px;
+}
+
+.wrapper_title {
+    display: flex;
+    width: 65%;
+    justify-content: start;
+}
+
+.button_go_back {
+    display: flex;
+    align-items: center;
+    p {
+        margin-left: 5px;
+    }
+}
