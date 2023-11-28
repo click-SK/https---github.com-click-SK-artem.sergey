@@ -1,0 +1,2009 @@
+{
+  "name": "Душові кабіни",
+  "type": [
+    {
+      "name": "Душова кабіна КD-3s",
+      "price": 2200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-4s",
+      "price": 2400,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна DR-2s",
+      "price": 1800,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КRD-3s",
+      "price": 1800,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КRD-4s",
+      "price": 2200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-135",
+      "price": 2300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КDR- 4",
+      "price": 2300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-2s",
+      "price": 1600,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна D-2s",
+      "price": 1600,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-2s",
+      "price": 1600,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-4s",
+      "price": 2500,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-135-3s",
+      "price": 2300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-135-3s",
+      "price": 2300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-135-4s",
+      "price": 2300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-3s",
+      "price": 2000,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-4s",
+      "price": 2200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-3s",
+      "price": 2000,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-3s",
+      "price": 2200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-3s",
+      "price": 2000,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Душова кабіна КD-2s",
+      "price": 1800,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Перегородка для душу P-1s",
+      "price": 1200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Перегородка для душу P-2s",
+      "price": 1300,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Перегородка для душу P-3s",
+      "price": 1500,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Перегородка для ванни  PV-1s ",
+      "price": 1600,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Двері для душової кабіни D-1s",
+      "price": 1000,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Двері для душової кабіни  D-2s",
+      "price": 1200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Двері для душової кабіни D-3s",
+      "price": 2200,
+      "showerImage": "url",
+      "defaultFurniture": [
+        {
+          "count": 1,
+          "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+          "title": "HDL-301",
+          "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+          "depends": [
+            "Петля до душової",
+            "Стіна - Скло 90"
+          ],
+          "colorsFurniture": [
+            {
+              "color": "PSS",
+              "price": 504
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typeWordpress": [
+    {
+      "name": "Душова 1 W",
+      "price": 2000
+    },
+    {
+      "name": "Душова 2 W",
+      "price": 2500
+    }
+  ],
+  "glassThickness": [
+    {
+      "name": "Флот 8 мм(прозоре скло)",
+      "price": 2600
+    },
+    {
+      "name": "Флот 10 мм(прозоре скло)",
+      "price": 3200
+    },
+    {
+      "name": "Скло бронза гартоване 8 мм",
+      "price": 3700
+    },
+    {
+      "name": "Скло бронза гартоване 10 мм",
+      "price": 4200
+    },
+    {
+      "name": "Скло графіт гартоване 8 мм",
+      "price": 3700
+    },
+    {
+      "name": "Скло графіт гартоване 10 мм",
+      "price": 4950
+    },
+    {
+      "name": "Скло діамант гартоване 8 мм",
+      "price": 3500
+    },
+    {
+      "name": "Скло діамант гартоване 10 мм",
+      "price": 4550
+    },
+    {
+      "name": "Антикалька 8мм",
+      "price": 5000
+    }
+  ],
+  "color": [
+    "8мм",
+    "Тріплекс",
+    "10 мм"
+  ],
+  "sizeOfTheShower": [
+    {
+      "name": "Висота",
+      "price": 100
+    },
+    {
+      "name": "Ширина",
+      "price": 200
+    },
+    {
+      "name": "Глибина",
+      "price": 20
+    }
+  ],
+  "dorsHandles": [
+    {
+      "name": "Ручка 1",
+      "price": 100
+    },
+    {
+      "name": "Ручка 2",
+      "price": 200
+    },
+    {
+      "name": "Ручка 3",
+      "price": 300
+    }
+  ],
+  "processingStandart": [
+    {
+      "name": "Матування",
+      "price": 300
+    },
+    {
+      "name": "Матування по плотеру",
+      "price": 500
+    },
+    {
+      "name": "Фарбування ",
+      "price": 600
+    },
+    {
+      "name": "Фарбування по плотеру",
+      "price": 1000
+    }
+  ],
+  "processingСutout": [
+    {
+      "name": "Отвір",
+      "price": 50,
+      "count": 1
+    },
+    {
+      "name": "Виріз",
+      "price": 100,
+      "count": 1
+    },
+    {
+      "name": "Виріз ЧПУ",
+      "price": 350,
+      "count": 1
+    }
+  ],
+  "furniture": [
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683881601/wqtbiupzaqednepiq7gj.png",
+      "title": "HDL-301",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683552987/ezrqjcxk9wxhaaixc1et.png",
+      "depends": [
+        "Петля до душової",
+        "Стіна - Скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 504
+        },
+        {
+          "color": "SSS",
+          "price": 504
+        },
+        {
+          "color": "BLACK",
+          "price": 558
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683553424/oitrxzybopwe9vsfslka.png",
+      "title": "HDL-302",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683553435/miqh5fnydgju6vompivl.png",
+      "depends": [
+        "Петля до душової",
+        "Скло - Скло 135"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 684
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798146/knmcgbdsu7ulaolx92fm.png",
+      "title": "HDL-303",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798154/j7jhxewkkkz7tehebgqs.png",
+      "depends": [
+        "Петля до душової",
+        "Скло - скло 180"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        },
+        {
+          "color": "SSS",
+          "price": 760
+        },
+        {
+          "color": "BLACK",
+          "price": 840
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798252/ce0ffw6nnplm9xebf4ew.png",
+      "title": "HDL-304",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798255/b60dg0bd86fjmey7rn8y.png",
+      "depends": [
+        "Петля до душової",
+        "Скло - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        },
+        {
+          "color": "SSS",
+          "price": 760
+        },
+        {
+          "color": "BLACK",
+          "price": 840
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798389/l6bznatdmw94frwo4yp4.png",
+      "title": "HDL-305",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798393/gbbdeemmdgzhsh24qd2w.png",
+      "depends": [
+        "Петля до душової",
+        "Стіна - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 560
+        },
+        {
+          "color": "SSS",
+          "price": 560
+        },
+        {
+          "color": "BLACK",
+          "price": 620
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798554/xv94d3fbfs5wy4zpau3y.png",
+      "title": "HDL-306",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798557/s8rfjvzlitwyigq0xdan.png",
+      "depends": [
+        "Кріплення",
+        "Стіна - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 720
+        },
+        {
+          "color": "SSS",
+          "price": 720
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798640/k5toclh5zlabwoefqaqg.png",
+      "title": "HDL-307",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798646/wnhlwribc2ioo9exosaa.png",
+      "depends": [
+        "Петля",
+        "Підлога, стеля - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 800
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798733/faymr8e46ocya4gold0i.png",
+      "title": "SH-180W L\\R",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683798739/tew7jhg9huckmcjy3ey6.png",
+      "depends": [
+        "Петля кулачкова з автопідйомом",
+        "Скло - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 1120
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799165/vc8fiqs7it0jl7ckevx3.png",
+      "title": "SHL-W L\\R",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799169/tots8vhtzhpakasnjgjw.png",
+      "depends": [
+        "Петля кулачкова з автопідйомом",
+        "Стіна - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 24
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799188/awuhffgvrnlo0oqpfttc.png",
+      "title": "AFT-SH-B",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799195/uvmod6fxtmqfrdbtrsma.png",
+      "depends": [
+        "Петля з автопідйомом",
+        "Скло - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 1360
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799283/dfjin3kdgydacwqx2x7j.png",
+      "title": "AFT-SH-C",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799286/pi0esvgi9mdkquhgacgt.png",
+      "depends": [
+        "Петля без фіксації з магнітними кришками",
+        "Стіна - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 680
+        },
+        {
+          "color": "BLACK",
+          "price": 800
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799684/omfk0d3qggfyzrs5qywc.png",
+      "title": "AFT-SH-D",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799687/nl8m28nfhkmqe9l1b37z.png",
+      "depends": [
+        "Петля без фіксації з магнітними кришками",
+        "Скло - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 880
+        },
+        {
+          "color": "BLACK",
+          "price": 1000
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799751/r4qrw72lbqoxqktaapd4.png",
+      "title": "AFT-SH-E",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683799755/aust6clilfdehy1et7ua.png",
+      "depends": [
+        "Петля без фіксації з магнітними кришками",
+        "Скло-Скло",
+        "Для нахлесної установки"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 1080
+        },
+        {
+          "color": "BLACK",
+          "price": 1240
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800172/mdkluf1yyxliqtojczmb.png",
+      "title": "SH-10S",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800202/u56rmkpb8aak8f0ln216.png",
+      "depends": [
+        "Петля складна",
+        "Стіна - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 680
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800398/cclph7t6eo5f144gcjhl.png",
+      "title": "SH-20S",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800403/ubzwn3z4lktrzinnhtba.png",
+      "depends": [
+        "Петля складна",
+        "Скло - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 780
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800414/rtcyqnpeqyfkl1fpk3y9.png",
+      "title": "AFT-SH-F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683800418/mbgxcxd57xs2cg3byrot.png",
+      "depends": [
+        "Петля складна",
+        "Скло - скло",
+        "Без фіксації"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 800
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801721/q68fpgecrhvbolin1bub.png",
+      "title": "HDL-301 F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801744/botvarwerraoafmv0jo5.png",
+      "depends": [
+        "Петля до душової",
+        "Стіна - скло 90",
+        "з фаскою"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 560
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801819/o5u8mvoaceov3nzzf22z.png",
+      "title": "HDL-302 F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801827/emeo2tfaigqcrtvbp81q.png",
+      "depends": [
+        "Петля до душової",
+        "Скло - скло 135",
+        "з фаскою"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801950/f2bchleguybm3z2pnsp3.png",
+      "title": "HDL-303 F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683801936/qfafqxm4w3hrmjzmyiw2.png",
+      "depends": [
+        "Петля до душової",
+        "Скло - скло 180",
+        "з фаскою"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683802127/hmnadfpbxllc69fp95di.png",
+      "title": "HDL-304 F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683802113/jej0s1sreo0eo0thbc5l.png",
+      "depends": [
+        "Петля душова",
+        "Скло - скло 90",
+        "з фаскою"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683802183/gjy0httdznwy4c0h4pqk.png",
+      "title": "HDL-305 F",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683802220/ouqmicwtkywcuskwfjih.png",
+      "depends": [
+        "Петля до душової",
+        "Стіна - скло 90",
+        "з фаскою"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 560
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803008/lx3bkc9dycsatlyzhlxq.png",
+      "title": "HDL-721",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803017/dtv3m0a37tixfhucecnj.png",
+      "depends": [
+        "Конектор",
+        "Стіна - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 200
+        },
+        {
+          "color": "SSS",
+          "price": 200
+        },
+        {
+          "color": "BLACK",
+          "price": 220
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803106/fuv4m9qg3umnpkvegihp.png",
+      "title": "HDL-721-1",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803130/fqvv5jkx28nlel3vu23m.png",
+      "depends": [
+        "Конектор",
+        "Стіна - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 200
+        },
+        {
+          "color": "SSS",
+          "price": 200
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803181/mnzbuium4rmjsc53anmz.png",
+      "title": "HDL-722",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803187/vnzact21k6dx112ldr65.png",
+      "depends": [
+        "Конектор зі зміщенням",
+        "Стіна-Скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 240
+        },
+        {
+          "color": "SSS",
+          "price": 240
+        },
+        {
+          "color": "BLACK",
+          "price": 264
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803444/tvpkjliarwwpto131rkp.png",
+      "title": "HDL-724",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803457/emolpxirp0ifwxotsqdr.png",
+      "depends": [
+        "Конектор",
+        "Скло - скло 180"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 540
+        },
+        {
+          "color": "SSS",
+          "price": 540
+        },
+        {
+          "color": "BLACK",
+          "price": 540
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803672/dezouuhhw8tqe6wf5i5o.png",
+      "title": "HDL-725",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803683/tbezp3x4dsrvhfsqau8f.png",
+      "depends": [
+        "Конектор",
+        "Скло - скло 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 320
+        },
+        {
+          "color": "SSS",
+          "price": 320
+        },
+        {
+          "color": "BLACK",
+          "price": 360
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803758/cpj7bwxnuznwsfnzdjyd.png",
+      "title": "HDL-726",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803772/goptd9mlamvj3v62jqx7.png",
+      "depends": [
+        "Конектор",
+        "Скло - скло 135"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 540
+        },
+        {
+          "color": "SSS",
+          "price": 540
+        },
+        {
+          "color": "BLACK",
+          "price": 540
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803855/xu3s3w2379vgo2zyb1r8.png",
+      "title": "HDL-727",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683803860/goiq6tbsdgm2gnsqzrss.png",
+      "depends": [
+        "Конектор для 3-х скл. 180 /90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 440
+        },
+        {
+          "color": "SSS",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804276/mjkyq1kyu15ujredkppk.png",
+      "title": "HDL-722 B ",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804284/akmfrl4rlbii9u2lnmma.png",
+      "depends": [
+        "Конектор",
+        "Стіна - скло 90",
+        "регульований"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 640
+        },
+        {
+          "color": "BLACK",
+          "price": 720
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804426/szbihu8xeijxmt1jf6uu.png",
+      "title": "HDL-725 B",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804434/i7vngxgv05ziyaisngux.png",
+      "depends": [
+        "Конектор",
+        "Скло - скло 90",
+        "регульований"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 640
+        },
+        {
+          "color": "BLACK",
+          "price": 720
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804525/a3radedfqqnxk9odnsuq.png",
+      "title": "HDL-902",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804533/vqwyadbebdcja1z1l9vh.png",
+      "depends": [
+        "Трійник для труби 19мм"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 720
+        },
+        {
+          "color": "BLACK",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804616/xv2eh5gsh5r5tzwctjmc.png",
+      "title": "HDL-907",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804623/wnlexbsq4gh5njs9po1r.png",
+      "depends": [
+        "Конектор",
+        "Стіна - труба"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 200
+        },
+        {
+          "color": "SSS",
+          "price": 400
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804691/nr7hzmnrejvvzmk4wfm2.png",
+      "title": "HDL-914",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683804705/cyfxb7yb0pb3ihcj2pln.png",
+      "depends": [
+        "Конектор",
+        "Скло - труба",
+        "Поворотний"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 240
+        },
+        {
+          "color": "SSS",
+          "price": 240
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683805641/myuxibno0nlmgekqncl3.png",
+      "title": "HDL-914A",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806050/vin9tuvub4essyigdstj.png",
+      "depends": [
+        "Конектор",
+        "Скло - труба",
+        "Поворотний"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 240
+        },
+        {
+          "color": "SSS",
+          "price": 240
+        },
+        {
+          "color": "BLACK",
+          "price": 264
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806170/vtqhd9lxwb1wkcqqf1me.png",
+      "title": "HDL-915",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806181/d3lrhetkhethjtw47tiz.png",
+      "depends": [
+        "Конектор",
+        "Труба -труба",
+        "Регульований"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        },
+        {
+          "color": "SSS",
+          "price": 360
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806272/xnxi7cl6pmnlutmryz5q.png",
+      "title": "HDL-945",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806286/yo1ym07spoydouprktiz.png",
+      "depends": [
+        "Конектор",
+        "Стіна - труба 45"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 280
+        },
+        {
+          "color": "SSS",
+          "price": 280
+        },
+        {
+          "color": "BLACK",
+          "price": 320
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806374/egtyy1mvxs4qdrgb2gz7.png",
+      "title": "SC-10-19",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806387/jmi4guefvlo8dbfnlh6n.png",
+      "depends": [
+        "Конектор",
+        "Стіна - труба",
+        "регульований"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806862/premr7o1zjdjqoc8ro1j.png",
+      "title": "SC-11-19",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683806869/czrgrvmciblp3kqcvhmx.png",
+      "depends": [
+        "Конектор",
+        "Скло - труба",
+        "Регульований"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807023/aimvjixci7krwouuwj3b.png",
+      "title": "Труба D=19mm",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807034/wzy36wxliklcjvuhkp5o.png",
+      "depends": [
+        "Харчова нерж. сталь"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 400
+        },
+        {
+          "color": "BLACK",
+          "price": 640
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807349/oi1tuy66ebxkgnmoo0kd.png",
+      "title": "DH-801S",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807370/c4quuqmefrytaj5hjf9v.png",
+      "depends": [
+        "Ручка сушки для рушників",
+        "Квадратна"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 840
+        },
+        {
+          "color": "BLACK",
+          "price": 1080
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807497/e8s3u5oz2fjtu0dwo2rk.png",
+      "title": "AFT-200",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807541/iclxxubdrx97ywd46akv.png",
+      "depends": [
+        "Ручка скоба",
+        "МО-200мм"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 720
+        },
+        {
+          "color": "BLACK",
+          "price": 960
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807669/jzcd59mfyvdn3gaihun9.png",
+      "title": "AFT-300",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807678/rffjwpxc2kjkw4ourbtt.png",
+      "depends": [
+        "Ручка скоба",
+        "МО-300мм"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 720
+        },
+        {
+          "color": "BLACK",
+          "price": 24
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807885/fkkdr28zsbdp3rgghfda.png",
+      "title": "HDL-626",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807895/nhryngycwjvzxkgmnobv.png",
+      "depends": [
+        "Ручка сушки для рушників",
+        "Кругла"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 800
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683807954/f8hblrzrmwmhkvkyykqu.png",
+      "title": "SK-39",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808030/irzoffsruf3v2ir9m31a.png",
+      "depends": [
+        "Ручка для душових кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 480
+        },
+        {
+          "color": "SSS",
+          "price": 480
+        },
+        {
+          "color": "BLACK",
+          "price": 540
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808075/jqhwnshpnqcdunoaopkv.png",
+      "title": "AFT-KNOB",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808082/krex3tqmimj5lmjhbvzt.png",
+      "depends": [
+        "Ручка для душових кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 1200
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808129/hu1tjjux9fedb0t0bw0t.png",
+      "title": "KNOB-691",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808135/uffxnor3yhtho6cdhwle.png",
+      "depends": [
+        "Ручка для душових"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808248/os7d2zwhbrj2ooytdc5e.png",
+      "title": "KNOB-692",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808255/tp4ehgrlbhrwnpv7zolq.png",
+      "depends": [
+        "Ручка для душових кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 8
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808295/vypu6auyzojnd6pzu9ck.png",
+      "title": "KNOB-693",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808301/g69tqjfmbl44rifkz0z0.png",
+      "depends": [
+        "Ручка для душових кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 320
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808375/akf2rm8zpgeknffagfwu.png",
+      "title": "KNOB-696",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808386/iarv6ahtc13xfjbexpl8.png",
+      "depends": [
+        "Ручки для душових кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        },
+        {
+          "color": "BLACK",
+          "price": 1040
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808525/lrxledg6u15lvylxgabq.png",
+      "title": "KNOB-698",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808534/gfse0kqiv87qnlcp6t3s.png",
+      "depends": [
+        "Ручка для душевих кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808599/tptdium07nlqmdzroaze.png",
+      "title": "Назва",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808605/ytgook5helgvukv2bbvb.png",
+      "depends": [
+        "Ручка для душевих кабін"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808673/bl5roxnicrxeqlomguks.png",
+      "title": "AFT-04 d50",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808686/b8vl03xpvtgqxo0e7qk8.png",
+      "depends": [
+        "Ручка блінчик d=50mm"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 440
+        },
+        {
+          "color": "SSS",
+          "price": 440
+        },
+        {
+          "color": "BLACK",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808908/dlramkpxjp8d09j4nefj.png",
+      "title": "AFT-04 d60",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808917/wepnkk5lj8h7w5p680aj.png",
+      "depends": [
+        "Ручка блінчик d=60mm"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 440
+        },
+        {
+          "color": "SSS",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808984/szk8qgpttnysbugh8bax.png",
+      "title": "AFT-05",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683808989/oophhhq5iw8hoa2ze7ek.png",
+      "depends": [
+        "Ручка блінчик d=50mm",
+        "Наскрізна"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "SSS",
+          "price": 480
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809072/lngpt0v64066s0wvdr4o.png",
+      "title": "SKR-06",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809078/gye0jokxy2pjumvc6dp9.png",
+      "depends": [
+        "Квадратна ручка для розсувок"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "SSS",
+          "price": 600
+        },
+        {
+          "color": "BLACK",
+          "price": 600
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809126/vcb3ezv1elnfzqni59uv.png",
+      "title": "SKR-07",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809133/jpcvrkvx0lqpyyo7jn3k.png",
+      "depends": [
+        "Прямокутна ручка для розсувок"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "SSS",
+          "price": 680
+        },
+        {
+          "color": "BLACK",
+          "price": 760
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809222/gzjtjkrnvlz7oje0eemq.png",
+      "title": "OF Комплект",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809231/hagipyqufcrhqwquhtpi.png",
+      "depends": [
+        "Комплект розсувної системи для душу"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 2400
+        },
+        {
+          "color": "BLACK",
+          "price": 2800
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809384/oe9ipeqnjhzgztnkep8s.png",
+      "title": "OF-WS",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809387/rso2yweqgnklq3ei31xx.png",
+      "depends": [
+        "Верхній ролик"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 760
+        },
+        {
+          "color": "BLACK",
+          "price": 760
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809443/qdukga9rgulhhhsl1ogn.png",
+      "title": "OF-WS-2",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809447/k7c57elmuxekp92n6f0y.png",
+      "depends": [
+        "Тримач",
+        "Труба - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 320
+        },
+        {
+          "color": "BLACK",
+          "price": 320
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809529/pfn8liyd8diatdtmp3f2.png",
+      "title": "OF-WS-3",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809546/wedgkqdngyrr1zhjlqzg.png",
+      "depends": [
+        "Обмежувач стулки"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 560
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809667/up2nx7fnn5kiqdjfigpl.png",
+      "title": "OF-WS-4",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809673/jcszm2q4mq0x8i13kl0m.png",
+      "depends": [
+        "Конектор ",
+        "Стіна - труба"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809740/yv29ldowtl1ifndvcgnz.png",
+      "title": "OF-WS-5",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809743/jg5lliqtbujrf1fw8o1m.png",
+      "depends": [
+        "Стопор ролика"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 240
+        },
+        {
+          "color": "BLACK",
+          "price": 280
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809800/b8ls12wp8swjutyo4drz.png",
+      "title": "OF-WS-6",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809806/a73pzfghljxu731nrxxs.png",
+      "depends": [
+        "Конектор",
+        "Труба - труба 90"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 440
+        },
+        {
+          "color": "BLACK",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809919/uiuzltatkd9gezayn8i9.png",
+      "title": "OF-WS-9",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809923/djpqmgnnlzghcmwyjymq.png",
+      "depends": [
+        "Нижня направляюча для стулки"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 400
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "mainImage": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809987/rv93gchinmtydwuyrra4.png",
+      "title": "OF-WS-15",
+      "drawingImg": "https://res.cloudinary.com/dzroxyus8/image/upload/v1683809990/w66e75buloyxwk8fggxv.png",
+      "depends": [
+        "Конектор",
+        "Труба - скло"
+      ],
+      "colorsFurniture": [
+        {
+          "color": "PSS",
+          "price": 360
+        },
+        {
+          "color": "BLACK",
+          "price": 400
+        }
+      ]
+    }
+  ],
+  "createdAt": "2023-05-03T14:19:21.801Z",
+  "updatedAt": "2023-05-12T11:32:30.809Z",
+  "__v": 168
+}

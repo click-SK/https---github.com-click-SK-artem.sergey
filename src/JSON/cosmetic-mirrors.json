@@ -1,0 +1,96 @@
+{
+	"name": "Косметичні дзеркала",
+	"typeGlass": [
+		{
+			"name": "Дзеркало на 6 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 8 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 8 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 10 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 16 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 14 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		}
+	],
+		"typeWordpress": [
+		{
+			"name": "Дзеркало на 6 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 8 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 8 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 10 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 16 ламп заводське",
+			"price": 10,
+            "mirrorsImage": "url"
+		},
+		{
+			"name": "Дзеркало на 14 ламп",
+			"price": 10,
+            "mirrorsImage": "url"
+		}
+	],
+	"size": [
+		{
+			"name": "Висота",
+			"price": 10
+		},
+		{
+			"name": "Ширина",
+			"price": 10
+		}
+	],
+		"processingСutout": [
+		{
+      "name": "Отвір",
+      "price": 50,
+			"count": 1
+    },
+		{
+      "name": "Виріз",
+      "price": 100,
+			"count": 1
+    },
+		{
+      "name": "Виріз ЧПУ",
+      "price": 350,
+			"count": 1
+    }
+	],
+	"lightBulbs": 40,
+	"patron": 30
+}
