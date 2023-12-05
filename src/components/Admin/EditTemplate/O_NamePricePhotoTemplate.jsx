@@ -38,7 +38,7 @@ const O_NamePricePhotoTemplate = ({el,showerId, pathDelete, pathEdit, setIsFetch
       formData.append('typeId',el?._id);
       formData.append('showerId',showerId);
   
-      fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-client-type-image', {
+      fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-client-type-image', {
         method: 'PATCH',
         body: formData
       })

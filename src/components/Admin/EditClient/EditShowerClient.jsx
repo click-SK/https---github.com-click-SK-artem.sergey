@@ -17,7 +17,7 @@ const EditShowerClient = () => {
     const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
-        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-shower")
+        fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-shower")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -26,7 +26,7 @@ const EditShowerClient = () => {
       }, [isFtch]);
 
       const handleAddNewType = () => {    
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-client-type', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-client-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ const EditShowerClient = () => {
       }
 
       const handleAddNewHandleDors = () => {    
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-handle-dors', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-handle-dors', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -87,8 +87,8 @@ const EditShowerClient = () => {
             {showTypeBlock && currentObject.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_NamePricePhotoTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-client-type'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-client-type'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-client-type'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-client-type'/>
             ))
             }
             {showTypeBlock && 
@@ -102,8 +102,8 @@ const EditShowerClient = () => {
             {showDorsHandlesBlock && currentObject.dorsHandles.map((el, idx) => (
                 <O_NamePriceTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-handle-dors'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-handle-dors'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-handle-dors'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-handle-dors'/>
             ))
             }
             {showDorsHandlesBlock && 

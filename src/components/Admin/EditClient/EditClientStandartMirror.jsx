@@ -10,7 +10,7 @@ const EditClientStandartMirror = () => {
   const [showTypeBlock, setShowTypeBlock] = useState(true);
   const [isFtch, setIsFetch] = useState(false);
   useEffect(() => {
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-standart-mirrors")
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-standart-mirrors")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -30,10 +30,10 @@ const EditClientStandartMirror = () => {
           typeName={currentObject?.type[idxType]?.name}
           showerId={currentObject._id}
           setIsFetch={setIsFetch}
-          updateTypePath='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-client-type'
-          addNewGoodsPath='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-client-goods'
-          updateGoodsPath='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-client-goods'
-          deleteGoodsPath='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-client-mirror-goods'/>
+          updateTypePath='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-client-type'
+          addNewGoodsPath='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-client-goods'
+          updateGoodsPath='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-client-goods'
+          deleteGoodsPath='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-client-mirror-goods'/>
         ))}
     </div>
   );

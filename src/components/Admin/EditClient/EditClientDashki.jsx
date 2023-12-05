@@ -23,7 +23,7 @@ const EditClientDashki = () => {
     const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
-        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-dashki")
+        fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-dashki")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -32,7 +32,7 @@ const EditClientDashki = () => {
       }, [isFtch]);
 
       const handleAddNewType = () => {    
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-client-dashki-type', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-client-dashki-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -61,8 +61,8 @@ const EditClientDashki = () => {
             {showTypeBlock && currentObject?.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-client-dashki-type'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-client-dashki-type'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-client-dashki-type'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-client-dashki-type'/>
             ))
             }
             {showTypeBlock && 

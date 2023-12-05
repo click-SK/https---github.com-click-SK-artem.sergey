@@ -35,7 +35,7 @@ const EditShower = () => {
 
 
   useEffect(() => {
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-shower")
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-shower")
       .then((res) => res.json())
       .then((data) => {
         setCurrentObject(data[0]);
@@ -44,7 +44,7 @@ const EditShower = () => {
   }, [isFtch]);
 
   const handleAddNewFurniture = () => {
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-furniture", {
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-furniture", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const EditShower = () => {
     const currentIndex = fullArray.indexOf();
     newArr.push(newValueDepends);
 
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-colors", {
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-colors", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const EditShower = () => {
   };
 
   const handleAddNewGlassThicknes = () => {
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-thickness", {
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-thickness", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const EditShower = () => {
   };
 
   const handleAddNewType = () => {
-    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-type", {
+    fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-type", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const EditShower = () => {
   };
 
   const handleAddNewProcessingStandart = () => {
-    fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-processing-standart', {
+    fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-processing-standart', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ const EditShower = () => {
   }
 
   const handleAddNewProcessingСutout = () => {
-    fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-processing-cutout', {
+    fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-processing-cutout', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -269,16 +269,16 @@ const EditShower = () => {
             el={el}
             furnitureIdx={furnitureIdx}
             showerId={currentObject._id}
-            pathUpdateMainImg="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-main-image"
-            pathUpdateSecondImg="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-second-image"
-            pathUpdateTitle="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-title"
-            pathAddNewDepends="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-depends"
-            pathAddNewColors="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-shower-furniture-colors"
-            pathDeleteFurniture="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-furniture"
-            pathUpdateFurnitureColors="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-color"
-            pathDeleteFurnitureColors="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-furniture-colors"
-            pathUpdateFurnituredepends="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-depends"
-            pathDeleteFurnituredepends="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-furniture-depends"
+            pathUpdateMainImg="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-main-image"
+            pathUpdateSecondImg="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-second-image"
+            pathUpdateTitle="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-title"
+            pathAddNewDepends="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-depends"
+            pathAddNewColors="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-shower-furniture-colors"
+            pathDeleteFurniture="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-furniture"
+            pathUpdateFurnitureColors="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-color"
+            pathDeleteFurnitureColors="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-furniture-colors"
+            pathUpdateFurnituredepends="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-depends"
+            pathDeleteFurnituredepends="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-furniture-depends"
             setIsFetch={setIsFetch}
           />
         ))}
@@ -296,8 +296,8 @@ const EditShower = () => {
             fullArray={currentObject.color}
             showerId={currentObject._id}
             setIsFetch={setIsFetch}
-            pathDelete="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-colors"
-            pathEdit="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-colors"
+            pathDelete="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-colors"
+            pathEdit="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-colors"
           />
         ))}
       {currentObject?.color && showColorsBlock && (
@@ -358,8 +358,8 @@ const EditShower = () => {
             idx={idx}
             showerId={currentObject._id}
             setIsFetch={setIsFetch}
-            pathDelete="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-type"
-            pathEdit="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-type"
+            pathDelete="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-type"
+            pathEdit="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-type"
           />
         ))}
       {currentObject?.type && showTypeBlock && (
@@ -391,14 +391,14 @@ const EditShower = () => {
             el={el}
             key={idx}
             setIsFetch={setIsFetch}
-            pathEdit="https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-size"
+            pathEdit="https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-size"
           />
         ))}
 
             {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
                 <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-processing-standart'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-processing-standart'
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-processing-standart'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-processing-standart'
                 setIsFetch={setIsFetch}/>
             ))
             }
@@ -411,8 +411,8 @@ const EditShower = () => {
             }
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-shower-processing-cutout'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-shower-processing-cutout'
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-shower-processing-cutout'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-shower-processing-cutout'
                 setIsFetch={setIsFetch}/>
             ))
             }
