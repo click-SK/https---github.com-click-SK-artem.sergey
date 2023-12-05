@@ -31,7 +31,7 @@ const EditGlassPartition = () => {
     const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
-        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-glass-partitions")
+        fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-glass-partitions")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -40,7 +40,7 @@ const EditGlassPartition = () => {
       }, [isFtch]);
 
     const handleAddNewProcessingStandart = () => {
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-partitions-processing-standart', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-partitions-processing-standart', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewProcessingСutout = () => {
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-partitions-processing-cutout', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-partitions-processing-cutout', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewColor = () => {
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-partitions-color', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-partitions-color', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewType = () => {    
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-partitions-type', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-partitions-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ const EditGlassPartition = () => {
         const currentIndex = fullArray.indexOf();
         newArr.push(newValueTypePartition);
     
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-colors', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-colors', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ const EditGlassPartition = () => {
       }
 
       const handleAddNewFurniture = () => {
-        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/glass-partitions-add-furniture', {
+        fetch('https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/glass-partitions-add-furniture', {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
@@ -253,16 +253,16 @@ const EditGlassPartition = () => {
                 furnitureIdx={furnitureIdx} showerId={currentObject._id}
                 isGlassPartition={true}
                 setIsFetch={setIsFetch}
-                pathUpdateMainImg='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-main-image'
-                pathUpdateSecondImg='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-second-image'
-                pathUpdateTitle='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-title'
-                pathAddNewDepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-depends'
-                pathAddNewColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-glass-partitions-furniture-colors'
-                pathDeleteFurniture='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-furniture'
-                pathUpdateFurnitureColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/glass-partitions-update-furniture-color'
-                pathDeleteFurnitureColors='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-furniture-colors'
-                pathUpdateFurnituredepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-depends'
-                pathDeleteFurnituredepends='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-furniture-depends'
+                pathUpdateMainImg='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-main-image'
+                pathUpdateSecondImg='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-second-image'
+                pathUpdateTitle='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-title'
+                pathAddNewDepends='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-depends'
+                pathAddNewColors='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/add-new-glass-partitions-furniture-colors'
+                pathDeleteFurniture='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-furniture'
+                pathUpdateFurnitureColors='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/glass-partitions-update-furniture-color'
+                pathDeleteFurnitureColors='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-furniture-colors'
+                pathUpdateFurnituredepends='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-depends'
+                pathDeleteFurnituredepends='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-furniture-depends'
                 />
             ))}
             {showFurnitureBlock && <button className="add_new_furniture" onClick={handleAddNewFurniture}>Додати нову фурнітуру</button>}
@@ -270,8 +270,8 @@ const EditGlassPartition = () => {
             {showColorBlock && currentObject.color.map((el, idx) => (
                 <O_EditColorTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-color'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-color'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-color'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-color'/>
             ))
             }
             {showColorBlock &&
@@ -285,8 +285,8 @@ const EditGlassPartition = () => {
             {showProcessingStandartBlock && currentObject.processingStandart.map((el, idx) => (
                 <O_EditProcessingStandartTempalte el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-processing-standart'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-processing-standart'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-processing-standart'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-processing-standart'/>
             ))
             }
             {showProcessingStandartBlock && 
@@ -299,8 +299,8 @@ const EditGlassPartition = () => {
             {showProcessingСutoutBlock && currentObject.processingСutout.map((el, idx) => (
                 <O_EditProcessingСutoutTempalte el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-processing-cutout'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-processing-cutout'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-processing-cutout'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-processing-cutout'/>
             ))
             }
             {showProcessingСutoutBlock && 
@@ -313,14 +313,14 @@ const EditGlassPartition = () => {
             {showSizeBlock && currentObject.size.map((el, idx) => (
                 <O_EditSizeTemplate el={el} key={idx}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-size'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-size'/>
             ))
             }
             {showTypeBlock && currentObject.typeGlass.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-type'
-                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-glass-partitions-type'/>
+                pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-type'
+                pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/remove-glass-partitions-type'/>
             ))
             }
             {showTypeBlock && 
@@ -335,8 +335,8 @@ const EditGlassPartition = () => {
                  <A_EditColorsTemplate el={el} key={idx} 
                  fullArray={currentObject.typePartitions} showerId={currentObject._id}
                  setIsFetch={setIsFetch}
-                 pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-colors'
-                 pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-glass-partitions-colors'
+                 pathDelete='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-colors'
+                 pathEdit='https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/update-glass-partitions-colors'
                  />
             ))
             }

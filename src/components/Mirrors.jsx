@@ -12,7 +12,7 @@ const Mirrors = () => {
     const [cosmeticMirrors, setCosmeticMirrors] = useState(false);
 
     useEffect(() => {
-        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-standart-mirrors")
+        fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-standart-mirrors")
           .then((res) => res.json())
           .then((data) => {
             setMirrorsStandartData(data[0])
@@ -21,7 +21,7 @@ const Mirrors = () => {
       }, []);
 
       useEffect(() => {
-        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-cosmetic-mirrors")
+        fetch("https://sklo-expert-server-v2-9a33eddf90a1.herokuapp.com/get-all-cosmetic-mirrors")
           .then((res) => res.json())
           .then((data) => {
             setMirrorsCosmeticData(data[0])
