@@ -102,10 +102,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width:'100%'
     },
+    imgGoods:{
+        width: '100px',
+        height: '100px'
+    },
 
 });
 
-const PdfFileMirorrsManager = ({order, glassProcessingCountArr}) => {
+const PdfFileMirorrsManager = ({order, img, glassProcessingCountArr}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -251,6 +255,7 @@ const PdfFileMirorrsManager = ({order, glassProcessingCountArr}) => {
                     </Text>
                 </View>
                     <View style={styles.section} >
+                        <Image style={styles.imgGoods} src={img}/>
                         <Text style={styles.textLeft}>
                            {goodsName} {'  '}
                            Форма: {type}

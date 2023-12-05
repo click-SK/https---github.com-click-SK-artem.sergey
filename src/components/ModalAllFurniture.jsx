@@ -10,7 +10,7 @@ const ModalAllFurniture = ({ isOpen, onClose, furnitureProps }) => {
   const [currentAllFurniture, setCurrentAllFurniture] = useState([]);
 
   useEffect(() => {
-    fetch("https://sklo-expert.herokuapp.com/get-all-shower")
+    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-shower")
       .then((res) => res.json())
       .then((data) => {
         setCurrentShower(data[0].furniture);
@@ -19,7 +19,7 @@ const ModalAllFurniture = ({ isOpen, onClose, furnitureProps }) => {
   }, []);
 
   useEffect(() => {
-    fetch("https://sklo-expert.herokuapp.com/get-all-dashki")
+    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-dashki")
       .then((res) => res.json())
       .then((data) => {
         setCurrentDashki(data[0].furniture);
@@ -28,7 +28,7 @@ const ModalAllFurniture = ({ isOpen, onClose, furnitureProps }) => {
   }, []);
 
   useEffect(() => {
-    fetch("https://sklo-expert.herokuapp.com/get-all-glass-partitions")
+    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-glass-partitions")
       .then((res) => res.json())
       .then((data) => {
         setCurrentGlassPartition(data[0].furniture);

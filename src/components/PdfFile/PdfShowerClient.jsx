@@ -108,10 +108,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width:'100%'
     },
+    imgGoods:{
+        width: '100px',
+        height: '100px'
+    },
 
 });
 
-const PdfShowerManadger = ({order}) => {
+const PdfShowerManadger = ({order, img}) => {
 
     
         const type = `${order.type}` /* форма дзеркала */
@@ -209,6 +213,7 @@ const PdfShowerManadger = ({order}) => {
                     </Text>
                 </View>
                     <View style={styles.section} >
+                        <Image style={styles.imgGoods} src={img}/>
                         <Text style={styles.textLeft}>
 
                            {type}

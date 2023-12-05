@@ -4,6 +4,7 @@ import Logo from '../../img/logo.png';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 
 
+
 Font.register({
     family: "Roboto",
     src:
@@ -69,6 +70,10 @@ const styles = StyleSheet?.create({
         width: '234px',
         height: '64px'
     },
+    imgGoods:{
+        width: '100px',
+        height: '100px'
+    },
     header:{
         fontSize: '8px',
         textAlign: 'right',
@@ -111,7 +116,7 @@ const styles = StyleSheet?.create({
 
 });
 
-const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessingArr}) => {
+const PdfShowerManadger = ({order, cart, img, glassProcessingCountArr, glassProcessingArr}) => {
 
     
         const type = `${order?.type}` /* форма дзеркала */
@@ -261,6 +266,7 @@ const PdfShowerManadger = ({order, cart, glassProcessingCountArr, glassProcessin
                     </Text>
                 </View>
                     <View style={styles.section} >
+                        <Image style={styles.imgGoods} src={img}/>
                         <Text style={styles.textLeft}>
                            {type}  {glassColorName}
                         </Text>

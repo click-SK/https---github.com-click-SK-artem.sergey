@@ -18,7 +18,7 @@ const EditClientGlassPartition = () => {
     const [isFtch, setIsFetch] = useState(false);
 
     useEffect(() => {
-        fetch("https://sklo-expert.herokuapp.com/get-all-glass-partitions")
+        fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-glass-partitions")
           .then((res) => res.json())
           .then((data) => {
             setCurrentObject(data[0]);
@@ -27,7 +27,7 @@ const EditClientGlassPartition = () => {
       }, [isFtch]);
 
       const handleAddNewType = () => {    
-        fetch('https://sklo-expert.herokuapp.com/add-new-client-glass-partitions-type', {
+        fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/add-new-client-glass-partitions-type', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -56,8 +56,8 @@ const EditClientGlassPartition = () => {
             {showTypeBlock && currentObject?.typeWordpress && currentObject.typeWordpress.map((el, idx) => (
                 <O_EditTypeTemplate el={el} key={idx} showerId={currentObject._id}
                 setIsFetch={setIsFetch}
-                pathEdit='https://sklo-expert.herokuapp.com/update-client-glass-partitions-type'
-                pathDelete='https://sklo-expert.herokuapp.com/remove-client-glass-partitions-type'/>
+                pathEdit='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-client-glass-partitions-type'
+                pathDelete='https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/remove-client-glass-partitions-type'/>
             ))
             }
             {showTypeBlock && 

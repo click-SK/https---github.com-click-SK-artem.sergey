@@ -41,7 +41,7 @@ const EditStandartMirrorsGoods = ({el, idxType, idxGoods, showerId, typeName, up
     formData.append('name',el.name);
     formData.append('price',el.price);
 
-    fetch('https://sklo-expert.herokuapp.com/update-mirror-standart-goods-image', {
+    fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/update-mirror-standart-goods-image', {
       method: 'PATCH',
       body: formData
     })

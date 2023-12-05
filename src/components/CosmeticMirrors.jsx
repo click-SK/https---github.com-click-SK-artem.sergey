@@ -241,7 +241,7 @@ const CosmeticMirrors = ({ data }) => {
       setIsSuccess(true);
     }, 1500);
 
-    const response = await fetch('https://sklo-expert.herokuapp.com/create-crm', {
+    const response = await fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/create-crm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -379,6 +379,7 @@ const CosmeticMirrors = ({ data }) => {
                   className="print print_manager" style={{ fontSize: 14 }}
                   document={<PdfFile 
                     order={finishMirrorPdf}
+                    img={currentType.mirrorsImage}
                     glassProcessingCountArr = {glassProcessingCountArr} 
                     />}
                   fileName={`Дзеркала кабіни менеджер ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
@@ -390,6 +391,7 @@ const CosmeticMirrors = ({ data }) => {
                 <PDFDownloadLink
                   className="print print_client" style={{ fontSize: 14,}}
                   document={<PdfFileClient 
+                    img={currentType.mirrorsImage}
                     order={finishMirrorPdf} />}
                   fileName={`Дзеркала кабіни клієнт ${new Date().toLocaleString().replaceAll('/', '-').replaceAll(':', '-')}.pdf`}
             >

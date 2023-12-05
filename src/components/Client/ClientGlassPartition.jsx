@@ -76,7 +76,7 @@ const ClientGlassPartition = () => {
   };
 
   useEffect(() => {
-    fetch("https://sklo-expert.herokuapp.com/get-all-glass-partitions")
+    fetch("https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/get-all-glass-partitions")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
@@ -267,7 +267,7 @@ const ClientGlassPartition = () => {
     }, 1000);
 
 
-    const response = await fetch('https://sklo-expert.herokuapp.com/create-crm', {
+    const response = await fetch('https://sklo-expert-server-v2-008be2d9257c.herokuapp.com/create-crm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
